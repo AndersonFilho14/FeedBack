@@ -1,0 +1,38 @@
+repos:
+  - repo: local
+    hooks:
+      - id: uv-pip-compile
+        name: Compile requirements.txt
+        entry: uv pip compile pyproject.toml -o requirements.txt --no-header --no-annotate --no-deps
+        language: python
+        pass_filenames: false
+
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff
+        entry: uv run ruff check
+        language: system
+        types: [python]
+        pass_filenames: true
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.8.3
+    hooks:
+      - id: bandit
+        name: Run Bandit Security Linter
+        entry: bandit -r system --exclude '.*enum.*\.py'
+        args: ["--skip", "B101"]
+        language: python
+        types: [python]
+        pass_filenames: false
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        name: Trim trailing whitespace
+      - id: end-of-file-fixer
+        name: Fix end of files
+      - id: detect-private-key
+        name: Detect private key
