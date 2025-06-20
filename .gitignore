@@ -6,3 +6,4 @@
 
 #Banco utilizado
 *.db
+*.log
