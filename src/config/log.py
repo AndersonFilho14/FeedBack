@@ -1,4 +1,4 @@
-from config.logger.log_handler import LogHandler
+from config.loggerManager.log_handler import LogHandler
 
 log_handler = LogHandler()
 
