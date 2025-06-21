@@ -4,7 +4,8 @@ from typing import Optional
 from sqlalchemy import create_engine, Engine
 from sqlalchemy.orm import sessionmaker, Session
 
-from infra.db.entites import Acesso, Professor, Cargo  # noqa: F401
+from infra.db.models_data import Acesso, Professor, Cargo, Turma, Aluno, Avaliacao, Coordenacao, Disciplina, Escola, Materia, Municipio, ProfessorTurma, Responsavel  # noqa: F401
+
 from infra.db.settings.base import Base
 
 class DBConnectionHandler:
