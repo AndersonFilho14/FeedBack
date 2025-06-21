@@ -12,11 +12,10 @@ class Acesso(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     usuario = Column(String(50), unique=True, nullable=False)
-    senha_hash = Column(String(255), nullable=False)
-
+    senha = Column(String(255), nullable=False)
+    id_user = Column(Integer) # id do professor, escola e municipio
 
     id_cargo = Column(Integer, ForeignKey('cargo.id'), nullable=False)
-    id_professor = Column(Integer, ForeignKey('professor.id'), nullable=True)
 
     def __repr__(self) -> str:
         return f"<Acesso id={self.id}, usuario='{self.usuario}', cargo_id={self.id_cargo}>"

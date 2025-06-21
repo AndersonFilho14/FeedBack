@@ -24,16 +24,26 @@ def popular_dados():
         # 2. Popular Cargos (essencial para Acesso)
         print("Populando cargos...")
         cargo_professor = Cargo(nome_cargo="Professor")
-        cargo_aluno = Cargo(nome_cargo="Aluno")
-        cargo_responsavel = Cargo(nome_cargo="Responsavel")
-        cargo_coordenador = Cargo(nome_cargo="Coordenador")
-        session.add_all([cargo_professor, cargo_aluno, cargo_responsavel, cargo_coordenador])
+        cargo_escola = Cargo(nome_cargo="Escola")
+        cargo_municipio = Cargo(nome_cargo="Municipio")
+        session.add_all([cargo_professor, cargo_escola, cargo_municipio])
         session.commit()
         # Após o commit, os IDs são gerados. Precisamos refresh para ter certeza que os objetos têm IDs.
         session.refresh(cargo_professor)
-        session.refresh(cargo_aluno)
-        session.refresh(cargo_responsavel)
-        session.refresh(cargo_coordenador)
+        session.refresh(cargo_escola)
+        session.refresh(cargo_municipio)
+
+        # 2.1 Popular acesso
+        acesso_professor = Acesso(usuario= 'prof_alfa', senha= 'senha123', id_user= '1', id_cargo=1)
+        acesso_escola = Acesso(usuario= 'escola_alfa', senha= 'senha123', id_user= '1', id_cargo=2)
+        acesso_municipio = Acesso(usuario= 'municipio_alfa', senha= 'senha123', id_user= '1', id_cargo=3)
+        session.add_all([acesso_professor, acesso_escola, acesso_municipio])
+        session.commit()
+        # Após o commit, os IDs são gerados. Precisamos refresh para ter certeza que os objetos têm IDs.
+        session.refresh(cargo_professor)
+        session.refresh(cargo_escola)
+        session.refresh(cargo_municipio)
+
 
         # 3. Criar Municípios
         print("Criando municípios...")
