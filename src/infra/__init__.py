@@ -1,1 +1,1 @@
-from infra.db.settings.connection import DBConnectionHandler # noqa: F401
+from infra.db.settings.connection import DBConnectionHandler  # noqa: F401

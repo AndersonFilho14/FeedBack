@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String
 from infra.db.settings.base import Base
 
+
 class Disciplina(Base):
     """
     Tabela que define as disciplinas oferecidas no sistema educacional.
@@ -9,6 +10,7 @@ class Disciplina(Base):
         id (int): Identificador único da disciplina.
         nome_disciplina (str): Nome da disciplina (ex: "Matemática", "Português").
     """
+
     __tablename__ = "disciplina"
 
     id = Column(Integer, primary_key=True, autoincrement=True)

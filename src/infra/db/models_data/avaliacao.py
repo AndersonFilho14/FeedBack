@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, Float, String, Date, ForeignKey
 from infra.db.settings.base import Base
 
+
 class Avaliacao(Base):
     """
     Tabela que armazena os resultados das avaliações dos alunos.
@@ -19,6 +20,7 @@ class Avaliacao(Base):
         id_materia (int): Chave estrangeira para a tabela Materia (tópico específico).
         id_turma (int): Chave estrangeira para a tabela Turma.
     """
+
     __tablename__ = "avaliacao"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -28,11 +30,11 @@ class Avaliacao(Base):
     nota_2 = Column(Float, nullable=True)
     nota_3 = Column(Float, nullable=True)
     nota_4 = Column(Float, nullable=True)
-    id_aluno = Column(Integer, ForeignKey('aluno.id'), nullable=False)
-    id_professor = Column(Integer, ForeignKey('professor.id'), nullable=False)
-    id_disciplina = Column(Integer, ForeignKey('disciplina.id'), nullable=False)
-    id_materia = Column(Integer, ForeignKey('materia.id'), nullable=False)
-    id_turma = Column(Integer, ForeignKey('turma.id'), nullable=False)
+    id_aluno = Column(Integer, ForeignKey("aluno.id"), nullable=False)
+    id_professor = Column(Integer, ForeignKey("professor.id"), nullable=False)
+    id_disciplina = Column(Integer, ForeignKey("disciplina.id"), nullable=False)
+    id_materia = Column(Integer, ForeignKey("materia.id"), nullable=False)
+    id_turma = Column(Integer, ForeignKey("turma.id"), nullable=False)
 
     def __repr__(self) -> str:
         return f"<Avaliacao id={self.id}, aluno_id={self.id_aluno}, tipo='{self.tipo_avaliacao}'>"

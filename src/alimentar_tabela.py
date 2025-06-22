@@ -4,10 +4,20 @@ from datetime import date
 # Importa o handler de conexão e as classes do seu modelo
 from infra.db.settings.connection import DBConnectionHandler
 from infra.db.models_data import (
-    Acesso, Professor, Cargo, Turma, Aluno, Avaliacao, # noqa : F401
-    Disciplina, Escola, Materia, Municipio,
-    ProfessorTurma, Responsavel
+    Acesso,
+    Professor,
+    Cargo,
+    Turma,
+    Aluno,
+    Avaliacao,  # noqa : F401
+    Disciplina,
+    Escola,
+    Materia,
+    Municipio,
+    ProfessorTurma,
+    Responsavel,
 )
+
 
 def popular_dados():
     """
@@ -15,8 +25,6 @@ def popular_dados():
     """
     # A sessão do SQLAlchemy é obtida através do DBConnectionHandler
     with DBConnectionHandler() as session:
-
-
         # Se o seu DBConnectionHandler já chama Base.metadata.create_all(engine)
         # ao ser inicializado, esta linha não é necessária aqui.
         # Caso contrário, adicione uma chamada para criar as tabelas aqui.
@@ -34,9 +42,15 @@ def popular_dados():
         session.refresh(cargo_municipio)
 
         # 2.1 Popular acesso
-        acesso_professor = Acesso(usuario= 'prof_alfa', senha= 'senha123', id_user= '1', id_cargo=1)
-        acesso_escola = Acesso(usuario= 'escola_alfa', senha= 'senha123', id_user= '1', id_cargo=2)
-        acesso_municipio = Acesso(usuario= 'municipio_alfa', senha= 'senha123', id_user= '1', id_cargo=3)
+        acesso_professor = Acesso(
+            usuario="prof_alfa", senha="senha123", id_user="1", id_cargo=1
+        )
+        acesso_escola = Acesso(
+            usuario="escola_alfa", senha="senha123", id_user="1", id_cargo=2
+        )
+        acesso_municipio = Acesso(
+            usuario="municipio_alfa", senha="senha123", id_user="1", id_cargo=3
+        )
         session.add_all([acesso_professor, acesso_escola, acesso_municipio])
         session.commit()
         # Após o commit, os IDs são gerados. Precisamos refresh para ter certeza que os objetos têm IDs.
@@ -44,21 +58,28 @@ def popular_dados():
         session.refresh(cargo_escola)
         session.refresh(cargo_municipio)
 
-
         # 3. Criar Municípios
         print("Criando municípios...")
-        municipio_a = Municipio(nome="Cidade Alpha", regiao="Metropolitana", estado="Pernambuco")
-        municipio_b = Municipio(nome="Cidade Beta", regiao="Interior", estado="Pernambuco")
+        municipio_a = Municipio(
+            nome="Cidade Alpha", regiao="Metropolitana", estado="Pernambuco"
+        )
+        municipio_b = Municipio(
+            nome="Cidade Beta", regiao="Interior", estado="Pernambuco"
+        )
         session.add_all([municipio_a, municipio_b])
         session.commit()
         session.refresh(municipio_a)
         session.refresh(municipio_b)
-        print(f"Municípios criados: {municipio_a.nome} (ID: {municipio_a.id}), {municipio_b.nome} (ID: {municipio_b.id})")
+        print(
+            f"Municípios criados: {municipio_a.nome} (ID: {municipio_a.id}), {municipio_b.nome} (ID: {municipio_b.id})"
+        )
 
         # 4. Criar Escolas (duas por município)
         print("Criando escolas...")
         escola_a1 = Escola(nome="Escola Primaria Alpha I", id_municipio=municipio_a.id)
-        escola_a2 = Escola(nome="Escola Secundária Alpha II", id_municipio=municipio_a.id)
+        escola_a2 = Escola(
+            nome="Escola Secundária Alpha II", id_municipio=municipio_a.id
+        )
         escola_b1 = Escola(nome="Escola Municipal Beta I", id_municipio=municipio_b.id)
         escola_b2 = Escola(nome="Escola Estadual Beta II", id_municipio=municipio_b.id)
         session.add_all([escola_a1, escola_a2, escola_b1, escola_b2])
@@ -73,9 +94,19 @@ def popular_dados():
         print("Criando turmas...")
         turmas = []
         escolas_list = [escola_a1, escola_a2, escola_b1, escola_b2]
-        for escola in escolas_list: # Removi 'i' desnecessário no loop externo, pois 'j' está no interno.
-            turma1 = Turma(nome=f"1º Ano - {escola.nome[-2:]}", ano_letivo=2025, id_escola=escola.id)
-            turma2 = Turma(nome=f"2º Ano - {escola.nome[-2:]}", ano_letivo=2025, id_escola=escola.id)
+        for escola in (
+            escolas_list
+        ):  # Removi 'i' desnecessário no loop externo, pois 'j' está no interno.
+            turma1 = Turma(
+                nome=f"1º Ano - {escola.nome[-2:]}",
+                ano_letivo=2025,
+                id_escola=escola.id,
+            )
+            turma2 = Turma(
+                nome=f"2º Ano - {escola.nome[-2:]}",
+                ano_letivo=2025,
+                id_escola=escola.id,
+            )
             turmas.extend([turma1, turma2])
         session.add_all(turmas)
         session.commit()
@@ -91,15 +122,39 @@ def popular_dados():
         session.commit()
         session.refresh(portugues)
         session.refresh(matematica)
-        print(f"Disciplinas criadas: {portugues.nome_disciplina} (ID: {portugues.id}), {matematica.nome_disciplina} (ID: {matematica.id})")
+        print(
+            f"Disciplinas criadas: {portugues.nome_disciplina} (ID: {portugues.id}), {matematica.nome_disciplina} (ID: {matematica.id})"
+        )
 
         # 7. Criar Professores (Matemática e Português)
         print("Criando professores...")
-        prof_portugues1 = Professor(nome="Prof. Ana Silva", cpf="11122233344", cargo="Professor de Português", id_escola=escola_a1.id)
-        prof_portugues2 = Professor(nome="Prof. Bia Costa", cpf="22233344455", cargo="Professor de Português", id_escola=escola_b1.id)
-        prof_matematica1 = Professor(nome="Prof. Carlos Santos", cpf="33344455566", cargo="Professor de Matemática", id_escola=escola_a2.id)
-        prof_matematica2 = Professor(nome="Prof. Daniel Pereira", cpf="44455566677", cargo="Professor de Matemática", id_escola=escola_b2.id)
-        session.add_all([prof_portugues1, prof_portugues2, prof_matematica1, prof_matematica2])
+        prof_portugues1 = Professor(
+            nome="Prof. Ana Silva",
+            cpf="11122233344",
+            cargo="Professor de Português",
+            id_escola=escola_a1.id,
+        )
+        prof_portugues2 = Professor(
+            nome="Prof. Bia Costa",
+            cpf="22233344455",
+            cargo="Professor de Português",
+            id_escola=escola_b1.id,
+        )
+        prof_matematica1 = Professor(
+            nome="Prof. Carlos Santos",
+            cpf="33344455566",
+            cargo="Professor de Matemática",
+            id_escola=escola_a2.id,
+        )
+        prof_matematica2 = Professor(
+            nome="Prof. Daniel Pereira",
+            cpf="44455566677",
+            cargo="Professor de Matemática",
+            id_escola=escola_b2.id,
+        )
+        session.add_all(
+            [prof_portugues1, prof_portugues2, prof_matematica1, prof_matematica2]
+        )
         session.commit()
         session.refresh(prof_portugues1)
         session.refresh(prof_portugues2)
@@ -110,24 +165,56 @@ def popular_dados():
         # 8. Criar Tabela de Relação Professor-Turma
         print("Vinculando professores às turmas...")
         prof_turma_data = []
-        prof_turma_data.append(ProfessorTurma(id_professor=prof_portugues1.id, id_turma=turmas[0].id))
-        prof_turma_data.append(ProfessorTurma(id_professor=prof_portugues1.id, id_turma=turmas[1].id))
-        prof_turma_data.append(ProfessorTurma(id_professor=prof_matematica1.id, id_turma=turmas[2].id))
-        prof_turma_data.append(ProfessorTurma(id_professor=prof_matematica1.id, id_turma=turmas[3].id))
-        prof_turma_data.append(ProfessorTurma(id_professor=prof_portugues2.id, id_turma=turmas[4].id))
-        prof_turma_data.append(ProfessorTurma(id_professor=prof_portugues2.id, id_turma=turmas[5].id))
-        prof_turma_data.append(ProfessorTurma(id_professor=prof_matematica2.id, id_turma=turmas[6].id))
-        prof_turma_data.append(ProfessorTurma(id_professor=prof_matematica2.id, id_turma=turmas[7].id))
+        prof_turma_data.append(
+            ProfessorTurma(id_professor=prof_portugues1.id, id_turma=turmas[0].id)
+        )
+        prof_turma_data.append(
+            ProfessorTurma(id_professor=prof_portugues1.id, id_turma=turmas[1].id)
+        )
+        prof_turma_data.append(
+            ProfessorTurma(id_professor=prof_matematica1.id, id_turma=turmas[2].id)
+        )
+        prof_turma_data.append(
+            ProfessorTurma(id_professor=prof_matematica1.id, id_turma=turmas[3].id)
+        )
+        prof_turma_data.append(
+            ProfessorTurma(id_professor=prof_portugues2.id, id_turma=turmas[4].id)
+        )
+        prof_turma_data.append(
+            ProfessorTurma(id_professor=prof_portugues2.id, id_turma=turmas[5].id)
+        )
+        prof_turma_data.append(
+            ProfessorTurma(id_professor=prof_matematica2.id, id_turma=turmas[6].id)
+        )
+        prof_turma_data.append(
+            ProfessorTurma(id_professor=prof_matematica2.id, id_turma=turmas[7].id)
+        )
         session.add_all(prof_turma_data)
         session.commit()
         print("Professores vinculados às turmas.")
 
         # 9. Criar Matérias (tópicos dentro das disciplinas)
         print("Criando matérias...")
-        materia_port_1 = Materia(nome_materia="Gramática", id_disciplina=portugues.id, id_professor=prof_portugues1.id)
-        materia_port_2 = Materia(nome_materia="Interpretação de Texto", id_disciplina=portugues.id, id_professor=prof_portugues2.id)
-        materia_mat_1 = Materia(nome_materia="Álgebra", id_disciplina=matematica.id, id_professor=prof_matematica1.id)
-        materia_mat_2 = Materia(nome_materia="Geometria", id_disciplina=matematica.id, id_professor=prof_matematica2.id)
+        materia_port_1 = Materia(
+            nome_materia="Gramática",
+            id_disciplina=portugues.id,
+            id_professor=prof_portugues1.id,
+        )
+        materia_port_2 = Materia(
+            nome_materia="Interpretação de Texto",
+            id_disciplina=portugues.id,
+            id_professor=prof_portugues2.id,
+        )
+        materia_mat_1 = Materia(
+            nome_materia="Álgebra",
+            id_disciplina=matematica.id,
+            id_professor=prof_matematica1.id,
+        )
+        materia_mat_2 = Materia(
+            nome_materia="Geometria",
+            id_disciplina=matematica.id,
+            id_professor=prof_matematica2.id,
+        )
         session.add_all([materia_port_1, materia_port_2, materia_mat_1, materia_mat_2])
         session.commit()
         session.refresh(materia_port_1)
@@ -140,11 +227,13 @@ def popular_dados():
         print("Criando responsáveis...")
         responsaveis = []
         for i in range(len(turmas) * 3):
-            responsaveis.append(Responsavel(
-                nome=f"Responsavel {i+1}",
-                cpf=f"{500+i:09d}00",
-                parentesco=random.choice(["Mãe", "Pai", "Avó"])
-            ))
+            responsaveis.append(
+                Responsavel(
+                    nome=f"Responsavel {i + 1}",
+                    cpf=f"{500 + i:09d}00",
+                    parentesco=random.choice(["Mãe", "Pai", "Avó"]),
+                )
+            )
         session.add_all(responsaveis)
         session.commit()
         for resp in responsaveis:
@@ -155,19 +244,21 @@ def popular_dados():
         print("Criando alunos...")
         alunos = []
         responsavel_idx = 0
-        global_aluno_count = 0 # Adicionado um contador global para o nome do aluno
-        for turma_idx, turma in enumerate(turmas): # Usei 'turma_idx' para evitar conflito com 'i' no f-string
-            for j in range(3): # 'j' está corretamente definido aqui
+        global_aluno_count = 0  # Adicionado um contador global para o nome do aluno
+        for turma_idx, turma in enumerate(
+            turmas
+        ):  # Usei 'turma_idx' para evitar conflito com 'i' no f-string
+            for j in range(3):  # 'j' está corretamente definido aqui
                 global_aluno_count += 1
                 aluno = Aluno(
-                    nome=f"Aluno {global_aluno_count} - {turma.nome}", # Usando o contador global
-                    cpf=f"{600+global_aluno_count:09d}01",
+                    nome=f"Aluno {global_aluno_count} - {turma.nome}",  # Usando o contador global
+                    cpf=f"{600 + global_aluno_count:09d}01",
                     idade=random.randint(6, 8),
                     faltas=random.randint(0, 2),
                     nota_score_preditivo=random.uniform(5.0, 9.5),
                     id_escola=turma.id_escola,
                     id_turma=turma.id,
-                    id_responsavel=responsaveis[responsavel_idx].id
+                    id_responsavel=responsaveis[responsavel_idx].id,
                 )
                 alunos.append(aluno)
                 responsavel_idx += 1
@@ -180,8 +271,14 @@ def popular_dados():
         # 12. Criar Avaliações (com lógica de notas)
         print("Gerando avaliações...")
         for aluno in alunos:
-            escola_do_aluno = session.query(Escola).filter_by(id=aluno.id_escola).first()
-            municipio_da_escola = session.query(Municipio).filter_by(id=escola_do_aluno.id_municipio).first()
+            escola_do_aluno = (
+                session.query(Escola).filter_by(id=aluno.id_escola).first()
+            )
+            municipio_da_escola = (
+                session.query(Municipio)
+                .filter_by(id=escola_do_aluno.id_municipio)
+                .first()
+            )
 
             is_municipio_a = municipio_da_escola.nome == "Cidade Alpha"
 
@@ -196,7 +293,11 @@ def popular_dados():
                 professor_portugues_para_avaliacao = prof_portugues2
 
             # Avaliação de Português
-            nota_port = random.uniform(8.0, 10.0) if is_municipio_a else random.uniform(6.0, 8.5)
+            nota_port = (
+                random.uniform(8.0, 10.0)
+                if is_municipio_a
+                else random.uniform(6.0, 8.5)
+            )
 
             avaliacao_portugues = Avaliacao(
                 tipo_avaliacao="Prova Mensal",
@@ -210,7 +311,7 @@ def popular_dados():
                 id_professor=professor_portugues_para_avaliacao.id,
                 id_disciplina=portugues.id,
                 id_materia=random.choice([materia_port_1, materia_port_2]).id,
-                id_turma=aluno.id_turma
+                id_turma=aluno.id_turma,
             )
             session.add(avaliacao_portugues)
 
@@ -222,7 +323,11 @@ def popular_dados():
                 professor_matematica_para_avaliacao = prof_matematica2
 
             # Avaliação de Matemática
-            nota_mat = random.uniform(8.0, 10.0) if not is_municipio_a else random.uniform(6.0, 8.5)
+            nota_mat = (
+                random.uniform(8.0, 10.0)
+                if not is_municipio_a
+                else random.uniform(6.0, 8.5)
+            )
 
             avaliacao_matematica = Avaliacao(
                 tipo_avaliacao="Prova Bimestral",
@@ -236,7 +341,7 @@ def popular_dados():
                 id_professor=professor_matematica_para_avaliacao.id,
                 id_disciplina=matematica.id,
                 id_materia=random.choice([materia_mat_1, materia_mat_2]).id,
-                id_turma=aluno.id_turma
+                id_turma=aluno.id_turma,
             )
             session.add(avaliacao_matematica)
         session.commit()
@@ -246,45 +351,72 @@ def popular_dados():
         print("\n--- Verificando dados (amostra) ---")
         print("\nAlunos da Cidade Alpha com notas de Português:")
         # Para consultar, precisamos de JOINs manuais no ORM
-        alunos_alpha_query = session.query(Aluno, Escola, Municipio). \
-            join(Escola, Aluno.id_escola == Escola.id). \
-            join(Municipio, Escola.id_municipio == Municipio.id). \
-            filter(Municipio.nome == "Cidade Alpha").all()
+        alunos_alpha_query = (
+            session.query(Aluno, Escola, Municipio)
+            .join(Escola, Aluno.id_escola == Escola.id)
+            .join(Municipio, Escola.id_municipio == Municipio.id)
+            .filter(Municipio.nome == "Cidade Alpha")
+            .all()
+        )
 
         for aluno_obj, escola_obj, municipio_obj in alunos_alpha_query:
             # Buscar a turma separadamente, se Aluno.turma não for um relationship
-            turma_do_aluno = session.query(Turma).filter_by(id=aluno_obj.id_turma).first()
+            turma_do_aluno = (
+                session.query(Turma).filter_by(id=aluno_obj.id_turma).first()
+            )
 
-            avaliacoes_portugues_aluno = session.query(Avaliacao, Disciplina, Turma). \
-                join(Disciplina, Avaliacao.id_disciplina == Disciplina.id). \
-                join(Turma, Avaliacao.id_turma == Turma.id). \
-                filter(Avaliacao.id_aluno == aluno_obj.id, Disciplina.nome_disciplina == "Português").first()
+            avaliacoes_portugues_aluno = (
+                session.query(Avaliacao, Disciplina, Turma)
+                .join(Disciplina, Avaliacao.id_disciplina == Disciplina.id)
+                .join(Turma, Avaliacao.id_turma == Turma.id)
+                .filter(
+                    Avaliacao.id_aluno == aluno_obj.id,
+                    Disciplina.nome_disciplina == "Português",
+                )
+                .first()
+            )
 
             if avaliacoes_portugues_aluno:
                 avaliacao, disciplina, turma_da_avaliacao = avaliacoes_portugues_aluno
                 # Usar turma_do_aluno.nome para ter certeza que é o nome da turma do aluno
-                print(f"- {aluno_obj.nome} (Escola: {escola_obj.nome}, Turma: {turma_do_aluno.nome}) - Português: {avaliacao.nota_1}")
+                print(
+                    f"- {aluno_obj.nome} (Escola: {escola_obj.nome}, Turma: {turma_do_aluno.nome}) - Português: {avaliacao.nota_1}"
+                )
 
         print("\nAlunos da Cidade Beta com notas de Matemática:")
-        alunos_beta_query = session.query(Aluno, Escola, Municipio). \
-            join(Escola, Aluno.id_escola == Escola.id). \
-            join(Municipio, Escola.id_municipio == Municipio.id). \
-            filter(Municipio.nome == "Cidade Beta").all()
+        alunos_beta_query = (
+            session.query(Aluno, Escola, Municipio)
+            .join(Escola, Aluno.id_escola == Escola.id)
+            .join(Municipio, Escola.id_municipio == Municipio.id)
+            .filter(Municipio.nome == "Cidade Beta")
+            .all()
+        )
 
         for aluno_obj, escola_obj, municipio_obj in alunos_beta_query:
             # Buscar a turma separadamente
-            turma_do_aluno = session.query(Turma).filter_by(id=aluno_obj.id_turma).first()
+            turma_do_aluno = (
+                session.query(Turma).filter_by(id=aluno_obj.id_turma).first()
+            )
 
-            avaliacoes_matematica_aluno = session.query(Avaliacao, Disciplina, Turma). \
-                join(Disciplina, Avaliacao.id_disciplina == Disciplina.id). \
-                join(Turma, Avaliacao.id_turma == Turma.id). \
-                filter(Avaliacao.id_aluno == aluno_obj.id, Disciplina.nome_disciplina == "Matemática").first()
+            avaliacoes_matematica_aluno = (
+                session.query(Avaliacao, Disciplina, Turma)
+                .join(Disciplina, Avaliacao.id_disciplina == Disciplina.id)
+                .join(Turma, Avaliacao.id_turma == Turma.id)
+                .filter(
+                    Avaliacao.id_aluno == aluno_obj.id,
+                    Disciplina.nome_disciplina == "Matemática",
+                )
+                .first()
+            )
 
             if avaliacoes_matematica_aluno:
                 avaliacao, disciplina, turma_da_avaliacao = avaliacoes_matematica_aluno
-                print(f"- {aluno_obj.nome} (Escola: {escola_obj.nome}, Turma: {turma_do_aluno.nome}) - Matemática: {avaliacao.nota_1}")
+                print(
+                    f"- {aluno_obj.nome} (Escola: {escola_obj.nome}, Turma: {turma_do_aluno.nome}) - Matemática: {avaliacao.nota_1}"
+                )
 
         print("\nPopulação de dados concluída!")
+
 
 if __name__ == "__main__":
     try:

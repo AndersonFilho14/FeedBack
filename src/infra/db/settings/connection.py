@@ -4,9 +4,8 @@ from typing import Optional
 from sqlalchemy import create_engine, Engine
 from sqlalchemy.orm import sessionmaker, Session
 
-from infra.db.models_data import Acesso, Professor, Cargo, Turma, Aluno, Avaliacao, Disciplina, Escola, Materia, Municipio, ProfessorTurma, Responsavel  # noqa: F401
-
 from infra.db.settings.base import Base
+
 
 class DBConnectionHandler:
     """
@@ -22,7 +21,7 @@ class DBConnectionHandler:
                      onde o script de execução for rodado.
     """
 
-    BANCO : str  = "sqlite:///banco.db"
+    BANCO: str = "sqlite:///banco.db"
 
     def __init__(self) -> None:
         """
@@ -51,7 +50,6 @@ class DBConnectionHandler:
         engine: Engine = create_engine(self.__connection_string)
         Base.metadata.create_all(engine)
         return engine
-
 
     def __enter__(self) -> Session:
         """
