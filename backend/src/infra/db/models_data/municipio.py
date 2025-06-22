@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String
 from infra.db.settings.base import Base
 
+
 class Municipio(Base):
     """
     Tabela que armazena os dados dos municípios.
@@ -11,6 +12,7 @@ class Municipio(Base):
         regiao (str): Região onde o município está localizado (ex: "Nordeste").
         estado (str): Estado ao qual o município pertence (ex: "Pernambuco").
     """
+
     __tablename__ = "municipio"
 
     id = Column(Integer, primary_key=True, autoincrement=True)

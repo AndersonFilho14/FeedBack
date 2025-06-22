@@ -1,11 +1,14 @@
 from flask import Flask
+from flask_cors import CORS 
 
 from routes.routes.routes import user_rout_bp
+
 
 class ManagerFlask:
     def __init__(self):
         self.app = Flask(__name__)
-        self.app.register_blueprint(blueprint= user_rout_bp)
+        CORS(self.app) # Habilita CORS para todas as rotas
+        self.app.register_blueprint(blueprint=user_rout_bp)
 
-    def run_flask(self)->None:
+    def run_flask(self) -> None:
         self.app.run()

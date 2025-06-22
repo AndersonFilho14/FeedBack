@@ -7,9 +7,8 @@ from loguru._logger import Logger
 
 class LogHandler:
     """Manipula o gerenciamento de logs"""
-    def __init__(
-        self
-    ):
+
+    def __init__(self):
         """Inicia o LogHandler com as configurações padrão."""
         self.log_file = "./log/app.log"
         self.log_level_file = "TRACE"
@@ -25,22 +24,32 @@ class LogHandler:
         os parâmetros de kwargs podem ser: file, cmd
         """
         LEVELS_ACCEPTED = [
-            'TRACE', 'DEBUG', 'INFO', 'SUCCESS', 'WARNING', 'ERROR', 'CRITICAL'
+            "TRACE",
+            "DEBUG",
+            "INFO",
+            "SUCCESS",
+            "WARNING",
+            "ERROR",
+            "CRITICAL",
         ]
 
-        if 'file' in kwargs:
-            level = kwargs['file'].upper()
+        if "file" in kwargs:
+            level = kwargs["file"].upper()
             if level in LEVELS_ACCEPTED:
                 self.log_level_file = level
             else:
-                raise ValueError(f"Os parâmetros aceitos para log são: {LEVELS_ACCEPTED}")
+                raise ValueError(
+                    f"Os parâmetros aceitos para log são: {LEVELS_ACCEPTED}"
+                )
 
-        if 'cmd' in kwargs:
-            level = kwargs['cmd'].upper()
+        if "cmd" in kwargs:
+            level = kwargs["cmd"].upper()
             if level in LEVELS_ACCEPTED:
                 self.log_level_cmd = level
             else:
-                raise ValueError(f"Os parâmetros aceitos para log são: {LEVELS_ACCEPTED}")
+                raise ValueError(
+                    f"Os parâmetros aceitos para log são: {LEVELS_ACCEPTED}"
+                )
 
     def configure_file(self, **kwargs):
         """Permite a configuração do arquivo .log
@@ -50,34 +59,33 @@ class LogHandler:
             * rotation [str]: Tempo que o arquivo vai ser rotacionado. Default: 10 MB
             * retention [str]: por quanto tempo os arquivos devem ser mantidos. Default: 1 year
         """
-        if 'path' in kwargs:
+        if "path" in kwargs:
             self.log_file = kwargs["path"]
 
-        if 'rotation' in kwargs:
+        if "rotation" in kwargs:
             self.rotation_file = kwargs["rotation"]
 
-        if 'retention' in kwargs:
+        if "retention" in kwargs:
             self.retention_file = kwargs["retention"]
 
     def configure_log_display(self, **kwargs):
         """Configura pametros relacionados a exibição de logs
 
-            * colorize [bool]: configura a exibição ou não de cores nos logs. Default: True
-            * backtrace_file [bool]: configura a
-            * backtrace_cmd [bool]: configura a
+        * colorize [bool]: configura a exibição ou não de cores nos logs. Default: True
+        * backtrace_file [bool]: configura a
+        * backtrace_cmd [bool]: configura a
         """
-        if 'colorize' in kwargs:
+        if "colorize" in kwargs:
             self.colorize = kwargs["colorize"]
 
-        if 'backtrace_file' in kwargs:
+        if "backtrace_file" in kwargs:
             self.backtrace_file = kwargs["backtrace_file"]
 
-        if 'backtrace_cmd' in kwargs:
+        if "backtrace_cmd" in kwargs:
             self.backtrace_cmd = kwargs["backtrace_cmd"]
 
     def start(self):
-        """Inicia a geração de logs
-        """
+        """Inicia a geração de logs"""
         logger.remove()  # Remove handlers antigos
 
         # Cria diretório se não existir
