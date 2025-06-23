@@ -25,16 +25,19 @@ class ControllerAcesso:
 
     def return_user_ou_texto(self):
         """Retorna os dados do usuário autenticado ou uma mensagem de erro."""
-        retorno_banco = BucarAcessoBanco(
+        retorno_banco : Acesso | str = BucarAcessoBanco(
             user_name=self.__user, passworld=self.__passworld
         ).buscar_banco()
         if not isinstance(retorno_banco, Acesso):
             log.debug("Não encontrou no banco")
             return retorno_banco
+
         usuario = BuscarQualUser(retorno_banco).consultar_quem_esta_acessando()
         return FormatarJsonRetorno(
-            nome_cargo=retorno_banco.nome_cargo, nome_user=usuario
-        ).gerar_json()
+            nome_cargo=retorno_banco.nome_cargo,
+              nome_user=usuario,
+                id_user= retorno_banco.id_user
+                ).gerar_json()
 
 
 class BucarAcessoBanco:
@@ -86,9 +89,10 @@ class BuscarQualUser:
 class FormatarJsonRetorno:
     """Formata os dados do usuário e cargo em uma string JSON, incluindo um token base64."""
 
-    def __init__(self, nome_user: str, nome_cargo: str) -> None:
+    def __init__(self, nome_user: str, nome_cargo: str, id_user: int) -> None:
         self.__nome_user = nome_user
         self.__nome_cargo = nome_cargo
+        self.__id_user = id_user
 
     def gerar_json(self) -> str:
         """Gera a string JSON formatada com os dados do usuário e um token base64."""
@@ -97,9 +101,10 @@ class FormatarJsonRetorno:
         )
 
         data_to_json = {
+            "id_user": self.__id_user,
             "nome": self.__nome_user,
             "cargo": self.__nome_cargo,
-            "token": token_base64,
+            "token": token_base64
         }
 
         return json.dumps(data_to_json, indent=4, ensure_ascii=False)

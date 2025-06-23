@@ -8,7 +8,6 @@ Este sistema busca resolver a **falta de acompanhamento visual e detalhado do de
 
 A criação e as interações com o banco de dados são gerenciadas em `.\FeedBack\src\infra\db\settings\connection.py` utilizando **SQLAlchemy ORM**.
 
-**Tabelas:** `Acesso`, `Professor`, `Cargo`
 
 ---
 
@@ -29,8 +28,8 @@ Siga os passos abaixo para configurar e executar o projeto:
 
 2.  **Clone o projeto:**
     ```bash
-    git clone <url-do-seu-repositorio> # Substitua pela URL real do seu repositório
-    cd <pasta-do-seu-projeto> # Navegue até o diretório do seu projeto
+    git clone `https://github.com/AndersonFilho14/FeedBack.git`
+    cd `FeedBack` # Navegue até o diretório do seu projeto
     ```
 
 3.  **Sincronize as dependências:**
@@ -65,9 +64,9 @@ Siga os passos abaixo para configurar e executar o projeto:
 **Endpoint:** `/acesso/<string:user_name>/<string:passworld>`
 
 - Credenciais para Teste:
-    * **Usuários aceitos:** `['prof_alfa', 'prof_beta', 'prof_gama']` (Assumi que você quis dizer múltiplos usuários aqui, e não apenas `prof_alfa` três vezes)
+    * **Usuários aceitos:** `['prof_alfa', 'escola_alfa', 'municipio_alfa']`
     * **Senha aceita:** `senha123`
 
     **Respostas:**
-    * **Sucesso:** Objeto JSON contendo `nome`, `cargo` e `token`.
+    * **Sucesso:** Objeto JSON contendo `id_user`,`nome`, `cargo` e `token`.
     * **Falha (Usuário Não Encontrado):** "User não encontrado"
