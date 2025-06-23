@@ -62,3 +62,10 @@ TRACE    | 22/06/2025 19:33:01 | 0:12:16.106253 |            acesso.py:46    |  
 TRACE    | 22/06/2025 19:34:04 | 0:13:18.802451 |            acesso.py:46    |               acesso.__init__             | Iniciando a validação do acesso
 TRACE    | 22/06/2025 19:34:18 | 0:13:32.670015 |            acesso.py:46    |               acesso.__init__             | Iniciando a validação do acesso
 TRACE    | 22/06/2025 19:34:53 | 0:14:08.101639 |            acesso.py:46    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 22/06/2025 20:44:05 | 1:23:20.266481 |            acesso.py:46    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 22/06/2025 20:45:48 | 1:25:03.326776 |            acesso.py:46    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 22/06/2025 20:48:36 | 1:27:51.247114 |            acesso.py:46    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 22/06/2025 20:49:03 | 1:28:17.773566 |            acesso.py:46    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 22/06/2025 20:50:39 | 1:29:53.870933 |            acesso.py:46    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 22/06/2025 21:15:08 | 1:54:23.170534 |            acesso.py:46    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 22/06/2025 21:22:41 | 2:01:56.297143 |            acesso.py:46    |               acesso.__init__             | Iniciando a validação do acesso
