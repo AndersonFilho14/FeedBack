@@ -6,7 +6,7 @@ from config import log
 
 from domain import Professor, Aluno
 
-from infra.repositories import ConsultarProfessor as ConsultarProfessorBanco, ConsultarAlunosVinculadosAoProfessorNoBanco
+from infra.repositories import ConsultarProfessor as ConsultarProfessorBanco, ConsultarAlunosVinculadosAoProfessorNoBanco, ProfessorRepository
 from infra.db.models_data import (
     Professor as ProfessorData,
     Aluno as AlunoData
@@ -107,7 +107,7 @@ class ConsultarProfessor:
         :param int id_professor: O ID inteiro do professor para a consulta.
         :return ProfessorData: Um objeto ProfessorData contendo os dados do professor, se encontrado.
         """
-        professor : Optional[ProfessorData] = ConsultarProfessorBanco(id_professor= id_professor).get_professor_retorno()
+        professor : Optional[ProfessorData] = ConsultarProfessorBanco(id_professor = id_professor).get_professor_retorno()
         return professor
 
     def get_professor_data(self)-> Optional[ProfessorData]:
@@ -159,3 +159,113 @@ class ConsultarAlunosVinculadosAoProfessor:
         :return Optional[list[Aluno]]: Uma lista de objetos Aluno, se existirem, caso contrário None.
         """
         return self.__alunos_vinculado
+
+
+class ControllerGestorProfessor:
+    """Controlador responsável por coordenar operações relacionadas a professores."""
+
+    # Tem que ser optional pq o controllerGestorEscola instancia diferentes em diferentes metodos o controller
+    def __init__(self, nome: Optional[str] = None,
+                 cpf: Optional[str] = None,
+                 cargo: Optional[str] = None,
+                 id_escola: Optional[int] = None,
+                 id_professor: Optional[int] = None
+        ) -> None:
+        self.__nome = nome
+        self.__cpf = cpf
+        self.__cargo = cargo
+        self.__id_escola = id_escola
+        self.__id_professor = id_professor
+
+    def __criar_professor(self) -> str:
+        """Cria um novo professor no banco de dados."""
+        resultado = CriarProfessorNoBanco(nome = self.__nome,
+                                          cpf = self.__cpf,
+                                          cargo = self.__cargo,
+                                          id_escola=self.__id_escola).executar()
+        return resultado
+
+    def __listar_professores(self) -> list[dict]:
+        """Lista todos os professores da escola especificada."""
+        return ListarProfessoresDaEscola(id_escola = self.__id_escola).executar()
+
+    def __atualizar_professor(self) -> str:
+        """Atualiza os dados do professor com base no ID."""
+        return AtualizarProfessorNoBanco(id_professor = self.__id_professor,
+                                         novo_nome = self.__nome,
+                                         novo_cargo = self.__cargo,
+                                         novo_cpf = self.__cpf,
+                                         novo_id_escola = self.__id_escola).executar()
+
+    def __deletar_professor(self) -> str:
+        """Remove um professor do banco pelo ID."""
+        return DeletarProfessorDoBanco(id_professor=self.__id_professor).executar()
+
+
+class CriarProfessorNoBanco:
+    def __init__(self, nome: str, cpf: str, cargo: str, id_escola: int):
+        self.__professor = Professor(nome = nome, cpf = cpf, cargo = cargo, id_escola = id_escola, id_professor = None)
+    
+    def executar(self) -> str:
+        try:
+            ProfessorRepository().criar(self.__professor)
+            log.info(f"Professor '{self.__professor.nome}' criado com sucesso.")
+            return "Professor criado com sucesso"
+        except Exception as e:
+            log.error(f"Erro ao criar professor: {e}")
+            return "Erro ao criar professor"
+
+
+class ListarProfessoresDaEscola:
+    def __init__(self, id_escola: int):
+        self.__id_escola = id_escola
+
+    def executar(self) -> list[dict]:
+        try:
+            professores = ProfessorRepository().listar_por_escola(self.__id_escola)
+            log.debug(f"{len(professores)} professores encontrados na escola {self.__id_escola}.")
+            return professores
+        except Exception as e:
+            log.error(f"Erro ao listar professores da escola {self.__id_escola}: {e}")
+            return []
+
+
+class AtualizarProfessorNoBanco:
+    def __init__(self, id_professor: int, novo_nome: str, novo_cargo: str, novo_cpf: int ,novo_id_escola: int):
+        self.__id = id_professor
+        self.__novo_nome = novo_nome
+        self.__novo_cargo = novo_cargo
+        self.__novo_cpf = novo_cpf
+        self.__novo_id_escola = novo_id_escola
+
+    def executar(self) -> str:
+        try:
+            atualizado = ProfessorRepository().atualizar(self.__id, self.__novo_nome,
+                                                         self.__novo_cargo,
+                                                         self.__novo_cpf,
+                                                         self.__novo_id_escola)
+            if atualizado:
+                log.info(f"Professor {self.__id} atualizado com sucesso.")
+                return "Professor atualizado com sucesso"
+            else:
+                return "Professor não encontrado"
+        except Exception as e:
+            log.error(f"Erro ao atualizar professor: {e}")
+            return "Erro ao atualizar professor"
+
+
+class DeletarProfessorDoBanco:
+    def __init__(self, id_professor: int):
+        self.__id = id_professor
+
+    def executar(self) -> str:
+        try:
+            deletado = ProfessorRepository().deletar(self.__id)
+            if deletado:
+                log.info(f"Professor {self.__id} deletado.")
+                return "Professor deletado com sucesso"
+            else:
+                return "Professor não encontrado"
+        except Exception as e:
+            log.error(f"Erro ao deletar professor: {e}")
+            return "Erro ao deletar professor"
