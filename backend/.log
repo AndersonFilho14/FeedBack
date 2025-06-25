@@ -279,3 +279,25 @@ TRACE    | 25/06/2025 10:45:44 | 0:40:56.446314 |            acesso.py:49    |  
 DEBUG    | 25/06/2025 10:45:44 | 0:40:56.700292 |         professor.py:128   |            professor.__init__             | 1
 TRACE    | 25/06/2025 10:48:12 | 0:43:25.066969 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
 DEBUG    | 25/06/2025 10:48:12 | 0:43:25.246313 |         professor.py:128   |            professor.__init__             | 1
+TRACE    | 25/06/2025 10:54:58 | 0:50:10.670616 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 25/06/2025 10:54:58 | 0:50:10.865201 |         professor.py:128   |            professor.__init__             | 1
+DEBUG    | 25/06/2025 10:54:59 | 0:50:11.963424 |         professor.py:128   |            professor.__init__             | 2
+DEBUG    | 25/06/2025 10:54:59 | 0:50:12.295626 |         professor.py:128   |            professor.__init__             | 3
+DEBUG    | 25/06/2025 10:55:00 | 0:50:12.582255 |         professor.py:128   |            professor.__init__             | 4
+WARNING  | 25/06/2025 10:55:00 | 0:50:13.096035 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+WARNING  | 25/06/2025 10:55:01 | 0:50:13.994375 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+WARNING  | 25/06/2025 10:55:01 | 0:50:14.197866 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+WARNING  | 25/06/2025 10:55:02 | 0:50:14.354907 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+WARNING  | 25/06/2025 10:55:02 | 0:50:14.510833 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+WARNING  | 25/06/2025 10:55:02 | 0:50:14.672701 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+WARNING  | 25/06/2025 10:55:02 | 0:50:14.817551 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+WARNING  | 25/06/2025 10:55:02 | 0:50:15.126606 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+WARNING  | 25/06/2025 10:55:02 | 0:50:15.297029 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+WARNING  | 25/06/2025 10:55:03 | 0:50:15.443729 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+WARNING  | 25/06/2025 10:55:03 | 0:50:15.607887 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+WARNING  | 25/06/2025 10:55:03 | 0:50:15.772149 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+WARNING  | 25/06/2025 10:55:03 | 0:50:15.929071 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+DEBUG    | 25/06/2025 10:55:03 | 0:50:16.094946 |         professor.py:128   |            professor.__init__             | 4
+DEBUG    | 25/06/2025 10:55:04 | 0:50:16.956520 |         professor.py:128   |            professor.__init__             | 3
+DEBUG    | 25/06/2025 10:55:04 | 0:50:17.103276 |         professor.py:128   |            professor.__init__             | 2
+DEBUG    | 25/06/2025 10:55:04 | 0:50:17.267044 |         professor.py:128   |            professor.__init__             | 1
