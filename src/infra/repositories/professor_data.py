@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 from infra import DBConnectionHandler
 
@@ -9,6 +9,7 @@ from infra.db.models_data import (
     Professor as ProfessorData,
 )
 
+from domain.models import Professor
 
 class ConsultarProfessor:
     """Lida com a consulta de um único registro de professor no banco de dados."""
@@ -57,3 +58,49 @@ class ConsultarAlunosVinculadosAoProfessorNoBanco:
     def get_alunos(self) -> List[AlunoData]:
         """Recupera a lista de objetos AlunoData que representam os alunos vinculados ao professor."""
         return self.__alunos
+
+
+class ProfessorRepository:
+    def criar(self, professor_dom: Professor) -> None:
+        """Insere um novo professor no banco."""
+        
+        # Convertendo professor de domain para professor de infra
+        professor_orm = ProfessorData(nome = professor_dom.nome,
+                                      cp = professor_dom.cpf,
+                                      cargo = professor_dom.cargo,
+                                      id_escola = professor_dom.id_escola)
+        
+        with DBConnectionHandler() as session:
+            session.add(professor_orm)
+            session.commit()
+
+    def listar_por_escola(self, id_escola: int) -> List[Dict]:
+        """Retorna lista de professores filtrados por escola."""
+        with DBConnectionHandler() as session:
+            professores = session.query(ProfessorData).filter(ProfessorData.id_escola == id_escola).all()
+            
+            # todo: converter as matérias para materias domain e converter pra json
+            return [ {"id": p.id, "nome": p.nome, "cpf": p.cpf, "cargo": p.cargo, "id_escola": p.id_escola} for p in professores]
+
+    def atualizar(self, id_professor: int, novo_nome: str, novo_cargo: str, novo_cpf: int ,novo_id_escola: int) -> bool:
+        """Atualiza os dados do professor com base no ID. Retorna True se atualizado, False se não encontrado."""
+        with DBConnectionHandler() as session:
+            professor = session.query(ProfessorData).filter(ProfessorData.id == id_professor).first()
+            if not professor:
+                return False
+            professor.nome = novo_nome
+            professor.cargo = novo_cargo
+            professor.cpf = novo_cpf
+            professor.id_escola = novo_id_escola
+            session.commit()
+            return True
+
+    def deletar(self, id_professor: int) -> bool:
+        """Deleta o professor pelo id. Retorna True se deletado, False se não encontrado."""
+        with DBConnectionHandler() as session:
+            professor = session.query(ProfessorData).filter(ProfessorData.id == id_professor).first()
+            if not professor:
+                return False
+            session.delete(professor)
+            session.commit()
+            return True
