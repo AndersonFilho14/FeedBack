@@ -57,16 +57,57 @@ Siga os passos abaixo para configurar e executar o projeto:
 
 ---
 
-## Rotas
+## **Rotas da API**
 
-### Autenticação
+A API oferece os seguintes endpoints para interação com o sistema:
 
-**Endpoint:** `/acesso/<string:user_name>/<string:passworld>`
+### **1. Autenticação de Usuário (Login)**
 
-- Credenciais para Teste:
-    * **Usuários aceitos:** `['prof_alfa', 'escola_alfa', 'municipio_alfa']`
-    * **Senha aceita:** `senha123`
+* **Endpoint:** `/acesso/<string:user_name>/<string:passworld>`
+* **Método:** `GET`
+* **Descrição:** Realiza o login do usuário (professor, escola ou município) e retorna suas informações e um token de acesso.
 
-    **Respostas:**
-    * **Sucesso:** Objeto JSON contendo `id_user`,`nome`, `cargo` e `token`.
-    * **Falha (Usuário Não Encontrado):** "User não encontrado"
+    * **Credenciais de Teste:**
+        * **Usuários Aceitos:** `['prof_alfa', 'escola_alfa', 'municipio_alfa']`
+        * **Senha Aceita:** `senha123`
+
+    * **Exemplo de Requisição (com `curl`):**
+        ```bash
+        curl [http://127.0.0.1:5000/acesso/prof_alfa/senha123](http://127.0.0.1:5000/acesso/prof_alfa/senha123)
+        ```
+
+    * **Respostas:**
+        * **Sucesso (JSON):** Retorna um objeto JSON contendo `id_user`, `nome`, `cargo` e `token`.
+            ```json
+            {
+              "cargo": "Professor",
+              "id_user": 1,
+              "nome": "Professor Alfa",
+              "token": "your_auth_token_here"
+            }
+            ```
+        * **Falha (Texto Simples):** "User não encontrado"
+
+### **2. Visualizar Alunos Vinculados ao Professor**
+
+* **Endpoint:** `/professor/visualizar_alunos/<string:id_professor>`
+* **Método:** `GET`
+* **Descrição:** Retorna uma lista de todos os alunos associados a um determinado professor.
+
+    * **Exemplo de Requisição (com `curl`):**
+        ```bash
+        curl [http://127.0.0.1:5000/professor/visualizar_alunos/ID_DO_PROFESSOR](http://127.0.0.1:5000/professor/visualizar_alunos/ID_DO_PROFESSOR)
+        ```
+        (Substitua `ID_DO_PROFESSOR` pelo ID obtido no login).
+
+### **3. Atualizar Quantidade de Faltas de um Aluno**
+
+* **Endpoint:** `/professor/atualizar_quantidade_de_faltas_para_aluno/<string:id_professor>/<string:id_aluno>/<string:faltas>`
+* **Método:** `GET` (Atualizar para ser um `POST` ou `PUT`)
+* **Descrição:** Atualiza o número de faltas para um aluno específico, associado a um professor.
+
+    * **Exemplo de Requisição (com `curl`):**
+        ```bash
+        curl [http://127.0.0.1:5000/professor/atualizar_quantidade_de_faltas_para_aluno/1/1/1
+        ```
+        (Substitua os placeholders pelos valores corretos).
