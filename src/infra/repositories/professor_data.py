@@ -57,3 +57,84 @@ class ConsultarAlunosVinculadosAoProfessorNoBanco:
     def get_alunos(self) -> List[AlunoData]:
         """Recupera a lista de objetos AlunoData que representam os alunos vinculados ao professor."""
         return self.__alunos
+
+
+class AtualizarQuantidadeDeFaltasParaAluno:
+    """
+    Classe de caso de uso para atualizar a quantidade de faltas de um aluno.
+
+    Este fluxo garante que apenas professores vinculados ao aluno possam realizar
+    a atualização das faltas no sistema.
+    """
+
+    def __init__(
+        self, id_professor: int, id_aluno: int, nova_quantidade_de_faltas: int
+    ) -> None:
+        """
+        Inicializa o fluxo de atualização de faltas para um aluno.
+
+        :param id_professor: O ID do professor que está realizando a atualização.
+        :param id_aluno: O ID do aluno cujas faltas serão atualizadas.
+        :param nova_quantidade_de_faltas: A nova quantidade de faltas a ser registrada para o aluno.
+        """
+        self.__id_professor: int = id_professor
+        self.__id_aluno: int = id_aluno
+        self.__nova_quantidade_de_faltas: int = nova_quantidade_de_faltas
+        self.__id_professor: int = id_professor
+
+    def fluxo_atualizar_falta_aluno(self) -> Optional[bool]:
+        """
+        Executa o fluxo completo para atualizar as faltas de um aluno.
+
+        Primeiro, verifica se o aluno está vinculado ao professor. Se a vinculação
+        não for confirmada, a operação é abortada. Caso contrário, as faltas do aluno
+        são atualizadas no banco de dados.
+
+        :return: True se a atualização for bem-sucedida, None caso o aluno não
+                 esteja vinculado ao professor.
+        """
+        retorno = self.__consultar_se_aluno_esta_vinculado_ao_professer()
+        if not retorno:
+            return None
+
+        self.__atualizar_falta_de_alunos()
+        return True
+
+    def __consultar_se_aluno_esta_vinculado_ao_professer(self) -> Optional[int]:
+        """
+        Verifica se um aluno específico está vinculado a um determinado professor.
+
+        Realiza uma consulta complexa no banco de dados, unindo tabelas de alunos,
+        turmas e professores para confirmar a relação entre aluno e professor.
+
+        :return: O ID do aluno se ele estiver vinculado ao professor, ou None caso contrário.
+        """
+        with DBConnectionHandler() as session:
+            retorno = (
+                session.query(AlunoData.id)
+                .join(TurmaData, AlunoData.id_turma == TurmaData.id)
+                .join(ProfessorTurmaData, ProfessorTurmaData.id_turma == TurmaData.id)
+                .join(
+                    ProfessorData, ProfessorData.id == ProfessorTurmaData.id_professor
+                )
+                .filter(
+                    ProfessorData.id == self.__id_professor,
+                    AlunoData.id == self.__id_aluno,
+                )
+                .first()
+            )
+        return retorno
+
+    def __atualizar_falta_de_alunos(self) -> None:
+        """
+        Atualiza a quantidade de faltas de um aluno no banco de dados.
+
+        Este método privado executa a operação de atualização diretamente na tabela
+        de alunos, persistindo a nova quantidade de faltas.
+        """
+        with DBConnectionHandler() as session:
+            session.query(AlunoData).filter(AlunoData.id == self.__id_aluno).update(
+                {"faltas": self.__nova_quantidade_de_faltas}
+            )
+
+            session.commit()
