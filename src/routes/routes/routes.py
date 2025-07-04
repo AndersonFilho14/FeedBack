@@ -1,9 +1,10 @@
-from flask import Blueprint
+from flask import Blueprint, make_response, jsonify, request
 
 from user_cases import (
     ControllerAcesso,
-    ControllerProfessorAlunosVinculados,
     ControllerProfessorAtualizarFalta,
+    ControllerProfessorAlunosVinculados,
+    ControllerProfessorAdicionarNotaAoAluo,
 )
 
 user_rout_bp = Blueprint("user_routes", __name__)
@@ -11,7 +12,7 @@ user_rout_bp = Blueprint("user_routes", __name__)
 
 @user_rout_bp.route("/acesso/<string:user_name>/<string:passworld>", methods=["GET"])
 def login(user_name: str, passworld: str) -> str:
-    informacao = ControllerAcesso(
+    informacao: str = ControllerAcesso(
         user_name=user_name, passworld=passworld
     ).return_user_ou_texto()
     return informacao
@@ -40,8 +41,13 @@ def professor_atualizar_quantidade_de_faltas_para_unico_aluno(
     retorno = controller.fluxo_crud_de_nota_do_aluno()
     return retorno
 
-
-# prof aplicar nota a aluno
+@user_rout_bp.route("/professor/adicionar_nota", methods=["POST"])
+def prof_aplicar_nota_a_aluno():
+    post: dict = request.json
+    controller = ControllerProfessorAdicionarNotaAoAluo(post= post)
+    controller.fluxo_para_adicionar()
+    retorno = "Retorno ainda não feito para prof_aplicar_nota_a_aluno"
+    return make_response(jsonify(retorno))
 #
 
 

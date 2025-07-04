@@ -261,3 +261,23 @@ class ConsultarAlunosVinculadosAoProfessor:
         :return Optional[list[Aluno]]: Uma lista de objetos Aluno, se existirem, caso contrário None.
         """
         return self.__alunos_vinculado
+
+
+class ControllerProfessorAdicionarNotaAoAluo:
+    def __init__(self, post: dict) -> None:
+        self.__post = dict
+
+    def fluxo_para_adicionar(self):
+
+    def __validar_post(self) -> Optional[dict]:
+        validar = ValidarJson(request= self.__post)
+        validar.
+
+class ValidarJson:
+    def __init__(self, request: dict):
+        self.__request = request
+
+    def validar_response_para_adicionar_nota_em_aluno(self)-> dict, bool:
+        retorno caso falhe em algo
+        return {"Não contem campo {xxx} "}, bool
+        return
