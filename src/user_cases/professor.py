@@ -1,4 +1,5 @@
 import json
+from datetime import date
 
 from typing import Optional, List
 
@@ -7,6 +8,8 @@ from config import log
 from domain import Professor, Aluno
 
 from infra.repositories import (
+    ConsultarTurma,
+    AdicionarNotaParaAluno,
     AtualizarQuantidadeDeFaltasParaAluno,
     ConsultarAlunosVinculadosAoProfessorNoBanco,
     ConsultarProfessor as ConsultarProfessorBanco,
@@ -277,35 +280,127 @@ class ControllerConsultarMateriaEDisciplinasVinculadasAoProfessor:
 
         return disciplinas
 
-"""
+
 class ControllerProfessorAdicionarNotaAoAluo:
+    """
+    Controla o fluxo de negócio para um professor adicionar uma nota a um aluno.
+
+    Esta classe recebe um payload (dicionário), orquestra uma série de validações,
+    consultas e, finalmente, a inserção dos dados da avaliação no sistema.
+    """
     def __init__(self, post: dict) -> None:
-        self.__post = dict
+        """
+        Inicializa o controller com o payload da requisição.
 
-    def fluxo_para_adicionar(self):
-        pass
+        :param post: Um dicionário contendo os dados brutos da avaliação,
+                     geralmente vindo de uma requisição HTTP JSON.
+        """
+        self.__post = post
+        # Inicializa os atributos para evitar AttributeError se a validação falhar
+        self.__tipo_avaliacao = None
+        self.__nota = None
+        self.__id_disciplina = None
+        self.__id_materia = None
+        self.__id_professor = None
+        self.__id_aluno = None
+        self.__id_turma = None
 
-    def __validar_post(self) -> Optional[dict]:
-        validar = ValidarJson(request= self.__post)
-        validar.validar_response_para_adicionar_nota_em_aluno()
+
+    def fluxo_para_adicionar(self) -> dict:
+        """
+        Orquestra o processo completo para adicionar a nota de um aluno.
+
+        Executa uma sequência de etapas:
+        1. Valida a presença das chaves obrigatórias no payload.
+        2. Valida se os valores dessas chaves não são nulos.
+        3. Consulta a turma do aluno.
+        4. Insere a nota no banco de dados.
+
+        :return: Um dicionário indicando o resultado da operação.
+                 - Em caso de sucesso: {"sucesso": "mensagem"}
+                 - Em caso de erro: {"erro": "mensagem de erro"}
+        """
+        if not self.__validar_post():
+            log.error("Post não contem campos necessarios para adicionar nota")
+            return {"error": "Post não contem campos nescessarios para fazer a avaliação do aluno"}
+
+        if not self.__validar_campos():
+            log.error("Um ou mais valores obrigatórios no post são nulos (None).")
+            return {"erro": "Valores inválidos. Um ou mais campos obrigatórios estão nulos."}
+
+        self.__consultar_turma()
+
+        if not self.__id_turma:
+            return {"error":"Não existe turma vinculada a esse aluno"}
+
+        retorno_do_banco = self.__inserir_nota()
+
+        return retorno_do_banco
+
+    def __validar_post(self) -> bool:
+        """
+        Valida se o dicionário '__post' contém todas as chaves obrigatórias.
+
+        :return: True se as chaves do post forem válidas, False caso contrário.
+        """
+        if not isinstance(self.__post, dict):
+            return False
+
+        chaves_obrigatorias = {'id_professor', 'tipo_avaliacao', 'nota', 'id_aluno', 'id_materia', 'id_disciplina'}
+
+        return chaves_obrigatorias.issubset(self.__post.keys())
+
+    def __validar_campos(self) -> bool:
+        """
+        Extrai valores do payload para atributos de instância e valida se não são nulos.
+
+        Este método tem um efeito colateral importante: ele popula os atributos
+        privados da classe (ex: self.__nota) com os valores do post.
+
+        :return: True se todos os valores obrigatórios não forem None, False caso contrário.
+        """
+        self.__tipo_avaliacao = self.__post.get("tipo_avaliacao")
+        self.__nota = self.__post.get("nota")
+        self.__id_disciplina = self.__post.get("id_disciplina")
+        self.__id_materia = self.__post.get("id_materia")
+        self.__id_professor = self.__post.get("id_professor")
+        self.__id_aluno = self.__post.get("id_aluno")
 
 
-class ValidarJson:
-    def __init__(self, request: dict):
-        self.__request = request
+        valores_a_validar = [
+            self.__tipo_avaliacao,
+            self.__nota,
+            self.__id_materia,
+            self.__id_professor,
+            self.__id_aluno,
+            ]
 
+        # Itera pela lista. Se qualquer um dos valores for None, retorna False imediatamente.
+        for valor in valores_a_validar:
+            if valor is None:
+                return False
 
-    def validar_response_para_adicionar_nota_em_aluno(self)-> (dict, bool):
-        campos_a_validar: dict = ['id_professor', 'tipo_avaliacao', 'data_avaliacao', 'nota', 'id_aluno', 'id_professor']
-        campos_a_validar: dict = self.__request
-        return {f"Não contem campo {xxx} "}, bool
+        # Se o loop terminar sem encontrar nenhum None, todos os campos são válidos.
+        return True
 
-    # tipo_avaliacao = Column(String(5), nullable=False)
-    # data_avaliacao = Column(Date, nullable=False)
-    # nota = Column(Float, nullable=False)  # Coluna única para a nota
-    # id_aluno = Column(Integer, ForeignKey("aluno.id"), nullable=False)
-    # id_professor = Column(Integer, ForeignKey("professor.id"), nullable=False)
-    # id_disciplina = Column(Integer, ForeignKey("disciplina.id"), nullable=False)
-    # id_materia = Column(Integer, ForeignKey("materia.id"), nullable=False)
-    # id_turma = Column(Integer, ForeignKey("turma.id"), nullable=False)
-"""
+    def __consultar_turma(self) -> None:
+        """
+        Consulta a turma do aluno e armazena o ID no atributo `self.__id_turma`.
+
+        Este método instancia e utiliza o caso de uso `ConsultarTurma`.
+        O resultado é armazenado como um efeito colateral na instância atual.
+        """
+        self.__id_turma = ConsultarTurma(id_aluno=self.__id_aluno).get_id_turma()
+
+    def __inserir_nota(self):
+        """
+        Prepara e executa o caso de uso para adicionar a nota no banco de dados.
+
+        Utiliza os atributos da instância (preenchidos durante a validação)
+        para instanciar `AdicionarNotaParaAluno` e persistir a avaliação.
+
+        :return: O dicionário de resultado retornado pelo caso de uso de inserção.
+        """
+        data_de_hoje = date.today()
+        adicionar = AdicionarNotaParaAluno(id_aluno=self.__id_aluno, id_professor=self.__id_professor, nota=self.__nota, tipo_avaliacao=self.__tipo_avaliacao, data_avaliacao=data_de_hoje, id_disciplina=self.__id_disciplina, id_materia=self.__id_materia, id_turma=self.__id_turma)
+        return adicionar.adicionar_nota()

@@ -1,4 +1,7 @@
+from datetime import date
 from typing import List, Optional
+
+from config import log
 
 from infra import DBConnectionHandler
 
@@ -9,6 +12,7 @@ from infra.db.models_data import (
     Professor as ProfessorData,
     Disciplina as DisciplinaData,
     Materia as MateriaData,
+    Avaliacao as AvaliacaoData,
 )
 
 
@@ -203,3 +207,80 @@ class ConsultarDisciplinasEMateriasVinculadasAoProfessor:
             })
 
         return disciplinas_formatadas
+
+class AdicionarNotaParaAluno:
+    """
+    Caso de uso para adicionar uma nova avaliação (nota) para um aluno no banco de dados.
+    """
+    def __init__(self, id_aluno: int, id_professor: int, nota: float, tipo_avaliacao: str,
+                 data_avaliacao: date, id_disciplina: int, id_materia: int, id_turma: int):
+
+
+        self.__id_aluno = id_aluno
+        self.__id_professor = id_professor
+        self.__nota = nota
+        self.__tipo_avaliacao = tipo_avaliacao
+        self.__data_avaliacao = data_avaliacao
+        self.__id_disciplina = id_disciplina
+        self.__id_materia = id_materia
+        self.__id_turma = id_turma
+
+    def adicionar_nota(self) -> dict:
+        """
+        Método público que orquestra a inserção da nota no banco de dados.
+        Inclui tratamento de erros.
+
+        :return: Um dicionário com o resultado da operação.
+        """
+        try:
+            nova_avaliacao = self.__inserir_no_banco()
+            return {
+                "sucesso": True,
+                "nova_avaliacao_id": nova_avaliacao.id,
+                "mensagem": f"Avaliação para o aluno {self.__id_aluno} inserida com sucesso."
+            }
+        except Exception as e:
+            # Em caso de erro, o rollback já é tratado no __inserir_no_banco
+            log.error(f"Erro ao adicionar nota para o aluno {self.__id_aluno}: {e}")
+            return {
+                "sucesso": False,
+                "erro": str(e)
+            }
+
+    def __inserir_no_banco(self) -> AvaliacaoData:
+        """
+        Método privado que lida diretamente com a sessão do banco de dados
+        para inserir a nova avaliação.
+        """
+        with DBConnectionHandler() as session:
+            try:
+                # 1. Cria uma instância do modelo 'Avaliacao' com os dados da classe
+                nova_avaliacao = AvaliacaoData(
+                    id_aluno=self.__id_aluno,
+                    id_professor=self.__id_professor,
+                    nota=self.__nota,
+                    tipo_avaliacao=self.__tipo_avaliacao,
+                    data_avaliacao=self.__data_avaliacao,
+                    id_disciplina=self.__id_disciplina,
+                    id_materia=self.__id_materia,
+                    id_turma=self.__id_turma
+                )
+
+                # 2. Adiciona o novo objeto à sessão do SQLAlchemy
+                session.add(nova_avaliacao)
+
+                # 3. Confirma (commit) a transação, salvando os dados no banco
+                session.commit()
+
+                # 4. (Opcional, mas recomendado) Atualiza a instância 'nova_avaliacao'
+                #    para obter dados gerados pelo banco, como o 'id' autoincrementado.
+                session.refresh(nova_avaliacao)
+
+                return nova_avaliacao
+
+            except Exception as e:
+                # 5. Em caso de qualquer erro (ex: um id_aluno que não existe),
+                #    desfaz a transação (rollback) para não deixar o banco em estado inconsistente.
+                session.rollback()
+                log.error(f"Ocorreu um rollback ao tentar inserir a avaliação: {e}")
+                raise e # Lança a exceção novamente para ser capturada pelo método público

@@ -1,7 +1,6 @@
 from domain.models.users import Users  # noqa : F401
-
 from domain.models.acesso import Acesso  # noqa : F401
-
+from domain.models.avaliacao import Avaliacao  # noqa : F401
 from domain.models.aluno import Aluno  # noqa : F401
 from domain.models.professor import Professor  # noqa : F401
 from domain.models.municipio import Municpio  # noqa : F401

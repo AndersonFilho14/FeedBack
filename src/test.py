@@ -1,6 +1,7 @@
-from config import log
+from datetime import date
 
-from domain import Acesso
+from config import log
+from domain import Acesso, Avaliacao
 
 from infra.repositories.acesso_data import ConsultarAcesso, ConsultarUser
 from infra.repositories import (
@@ -11,10 +12,12 @@ from user_cases import (
     ControllerProfessorAtualizarFalta,
     ControllerProfessorAlunosVinculados,
     ConsultarAlunosVinculadosAoProfessor,
+    ControllerProfessorAdicionarNotaAoAluo,
     ConsultarAlunosVinculadosAoProfessorNoBanco,  # noqa: F811
 )
 
-from infra.repositories.professor_data import AtualizarQuantidadeDeFaltasParaAluno, ConsultarDisciplinasEMateriasVinculadasAoProfessor
+from infra.repositories.professor_data import AtualizarQuantidadeDeFaltasParaAluno, ConsultarDisciplinasEMateriasVinculadasAoProfessor, AdicionarNotaParaAluno
+from infra.repositories.aluno_data import ConsultarTurma
 
 from infra.db.models_data import (
     Acesso as AcessoData,  # noqa: F401
@@ -106,5 +109,24 @@ def test_consultar_materia_e_disciplinas_vinculadas_ao_professor():
     log.debug(disicplinas_e_materia)
     log.debug(type(disicplinas_e_materia))
 
+def test_adicionar_nota_banco():
+    ava = Avaliacao(id= 0, tipo_avaliacao= "3Va", data_avaliacao= date(2025, 4, 21), nota= 8.3, id_aluno=1, id_professor=1, id_disciplina=1, id_materia=1, id_turma=3)
+    adicionar = AdicionarNotaParaAluno(id_aluno=ava.id_aluno, id_professor=ava.id_professor, tipo_avaliacao= ava.tipo_avaliacao, nota=ava.nota, data_avaliacao= ava.data_avaliacao, id_disciplina= ava.id_disciplina, id_materia= ava.id_materia, id_turma= ava.id_turma)
+    retorno = adicionar.adicionar_nota()
+    log.trace(retorno)
+    log.trace(type(retorno))
+
+def test_ControllerProfessorAdicionarNotaAoAluo():
+    post =  {"id_professor" : "1", "tipo_avaliacao": "2", "nota": "3", "id_aluno": "4", "id_materia": "5"}
+    controller = ControllerProfessorAdicionarNotaAoAluo(post= post)
+    retorno = controller.fluxo_para_adicionar()
+    log.debug(retorno)
+    log.debug(type(retorno))
+
+def test_consultar_turma_do_aluno():
+    retorno = ConsultarTurma(id_aluno= 700).get_id_turma()
+    log.debug(retorno)
+    log.debug(type(retorno))
+
 if __name__ == "__main__":
-    test_consultar_materia_e_disciplinas_vinculadas_ao_professor()
+    test_consultar_turma_do_aluno()
