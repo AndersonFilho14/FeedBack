@@ -5,4 +5,5 @@ from user_cases.professor import (
     ConsultarAlunosVinculadosAoProfessor,  # noqa : F401
     ControllerProfessorAdicionarNotaAoAluo,  # noqa: F401
     ConsultarAlunosVinculadosAoProfessorNoBanco,  # noqa : F401
+    ControllerConsultarMateriaEDisciplinasVinculadasAoProfessor,  # noqa : F401
     )

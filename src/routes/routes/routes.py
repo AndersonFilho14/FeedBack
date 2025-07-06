@@ -1,10 +1,11 @@
-from flask import Blueprint, make_response, jsonify, request
+from flask import Blueprint, make_response, jsonify
 
 from user_cases import (
     ControllerAcesso,
     ControllerProfessorAtualizarFalta,
     ControllerProfessorAlunosVinculados,
-    ControllerProfessorAdicionarNotaAoAluo,
+    ControllerProfessorAdicionarNotaAoAluo,  # noqa F401
+    ControllerConsultarMateriaEDisciplinasVinculadasAoProfessor,
 )
 
 user_rout_bp = Blueprint("user_routes", __name__)
@@ -41,13 +42,21 @@ def professor_atualizar_quantidade_de_faltas_para_unico_aluno(
     retorno = controller.fluxo_crud_de_nota_do_aluno()
     return retorno
 
-@user_rout_bp.route("/professor/adicionar_nota", methods=["POST"])
-def prof_aplicar_nota_a_aluno():
-    post: dict = request.json
-    controller = ControllerProfessorAdicionarNotaAoAluo(post= post)
-    controller.fluxo_para_adicionar()
-    retorno = "Retorno ainda não feito para prof_aplicar_nota_a_aluno"
+@user_rout_bp.route('/materia_e_disciplina_que_o_professor_ensina/<string:id_professor>', methods=['GET'])
+def consultar_materia_e_disciplina_do_professor(id_professor: str):
+    consultar = ControllerConsultarMateriaEDisciplinasVinculadasAoProfessor(id_professor=id_professor)
+    retorno = consultar.fluxo_para_consultar()
+    print(retorno)
+    print(type(retorno))
     return make_response(jsonify(retorno))
+
+# @user_rout_bp.route("/professor/adicionar_nota", methods=["POST"])
+# def prof_aplicar_nota_a_aluno():
+#     post: dict = request.json
+#     controller = ControllerProfessorAdicionarNotaAoAluo(post= post)
+#     controller.fluxo_para_adicionar()
+#     retorno = "Retorno ainda não feito para prof_aplicar_nota_a_aluno"
+#     return make_response(jsonify(retorno))
 #
 
 

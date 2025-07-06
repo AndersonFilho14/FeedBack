@@ -14,7 +14,7 @@ from user_cases import (
     ConsultarAlunosVinculadosAoProfessorNoBanco,  # noqa: F811
 )
 
-from infra.repositories.professor_data import AtualizarQuantidadeDeFaltasParaAluno
+from infra.repositories.professor_data import AtualizarQuantidadeDeFaltasParaAluno, ConsultarDisciplinasEMateriasVinculadasAoProfessor
 
 from infra.db.models_data import (
     Acesso as AcessoData,  # noqa: F401
@@ -100,6 +100,11 @@ def testar_controller_atualizar_quantidade_de_faltas():
     log.debug(controller)
     log.debug(type(controller))
 
+def test_consultar_materia_e_disciplinas_vinculadas_ao_professor():
+    id_professor = 6
+    disicplinas_e_materia = ConsultarDisciplinasEMateriasVinculadasAoProfessor(id_professor= id_professor).consultar()
+    log.debug(disicplinas_e_materia)
+    log.debug(type(disicplinas_e_materia))
 
 if __name__ == "__main__":
-    testar_controller_atualizar_quantidade_de_faltas()
+    test_consultar_materia_e_disciplinas_vinculadas_ao_professor()

@@ -1,4 +1,5 @@
 from typing import List, Optional
+from collections import defaultdict
 
 from infra import DBConnectionHandler
 
@@ -7,6 +8,8 @@ from infra.db.models_data import (
     Turma as TurmaData,
     ProfessorTurma as ProfessorTurmaData,
     Professor as ProfessorData,
+    Disciplina as DisciplinaData,
+    Materia as MateriaData,
 )
 
 
@@ -138,3 +141,49 @@ class AtualizarQuantidadeDeFaltasParaAluno:
             )
 
             session.commit()
+
+
+class ConsultarDisciplinasEMateriasVinculadasAoProfessor:
+    """
+    Consulta as disciplinas e matérias que estão vinculadas a um professor específico.
+
+    Esta classe de caso de uso recupera informações detalhadas sobre quais disciplinas
+    e matérias um professor está atualmente lecionando, utilizando seu ID como critério.
+    """
+
+    def __init__(self, id_professor: int) -> None:
+        """
+        Inicializa o caso de uso com o ID do professor para a consulta.
+
+        :param id_professor: O ID do professor cujas disciplinas e matérias serão consultadas.
+        """
+        self.__id_professor = id_professor
+
+    def consultar(self) -> dict:
+        """
+        Executa a consulta no banco de dados para obter as disciplinas e matérias.
+
+        Realiza um JOIN entre as tabelas de Materia, Disciplina e Professor para
+        filtrar os resultados com base no ID do professor fornecido.
+
+        :return: Um dicionário onde as chaves são os nomes das disciplinas
+                 e os valores são listas com os nomes das matérias.
+                 Ex: {"Matemática": ["Álgebra", "Geometria"]}.
+                 Retorna um dicionário vazio se nenhuma vinculação for encontrada.
+        """
+        with DBConnectionHandler() as session:
+            resultado = (
+                session.query(DisciplinaData.nome_disciplina, MateriaData.nome_materia)
+                .select_from(MateriaData)
+                .join(DisciplinaData, MateriaData.id_disciplina == DisciplinaData.id)
+                .join(ProfessorData, MateriaData.id_professor == ProfessorData.id)
+                .filter(ProfessorData.id == self.__id_professor)
+                .all()
+            )
+
+        disciplinas_agrupadas = defaultdict(list)
+
+        for disciplina, materia in resultado:
+            disciplinas_agrupadas[disciplina].append(materia)
+
+        return dict(disciplinas_agrupadas)

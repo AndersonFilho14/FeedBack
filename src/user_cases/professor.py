@@ -7,9 +7,10 @@ from config import log
 from domain import Professor, Aluno
 
 from infra.repositories import (
-    ConsultarProfessor as ConsultarProfessorBanco,
-    ConsultarAlunosVinculadosAoProfessorNoBanco,
     AtualizarQuantidadeDeFaltasParaAluno,
+    ConsultarAlunosVinculadosAoProfessorNoBanco,
+    ConsultarProfessor as ConsultarProfessorBanco,
+    ConsultarDisciplinasEMateriasVinculadasAoProfessor,
 )
 
 from infra.db.models_data import Professor as ProfessorData, Aluno as AlunoData
@@ -263,21 +264,46 @@ class ConsultarAlunosVinculadosAoProfessor:
         return self.__alunos_vinculado
 
 
+class ControllerConsultarMateriaEDisciplinasVinculadasAoProfessor:
+    def __init__(self, id_professor: str):
+        self.__id_professor: int = int(id_professor)
+
+    def fluxo_para_consultar(self)-> dict| str:
+        consultar_disciplinas = ConsultarDisciplinasEMateriasVinculadasAoProfessor(id_professor= self.__id_professor)
+        disciplinas = consultar_disciplinas.consultar()
+
+        if not disciplinas:
+            return f'Professor de id {self.__id_professor} não tem disciplinas vinculadas'
+
+        return disciplinas
+
+
+
 class ControllerProfessorAdicionarNotaAoAluo:
     def __init__(self, post: dict) -> None:
         self.__post = dict
 
-    def fluxo_para_adicionar(self):
+    def fluxo_para_adicionar(self):pass
 
-    def __validar_post(self) -> Optional[dict]:
-        validar = ValidarJson(request= self.__post)
-        validar.
+    # def __validar_post(self) -> Optional[dict]:
+    #     validar = ValidarJson(request= self.__post)
 
-class ValidarJson:
-    def __init__(self, request: dict):
-        self.__request = request
 
-    def validar_response_para_adicionar_nota_em_aluno(self)-> dict, bool:
-        retorno caso falhe em algo
-        return {"Não contem campo {xxx} "}, bool
-        return
+# class ValidarJson:
+#     def __init__(self, request: dict):
+#         self.__request = request
+
+
+#     def validar_response_para_adicionar_nota_em_aluno(self)-> dict, bool:
+#         campos_a_validar: dict = ['id_professor', 'tipo_avaliacao', 'data_avaliacao', 'nota', 'id_aluno', 'id_professor']
+#         campos_a_validar: dict = self.__request
+#         return {f"Não contem campo {xxx} "}, bool
+
+    # tipo_avaliacao = Column(String(5), nullable=False)
+    # data_avaliacao = Column(Date, nullable=False)
+    # nota = Column(Float, nullable=False)  # Coluna única para a nota
+    # id_aluno = Column(Integer, ForeignKey("aluno.id"), nullable=False)
+    # id_professor = Column(Integer, ForeignKey("professor.id"), nullable=False)
+    # id_disciplina = Column(Integer, ForeignKey("disciplina.id"), nullable=False)
+    # id_materia = Column(Integer, ForeignKey("materia.id"), nullable=False)
+    # id_turma = Column(Integer, ForeignKey("turma.id"), nullable=False)
