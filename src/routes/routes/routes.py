@@ -1,4 +1,4 @@
-from flask import Blueprint, make_response, jsonify
+from flask import Blueprint, make_response, jsonify, request
 
 from user_cases import (
     ControllerAcesso,
@@ -50,14 +50,14 @@ def consultar_materia_e_disciplina_do_professor(id_professor: str):
     print(type(retorno))
     return make_response(jsonify(retorno))
 
-# @user_rout_bp.route("/professor/adicionar_nota", methods=["POST"])
-# def prof_aplicar_nota_a_aluno():
-#     post: dict = request.json
-#     controller = ControllerProfessorAdicionarNotaAoAluo(post= post)
-#     controller.fluxo_para_adicionar()
-#     retorno = "Retorno ainda não feito para prof_aplicar_nota_a_aluno"
-#     return make_response(jsonify(retorno))
-#
+@user_rout_bp.route("/professor/adicionar_nota", methods=["POST"])
+def prof_aplicar_nota_a_aluno():
+    post: dict = request.json
+    controller = ControllerProfessorAdicionarNotaAoAluo(post= post)
+    retorno = controller.fluxo_para_adicionar()
+    retorno = "Retorno ainda não feito para prof_aplicar_nota_a_aluno"
+    return make_response(jsonify(retorno))
+
 
 
 class ValidarToken:

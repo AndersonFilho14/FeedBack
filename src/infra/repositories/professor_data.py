@@ -1,5 +1,4 @@
 from typing import List, Optional
-from collections import defaultdict
 
 from infra import DBConnectionHandler
 
@@ -172,8 +171,13 @@ class ConsultarDisciplinasEMateriasVinculadasAoProfessor:
                  Retorna um dicionário vazio se nenhuma vinculação for encontrada.
         """
         with DBConnectionHandler() as session:
-            resultado = (
-                session.query(DisciplinaData.nome_disciplina, MateriaData.nome_materia)
+            resultado_query = (
+                session.query(
+                    DisciplinaData.id,
+                    DisciplinaData.nome_disciplina,
+                    MateriaData.id,
+                    MateriaData.nome_materia,
+                )
                 .select_from(MateriaData)
                 .join(DisciplinaData, MateriaData.id_disciplina == DisciplinaData.id)
                 .join(ProfessorData, MateriaData.id_professor == ProfessorData.id)
@@ -181,9 +185,21 @@ class ConsultarDisciplinasEMateriasVinculadasAoProfessor:
                 .all()
             )
 
-        disciplinas_agrupadas = defaultdict(list)
+        disciplinas_formatadas = {}
 
-        for disciplina, materia in resultado:
-            disciplinas_agrupadas[disciplina].append(materia)
+        for id_disciplina, nome_disciplina, id_materia, nome_materia in resultado_query:
 
-        return dict(disciplinas_agrupadas)
+            # 3. Se a disciplina ainda não está no nosso dicionário, a inicializamos
+            if nome_disciplina not in disciplinas_formatadas:
+                disciplinas_formatadas[nome_disciplina] = {
+                    "id_disciplina": id_disciplina,
+                    "materias": []
+                }
+
+            # 4. Adicione a matéria (com seu ID e nome) à lista de matérias da disciplina correspondente
+            disciplinas_formatadas[nome_disciplina]["materias"].append({
+                "id_materia": id_materia,
+                "nome_materia": nome_materia
+            })
+
+        return disciplinas_formatadas

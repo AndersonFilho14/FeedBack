@@ -101,7 +101,7 @@ def testar_controller_atualizar_quantidade_de_faltas():
     log.debug(type(controller))
 
 def test_consultar_materia_e_disciplinas_vinculadas_ao_professor():
-    id_professor = 6
+    id_professor = 1
     disicplinas_e_materia = ConsultarDisciplinasEMateriasVinculadasAoProfessor(id_professor= id_professor).consultar()
     log.debug(disicplinas_e_materia)
     log.debug(type(disicplinas_e_materia))

@@ -277,27 +277,28 @@ class ControllerConsultarMateriaEDisciplinasVinculadasAoProfessor:
 
         return disciplinas
 
-
-
+"""
 class ControllerProfessorAdicionarNotaAoAluo:
     def __init__(self, post: dict) -> None:
         self.__post = dict
 
-    def fluxo_para_adicionar(self):pass
+    def fluxo_para_adicionar(self):
+        pass
 
-    # def __validar_post(self) -> Optional[dict]:
-    #     validar = ValidarJson(request= self.__post)
-
-
-# class ValidarJson:
-#     def __init__(self, request: dict):
-#         self.__request = request
+    def __validar_post(self) -> Optional[dict]:
+        validar = ValidarJson(request= self.__post)
+        validar.validar_response_para_adicionar_nota_em_aluno()
 
 
-#     def validar_response_para_adicionar_nota_em_aluno(self)-> dict, bool:
-#         campos_a_validar: dict = ['id_professor', 'tipo_avaliacao', 'data_avaliacao', 'nota', 'id_aluno', 'id_professor']
-#         campos_a_validar: dict = self.__request
-#         return {f"Não contem campo {xxx} "}, bool
+class ValidarJson:
+    def __init__(self, request: dict):
+        self.__request = request
+
+
+    def validar_response_para_adicionar_nota_em_aluno(self)-> (dict, bool):
+        campos_a_validar: dict = ['id_professor', 'tipo_avaliacao', 'data_avaliacao', 'nota', 'id_aluno', 'id_professor']
+        campos_a_validar: dict = self.__request
+        return {f"Não contem campo {xxx} "}, bool
 
     # tipo_avaliacao = Column(String(5), nullable=False)
     # data_avaliacao = Column(Date, nullable=False)
@@ -307,3 +308,4 @@ class ControllerProfessorAdicionarNotaAoAluo:
     # id_disciplina = Column(Integer, ForeignKey("disciplina.id"), nullable=False)
     # id_materia = Column(Integer, ForeignKey("materia.id"), nullable=False)
     # id_turma = Column(Integer, ForeignKey("turma.id"), nullable=False)
+"""
