@@ -590,6 +590,3 @@ class FormatarProfessor:
             for prof in professores_dominio
         ]
         return json.dumps({"professores": lista}, ensure_ascii = False, indent = 4)
-    
-class consultas():
-    def
