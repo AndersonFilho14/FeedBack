@@ -4,7 +4,7 @@ from datetime import date
 from typing import Optional, List
 
 from config import log
-
+from utils.validarCampos import ValidadorCampos
 from domain import Professor, Aluno
 
 from infra.repositories import (
@@ -14,6 +14,9 @@ from infra.repositories import (
     ConsultarAlunosVinculadosAoProfessorNoBanco,
     ConsultarProfessor as ConsultarProfessorBanco,
     ConsultarDisciplinasEMateriasVinculadasAoProfessor,
+    ProfessorRepository,
+    ConsultaBancoEscola,
+    ConsultaBancoAluno
 )
 
 from infra.db.models_data import Professor as ProfessorData, Aluno as AlunoData
@@ -404,3 +407,189 @@ class ControllerProfessorAdicionarNotaAoAluo:
         data_de_hoje = date.today()
         adicionar = AdicionarNotaParaAluno(id_aluno=self.__id_aluno, id_professor=self.__id_professor, nota=self.__nota, tipo_avaliacao=self.__tipo_avaliacao, data_avaliacao=data_de_hoje, id_disciplina=self.__id_disciplina, id_materia=self.__id_materia, id_turma=self.__id_turma)
         return adicionar.adicionar_nota()
+
+
+class ControllerProfessor:
+    """Controlador responsável por coordenar operações relacionadas a professores."""
+
+    # Tem que ser optional pq o controllerGestorEscola instancia em diferentes metodos o controller
+    def __init__(self, nome: Optional[str] = None,
+                 cpf: Optional[str] = None,
+                 cargo: Optional[str] = None,
+                 id_escola: Optional[int] = None,
+                 id_professor: Optional[int] = None
+        ) -> None:
+        self.__nome = nome
+        self.__cpf = cpf
+        self.__cargo = cargo
+        self.__id_escola = id_escola
+        self.__id_professor = id_professor
+
+    def criar_professor(self) -> str:
+        """Cria um novo professor no banco de dados."""
+        resultado = CriarProfessorNoBanco(nome = self.__nome,
+                                          cpf = self.__cpf,
+                                          cargo = self.__cargo,
+                                          id_escola=self.__id_escola)._executar()
+        return resultado
+
+    def listar_professores(self) -> list[dict]:
+        """Lista todos os professores da escola especificada."""
+        professores_data =  ListarProfessoresDaEscola(id_escola = self.__id_escola)._executar()  
+        formater = FormatarProfessor()
+        professores_dominio = formater.formatar_professor_data_para_dominio(professores_data = professores_data)
+        return formater.gerar_json(professores_dominio = professores_dominio)
+    
+    def atualizar_professor(self) -> str:
+        """Atualiza os dados do professor com base no ID."""
+        return AtualizarProfessorNoBanco(id_professor = self.__id_professor,
+                                         novo_nome = self.__nome,
+                                         novo_cargo = self.__cargo,
+                                         novo_cpf = self.__cpf,)._executar()
+
+    def deletar_professor(self) -> str:
+        """Remove um professor do banco pelo ID."""
+        return DeletarProfessorDoBanco(id_professor=self.__id_professor)._executar()
+
+
+class CriarProfessorNoBanco:
+    def __init__(self, nome: str, cpf: str, cargo: str, id_escola: int):
+        self.__professor = Professor(nome = nome, cpf = cpf, cargo = cargo, id_escola = id_escola, id = 0)
+    
+    def _executar(self) -> str:
+        
+        # Verifica se os campos obrigatórios foram preenchidos
+        resultado = ValidadorCampos.validar_campos_preenchidos([
+            self.__professor.nome,
+            self.__professor.cpf,
+            self.__professor.cargo,
+            self.__professor.id_escola
+        ])
+        
+        if resultado is not None:
+            return resultado
+        
+        try:
+            # Verifica existência da escola
+            if ConsultaBancoEscola().buscar_por_id(self.__professor.id_escola) is None:
+                return f"Escola com ID {self.__professor.id_escola} não encontrada."
+            
+            # Verifica existencia de algum aluno com cpf existente
+            if ConsultaBancoAluno().buscar_por_cpf(cpf=self.__professor.cpf) is None:
+                log.warning(f"Tentativa de cadastro com CPF já existente: {self.__professor.cpf}")
+                return "CPF já vinculado."
+            
+            # Verifica existência de algum professor com cpf existente
+            if ConsultarProfessorBanco(id_professor=self.__professor.id).get_professor_retorno_cpf(cpf=self.__professor.cpf) is None:
+                log.warning(f"Tentativa de cadastro com CPF já existente: {self.__professor.cpf}")
+                return "CPF já vinculado."
+            
+            ProfessorRepository().criar(self.__professor)
+            log.info(f"Professor '{self.__professor.nome}' criado com sucesso.")
+            return "Professor criado com sucesso"
+        except Exception as e:
+            log.error(f"Erro ao criar professor: {e}")
+            return "Erro ao criar professor"
+
+
+class ListarProfessoresDaEscola:
+    def __init__(self, id_escola: int):
+        self.__id_escola = id_escola
+
+    def _executar(self) -> list[ProfessorData]:
+        try:
+            professores = ProfessorRepository().listar_por_escola(self.__id_escola)
+            log.debug(f"{len(professores)} professores encontrados na escola {self.__id_escola}.")
+            return professores
+        except Exception as e:
+            log.error(f"Erro ao listar professores da escola {self.__id_escola}: {e}")
+            return []
+
+
+class AtualizarProfessorNoBanco:
+    def __init__(self, id_professor: int, novo_nome: str, novo_cargo: str, novo_cpf: int):
+        self.__id = id_professor
+        self.__novo_nome = novo_nome
+        self.__novo_cargo = novo_cargo
+        self.__novo_cpf = novo_cpf
+
+    def _executar(self) -> str:
+        
+        # Verifica se os campos obrigatórios foram preenchidos
+        resultado = ValidadorCampos.validar_campos_preenchidos([
+            self.__id,
+            self.__novo_nome,
+            self.__novo_cargo,
+            self.__novo_cpf
+        ])
+        
+        if resultado is not None:
+            return resultado
+        
+        try:               
+            # Verifica existencia de algum aluno com cpf fornecido
+            if ConsultaBancoAluno().buscar_por_cpf_e_id(cpf=self.__novo_cpf, id = self.__id):
+                log.warning(f"Tentativa de atualização com CPF já existente: {self.__novo_cpf}")
+                return "CPF já vinculado."
+            
+            # Verifica existência de algum professor com cpf existente
+            if ConsultarProfessorBanco(id_professor=self.__id).get_professor_retorno_cpf_e_id(cpf=self.__novo_cpf, id=self.__id):
+                log.warning(f"Tentativa de atualização com CPF já existente: {self.__novo_cpf}")
+                return "CPF já vinculado."  
+                   
+            atualizado = ProfessorRepository().atualizar(self.__id, self.__novo_nome,
+                                                         self.__novo_cargo,
+                                                         self.__novo_cpf)
+            if atualizado:
+                log.info(f"Professor {self.__id} atualizado com sucesso.")
+                return "Professor atualizado com sucesso"
+            else:
+                return "Professor não encontrado"
+        except Exception as e:
+            log.error(f"Erro ao atualizar professor: {e}")
+            return "Erro ao atualizar professor"
+
+
+class DeletarProfessorDoBanco:
+    def __init__(self, id_professor: int):
+        self.__id = id_professor
+
+    def _executar(self) -> str:
+        try:
+            deletado = ProfessorRepository().deletar(self.__id)
+            if deletado:
+                log.info(f"Professor {self.__id} deletado.")
+                return "Professor deletado com sucesso"
+            else:
+                return "Professor não encontrado"
+        except Exception as e:
+            log.error(f"Erro ao deletar professor: {e}")
+            return "Erro ao deletar professor"
+        
+class FormatarProfessor:
+    """Classe responsável por formatar professorData → professor (dominio) → e por fim converter isso para uma string json"""
+
+    def formatar_professor_data_para_dominio(self, professores_data: List[ProfessorData]) -> List[Professor]:
+        """Converte uma lista de ProfessorData (ORM) para Professor (domínio)."""
+        professores_dom = []
+        for professor in professores_data:
+            prof_dom = Professor( id = professor.id, nome = professor.nome, cpf = professor.cpf, cargo = professor.cargo, id_escola = professor.id_escola)
+            professores_dom.append(prof_dom)
+        return professores_dom
+
+    def gerar_json(self, professores_dominio: List[Professor]) -> str:
+        """Retorna string JSON com a lista de professores."""
+        lista = [
+            {
+                "id": prof.id,
+                "nome": prof.nome,
+                "cpf": prof.cpf,
+                "cargo": prof.cargo,
+                "id_escola": prof.id_escola
+            }
+            for prof in professores_dominio
+        ]
+        return json.dumps({"professores": lista}, ensure_ascii = False, indent = 4)
+    
+class consultas():
+    def
