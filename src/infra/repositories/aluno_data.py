@@ -107,16 +107,20 @@ class AlunoRepository:
             session.commit()
             return True
         
-class ConsultaBancoAluno:
+class ConsultaAlunoBanco:
     """Classe resonsável por fazer consultas para validar alguns atributos no banco"""
+
+    def __init__(self, id_aluno: Optional[int] = None, cpf: Optional[int] = None) -> None:
+        self.__id_aluno = id_aluno
+        self.__cpf = cpf
     
-    def buscar_por_cpf(self, cpf: str) -> Optional[AlunoData]:
+    def buscar_por_cpf(self) -> Optional[AlunoData]:
         """Busca um aluno pelo CPF. Retorna o objeto AlunoData se encontrado, senão None."""
         with DBConnectionHandler() as session:
-            return session.query(AlunoData).filter_by(cpf=cpf).first()
+            return session.query(AlunoData).filter_by(cpf=self.__cpf).first()
         
-    def buscar_por_cpf_e_id(self, cpf: str, id: int) -> bool:
+    def buscar_por_cpf_e_id(self) -> bool:
         """Verifica se o CPF já está cadastrado em outro professor com ID diferente, e retorna um booleano com base nisso.."""
         with DBConnectionHandler() as session:
-            aluno = session.query(AlunoData).filter_by(cpf=cpf).first()
-            return aluno is not None and aluno.id != id
+            aluno = session.query(AlunoData).filter_by(cpf=self.__cpf).first()
+            return aluno is not None and aluno.id != self.__id_aluno

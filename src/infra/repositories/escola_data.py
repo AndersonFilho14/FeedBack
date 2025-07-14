@@ -43,7 +43,7 @@ class EscolaRepository:
                 return True
     
             
-class ConsultaBancoEscola:
+class ConsultaEscolaBanco:
     """Classe resonsável por fazer consultas para validar alguns atributos no banco"""
     
     def buscar_por_id(self, id_escola: int) -> Optional[EscolaData]:

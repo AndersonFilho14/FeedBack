@@ -46,7 +46,7 @@ class MunicipioRepository:
             return True
 
 
-class ConsultaBancoMunicipio:
+class ConsultaMunicipioBanco:
     """Classe resonsável por fazer consultas para validar alguns atributos no banco"""
     
     def buscar_por_id(self, id_municipio: int) -> Optional[MunicipioData]:

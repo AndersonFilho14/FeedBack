@@ -1,6 +1,6 @@
 from typing import Optional
 from domain.models import Aluno
-from infra.repositories import AlunoRepository, ConsultaBancoEscola, ConsultaBancoTurma, ConsultaBancoAluno, ConsultarProfessor
+from infra.repositories import AlunoRepository, ConsultaEscolaBanco, ConsultaTurmaBanco, ConsultaAlunoBanco, ConsultarProfessor
 from config import log
 
 from utils.validarCampos import ValidadorCampos
@@ -114,20 +114,20 @@ class CriarAlunoNoBanco:
         
         try:
             # Verifica existência da escola
-            if ConsultaBancoEscola().buscar_por_id(self.__aluno.id_escola) is None:
+            if ConsultaEscolaBanco().buscar_por_id(self.__aluno.id_escola) is None:
                 return f"Escola com ID {self.__aluno.id_escola} não encontrada."
             
             # Verifica existência da turma
-            if ConsultaBancoTurma().buscar_por_id(self.__aluno.id_turma) is None:
+            if ConsultaTurmaBanco().buscar_por_id(self.__aluno.id_turma) is None:
                 return f"Turma com ID {self.__aluno.id_turma} não encontrada."
             
             # Verifica existencia de algum outro aluno com associado ao cpf fornecido
-            if ConsultaBancoAluno().buscar_por_cpf(cpf= self.__aluno.cpf) is not None:
+            if ConsultaAlunoBanco(cpf= self.__aluno.cpf).buscar_por_cpf() is not None:
                 log.warning(f"Tentativa de cadastro com CPF já existente: {self.__aluno.cpf}")
                 return "CPF já vinculado."
             
             # Verifica existência de algum professor com cpf existente
-            if ConsultarProfessor(id_professor=0).get_professor_retorno_cpf(cpf=self.__aluno.cpf) is not None:
+            if ConsultarProfessor(cpf=self.__aluno.cpf).get_professor_retorno_cpf() is not None:
                 log.warning(f"Tentativa de cadastro com CPF já existente: {self.__aluno.cpf}")
                 return "CPF já vinculado."
             
@@ -191,16 +191,16 @@ class AtualizarAlunoNoBanco:
         
         try:
             # Verifica existência da turma
-            if ConsultaBancoTurma().buscar_por_id(self.__novo_id_turma) is None:
+            if ConsultaTurmaBanco().buscar_por_id(self.__novo_id_turma) is None:
                 return f"Turma com ID {self.__novo_id_turma} não encontrada."
             
             # Verifica existencia de algum aluno com cpf existente
-            if ConsultaBancoAluno().buscar_por_cpf_e_id(cpf=self.__novo_cpf, id = self.__id):
+            if ConsultaAlunoBanco(id_aluno=self.__id, cpf=self.__novo_cpf).buscar_por_cpf_e_id():
                 log.warning(f"Tentativa de cadastro com CPF já existente: {self.__novo_cpf}")
                 return "CPF já vinculado."
             
             # Verifica existência de algum professor com cpf existente
-            if ConsultarProfessor(id_professor = self.__id).get_professor_retorno_cpf_e_id(cpf = self.__novo_cpf, id = self.__id):
+            if ConsultarProfessor(id_professor = self.__id, cpf = self.__novo_cpf).get_professor_retorno_cpf_e_id():
                 log.warning(f"Tentativa de cadastro com CPF já existente: {self.__novo_cpf}")
                 return "CPF já vinculado."
             

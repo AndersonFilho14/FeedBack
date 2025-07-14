@@ -15,8 +15,8 @@ from infra.repositories import (
     ConsultarProfessor as ConsultarProfessorBanco,
     ConsultarDisciplinasEMateriasVinculadasAoProfessor,
     ProfessorRepository,
-    ConsultaBancoEscola,
-    ConsultaBancoAluno
+    ConsultaEscolaBanco,
+    ConsultaAlunoBanco
 )
 
 from infra.db.models_data import Professor as ProfessorData, Aluno as AlunoData
@@ -471,16 +471,16 @@ class CriarProfessorNoBanco:
         
         try:
             # Verifica existência da escola
-            if ConsultaBancoEscola().buscar_por_id(self.__professor.id_escola) is None:
+            if ConsultaEscolaBanco().buscar_por_id(self.__professor.id_escola) is None:
                 return f"Escola com ID {self.__professor.id_escola} não encontrada."
             
             # Verifica existencia de algum aluno com cpf existente
-            if ConsultaBancoAluno().buscar_por_cpf(cpf=self.__professor.cpf) is None:
+            if ConsultaAlunoBanco(cpf=self.__professor.cpf).buscar_por_cpf() is None:
                 log.warning(f"Tentativa de cadastro com CPF já existente: {self.__professor.cpf}")
                 return "CPF já vinculado."
             
             # Verifica existência de algum professor com cpf existente
-            if ConsultarProfessorBanco(id_professor=self.__professor.id).get_professor_retorno_cpf(cpf=self.__professor.cpf) is None:
+            if ConsultarProfessorBanco(id_professor=self.__professor.id, cpf=self.__professor.cpf).get_professor_retorno_cpf() is None:
                 log.warning(f"Tentativa de cadastro com CPF já existente: {self.__professor.cpf}")
                 return "CPF já vinculado."
             
@@ -528,12 +528,12 @@ class AtualizarProfessorNoBanco:
         
         try:               
             # Verifica existencia de algum aluno com cpf fornecido
-            if ConsultaBancoAluno().buscar_por_cpf_e_id(cpf=self.__novo_cpf, id = self.__id):
+            if ConsultaAlunoBanco(id_aluno =  self.__id, cpf = self.__novo_cpf).buscar_por_cpf_e_id():
                 log.warning(f"Tentativa de atualização com CPF já existente: {self.__novo_cpf}")
                 return "CPF já vinculado."
             
             # Verifica existência de algum professor com cpf existente
-            if ConsultarProfessorBanco(id_professor=self.__id).get_professor_retorno_cpf_e_id(cpf=self.__novo_cpf, id=self.__id):
+            if ConsultarProfessorBanco(id_professor=self.__id, cpf= self.__novo_cpf).get_professor_retorno_cpf_e_id():
                 log.warning(f"Tentativa de atualização com CPF já existente: {self.__novo_cpf}")
                 return "CPF já vinculado."  
                    

@@ -4,7 +4,7 @@ from config import log
 from utils.validarCampos import ValidadorCampos
 
 from domain.models.escola import Escola
-from infra.repositories import EscolaRepository, ConsultaBancoMunicipio
+from infra.repositories import EscolaRepository, ConsultaMunicipioBanco
 from infra.db.models_data import Escola as Escola_data
 from typing import List
  
@@ -55,7 +55,7 @@ class CriarEscolaNoBanco:
         
         try:
             # Verifica existência do município antes de criar a escola
-            if ConsultaBancoMunicipio().buscar_por_id(self.__escola.id_municipio) is None:
+            if ConsultaMunicipioBanco().buscar_por_id(self.__escola.id_municipio) is None:
                 return f"Município com ID {self.__escola.id_municipio} não encontrado."
             
             else:
@@ -101,7 +101,7 @@ class AtualizarEscolaNoBanco:
         
         try:
             # Verifica existência do município antes de atualizar a escola
-            if ConsultaBancoMunicipio().buscar_por_id(self.__novo_id_municipio) is None:
+            if ConsultaMunicipioBanco().buscar_por_id(self.__novo_id_municipio) is None:
                 return f"Município com ID {self.__novo_id_municipio} não encontrado."
             
             atualizado = EscolaRepository().atualizar(self.__id, self.__novo_nome, self.__novo_id_municipio)

@@ -10,8 +10,8 @@ from infra.repositories.professor_data import (
     ProfessorRepository # noqa : F401
 )
 
-from infra.repositories.aluno_data import ConsultarTurma, AlunoRepository, ConsultaBancoAluno  # noqa : F401
-from infra.repositories.escola_data import EscolaRepository, ConsultaBancoEscola # noqa : F401
+from infra.repositories.aluno_data import ConsultarTurma, AlunoRepository, ConsultaAlunoBanco  # noqa : F401
+from infra.repositories.escola_data import EscolaRepository, ConsultaEscolaBanco # noqa : F401
 from infra.repositories.materia_data import MateriaRepository # noqa : F401
-from infra.repositories.municipio_data import MunicipioRepository, ConsultaBancoMunicipio # noqa : F401
-from infra.repositories.turma_data import TurmaRepository, ConsultaBancoTurma # noqa : F401
+from infra.repositories.municipio_data import MunicipioRepository, ConsultaMunicipioBanco # noqa : F401
+from infra.repositories.turma_data import TurmaRepository, ConsultaTurmaBanco # noqa : F401

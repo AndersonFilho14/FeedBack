@@ -39,7 +39,7 @@ class TurmaRepository:
             session.commit()
             return True
         
-class ConsultaBancoTurma:
+class ConsultaTurmaBanco:
     """Classe resonsável por fazer consultas para validar alguns atributos no banco"""
     
     def buscar_por_id(self, id_turma: int) -> Optional[TurmaData]:

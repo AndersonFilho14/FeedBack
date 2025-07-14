@@ -20,9 +20,10 @@ from domain.models import Professor
 class ConsultarProfessor:
     """Lida com a consulta de um único registro de professor no banco de dados."""
 
-    def __init__(self, id_professor: int) -> None:
+    def __init__(self, id_professor: Optional[int] = None, cpf: Optional[int] = None) -> None:
         """Inicializa a classe ConsultarProfessor com o ID do professor."""
         self.__id_professor = id_professor
+        self.__cpf_professor = cpf
 
     def __consultar_no_banco(self) -> Optional[ProfessorData]:
         """Consulta o banco de dados por um professor com o ID fornecido, retornando o objeto ProfessorData ou None."""
@@ -34,28 +35,28 @@ class ConsultarProfessor:
             )
         return retorno
     
-    def __Consultar_cpf_no_banco(self, cpf: int, id: int) -> Optional[ProfessorData]:
+    def __Consultar_cpf_no_banco(self) -> Optional[ProfessorData]:
         """Busca um aluno pelo CPF. Retorna o objeto ProfessorData se encontrado, senão None."""
         with DBConnectionHandler() as session:
-            return session.query(ProfessorData).filter_by(cpf=cpf).first()
+            return session.query(ProfessorData).filter_by(cpf = self.__cpf_professor).first()
     
-    def __Consultar_cpf_e_id_no_banco(self, cpf: int, id: int) -> bool:
+    def __Consultar_cpf_e_id_no_banco(self) -> bool:
         """Verifica se o CPF já está cadastrado em outro professor com ID diferente, e retorna um booleano com base nisso."""
         with DBConnectionHandler() as session:
-            professor = session.query(ProfessorData).filter_by(cpf=cpf).first()
-            return professor is not None and professor.id != id
+            professor = session.query(ProfessorData).filter_by(cpf=self.__cpf_professor).first()
+            return professor is not None and professor.id != self.__id_professor
 
     def get_professor_retorno(self) -> Optional[ProfessorData]:
         """Recupera os dados do professor, retornando o objeto ProfessorData ou None."""
         return self.__consultar_no_banco()
     
-    def get_professor_retorno_cpf(self, cpf: int) -> Optional[ProfessorData]:
+    def get_professor_retorno_cpf(self) -> Optional[ProfessorData]:
         """Recupera os dados do professor, retornando o objeto ProfessorData ou None."""
-        return self.__Consultar_cpf_no_banco(cpf=cpf, id=id)
+        return self.__Consultar_cpf_no_banco()
     
-    def get_professor_retorno_cpf_e_id(self, cpf: int, id: int) -> bool:
+    def get_professor_retorno_cpf_e_id(self) -> bool:
         """Recupera os dados do professor, retornando um booleano."""
-        return self.__Consultar_cpf_e_id_no_banco(cpf=cpf, id=id)
+        return self.__Consultar_cpf_e_id_no_banco()
 
 
 class ConsultarAlunosVinculadosAoProfessorNoBanco:

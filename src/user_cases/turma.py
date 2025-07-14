@@ -2,7 +2,7 @@ import json
 from config import log
 
 from utils.validarCampos import ValidadorCampos
-from infra.repositories import TurmaRepository, ConsultaBancoEscola
+from infra.repositories import TurmaRepository, ConsultaEscolaBanco
 from domain.models import Turma
 from infra.db.models_data import Turma as Turma_data
 
@@ -60,7 +60,7 @@ class CriarTurmaNoBanco:
         
         try:
             # Verifica existência da escola
-            if ConsultaBancoEscola().buscar_por_id(self.__turma.id_escola) is None:
+            if ConsultaEscolaBanco().buscar_por_id(self.__turma.id_escola) is None:
                 return f"Escola com ID {self.__aluno.id_escola} não encontrada."
             
             TurmaRepository().criar(self.__turma)
