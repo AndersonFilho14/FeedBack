@@ -11,7 +11,9 @@ from user_cases import (
     ControllerAluno, 
     ControllerMunicipio, 
     ControllerProfessor,
-    ControllerTurma
+    ControllerTurma,
+    ControllerRankingAvaliacao, 
+    ControllerHistoricoDesempenho
 )
 
 user_rout_bp = Blueprint("user_routes", __name__)
@@ -690,3 +692,85 @@ def deletar_turma(id_turma):
     controller = ControllerTurma(id_turma=id_turma)
     resultado = controller.deletar_turma()
     return make_response(jsonify({"mensagem": resultado}))
+
+# --------------- HISTÓRICO DE AVALIAÇÕES ---------------
+
+@user_rout_bp.route("/historico/avaliacoes/aluno/<int:id_aluno>", methods=["GET"])
+def historico_avaliacoes_por_aluno(id_aluno):
+    """
+    Retorna o histórico de avaliações de um aluno.
+    """
+    controller = ControllerHistoricoDesempenho(id_aluno=id_aluno)
+    resultado = controller.listar_historico_avaliacoes_por_aluno()
+    return make_response(resultado)
+
+
+@user_rout_bp.route("/historico/avaliacoes/turma/<int:id_turma>", methods=["GET"])
+def historico_avaliacoes_por_turma(id_turma):
+    """
+    Retorna o histórico de avaliações de uma turma.
+    """
+    controller = ControllerHistoricoDesempenho(id_turma=id_turma)
+    resultado = controller.listar_historico_avaliacoes_por_turma()
+    return make_response(resultado)
+
+
+@user_rout_bp.route("/historico/avaliacoes/escola/<int:id_escola>", methods=["GET"])
+def historico_avaliacoes_por_escola(id_escola):
+    """
+    Retorna o histórico de avaliações de uma escola.
+    """
+    controller = ControllerHistoricoDesempenho(id_escola=id_escola)
+    resultado = controller.listar_historico_avaliacoes_por_escola()
+    return make_response(resultado)
+
+
+@user_rout_bp.route("/historico/avaliacoes/materia/<int:id_materia>", methods=["GET"])
+def historico_avaliacoes_por_materia(id_materia):
+    """
+    Retorna o histórico de avaliações de uma matéria.
+    """
+    controller = ControllerHistoricoDesempenho(id_materia=id_materia)
+    resultado = controller.listar_historico_avaliacoes_por_materia()
+    return make_response(resultado)
+
+# --------------- RANKING DE AVALIAÇÕES ---------------
+
+@user_rout_bp.route("/ranking/alunos", methods=["GET"])
+def ranking_alunos():
+    """
+    Retorna o ranking geral dos alunos por média de nota.
+    """
+    controller = ControllerRankingAvaliacao()
+    resultado = controller.ranquear_alunos()
+    return make_response(resultado)
+
+
+@user_rout_bp.route("/ranking/turmas", methods=["GET"])
+def ranking_turmas():
+    """
+    Retorna o ranking geral das turmas por média de nota.
+    """
+    controller = ControllerRankingAvaliacao()
+    resultado = controller.ranquear_turmas()
+    return make_response(resultado)
+
+
+@user_rout_bp.route("/ranking/escolas", methods=["GET"])
+def ranking_escolas():
+    """
+    Retorna o ranking geral das escolas por média de nota.
+    """
+    controller = ControllerRankingAvaliacao()
+    resultado = controller.ranquear_escolas()
+    return make_response(resultado)
+
+
+@user_rout_bp.route("/ranking/materias/escola/<int:id_escola>", methods=["GET"])
+def ranking_materias_por_escola(id_escola):
+    """
+    Retorna o ranking das matérias de uma escola por média de nota.
+    """
+    controller = ControllerRankingAvaliacao(id_escola=id_escola)
+    resultado = controller.ranquear_materias()
+    return make_response(resultado)
