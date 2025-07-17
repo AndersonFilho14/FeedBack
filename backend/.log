@@ -301,3 +301,413 @@ DEBUG    | 25/06/2025 10:55:03 | 0:50:16.094946 |         professor.py:128   |  
 DEBUG    | 25/06/2025 10:55:04 | 0:50:16.956520 |         professor.py:128   |            professor.__init__             | 3
 DEBUG    | 25/06/2025 10:55:04 | 0:50:17.103276 |         professor.py:128   |            professor.__init__             | 2
 DEBUG    | 25/06/2025 10:55:04 | 0:50:17.267044 |         professor.py:128   |            professor.__init__             | 1
+INFO     | 25/06/2025 18:43:18 | 0:00:00.292095 |              main.py:8     |                 main.<module>             | Iniciando projeto
+DEBUG    | 25/06/2025 18:45:14 | 0:01:56.630528 |         professor.py:128   |            professor.__init__             | 4
+DEBUG    | 25/06/2025 18:45:16 | 0:01:58.963927 |         professor.py:128   |            professor.__init__             | 4
+DEBUG    | 25/06/2025 18:46:27 | 0:03:09.278476 |         professor.py:128   |            professor.__init__             | 1
+TRACE    | 25/06/2025 18:46:54 | 0:03:36.558369 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 25/06/2025 18:46:54 | 0:03:36.729182 |         professor.py:128   |            professor.__init__             | 1
+DEBUG    | 25/06/2025 18:47:01 | 0:03:44.028063 |         professor.py:128   |            professor.__init__             | 2
+DEBUG    | 25/06/2025 18:47:04 | 0:03:46.400536 |         professor.py:128   |            professor.__init__             | 3
+DEBUG    | 25/06/2025 18:47:06 | 0:03:48.398940 |         professor.py:128   |            professor.__init__             | 4
+WARNING  | 25/06/2025 18:47:07 | 0:03:49.812539 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+WARNING  | 25/06/2025 18:47:09 | 0:03:51.458577 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+WARNING  | 25/06/2025 18:47:09 | 0:03:51.860231 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+DEBUG    | 25/06/2025 18:47:09 | 0:03:52.042720 |         professor.py:128   |            professor.__init__             | 4
+DEBUG    | 25/06/2025 18:47:10 | 0:03:52.824380 |         professor.py:128   |            professor.__init__             | 3
+DEBUG    | 25/06/2025 18:47:10 | 0:03:53.042194 |         professor.py:128   |            professor.__init__             | 2
+DEBUG    | 25/06/2025 18:47:11 | 0:03:53.211228 |         professor.py:128   |            professor.__init__             | 1
+DEBUG    | 25/06/2025 18:47:14 | 0:03:57.079257 |         professor.py:128   |            professor.__init__             | 4
+TRACE    | 25/06/2025 18:58:01 | 0:14:43.651908 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 18:58:09 | 0:14:51.197312 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 18:58:09 | 0:14:51.930758 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 18:58:09 | 0:14:52.092938 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 18:58:15 | 0:14:57.813544 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 18:58:15 | 0:14:58.063207 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 18:58:16 | 0:14:58.227039 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 25/06/2025 18:58:18 | 0:15:01.160398 |         professor.py:128   |            professor.__init__             | 4
+DEBUG    | 25/06/2025 18:58:19 | 0:15:01.774011 |         professor.py:128   |            professor.__init__             | 4
+DEBUG    | 25/06/2025 18:58:19 | 0:15:01.913618 |         professor.py:128   |            professor.__init__             | 4
+DEBUG    | 25/06/2025 18:58:19 | 0:15:02.057448 |         professor.py:128   |            professor.__init__             | 4
+DEBUG    | 25/06/2025 18:58:20 | 0:15:02.195954 |         professor.py:128   |            professor.__init__             | 4
+DEBUG    | 25/06/2025 18:58:20 | 0:15:02.337759 |         professor.py:128   |            professor.__init__             | 4
+DEBUG    | 25/06/2025 18:58:20 | 0:15:02.473856 |         professor.py:128   |            professor.__init__             | 4
+TRACE    | 25/06/2025 18:58:27 | 0:15:09.427790 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 18:58:27 | 0:15:09.838527 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 18:58:38 | 0:15:20.368298 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 18:58:38 | 0:15:20.929847 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 18:58:42 | 0:15:24.287399 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 18:59:06 | 0:15:48.196548 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 18:59:10 | 0:15:53.145882 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 18:59:11 | 0:15:53.289134 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 18:59:40 | 0:16:22.735096 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 25/06/2025 18:59:42 | 0:16:24.455664 |         professor.py:128   |            professor.__init__             | 4
+TRACE    | 25/06/2025 19:00:33 | 0:17:16.014754 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 25/06/2025 19:00:37 | 0:17:20.100034 |         professor.py:128   |            professor.__init__             | 4
+TRACE    | 25/06/2025 19:00:51 | 0:17:33.878517 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:00:53 | 0:17:35.205901 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:01:05 | 0:17:47.972280 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:01:06 | 0:17:48.231398 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:01:24 | 0:18:06.391636 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:01:29 | 0:18:11.656663 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:02:12 | 0:18:55.135011 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:02:19 | 0:19:01.273426 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:02:49 | 0:19:31.643409 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:03:42 | 0:20:24.635870 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:03:43 | 0:20:25.177894 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:03:43 | 0:20:25.323568 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:03:43 | 0:20:25.469164 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:03:58 | 0:20:40.190328 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:03:58 | 0:20:40.656292 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:03:58 | 0:20:40.804748 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:03:58 | 0:20:40.948177 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:03:58 | 0:20:41.085267 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:04:39 | 0:21:21.512681 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:04:42 | 0:21:24.291319 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:04:45 | 0:21:27.179193 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:05:14 | 0:21:56.897868 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:05:19 | 0:22:01.485549 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:06:15 | 0:22:57.276787 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:06:18 | 0:23:00.796869 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:06:29 | 0:23:12.025801 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:06:32 | 0:23:14.717146 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:06:32 | 0:23:14.879981 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:06:40 | 0:23:22.732694 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:06:42 | 0:23:24.190296 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:06:42 | 0:23:24.329453 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:07:07 | 0:23:49.890448 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:07:09 | 0:23:51.295284 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:07:54 | 0:24:36.321820 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 25/06/2025 19:07:54 | 0:24:36.471259 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+INFO     | 06/07/2025 14:40:06 | 0:00:00.289777 |              main.py:8     |                 main.<module>             | Iniciando projeto
+DEBUG    | 06/07/2025 14:40:41 | 0:00:35.791113 |         professor.py:128   |            professor.__init__             | 1
+DEBUG    | 06/07/2025 14:40:46 | 0:00:40.267570 |         professor.py:128   |            professor.__init__             | 1
+DEBUG    | 06/07/2025 14:40:47 | 0:00:41.420381 |         professor.py:128   |            professor.__init__             | 2
+DEBUG    | 06/07/2025 14:40:47 | 0:00:41.730215 |         professor.py:128   |            professor.__init__             | 3
+DEBUG    | 06/07/2025 14:40:47 | 0:00:41.898611 |         professor.py:128   |            professor.__init__             | 4
+WARNING  | 06/07/2025 14:40:48 | 0:00:42.063784 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+DEBUG    | 06/07/2025 14:40:48 | 0:00:42.776386 |         professor.py:128   |            professor.__init__             | 4
+DEBUG    | 06/07/2025 14:40:49 | 0:00:43.340510 |         professor.py:128   |            professor.__init__             | 3
+DEBUG    | 06/07/2025 14:40:49 | 0:00:43.558273 |         professor.py:128   |            professor.__init__             | 2
+DEBUG    | 06/07/2025 14:40:49 | 0:00:43.708558 |         professor.py:128   |            professor.__init__             | 1
+TRACE    | 06/07/2025 14:40:51 | 0:00:45.190428 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 06/07/2025 14:40:52 | 0:00:46.419696 |         professor.py:128   |            professor.__init__             | 1
+DEBUG    | 06/07/2025 14:40:55 | 0:00:49.500986 |         professor.py:128   |            professor.__init__             | 1
+DEBUG    | 06/07/2025 15:11:23 | 0:31:17.784241 |         professor.py:128   |            professor.__init__             | 2
+DEBUG    | 06/07/2025 15:11:24 | 0:31:18.265032 |         professor.py:128   |            professor.__init__             | 3
+DEBUG    | 06/07/2025 15:11:24 | 0:31:18.694114 |         professor.py:128   |            professor.__init__             | 4
+DEBUG    | 06/07/2025 15:11:25 | 0:31:19.746835 |         professor.py:128   |            professor.__init__             | 3
+DEBUG    | 06/07/2025 15:11:25 | 0:31:19.907458 |         professor.py:128   |            professor.__init__             | 2
+DEBUG    | 06/07/2025 15:11:26 | 0:31:20.080668 |         professor.py:128   |            professor.__init__             | 1
+DEBUG    | 06/07/2025 15:11:47 | 0:31:41.807591 |         professor.py:128   |            professor.__init__             | 2
+DEBUG    | 06/07/2025 15:11:48 | 0:31:42.046768 |         professor.py:128   |            professor.__init__             | 3
+DEBUG    | 06/07/2025 15:11:48 | 0:31:42.278704 |         professor.py:128   |            professor.__init__             | 4
+WARNING  | 06/07/2025 15:11:48 | 0:31:42.738570 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+DEBUG    | 06/07/2025 15:11:50 | 0:31:44.184078 |         professor.py:128   |            professor.__init__             | 4
+DEBUG    | 06/07/2025 15:11:51 | 0:31:45.064078 |         professor.py:128   |            professor.__init__             | 3
+DEBUG    | 06/07/2025 15:11:51 | 0:31:45.349374 |         professor.py:128   |            professor.__init__             | 2
+DEBUG    | 06/07/2025 15:11:51 | 0:31:45.581607 |         professor.py:128   |            professor.__init__             | 1
+TRACE    | 06/07/2025 15:48:26 | 1:08:20.713853 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:48:44 | 1:08:37.998652 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:48:46 | 1:08:40.009973 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:48:47 | 1:08:41.165312 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:48:47 | 1:08:41.323042 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:48:58 | 1:08:52.821159 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:48:59 | 1:08:53.220534 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:48:59 | 1:08:53.375677 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:48:59 | 1:08:53.523356 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:48:59 | 1:08:53.669273 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:48:59 | 1:08:53.815523 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:49:00 | 1:08:53.949852 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:49:00 | 1:08:54.095509 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:49:02 | 1:08:56.843632 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 06/07/2025 15:49:02 | 1:08:56.847318 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+TRACE    | 06/07/2025 15:49:03 | 1:08:57.410784 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 06/07/2025 15:49:03 | 1:08:57.413952 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+TRACE    | 06/07/2025 15:49:03 | 1:08:57.585193 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 06/07/2025 15:49:03 | 1:08:57.588686 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+TRACE    | 06/07/2025 15:49:05 | 1:08:59.148872 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 06/07/2025 15:49:05 | 1:08:59.152106 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+TRACE    | 06/07/2025 15:49:08 | 1:09:02.483611 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:49:08 | 1:09:02.634757 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:49:08 | 1:09:02.796249 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:49:09 | 1:09:02.942242 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:50:14 | 1:10:08.525473 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:50:16 | 1:10:10.156183 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:50:21 | 1:10:15.580993 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:50:21 | 1:10:15.730629 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:50:21 | 1:10:15.879097 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:55:37 | 1:15:31.127708 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:55:37 | 1:15:31.301782 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:55:37 | 1:15:31.473061 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:55:37 | 1:15:31.612097 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:55:40 | 1:15:34.181065 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:55:40 | 1:15:34.334077 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:55:40 | 1:15:34.482800 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:55:46 | 1:15:40.024111 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 06/07/2025 15:55:46 | 1:15:40.027445 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+TRACE    | 06/07/2025 15:56:10 | 1:16:04.036430 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:39 | 1:16:33.023310 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:40 | 1:16:34.770013 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:40 | 1:16:34.931078 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:41 | 1:16:35.062079 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:41 | 1:16:35.203149 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:41 | 1:16:35.335880 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:41 | 1:16:35.470967 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:41 | 1:16:35.604731 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:41 | 1:16:35.729474 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:53 | 1:16:47.723551 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:54 | 1:16:48.076732 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:54 | 1:16:48.246502 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:54 | 1:16:48.383225 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:54 | 1:16:48.541808 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:54 | 1:16:48.677397 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:54 | 1:16:48.812274 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:56:54 | 1:16:48.935748 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:57:13 | 1:17:07.059277 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:57:37 | 1:17:31.113348 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:57:41 | 1:17:35.574015 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:57:41 | 1:17:35.904540 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:57:42 | 1:17:36.068873 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:57:42 | 1:17:36.209814 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:57:42 | 1:17:36.351448 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:58:07 | 1:18:01.697594 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 15:58:23 | 1:18:17.173777 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 06/07/2025 15:58:23 | 1:18:17.177352 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+TRACE    | 06/07/2025 15:58:34 | 1:18:27.951430 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 19:07:29 | 4:27:23.649589 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 06/07/2025 22:06:53 | 7:26:47.679574 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 07/07/2025 00:20:21 | 9:40:15.011967 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 07/07/2025 00:20:21 | 9:40:15.016161 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+TRACE    | 07/07/2025 00:20:24 | 9:40:18.495675 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 07/07/2025 00:20:24 | 9:40:18.499111 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+TRACE    | 07/07/2025 00:20:42 | 9:40:36.469425 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 07/07/2025 00:20:42 | 9:40:36.472712 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+TRACE    | 07/07/2025 00:20:57 | 9:40:51.125707 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 07/07/2025 00:22:01 | 9:41:55.069561 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 07/07/2025 00:22:58 | 9:42:52.623957 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 07/07/2025 00:57:48 | 10:17:42.903846 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 07/07/2025 01:09:11 | 10:29:05.404771 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 07/07/2025 01:24:56 | 10:44:50.459273 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 07/07/2025 02:23:43 | 11:43:37.026416 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+INFO     | 07/07/2025 13:10:43 | 0:00:00.249364 |              main.py:8     |                 main.<module>             | Iniciando projeto
+DEBUG    | 07/07/2025 13:15:46 | 0:05:03.137298 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:15:55 | 0:05:12.224219 |         professor.py:222   |            professor.__init__             | 2
+DEBUG    | 07/07/2025 13:15:58 | 0:05:14.916652 |         professor.py:222   |            professor.__init__             | 3
+DEBUG    | 07/07/2025 13:17:52 | 0:07:08.402846 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:17:54 | 0:07:10.673644 |         professor.py:222   |            professor.__init__             | 2
+DEBUG    | 07/07/2025 13:17:56 | 0:07:12.502467 |         professor.py:222   |            professor.__init__             | 3
+DEBUG    | 07/07/2025 13:17:58 | 0:07:14.424954 |         professor.py:222   |            professor.__init__             | 4
+WARNING  | 07/07/2025 13:18:01 | 0:07:17.816491 |         professor.py:44    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+DEBUG    | 07/07/2025 13:18:03 | 0:07:19.801683 |         professor.py:222   |            professor.__init__             | 4
+DEBUG    | 07/07/2025 13:21:04 | 0:10:21.121016 |         professor.py:222   |            professor.__init__             | 1
+TRACE    | 07/07/2025 13:22:20 | 0:11:36.408011 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 07/07/2025 13:23:57 | 0:13:13.396195 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:24:34 | 0:13:50.569268 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:25:01 | 0:14:17.810676 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:25:34 | 0:14:51.076771 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:25:34 | 0:14:51.078887 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:27:54 | 0:17:11.272126 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:27:54 | 0:17:11.274934 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:28:11 | 0:17:27.637333 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:28:11 | 0:17:27.637687 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:28:34 | 0:17:50.724554 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:28:34 | 0:17:50.726367 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:30:25 | 0:19:41.480274 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:30:25 | 0:19:41.480641 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:31:09 | 0:20:25.481833 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:31:09 | 0:20:25.483758 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:31:10 | 0:20:27.192157 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:31:10 | 0:20:27.194887 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:40:48 | 0:30:04.403474 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:40:48 | 0:30:04.403703 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:40:51 | 0:30:07.749825 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:40:51 | 0:30:07.752430 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:40:54 | 0:30:10.886278 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:40:54 | 0:30:10.888346 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:40:57 | 0:30:13.743792 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:40:57 | 0:30:13.751674 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:44:31 | 0:33:48.072577 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:44:45 | 0:34:01.923659 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:44:45 | 0:34:01.926095 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:44:46 | 0:34:03.161175 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:44:46 | 0:34:03.161572 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:44:54 | 0:34:10.396245 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:44:54 | 0:34:10.398109 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:44:55 | 0:34:11.443605 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:44:55 | 0:34:11.443974 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:44:57 | 0:34:13.780981 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:44:57 | 0:34:13.781212 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:44:58 | 0:34:15.003565 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:44:58 | 0:34:15.005801 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:46:37 | 0:35:53.612337 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:46:37 | 0:35:53.614266 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:46:38 | 0:35:55.041757 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:46:38 | 0:35:55.044308 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:46:50 | 0:36:06.813558 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:46:50 | 0:36:06.816162 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:46:51 | 0:36:08.331807 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:46:51 | 0:36:08.335067 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:46:53 | 0:36:09.963483 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:46:53 | 0:36:09.965409 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:27 | 0:40:43.765804 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:27 | 0:40:43.766175 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:29 | 0:40:45.983369 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:29 | 0:40:45.983744 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:30 | 0:40:47.048363 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:30 | 0:40:47.056991 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:33 | 0:40:50.316958 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:33 | 0:40:50.324344 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:36 | 0:40:53.301529 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:36 | 0:40:53.301969 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:41 | 0:40:57.426849 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:41 | 0:40:57.427247 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:42 | 0:40:58.742267 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:42 | 0:40:58.743015 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:46 | 0:41:03.024668 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:46 | 0:41:03.027563 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:50 | 0:41:06.762288 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:51:50 | 0:41:06.762626 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:58:34 | 0:47:50.459783 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:58:34 | 0:47:50.461671 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:58:43 | 0:47:59.914025 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:58:43 | 0:47:59.914377 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:58:45 | 0:48:01.586581 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:58:45 | 0:48:01.588432 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:58:53 | 0:48:09.751465 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:58:53 | 0:48:09.757400 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:58:55 | 0:48:11.877218 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:58:55 | 0:48:11.879620 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:59:07 | 0:48:23.391472 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:59:07 | 0:48:23.394456 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:59:14 | 0:48:30.442261 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:59:14 | 0:48:30.442633 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:59:15 | 0:48:31.430408 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:59:15 | 0:48:31.433158 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:59:18 | 0:48:35.053912 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 13:59:18 | 0:48:35.057252 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:03:18 | 0:52:34.893788 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:03:18 | 0:52:34.896136 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:03:22 | 0:52:39.250361 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:03:22 | 0:52:39.250575 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:28:31 | 1:17:48.244197 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:28:31 | 1:17:48.246286 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:28:34 | 1:17:50.655801 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:28:34 | 1:17:50.657718 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:28:35 | 1:17:51.689709 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:28:35 | 1:17:51.693118 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:28:36 | 1:17:53.286024 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:28:36 | 1:17:53.287914 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:28:38 | 1:17:54.413358 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:28:38 | 1:17:54.415490 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:34:20 | 1:23:37.064352 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:34:50 | 1:24:06.528163 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:34:50 | 1:24:06.528512 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:34:51 | 1:24:08.355829 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:34:51 | 1:24:08.358309 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:34:53 | 1:24:09.809509 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:34:53 | 1:24:09.809857 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:34:57 | 1:24:13.614275 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:34:57 | 1:24:13.614634 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:34:59 | 1:24:15.526619 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:34:59 | 1:24:15.528696 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:35:31 | 1:24:48.011319 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:35:31 | 1:24:48.013810 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:35:33 | 1:24:49.909834 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:35:33 | 1:24:49.911845 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:35:38 | 1:24:54.401977 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 14:35:38 | 1:24:54.402568 |         professor.py:222   |            professor.__init__             | 1
+TRACE    | 07/07/2025 15:33:36 | 2:22:52.915447 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 07/07/2025 15:36:05 | 2:25:21.396334 |         professor.py:222   |            professor.__init__             | 4
+TRACE    | 07/07/2025 15:47:24 | 2:36:41.021221 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 07/07/2025 15:47:25 | 2:36:41.401655 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 15:47:25 | 2:36:41.432634 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 15:47:35 | 2:36:51.423136 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 15:55:15 | 2:44:31.504724 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 15:55:15 | 2:44:31.538352 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 15:55:16 | 2:44:33.136514 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 15:55:16 | 2:44:33.165719 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 15:55:20 | 2:44:36.780128 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 15:55:33 | 2:44:50.172775 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 15:56:02 | 2:45:18.574225 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:16:44 | 3:06:00.614778 |         professor.py:222   |            professor.__init__             | 1
+TRACE    | 07/07/2025 16:18:57 | 3:08:14.134474 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 07/07/2025 16:18:57 | 3:08:14.375141 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:19:20 | 3:08:36.735292 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:19:20 | 3:08:36.737290 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:19:30 | 3:08:47.339540 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:19:30 | 3:08:47.339912 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:19:32 | 3:08:49.284619 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:19:32 | 3:08:49.292005 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:19:34 | 3:08:51.062906 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:19:34 | 3:08:51.063651 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:19:41 | 3:08:57.845460 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:19:41 | 3:08:57.848393 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:19:46 | 3:09:02.446028 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:19:46 | 3:09:02.452265 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:20:09 | 3:09:25.879627 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:20:28 | 3:09:44.771831 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:20:28 | 3:09:44.773813 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:20:30 | 3:09:47.141641 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:20:30 | 3:09:47.143863 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:20:38 | 3:09:54.582422 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:20:38 | 3:09:54.585342 |         professor.py:222   |            professor.__init__             | 1
+TRACE    | 07/07/2025 16:20:52 | 3:10:09.224560 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 07/07/2025 16:22:24 | 3:11:41.151166 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:24:39 | 3:13:56.228375 |         professor.py:222   |            professor.__init__             | 1
+TRACE    | 07/07/2025 16:27:35 | 3:16:51.579260 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 07/07/2025 16:27:35 | 3:16:51.824542 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:27:47 | 3:17:03.735650 |         professor.py:222   |            professor.__init__             | 2
+DEBUG    | 07/07/2025 16:28:02 | 3:17:18.511024 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:17 | 3:17:33.538585 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:17 | 3:17:33.543204 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:25 | 3:17:42.043800 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:25 | 3:17:42.044241 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:28 | 3:17:45.108074 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:28 | 3:17:45.110367 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:30 | 3:17:46.892887 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:30 | 3:17:46.901505 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:31 | 3:17:48.357217 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:31 | 3:17:48.360098 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:33 | 3:17:49.786837 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:33 | 3:17:49.789148 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:52 | 3:18:08.500462 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:52 | 3:18:08.502517 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:54 | 3:18:11.125208 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:54 | 3:18:11.125520 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:56 | 3:18:12.739831 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:56 | 3:18:12.741780 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:58 | 3:18:14.787230 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:28:58 | 3:18:14.789071 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:29:05 | 3:18:21.838488 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:29:05 | 3:18:21.841377 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:29:06 | 3:18:23.139482 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:29:06 | 3:18:23.143736 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:29:15 | 3:18:31.576473 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:29:15 | 3:18:31.584657 |         professor.py:222   |            professor.__init__             | 1
+TRACE    | 07/07/2025 16:29:33 | 3:18:50.107490 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 07/07/2025 16:32:46 | 3:22:02.994823 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 16:32:52 | 3:22:08.739840 |         professor.py:222   |            professor.__init__             | 1
+TRACE    | 07/07/2025 17:36:40 | 4:25:56.634201 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 07/07/2025 17:36:40 | 4:25:56.908296 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 17:43:22 | 4:32:39.228179 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 17:43:34 | 4:32:50.529840 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 17:57:17 | 4:46:33.549416 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 17:59:07 | 4:48:23.820772 |         professor.py:222   |            professor.__init__             | 1
+TRACE    | 07/07/2025 21:00:49 | 7:50:05.734099 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 07/07/2025 21:00:49 | 7:50:05.997328 |         professor.py:222   |            professor.__init__             | 1
+TRACE    | 07/07/2025 21:01:08 | 7:50:24.567044 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 07/07/2025 21:01:39 | 7:50:56.029578 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 07/07/2025 21:01:39 | 7:50:56.301318 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 21:01:43 | 7:50:59.916032 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 21:01:43 | 7:50:59.918582 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 21:01:54 | 7:51:10.398358 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 21:01:54 | 7:51:10.401187 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 21:01:57 | 7:51:13.456583 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 21:01:57 | 7:51:13.459201 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 21:02:03 | 7:51:19.983725 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 21:02:03 | 7:51:19.984152 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 21:02:05 | 7:51:21.540261 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 21:02:05 | 7:51:21.542397 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 21:02:07 | 7:51:23.804038 |         professor.py:222   |            professor.__init__             | 1
+DEBUG    | 07/07/2025 21:02:07 | 7:51:23.807181 |         professor.py:222   |            professor.__init__             | 1
