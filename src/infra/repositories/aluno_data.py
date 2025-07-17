@@ -119,6 +119,11 @@ class ConsultaAlunoBanco:
         with DBConnectionHandler() as session:
             return session.query(AlunoData).filter_by(cpf=self.__cpf).first()
         
+    def buscar_aluno_por_id(self) -> Optional[AlunoData]:
+        """Busca um aluno pelo ID e Retorna o objeto AlunoData  se encontrado, senão None."""
+        with DBConnectionHandler() as session:
+            return session.query(AlunoData).filter_by(id = self.__id_aluno).first()
+        
     def buscar_por_cpf_e_id(self) -> bool:
         """Verifica se o CPF já está cadastrado em outro professor com ID diferente, e retorna um booleano com base nisso.."""
         with DBConnectionHandler() as session:

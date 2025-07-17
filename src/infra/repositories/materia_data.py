@@ -1,5 +1,5 @@
 from infra import DBConnectionHandler
-from typing import List
+from typing import List, Optional
 
 from domain.models import Materia
 from infra.db.models_data import Materia as MateriaData
@@ -44,3 +44,11 @@ class MateriaRepository:
             session.delete(materia)
             session.commit()
             return True
+        
+
+class ConsultaMateriaBanco:
+    """Classe resonsável por fazer consultas para validar alguns atributos no banco"""
+    
+    def buscar_por_id(self, id_materia: int) -> Optional[MateriaData]:
+        with DBConnectionHandler() as session:
+            return session.query(MateriaData).filter_by(id = id_materia).first()
