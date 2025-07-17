@@ -14,14 +14,16 @@ from infra.db.models_data import (
     Materia as MateriaData,
     Avaliacao as AvaliacaoData,
 )
+from domain.models import Professor
 
 
 class ConsultarProfessor:
     """Lida com a consulta de um único registro de professor no banco de dados."""
 
-    def __init__(self, id_professor: int) -> None:
+    def __init__(self, id_professor: Optional[int] = None, cpf: Optional[int] = None) -> None:
         """Inicializa a classe ConsultarProfessor com o ID do professor."""
         self.__id_professor = id_professor
+        self.__cpf_professor = cpf
 
     def __consultar_no_banco(self) -> Optional[ProfessorData]:
         """Consulta o banco de dados por um professor com o ID fornecido, retornando o objeto ProfessorData ou None."""
@@ -32,10 +34,29 @@ class ConsultarProfessor:
                 .first()
             )
         return retorno
+    
+    def __Consultar_cpf_no_banco(self) -> Optional[ProfessorData]:
+        """Busca um aluno pelo CPF. Retorna o objeto ProfessorData se encontrado, senão None."""
+        with DBConnectionHandler() as session:
+            return session.query(ProfessorData).filter_by(cpf = self.__cpf_professor).first()
+    
+    def __Consultar_cpf_e_id_no_banco(self) -> bool:
+        """Verifica se o CPF já está cadastrado em outro professor com ID diferente, e retorna um booleano com base nisso."""
+        with DBConnectionHandler() as session:
+            professor = session.query(ProfessorData).filter_by(cpf=self.__cpf_professor).first()
+            return professor is not None and professor.id != self.__id_professor
 
     def get_professor_retorno(self) -> Optional[ProfessorData]:
         """Recupera os dados do professor, retornando o objeto ProfessorData ou None."""
         return self.__consultar_no_banco()
+    
+    def get_professor_retorno_cpf(self) -> Optional[ProfessorData]:
+        """Recupera os dados do professor, retornando o objeto ProfessorData ou None."""
+        return self.__Consultar_cpf_no_banco()
+    
+    def get_professor_retorno_cpf_e_id(self) -> bool:
+        """Recupera os dados do professor, retornando um booleano."""
+        return self.__Consultar_cpf_e_id_no_banco()
 
 
 class ConsultarAlunosVinculadosAoProfessorNoBanco:
@@ -284,3 +305,46 @@ class AdicionarNotaParaAluno:
                 session.rollback()
                 log.error(f"Ocorreu um rollback ao tentar inserir a avaliação: {e}")
                 raise e # Lança a exceção novamente para ser capturada pelo método público
+            
+
+class ProfessorRepository:
+    def criar(self, professor_dom: Professor) -> None:
+        """Insere um novo professor no banco."""
+        
+        # Convertendo professor de domain para professor de infra
+        professor_orm = ProfessorData(nome = professor_dom.nome,
+                                      cpf = professor_dom.cpf,
+                                      cargo = professor_dom.cargo,
+                                      id_escola = professor_dom.id_escola)
+        
+        with DBConnectionHandler() as session:
+            session.add(professor_orm)
+            session.commit()
+
+    def listar_por_escola(self, id_escola: int) -> List[ProfessorData]:
+        """Retorna lista de professores filtrados por escola."""
+        with DBConnectionHandler() as session:
+            professores = session.query(ProfessorData).filter(ProfessorData.id_escola == id_escola).all()
+            return professores
+
+    def atualizar(self, id_professor: int, novo_nome: str, novo_cargo: str, novo_cpf: int) -> bool:
+        """Atualiza os dados do professor com base no ID. Retorna True se atualizado, False se não encontrado."""
+        with DBConnectionHandler() as session:
+            professor = session.query(ProfessorData).filter(ProfessorData.id == id_professor).first()
+            if not professor:
+                return False
+            professor.nome = novo_nome
+            professor.cargo = novo_cargo
+            professor.cpf = novo_cpf
+            session.commit()
+            return True
+
+    def deletar(self, id_professor: int) -> bool:
+        """Deleta o professor pelo id. Retorna True se deletado, False se não encontrado."""
+        with DBConnectionHandler() as session:
+            professor = session.query(ProfessorData).filter(ProfessorData.id == id_professor).first()
+            if not professor:
+                return False
+            session.delete(professor)
+            session.commit()
+            return True

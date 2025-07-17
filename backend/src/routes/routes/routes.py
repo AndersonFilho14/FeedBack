@@ -6,6 +6,14 @@ from user_cases import (
     ControllerProfessorAlunosVinculados,
     ControllerProfessorAdicionarNotaAoAluo,  # noqa F401
     ControllerConsultarMateriaEDisciplinasVinculadasAoProfessor,
+    ControllerEscola,
+    ControllerMateria, 
+    ControllerAluno, 
+    ControllerMunicipio, 
+    ControllerProfessor,
+    ControllerTurma,
+    ControllerRankingAvaliacao, 
+    ControllerHistoricoDesempenho
 )
 
 user_rout_bp = Blueprint("user_routes", __name__)
@@ -160,3 +168,609 @@ class ReservarToken:
 
     def get_token(cls) -> str:
         return cls.__token
+    
+
+# --------------- CRIAR ALUNO ---------------
+@user_rout_bp.route("/aluno", methods=["POST"])
+def criar_aluno():
+    """
+    Cria um novo aluno.
+
+    **JSON Body esperado**:
+    ```json
+    {
+        "nome": "Maria Teste",
+        "cpf": "12345678901",
+        "idade": 14,
+        "faltas": 0,
+        "nota_score_preditivo": 8.5,
+        "id_escola": 1,
+        "id_turma": 2,
+        "id_responsavel": 3
+    }
+    ```
+
+    :return: JSON com mensagem de sucesso ou erro.
+    """
+    dados = request.json
+    controller = ControllerAluno(
+        nome=dados.get("nome"),
+        cpf=dados.get("cpf"),
+        idade=dados.get("idade"),
+        faltas=dados.get("faltas"),
+        nota_score_preditivo=dados.get("nota_score_preditivo"),
+        id_escola=dados.get("id_escola"),
+        id_turma=dados.get("id_turma"),
+        id_responsavel=dados.get("id_responsavel")
+    )
+    resultado = controller.criar_aluno()
+    return make_response(jsonify({"mensagem": resultado}))
+
+
+# --------------- LISTAR ALUNOS POR ESCOLA ---------------
+@user_rout_bp.route("/alunos/escola/<int:id_escola>", methods=["GET"])
+def listar_alunos_escola(id_escola):
+    """
+    Lista todos os alunos vinculados a uma escola.
+
+    :param id_escola: ID da escola.
+    :return: JSON estruturado com a lista de alunos.
+    """
+    controller = ControllerAluno(id_escola=id_escola)
+    resultado = controller.listar_alunos_Escola()   # já retorna string JSON
+    return make_response(resultado)
+
+
+# --------------- LISTAR ALUNOS POR TURMA ---------------
+@user_rout_bp.route("/alunos/turma/<int:id_turma>", methods=["GET"])
+def listar_alunos_turma(id_turma):
+    """
+    Lista todos os alunos de uma turma.
+
+    :param id_turma: ID da turma.
+    :return: JSON estruturado com a lista de alunos.
+    """
+    controller = ControllerAluno(id_turma=id_turma)
+    resultado_json = controller.listar_alunos_turma()    # já retorna string JSON
+    return make_response(resultado_json)
+
+
+# --------------- ATUALIZAR ALUNO ---------------
+@user_rout_bp.route("/aluno/<int:id_aluno>", methods=["PUT"])
+def atualizar_aluno(id_aluno):
+    """
+    Atualiza os dados de um aluno.
+
+    **JSON Body esperado**:
+    ```json
+    {
+        "nome": "Maria Atualizada",
+        "cpf": "12345678901",
+        "idade": 15,
+        "faltas": 2,
+        "id_turma": 2,
+        "id_responsavel": 3
+    }
+    ```
+
+    :param id_aluno: ID do aluno a ser atualizado.
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    dados = request.json
+    controller = ControllerAluno(
+        id_aluno=id_aluno,
+        nome=dados.get("nome"),
+        cpf=dados.get("cpf"),
+        idade=dados.get("idade"),
+        faltas=dados.get("faltas"),
+        id_turma=dados.get("id_turma"),
+        id_responsavel=dados.get("id_responsavel")
+    )
+    resultado = controller.atualizar_aluno()
+    return make_response(jsonify({"mensagem": resultado}))
+
+
+# --------------- DELETAR ALUNO ---------------
+@user_rout_bp.route("/aluno/<int:id_aluno>", methods=["DELETE"])
+def deletar_aluno(id_aluno):
+    """
+    Remove um aluno do sistema.
+
+    :param id_aluno: ID do aluno a ser removido.
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    controller = ControllerAluno(id_aluno=id_aluno)
+    resultado = controller.deletar_aluno()
+    return make_response(jsonify({"mensagem": resultado})) 
+
+ 
+ # --------------------- CRIAR ESCOLAS ---------------------   
+@user_rout_bp.route("/escola", methods=["POST"])
+def criar_escola():
+    """
+    Cria uma nova escola no sistema.
+
+    Espera um JSON com os campos:
+    {
+        "nome": "Escola Exemplo",
+        "id_municipio": 1
+    }
+
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    dados = request.json
+    controller = ControllerEscola(
+        nome=dados.get("nome"),
+        id_municipio=dados.get("id_municipio")
+    )
+    resultado = controller.criar_escola()
+    return make_response(jsonify({"mensagem": resultado}))
+
+
+# --------------------- LISTAR ESCOLAS ---------------------
+@user_rout_bp.route("/escola", methods=["GET"])
+def listar_escolas():
+    """
+    Lista todas as escolas cadastradas no sistema.
+
+    :return: JSON contendo a lista de escolas em formato estruturado.
+    """
+    controller = ControllerEscola()
+    resultado_json = controller.listar_escolas()
+    return make_response(resultado_json)
+
+
+# --------------------- ATUALIZAR ESCOLA ---------------------
+@user_rout_bp.route("/escola/<int:id_escola>", methods=["PUT"])
+def atualizar_escola(id_escola):
+    """
+    Atualiza os dados de uma escola existente.
+
+    Espera um JSON com os campos:
+    {
+        "nome": "Novo Nome da Escola",
+        "id_municipio": 2
+    }
+
+    :param id_escola: ID da escola a ser atualizada.
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    dados = request.json
+    controller = ControllerEscola(
+        id_escola=id_escola,
+        nome=dados.get("nome"),
+        id_municipio=dados.get("id_municipio")
+    )
+    resultado = controller.atualizar_escola()
+    return make_response(jsonify({"mensagem": resultado}))
+
+
+# --------------------- DELETAR ESCOLA ---------------------
+@user_rout_bp.route("/escola/<int:id_escola>", methods=["DELETE"])
+def deletar_escola(id_escola):
+    """
+    Remove uma escola do sistema com base no ID informado.
+
+    :param id_escola: ID da escola a ser removida.
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    controller = ControllerEscola(id_escola=id_escola)
+    resultado = controller.deletar_escola()
+    return make_response(jsonify({"mensagem": resultado}))
+
+
+# --------------------- CRIAR MATÉRIA ---------------------
+@user_rout_bp.route("/materia", methods=["POST"])
+def criar_materia():
+    """
+    Cria uma nova matéria.
+
+    **JSON Body esperado**:
+    ```json
+    {
+        "nome": "Gramática",
+        "id_disciplina": 1,
+        "id_professor": 3
+    }
+    ```
+
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    dados = request.json
+    controller = ControllerMateria(
+        nome=dados.get("nome"),
+        id_disciplina=dados.get("id_disciplina"),
+        id_professor=dados.get("id_professor")
+    )
+    resultado = controller.criar_materia()
+    return make_response(jsonify({"mensagem": resultado}))
+
+
+# --------------------- LISTAR MATÉRIAS DE UM PROFESSOR ---------------------
+@user_rout_bp.route("/materia/professor/<int:id_professor>", methods=["GET"])
+def listar_materias_por_professor(id_professor):
+    """
+    Lista todas as matérias vinculadas a um professor.
+
+    :param id_professor: ID do professor.
+    :return: JSON estruturado com a lista de matérias.
+    """
+    controller = ControllerMateria(id_professor=id_professor)
+    resultado_json = controller.listar_materias()  
+    return make_response(resultado_json)
+
+
+# --------------------- ATUALIZAR MATÉRIA ---------------------
+@user_rout_bp.route("/materia/<int:id_materia>", methods=["PUT"])
+def atualizar_materia(id_materia):
+    """
+    Atualiza os dados de uma matéria existente.
+
+    **JSON Body esperado**:
+    ```json
+    {
+        "nome": "Gramática Avançada",
+        "id_disciplina": 1,
+        "id_professor": 3
+    }
+    ```
+
+    :param id_materia: ID da matéria a ser atualizada.
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    dados = request.json
+    controller = ControllerMateria(
+        id_materia=id_materia,
+        nome=dados.get("nome"),
+        id_disciplina=dados.get("id_disciplina"),
+        id_professor=dados.get("id_professor")
+    )
+    resultado = controller.atualizar_materia()
+    return make_response(jsonify({"mensagem": resultado}))
+
+
+# --------------------- DELETAR MATÉRIA ---------------------
+@user_rout_bp.route("/materia/<int:id_materia>", methods=["DELETE"])
+def deletar_materia(id_materia):
+    """
+    Remove uma matéria do sistema.
+
+    :param id_materia: ID da matéria a ser excluída.
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    controller = ControllerMateria(id_materia=id_materia)
+    resultado = controller.deletar_materia()
+    return make_response(jsonify({"mensagem": resultado}))
+
+
+# ------------------ CRIAR MUNICÍPIO ------------------
+@user_rout_bp.route("/municipio", methods=["POST"])
+def criar_municipio():
+    """
+    Cria um novo município no sistema.
+
+    **JSON Body esperado**:
+    ```json
+    {
+        "nome": "Porto Alegre",
+        "estado": "RS",
+        "regiao": "Sul"
+    }
+    ```
+
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    dados = request.json
+    controller = ControllerMunicipio(
+        nome=dados.get("nome"),
+        estado=dados.get("estado"),
+        regiao=dados.get("regiao")
+    )
+    resultado = controller.criar_municipio()
+    return make_response(jsonify({"mensagem": resultado}))
+
+
+# ------------------ LISTAR MUNICÍPIOS ------------------
+@user_rout_bp.route("/municipios", methods=["GET"])
+def listar_municipios():
+    """
+    Retorna a lista de todos os municípios cadastrados.
+
+    :return: JSON contendo a lista de municípios.
+    """
+    controller = ControllerMunicipio()
+    resultado = controller.listar_municipios()  # já retorna string JSON
+    return make_response(resultado)
+
+
+# ------------------ ATUALIZAR MUNICÍPIO ------------------
+@user_rout_bp.route("/municipio/<int:id_municipio>", methods=["PUT"])
+def atualizar_municipio(id_municipio):
+    """
+    Atualiza os dados de um município existente.
+
+    **JSON Body esperado**:
+    ```json
+    {
+        "nome": "Novo Nome",
+        "estado": "SC",
+        "regiao": "Sul"
+    }
+    ```
+
+    :param id_municipio: ID do município a ser atualizado.
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    dados = request.json
+    controller = ControllerMunicipio(
+        id_municipio=id_municipio,
+        nome=dados.get("nome"),
+        estado=dados.get("estado"),
+        regiao=dados.get("regiao")
+    )
+    resultado = controller.atualizar_municipio()
+    return make_response(jsonify({"mensagem": resultado}))
+
+
+# ------------------ DELETAR MUNICÍPIO ------------------
+@user_rout_bp.route("/municipio/<int:id_municipio>", methods=["DELETE"])
+def deletar_municipio(id_municipio):
+    """
+    Remove um município do sistema.
+
+    :param id_municipio: ID do município a ser deletado.
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    controller = ControllerMunicipio(id_municipio=id_municipio)
+    resultado = controller.deletar_municipio()
+    return make_response(jsonify({"mensagem": resultado}))
+
+# ------------------ CRIAR PROFESSOR ------------------
+@user_rout_bp.route("/professor", methods=["POST"])
+def criar_professor():
+    """
+    Cria um novo professor.
+
+    **JSON Body esperado**:
+    ```json
+    {
+        "nome": "João Silva",
+        "cpf": "12345678901",
+        "cargo": "Matemática",
+        "id_escola": 1
+    }
+    ```
+
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    dados = request.json
+    controller = ControllerProfessor(
+        nome=dados.get("nome"),
+        cpf=dados.get("cpf"),
+        cargo=dados.get("cargo"),
+        id_escola=dados.get("id_escola")
+    )
+    resultado = controller.criar_professor()
+    return make_response(jsonify({"mensagem": resultado}))
+
+
+# ------------------ LISTAR PROFESSORES POR ESCOLA ------------------
+@user_rout_bp.route("/professores/escola/<int:id_escola>", methods=["GET"])
+def listar_professores(id_escola):
+    """
+    Lista todos os professores vinculados a uma escola.
+
+    :param id_escola: ID da escola.
+    :return: JSON estruturado com a lista de professores.
+    """
+    controller = ControllerProfessor(id_escola=id_escola)
+    resultado_json = controller.listar_professores()   # já retorna string JSON
+    return make_response(resultado_json)
+
+
+# ------------------ ATUALIZAR PROFESSOR ------------------
+@user_rout_bp.route("/professor/<int:id_professor>", methods=["PUT"])
+def atualizar_professor(id_professor):
+    """
+    Atualiza os dados de um professor existente.
+
+    **JSON Body esperado**:
+    ```json
+    {
+        "nome": "João Atualizado",
+        "cpf": "12345678901",
+        "cargo": "Física"
+    }
+    ```
+
+    :param id_professor: ID do professor a ser atualizado.
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    dados = request.json
+    controller = ControllerProfessor(
+        id_professor=id_professor,
+        nome=dados.get("nome"),
+        cpf=dados.get("cpf"),
+        cargo=dados.get("cargo")
+    )
+    resultado = controller.atualizar_professor()
+    return make_response(jsonify({"mensagem": resultado}))
+
+
+# ------------------ DELETAR PROFESSOR ------------------
+@user_rout_bp.route("/professor/<int:id_professor>", methods=["DELETE"])
+def deletar_professor(id_professor):
+    """
+    Remove um professor do sistema.
+
+    :param id_professor: ID do professor a ser removido.
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    controller = ControllerProfessor(id_professor=id_professor)
+    resultado = controller.deletar_professor()
+    return make_response(jsonify({"mensagem": resultado}))
+
+# ------------------ CRIAR TURMA ------------------
+@user_rout_bp.route("/turma", methods=["POST"])
+def criar_turma():
+    """
+    Cria uma nova turma.
+
+    **JSON Body esperado**:
+    ```json
+    {
+        "nome": "3º Ano B",
+        "ano_letivo": 2025,
+        "id_escola": 1
+    }
+    ```
+
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    dados = request.json
+    controller = ControllerTurma(
+        nome=dados.get("nome"),
+        ano_letivo=dados.get("ano_letivo"),
+        id_escola=dados.get("id_escola")
+    )
+    resultado = controller.criar_turma()
+    return make_response(jsonify({"mensagem": resultado}))
+
+
+# ------------------ LISTAR TURMAS POR ESCOLA ------------------
+@user_rout_bp.route("/turmas/escola/<int:id_escola>", methods=["GET"])
+def listar_turmas(id_escola):
+    """
+    Lista todas as turmas de uma escola.
+
+    :param id_escola: ID da escola.
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    controller = ControllerTurma(id_escola=id_escola)
+    resultado_json = controller.listar_turmas()  # já retorna string JSON
+    return make_response(resultado_json)
+
+
+# ------------------ ATUALIZAR TURMA ------------------
+@user_rout_bp.route("/turma/<int:id_turma>", methods=["PUT"])
+def atualizar_turma(id_turma):
+    """
+    Atualiza os dados de uma turma.
+
+    **JSON Body esperado**:
+    ```json
+    {
+        "nome": "3º Ano C",
+        "ano_letivo": 2026,
+        "id_escola": 1
+    }
+    ```
+
+    :param id_turma: ID da turma a ser atualizada.
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    dados = request.json
+    controller = ControllerTurma(
+        id_turma=id_turma,
+        nome=dados.get("nome"),
+        ano_letivo=dados.get("ano_letivo"),
+        id_escola=dados.get("id_escola")
+    )
+    resultado = controller.atualizar_turmas()
+    return make_response(jsonify({"mensagem": resultado}))
+
+
+# ------------------ DELETAR TURMA ------------------
+@user_rout_bp.route("/turma/<int:id_turma>", methods=["DELETE"])
+def deletar_turma(id_turma):
+    """
+    Deleta uma turma existente.
+
+    :param id_turma: ID da turma a ser deletada.
+    :return: Mensagem em string de sucesso ou erro.
+    """
+    controller = ControllerTurma(id_turma=id_turma)
+    resultado = controller.deletar_turma()
+    return make_response(jsonify({"mensagem": resultado}))
+
+# --------------- HISTÓRICO DE AVALIAÇÕES ---------------
+
+@user_rout_bp.route("/historico/avaliacoes/aluno/<int:id_aluno>", methods=["GET"])
+def historico_avaliacoes_por_aluno(id_aluno):
+    """
+    Retorna o histórico de avaliações de um aluno.
+    """
+    controller = ControllerHistoricoDesempenho(id_aluno=id_aluno)
+    resultado = controller.listar_historico_avaliacoes_por_aluno()
+    return make_response(resultado)
+
+
+@user_rout_bp.route("/historico/avaliacoes/turma/<int:id_turma>", methods=["GET"])
+def historico_avaliacoes_por_turma(id_turma):
+    """
+    Retorna o histórico de avaliações de uma turma.
+    """
+    controller = ControllerHistoricoDesempenho(id_turma=id_turma)
+    resultado = controller.listar_historico_avaliacoes_por_turma()
+    return make_response(resultado)
+
+
+@user_rout_bp.route("/historico/avaliacoes/escola/<int:id_escola>", methods=["GET"])
+def historico_avaliacoes_por_escola(id_escola):
+    """
+    Retorna o histórico de avaliações de uma escola.
+    """
+    controller = ControllerHistoricoDesempenho(id_escola=id_escola)
+    resultado = controller.listar_historico_avaliacoes_por_escola()
+    return make_response(resultado)
+
+
+@user_rout_bp.route("/historico/avaliacoes/materia/<int:id_materia>", methods=["GET"])
+def historico_avaliacoes_por_materia(id_materia):
+    """
+    Retorna o histórico de avaliações de uma matéria.
+    """
+    controller = ControllerHistoricoDesempenho(id_materia=id_materia)
+    resultado = controller.listar_historico_avaliacoes_por_materia()
+    return make_response(resultado)
+
+# --------------- RANKING DE AVALIAÇÕES ---------------
+
+@user_rout_bp.route("/ranking/alunos", methods=["GET"])
+def ranking_alunos():
+    """
+    Retorna o ranking geral dos alunos por média de nota.
+    """
+    controller = ControllerRankingAvaliacao()
+    resultado = controller.ranquear_alunos()
+    return make_response(resultado)
+
+
+@user_rout_bp.route("/ranking/turmas", methods=["GET"])
+def ranking_turmas():
+    """
+    Retorna o ranking geral das turmas por média de nota.
+    """
+    controller = ControllerRankingAvaliacao()
+    resultado = controller.ranquear_turmas()
+    return make_response(resultado)
+
+
+@user_rout_bp.route("/ranking/escolas", methods=["GET"])
+def ranking_escolas():
+    """
+    Retorna o ranking geral das escolas por média de nota.
+    """
+    controller = ControllerRankingAvaliacao()
+    resultado = controller.ranquear_escolas()
+    return make_response(resultado)
+
+
+@user_rout_bp.route("/ranking/materias/escola/<int:id_escola>", methods=["GET"])
+def ranking_materias_por_escola(id_escola):
+    """
+    Retorna o ranking das matérias de uma escola por média de nota.
+    """
+    controller = ControllerRankingAvaliacao(id_escola=id_escola)
+    resultado = controller.ranquear_materias()
+    return make_response(resultado)
