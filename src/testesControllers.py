@@ -4,7 +4,7 @@ from user_cases.turma import ControllerTurma
 from user_cases.materia import ControllerMateria
 from user_cases.municipio import ControllerMunicipio
 from user_cases.escola import ControllerEscola
-
+from user_cases.avaliacao import ControllerRankingAvaliacao, ControllerHistoricoDesempenho
 
 ID_ESCOLA_TESTE = 1
 
@@ -184,7 +184,6 @@ def test_atualizar_materia():
     print(resposta)
 
 
-
 # Funções de deletar:
 
 def test_deletar_escola():
@@ -217,6 +216,52 @@ def test_deletar_turma():
     resposta = controller.deletar_turma()
     print(resposta)
 
+ID_ALUNO_TESTE = 1
+ID_TURMA_TESTE = 1
+ID_ESCOLA_TESTE = 1
+ID_DISCIPLINA_TESTE = 1
+
+# Testes de histórico de desempenho (listar avaliações)
+
+def test_historico_por_aluno():
+    controller = ControllerHistoricoDesempenho(id_aluno=ID_ALUNO_TESTE)
+    resposta = controller.listar_historico_avaliacoes_por_aluno()
+    print(resposta)
+
+def test_historico_por_turma():
+    controller = ControllerHistoricoDesempenho(id_turma=ID_TURMA_TESTE)
+    resposta = controller.listar_historico_avaliacoes_por_turma()
+    print(resposta)
+
+def test_historico_por_escola():
+    controller = ControllerHistoricoDesempenho(id_escola=2)
+    resposta = controller.listar_historico_avaliacoes_por_escola()
+    print(resposta)
+
+
+# Testes de ranking de desempenho (ranquear por critério)
+
+def test_ranking_por_aluno():
+    controller = ControllerRankingAvaliacao()
+    resposta = controller.ranquear_alunos()
+    print(resposta)
+
+def test_ranking_por_turma():
+    controller = ControllerRankingAvaliacao()
+    resposta = controller.ranquear_turmas()
+    print(resposta)
+
+def test_ranking_por_escola():
+    controller = ControllerRankingAvaliacao()
+    resposta = controller.ranquear_escolas()
+    print(resposta)
+
+def test_ranking_por_disciplina_na_escola():
+    controller = ControllerRankingAvaliacao()
+    resposta = controller.ranquear_materias()
+    print(resposta)
+
+
 if __name__ == "__main__":
     print("descomente a função que deseja testar")
     #test_criar_escola()
@@ -247,3 +292,12 @@ if __name__ == "__main__":
     #test_deletar_aluno()
     #test_deletar_materia()
     #test_deletar_municipio()  
+
+    #test_historico_por_aluno()
+    #test_historico_por_turma()
+    #test_historico_por_escola()
+
+    #test_ranking_por_aluno()
+    #test_ranking_por_turma()
+    #test_ranking_por_escola()
+    #test_ranking_por_disciplina_na_escola()
