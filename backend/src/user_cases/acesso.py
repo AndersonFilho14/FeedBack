@@ -23,9 +23,9 @@ class ControllerAcesso:
         self.__user = user_name
         self.__passworld = passworld
 
-    def return_user_ou_texto(self):
+    def return_user_ou_texto(self) -> str:
         """Retorna os dados do usuário autenticado ou uma mensagem de erro."""
-        retorno_banco : Acesso | str = BucarAcessoBanco(
+        retorno_banco: Acesso | str = BucarAcessoBanco(
             user_name=self.__user, passworld=self.__passworld
         ).buscar_banco()
         if not isinstance(retorno_banco, Acesso):
@@ -35,9 +35,9 @@ class ControllerAcesso:
         usuario = BuscarQualUser(retorno_banco).consultar_quem_esta_acessando()
         return FormatarJsonRetorno(
             nome_cargo=retorno_banco.nome_cargo,
-              nome_user=usuario,
-                id_user= retorno_banco.id_user
-                ).gerar_json()
+            nome_user=usuario,
+            id_user=retorno_banco.id_user,
+        ).gerar_json()
 
 
 class BucarAcessoBanco:
@@ -104,7 +104,7 @@ class FormatarJsonRetorno:
             "id_user": self.__id_user,
             "nome": self.__nome_user,
             "cargo": self.__nome_cargo,
-            "token": token_base64
+            "token": token_base64,
         }
 
         return json.dumps(data_to_json, indent=4, ensure_ascii=False)

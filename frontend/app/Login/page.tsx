@@ -1,7 +1,6 @@
 "use client";
 import React,{useState} from "react";
-import Link from "next/link";
-import { link } from "fs";
+
 
 export default function Login() {
     const [user, setUser] = useState("");
@@ -18,8 +17,15 @@ export default function Login() {
             return;
         }
         const data = await response.json();
-        if (data.nome) {
-            window.location.href = "/AdicaoAlunos";
+        if (data.nome && data.cargo) {
+            const cargo = data.cargo.toLowerCase();
+            if (cargo === "professor") {
+                window.location.href = "/InicialProfessor";
+            } else if (cargo === "escola") {
+                window.location.href = "/EdicaoEscola";
+            } else if (cargo === "municipio") {
+                window.location.href = "/EdicaoMunicipio";
+            }
         } else {
             setMensagem("Usuário ou senha inválidos.");
         }
@@ -59,12 +65,6 @@ export default function Login() {
                             <button type="submit" className=" cursor-pointer pt-2 pb-2 pl-14 pr-14 bg-[#D0DDD0] border-[#727D73] rounded-sm">Entrar</button>
                         </span>
                     </form>
-                    <Link
-                        href="/CordenacaoCadastro"
-                        className="mt-4 px-6 py-2 bg-[#EEA03D] text-white rounded shadow hover:bg-[#d18a2c] transition"
-                    >
-                        Registrar-se
-                    </Link>                  
                     {mensagem && (
                         <div className="mt-4 text-red-600">{mensagem}</div>
                     )}
