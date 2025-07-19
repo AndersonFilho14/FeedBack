@@ -14,6 +14,7 @@ export default function EdicaoTurma() {
     }
   }, [turmaId]);
 
+  
   return (
     <>
       <header className="font-[InknutAntiqua] bg-[#727D73] border-[#A4B465] text-[#EEA03D] border-7 h-21 text-center text-7xl fixed top-0 left-0 w-full z-50">

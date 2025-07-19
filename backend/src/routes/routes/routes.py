@@ -705,7 +705,7 @@ def historico_avaliacoes_por_aluno(id_aluno):
     return make_response(resultado)
 
 
-@user_rout_bp.route("/historico/avaliacoes/turma/<int:id_turma>", methods=["GET"])
+@user_rout_bp.route("/historico/avaliacoes/turma/<int:id_turma>", methods=["GET","PUT"])
 def historico_avaliacoes_por_turma(id_turma):
     """
     Retorna o histórico de avaliações de uma turma.

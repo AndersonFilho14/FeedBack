@@ -3,6 +3,7 @@ from typing import List, Optional
 
 from domain.models import Materia
 from infra.db.models_data import Materia as MateriaData
+from infra.db.models_data import Disciplina as DisciplinaData
 
 class MateriaRepository:
     def criar(self, materia: Materia) -> None:
@@ -49,6 +50,11 @@ class MateriaRepository:
 class ConsultaMateriaBanco:
     """Classe resonsável por fazer consultas para validar alguns atributos no banco"""
     
-    def buscar_por_id(self, id_materia: int) -> Optional[MateriaData]:
+    def buscar_materia_por_id(self, id_materia: int) -> Optional[MateriaData]:
         with DBConnectionHandler() as session:
             return session.query(MateriaData).filter_by(id = id_materia).first()
+        
+    def buscar_disciplina_por_id(self, id_disciplina: int ) -> Optional[DisciplinaData]:
+        with DBConnectionHandler() as session:
+            return session.query(DisciplinaData).filter_by(id = id_disciplina).first()
+        
