@@ -6,9 +6,7 @@ from collections import defaultdict
 from infra.repositories.avaliacao_data import AvaliacaoRepository
 from domain.models.avaliacao import Avaliacao
 from infra.db.models_data import Avaliacao as AvaliacaoData
-from infra.repositories import ConsultaAlunoBanco, ConsultaEscolaBanco, ConsultaTurmaBanco, ConsultaMateriaBanco
-
-
+from infra.repositories import ConsultaAlunoBanco, ConsultaEscolaBanco, ConsultaTurmaBanco, ConsultaMateriaBanco, ConsultarProfessor
 
 class ControllerRankingAvaliacao:
     """Classe responsável por gerar rankings de desempenho por aluno, turma, escola e matéria."""
@@ -140,7 +138,7 @@ class RanquearAvaliacao:
 
         elif criterio == "ranking_materias":
             for item in ranking:
-                materia = ConsultaMateriaBanco().buscar_por_id(item["id"])
+                materia = ConsultaMateriaBanco().buscar_materia_por_id(item["id"])
                 if materia is not None:
                     lista_formatada.append({
                         "id": materia.id,
@@ -203,19 +201,37 @@ class FormatarAvaliacao:
         return avaliacoes_dom
 
     def gerar_json(self, avaliacoes_dominio: List[Avaliacao]) -> str:
-        """Gera JSON com lista de avaliações formatadas."""
-        lista = [
-            {
+        """Gera JSON com lista de avaliações formatadas, incluindo nomes associados."""
+        lista = []
+
+        for avaliacao in avaliacoes_dominio:
+            aluno = ConsultaAlunoBanco(id_aluno=avaliacao.id_aluno).buscar_aluno_por_id()
+            professor = ConsultarProfessor(id_professor=avaliacao.id_professor).get_professor_retorno()
+            disciplina = ConsultaMateriaBanco().buscar_disciplina_por_id(id_disciplina=avaliacao.id_disciplina)
+            materia = ConsultaMateriaBanco().buscar_materia_por_id(avaliacao.id_materia)
+            turma = ConsultaTurmaBanco().buscar_por_id(avaliacao.id_turma)
+
+            nome_aluno = aluno.nome if aluno else "Desconhecido"
+            nome_professor = professor.nome if professor else "Desconhecido"
+            nome_disciplina = disciplina.nome_disciplina if disciplina else "Desconhecida"
+            nome_materia = materia.nome_materia if materia else "Desconhecida"
+            nome_turma = turma.nome if turma else "Desconhecida"
+            escola = ConsultaEscolaBanco().buscar_por_id(aluno.id_escola)
+            nome_escola = escola.nome if escola else "Desconhecida"
+
+
+            lista.append({
                 "id": avaliacao.id,
                 "tipo_avaliacao": avaliacao.tipo_avaliacao,
                 "data_avaliacao": avaliacao.data_avaliacao.isoformat(),
                 "nota": avaliacao.nota,
                 "id_aluno": avaliacao.id_aluno,
-                "id_professor": avaliacao.id_professor,
-                "id_disciplina": avaliacao.id_disciplina,
-                "id_materia": avaliacao.id_materia,
-                "id_turma": avaliacao.id_turma
-            }
-            for avaliacao in avaliacoes_dominio
-        ]
+                "nome_aluno": nome_aluno,
+                "nome_professor": nome_professor,
+                "nome_disciplina": nome_disciplina,
+                "nome_materia": nome_materia,
+                "nome_turma": nome_turma,
+                "nome_escola": nome_escola
+            })
+
         return json.dumps({"avaliacoes": lista}, ensure_ascii=False, indent=4)
