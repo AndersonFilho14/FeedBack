@@ -1,89 +1,161 @@
-INFO     | 25/06/2025 11:17:45 | 0:00:00.320548 |              main.py:8     |                 main.<module>             | Iniciando projeto
-INFO     | 25/06/2025 19:09:13 | 0:00:00.286948 |              main.py:8     |                 main.<module>             | Iniciando projeto
-INFO     | 25/06/2025 19:09:57 | 0:00:00.280614 |              main.py:8     |                 main.<module>             | Iniciando projeto
-TRACE    | 25/06/2025 19:10:04 | 0:00:07.311022 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-TRACE    | 25/06/2025 19:10:04 | 0:00:07.697958 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-TRACE    | 25/06/2025 19:10:04 | 0:00:07.816114 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-TRACE    | 25/06/2025 19:10:44 | 0:00:47.276231 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-TRACE    | 25/06/2025 19:10:47 | 0:00:50.163191 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-TRACE    | 25/06/2025 19:10:47 | 0:00:50.312957 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-TRACE    | 25/06/2025 19:10:47 | 0:00:50.450319 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-TRACE    | 25/06/2025 19:11:53 | 0:01:56.632387 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-TRACE    | 25/06/2025 19:12:04 | 0:02:08.016001 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-INFO     | 25/06/2025 19:12:34 | 0:02:37.620728 |              main.py:10    |                 main.<module>             | Fim do projeto
-INFO     | 25/06/2025 19:12:37 | 0:00:00.279471 |              main.py:8     |                 main.<module>             | Iniciando projeto
-TRACE    | 25/06/2025 19:13:22 | 0:00:45.217508 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-TRACE    | 25/06/2025 19:14:06 | 0:01:29.337487 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-DEBUG    | 25/06/2025 19:14:07 | 0:01:30.132454 |         professor.py:128   |            professor.__init__             | 1
-TRACE    | 25/06/2025 19:14:29 | 0:01:53.064048 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-DEBUG    | 25/06/2025 19:14:30 | 0:01:53.308322 |         professor.py:128   |            professor.__init__             | 1
-DEBUG    | 25/06/2025 19:14:31 | 0:01:54.715452 |         professor.py:128   |            professor.__init__             | 2
-DEBUG    | 25/06/2025 19:14:31 | 0:01:54.850672 |         professor.py:128   |            professor.__init__             | 3
-DEBUG    | 25/06/2025 19:14:31 | 0:01:54.972020 |         professor.py:128   |            professor.__init__             | 4
-WARNING  | 25/06/2025 19:14:32 | 0:01:55.106553 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
-DEBUG    | 25/06/2025 19:14:32 | 0:01:55.810482 |         professor.py:128   |            professor.__init__             | 4
-DEBUG    | 25/06/2025 19:14:33 | 0:01:56.477417 |         professor.py:128   |            professor.__init__             | 3
-DEBUG    | 25/06/2025 19:14:33 | 0:01:56.641251 |         professor.py:128   |            professor.__init__             | 2
-DEBUG    | 25/06/2025 19:14:33 | 0:01:56.779593 |         professor.py:128   |            professor.__init__             | 1
-TRACE    | 25/06/2025 19:15:13 | 0:02:36.312218 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-DEBUG    | 25/06/2025 19:15:13 | 0:02:36.543929 |         professor.py:128   |            professor.__init__             | 1
-DEBUG    | 25/06/2025 19:15:32 | 0:02:55.206386 |         professor.py:128   |            professor.__init__             | 2
-DEBUG    | 25/06/2025 19:15:32 | 0:02:55.531144 |         professor.py:128   |            professor.__init__             | 3
-DEBUG    | 25/06/2025 19:15:32 | 0:02:55.807744 |         professor.py:128   |            professor.__init__             | 4
-WARNING  | 25/06/2025 19:15:33 | 0:02:56.193879 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
-DEBUG    | 25/06/2025 19:15:33 | 0:02:56.942400 |         professor.py:128   |            professor.__init__             | 4
-WARNING  | 25/06/2025 19:15:34 | 0:02:57.463349 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
-DEBUG    | 25/06/2025 19:15:34 | 0:02:58.017345 |         professor.py:128   |            professor.__init__             | 4
-DEBUG    | 25/06/2025 19:15:35 | 0:02:58.582888 |         professor.py:128   |            professor.__init__             | 3
-DEBUG    | 25/06/2025 19:15:35 | 0:02:58.843956 |         professor.py:128   |            professor.__init__             | 2
-DEBUG    | 25/06/2025 19:15:35 | 0:02:58.991409 |         professor.py:128   |            professor.__init__             | 1
-DEBUG    | 25/06/2025 19:15:37 | 0:03:00.909539 |         professor.py:128   |            professor.__init__             | 2
-DEBUG    | 25/06/2025 19:15:37 | 0:03:01.063684 |         professor.py:128   |            professor.__init__             | 3
-DEBUG    | 25/06/2025 19:15:38 | 0:03:01.389694 |         professor.py:128   |            professor.__init__             | 4
-WARNING  | 25/06/2025 19:15:39 | 0:03:02.610643 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
-DEBUG    | 25/06/2025 19:15:40 | 0:03:03.429347 |         professor.py:128   |            professor.__init__             | 4
-DEBUG    | 25/06/2025 19:15:40 | 0:03:03.958944 |         professor.py:128   |            professor.__init__             | 3
-DEBUG    | 25/06/2025 19:15:41 | 0:03:04.128072 |         professor.py:128   |            professor.__init__             | 2
-DEBUG    | 25/06/2025 19:15:41 | 0:03:04.283503 |         professor.py:128   |            professor.__init__             | 1
-DEBUG    | 25/06/2025 19:15:42 | 0:03:05.586048 |         professor.py:128   |            professor.__init__             | 2
-DEBUG    | 25/06/2025 19:15:42 | 0:03:05.750205 |         professor.py:128   |            professor.__init__             | 3
-DEBUG    | 25/06/2025 19:15:42 | 0:03:05.926751 |         professor.py:128   |            professor.__init__             | 4
-WARNING  | 25/06/2025 19:15:43 | 0:03:06.241874 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
-DEBUG    | 25/06/2025 19:15:43 | 0:03:06.855809 |         professor.py:128   |            professor.__init__             | 4
-DEBUG    | 25/06/2025 19:15:44 | 0:03:07.478782 |         professor.py:128   |            professor.__init__             | 3
-DEBUG    | 25/06/2025 19:15:44 | 0:03:07.675128 |         professor.py:128   |            professor.__init__             | 2
-DEBUG    | 25/06/2025 19:15:44 | 0:03:07.842431 |         professor.py:128   |            professor.__init__             | 1
-DEBUG    | 25/06/2025 19:18:59 | 0:06:22.732259 |         professor.py:128   |            professor.__init__             | 2
-DEBUG    | 25/06/2025 19:18:59 | 0:06:22.980008 |         professor.py:128   |            professor.__init__             | 3
-DEBUG    | 25/06/2025 19:19:00 | 0:06:23.206157 |         professor.py:128   |            professor.__init__             | 4
-DEBUG    | 25/06/2025 19:19:00 | 0:06:23.759093 |         professor.py:128   |            professor.__init__             | 3
-DEBUG    | 25/06/2025 19:19:00 | 0:06:23.973693 |         professor.py:128   |            professor.__init__             | 2
-DEBUG    | 25/06/2025 19:19:01 | 0:06:24.223911 |         professor.py:128   |            professor.__init__             | 1
-TRACE    | 25/06/2025 19:24:25 | 0:11:48.873468 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-DEBUG    | 25/06/2025 19:25:07 | 0:12:30.461798 |         professor.py:128   |            professor.__init__             | 1
-TRACE    | 25/06/2025 19:25:21 | 0:12:44.769181 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-DEBUG    | 25/06/2025 19:25:21 | 0:12:44.772766 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
-TRACE    | 25/06/2025 19:25:26 | 0:12:49.533385 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-DEBUG    | 25/06/2025 19:25:26 | 0:12:49.536926 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
-TRACE    | 25/06/2025 19:25:30 | 0:12:54.034344 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-DEBUG    | 25/06/2025 19:25:31 | 0:12:54.455228 |         professor.py:128   |            professor.__init__             | 1
-TRACE    | 25/06/2025 19:27:01 | 0:14:24.142607 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-DEBUG    | 25/06/2025 19:27:01 | 0:14:24.556780 |         professor.py:128   |            professor.__init__             | 1
-TRACE    | 25/06/2025 19:36:45 | 0:24:08.355176 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
-DEBUG    | 25/06/2025 19:36:45 | 0:24:08.695440 |         professor.py:128   |            professor.__init__             | 1
-DEBUG    | 25/06/2025 19:36:59 | 0:24:22.770121 |         professor.py:128   |            professor.__init__             | 2
-DEBUG    | 25/06/2025 19:37:05 | 0:24:28.832610 |         professor.py:128   |            professor.__init__             | 3
-DEBUG    | 25/06/2025 19:37:07 | 0:24:30.307180 |         professor.py:128   |            professor.__init__             | 4
-WARNING  | 25/06/2025 19:37:07 | 0:24:30.641948 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
-DEBUG    | 25/06/2025 19:37:24 | 0:24:47.898897 |         professor.py:128   |            professor.__init__             | 4
-DEBUG    | 25/06/2025 19:37:26 | 0:24:49.147396 |         professor.py:128   |            professor.__init__             | 3
-DEBUG    | 25/06/2025 19:37:26 | 0:24:49.499387 |         professor.py:128   |            professor.__init__             | 2
-DEBUG    | 25/06/2025 19:37:26 | 0:24:50.061749 |         professor.py:128   |            professor.__init__             | 1
-DEBUG    | 25/06/2025 19:38:23 | 0:25:46.321600 |         professor.py:128   |            professor.__init__             | 2
-DEBUG    | 25/06/2025 19:38:23 | 0:25:47.087723 |         professor.py:128   |            professor.__init__             | 3
-DEBUG    | 25/06/2025 19:38:24 | 0:25:48.056045 |         professor.py:128   |            professor.__init__             | 4
-WARNING  | 25/06/2025 19:40:20 | 0:27:43.365447 |         professor.py:34    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
-DEBUG    | 25/06/2025 19:40:21 | 0:27:44.148331 |         professor.py:128   |            professor.__init__             | 4
-DEBUG    | 25/06/2025 19:40:21 | 0:27:44.648122 |         professor.py:128   |            professor.__init__             | 3
-DEBUG    | 25/06/2025 19:40:21 | 0:27:44.930580 |         professor.py:128   |            professor.__init__             | 2
-DEBUG    | 25/06/2025 19:40:21 | 0:27:45.076559 |         professor.py:128   |            professor.__init__             | 1
+INFO     | 17/07/2025 01:32:12 | 0:00:00.366201 |              main.py:8     |                 main.<module>             | Iniciando projeto
+WARNING  | 17/07/2025 01:33:46 | 0:01:34.994869 |         professor.py:47    |            professor.fluxo_para_consultar_professor_e_seus_alunos | Não encontrado professor com esse ID no banco
+DEBUG    | 17/07/2025 01:34:41 | 0:02:29.526102 |         professor.py:225   |            professor.__init__             | 1
+TRACE    | 17/07/2025 12:32:18 | 11:00:07.063366 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 17/07/2025 12:32:19 | 11:00:07.947734 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:32:22 | 11:00:10.155304 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:32:28 | 11:00:16.362123 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:32:28 | 11:00:16.370701 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:10 | 11:00:58.303254 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:10 | 11:00:58.313997 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:17 | 11:01:05.331860 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:17 | 11:01:05.346026 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:20 | 11:01:08.170907 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:20 | 11:01:08.181095 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:21 | 11:01:09.394154 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:21 | 11:01:09.405424 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:29 | 11:01:17.567817 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:29 | 11:01:17.577794 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:33 | 11:01:21.640610 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:33 | 11:01:21.649708 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:34 | 11:01:22.423551 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:34 | 11:01:22.432839 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:35 | 11:01:23.830823 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:38 | 11:01:27.028337 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:33:38 | 11:01:27.031402 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:42:41 | 11:10:29.786047 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:44:19 | 11:12:07.892115 |             aluno.py:160   |                aluno.listar_alunos_turma  | 3 alunos encontrados na turma 1.
+DEBUG    | 17/07/2025 12:44:34 | 11:12:23.013979 |             aluno.py:160   |                aluno.listar_alunos_turma  | 3 alunos encontrados na turma 3.
+DEBUG    | 17/07/2025 12:44:37 | 11:12:25.833504 |             aluno.py:160   |                aluno.listar_alunos_turma  | 3 alunos encontrados na turma 4.
+DEBUG    | 17/07/2025 12:44:40 | 11:12:28.477132 |             aluno.py:160   |                aluno.listar_alunos_turma  | 0 alunos encontrados na turma 10.
+DEBUG    | 17/07/2025 12:44:44 | 11:12:32.162160 |             aluno.py:160   |                aluno.listar_alunos_turma  | 3 alunos encontrados na turma 3.
+DEBUG    | 17/07/2025 12:45:49 | 11:13:37.411095 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:45:49 | 11:13:37.422032 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 12:46:30 | 11:14:18.151589 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:00:58 | 11:28:46.554994 |             aluno.py:151   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 17/07/2025 13:01:35 | 11:29:23.817241 |             aluno.py:160   |                aluno.listar_alunos_turma  | 3 alunos encontrados na turma 1.
+DEBUG    | 17/07/2025 13:20:31 | 11:48:19.217667 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:20:31 | 11:48:19.227825 |         professor.py:225   |            professor.__init__             | 1
+TRACE    | 17/07/2025 13:22:52 | 11:50:40.101022 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 17/07/2025 13:24:42 | 11:52:30.263331 |         professor.py:225   |            professor.__init__             | 1
+TRACE    | 17/07/2025 13:26:47 | 11:54:35.670838 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 17/07/2025 13:26:47 | 11:54:35.921234 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:26:58 | 11:54:46.161692 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:26:58 | 11:54:46.171931 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:29:26 | 11:57:14.171241 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:34:58 | 12:02:47.021391 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:34:58 | 12:02:47.030787 |         professor.py:225   |            professor.__init__             | 1
+TRACE    | 17/07/2025 13:35:15 | 12:03:03.738122 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 17/07/2025 13:56:02 | 12:23:50.477077 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 17/07/2025 13:56:02 | 12:23:50.689839 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:57:03 | 12:24:51.148957 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:57:03 | 12:24:51.160381 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:57:53 | 12:25:41.662936 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:57:53 | 12:25:41.673702 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:58:18 | 12:26:06.727303 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:58:18 | 12:26:06.738902 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:58:40 | 12:26:28.837753 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:58:40 | 12:26:28.847282 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:58:54 | 12:26:42.453796 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 13:58:54 | 12:26:42.467536 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 14:00:30 | 12:28:18.733346 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 14:00:30 | 12:28:18.744412 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 14:00:33 | 12:28:21.687771 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 14:00:33 | 12:28:21.700782 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 14:00:37 | 12:28:25.419288 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 14:00:37 | 12:28:25.430926 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 14:00:38 | 12:28:26.463558 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 17/07/2025 14:00:38 | 12:28:26.473005 |         professor.py:225   |            professor.__init__             | 1
+TRACE    | 17/07/2025 14:00:53 | 12:28:42.041007 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 18/07/2025 22:19:54 | 1 day, 20:47:42.357380 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 18/07/2025 22:19:54 | 1 day, 20:47:42.562771 |         professor.py:225   |            professor.__init__             | 1
+INFO     | 18/07/2025 22:26:54 | 0:00:00.195235 |            escola.py:63    |               escola.executar             | Escola 'Escola Modelo' criada com sucesso.
+WARNING  | 18/07/2025 22:26:54 | 0:00:00.201211 |         professor.py:479   |            professor._executar            | Tentativa de cadastro com CPF já existente: 12345678900
+INFO     | 18/07/2025 22:26:54 | 0:00:00.210827 |             turma.py:67    |                turma.executar             | Turma '3º Ano B' criada com sucesso.
+INFO     | 18/07/2025 22:26:54 | 0:00:00.226959 |             aluno.py:136   |                aluno.executar             | Aluno 'Maria teste' criado com sucesso.
+INFO     | 18/07/2025 22:26:54 | 0:00:00.233489 |           materia.py:72    |              materia.executar             | Matéria 'História' criada com sucesso.
+INFO     | 18/07/2025 22:27:12 | 0:00:00.202107 |            escola.py:63    |               escola.executar             | Escola 'Escola Modelo' criada com sucesso.
+DEBUG    | 18/07/2025 22:27:49 | 0:00:00.199797 |         professor.py:502   |            professor._executar            | 1 professores encontrados na escola 1.
+DEBUG    | 18/07/2025 22:28:09 | 0:00:00.190715 |         professor.py:502   |            professor._executar            | 1 professores encontrados na escola 1.
+DEBUG    | 18/07/2025 22:28:09 | 0:00:00.193742 |             turma.py:81    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 18/07/2025 22:37:33 | 1 day, 21:05:21.368757 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:37:33 | 1 day, 21:05:21.371022 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:40:03 | 1 day, 21:07:52.073424 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:40:40 | 1 day, 21:08:28.255165 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:40:40 | 1 day, 21:08:28.258054 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:40:44 | 1 day, 21:08:32.445322 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:40:44 | 1 day, 21:08:32.457115 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:42:41 | 1 day, 21:10:29.590875 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:44:53 | 1 day, 21:12:41.092838 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:44:53 | 1 day, 21:12:41.101972 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:44:56 | 1 day, 21:12:45.008887 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:44:56 | 1 day, 21:12:45.018858 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:46:10 | 1 day, 21:13:58.845546 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:46:30 | 1 day, 21:14:18.777772 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:46:31 | 1 day, 21:14:19.120482 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:49:00 | 1 day, 21:16:48.335433 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:49:00 | 1 day, 21:16:48.345640 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:49:00 | 1 day, 21:16:49.014627 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:49:00 | 1 day, 21:16:49.027730 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:56:41 | 1 day, 21:24:29.107474 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:56:41 | 1 day, 21:24:29.118432 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:57:50 | 1 day, 21:25:38.542551 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:57:50 | 1 day, 21:25:38.552819 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:57:54 | 1 day, 21:25:42.224333 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:57:54 | 1 day, 21:25:42.234670 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 22:58:28 | 1 day, 21:26:16.464322 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:06:07 | 1 day, 21:33:56.067014 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:06:08 | 1 day, 21:33:56.079163 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:10:31 | 1 day, 21:38:20.055590 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:10:31 | 1 day, 21:38:20.064557 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:12:08 | 1 day, 21:39:56.681492 |         professor.py:225   |            professor.__init__             | 2
+DEBUG    | 18/07/2025 23:12:10 | 1 day, 21:39:58.509756 |         professor.py:225   |            professor.__init__             | 3
+DEBUG    | 18/07/2025 23:12:14 | 1 day, 21:40:02.278928 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:12:14 | 1 day, 21:40:02.296288 |         professor.py:225   |            professor.__init__             | 1
+TRACE    | 18/07/2025 23:13:22 | 1 day, 21:41:11.010616 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 18/07/2025 23:18:28 | 1 day, 21:46:16.539933 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 18/07/2025 23:18:28 | 1 day, 21:46:16.801461 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:20:53 | 1 day, 21:48:41.759130 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:30:03 | 1 day, 21:57:51.756118 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:30:03 | 1 day, 21:57:51.756472 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:30:08 | 1 day, 21:57:56.379116 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:30:08 | 1 day, 21:57:56.379578 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:30:09 | 1 day, 21:57:57.727197 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:30:11 | 1 day, 21:57:59.253978 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:30:11 | 1 day, 21:57:59.254281 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:32:28 | 1 day, 22:00:16.108095 |         professor.py:225   |            professor.__init__             | 1
+INFO     | 18/07/2025 23:41:57 | 1 day, 22:09:45.258067 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 18/07/2025 23:42:05 | 0:00:00.347848 |              main.py:8     |                 main.<module>             | Iniciando projeto
+DEBUG    | 18/07/2025 23:43:05 | 0:01:00.260818 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:43:05 | 0:01:00.261246 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:43:15 | 0:01:10.205848 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:52:32 | 0:10:26.916189 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:52:32 | 0:10:26.919816 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:54:50 | 0:12:45.349114 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:54:50 | 0:12:45.352818 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:54:53 | 0:12:47.971650 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:54:53 | 0:12:47.971959 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:54:54 | 0:12:49.465334 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:54:54 | 0:12:49.467813 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:54:56 | 0:12:50.955546 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:54:56 | 0:12:50.955739 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:55:01 | 0:12:56.174576 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:55:01 | 0:12:56.174920 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:57:42 | 0:15:37.538070 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:57:43 | 0:15:37.540317 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:57:49 | 0:15:43.833164 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 18/07/2025 23:57:49 | 0:15:43.836943 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 00:32:08 | 0:50:02.977553 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 00:32:08 | 0:50:02.981679 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 00:32:12 | 0:50:07.426916 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 00:32:12 | 0:50:07.428628 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 00:36:50 | 0:54:45.140156 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 00:36:50 | 0:54:45.152175 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 00:37:08 | 0:55:03.391894 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 00:37:08 | 0:55:03.403160 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 00:37:11 | 0:55:06.143893 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 00:37:11 | 0:55:06.153990 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 00:37:12 | 0:55:07.536628 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 00:37:12 | 0:55:07.538880 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 00:45:19 | 1:03:14.370736 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 00:45:19 | 1:03:14.373417 |         professor.py:225   |            professor.__init__             | 1

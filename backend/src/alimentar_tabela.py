@@ -46,10 +46,10 @@ def popular_dados():
             usuario="prof_alfa", senha="senha123", id_user="1", id_cargo=1
         )
         acesso_escola = Acesso(
-            usuario="escola_alfa", senha="senha123", id_user="2", id_cargo=2
+            usuario="escola_alfa", senha="senha123", id_user="1", id_cargo=2
         )
         acesso_municipio = Acesso(
-            usuario="municipio_alfa", senha="senha123", id_user="3", id_cargo=3
+            usuario="municipio_alfa", senha="senha123", id_user="1", id_cargo=3
         )
         session.add_all([acesso_professor, acesso_escola, acesso_municipio])
         session.commit()
@@ -270,153 +270,118 @@ def popular_dados():
 
         # 12. Criar Avaliações (com lógica de notas)
         print("Gerando avaliações...")
-        for aluno in alunos:
-            escola_do_aluno = (
-                session.query(Escola).filter_by(id=aluno.id_escola).first()
-            )
-            municipio_da_escola = (
-                session.query(Municipio)
-                .filter_by(id=escola_do_aluno.id_municipio)
-                .first()
-            )
-
+        avaliacoes_para_adicionar = []
+        for aluno in session.query(Aluno).all():
+            escola_do_aluno = session.query(Escola).filter_by(id=aluno.id_escola).one()
+            municipio_da_escola = session.query(Municipio).filter_by(id=escola_do_aluno.id_municipio).one()
             is_municipio_a = municipio_da_escola.nome == "Cidade Alpha"
 
-            # --- Lógica para o Professor de Português ---
-            # Vamos garantir que sempre tenhamos um professor de português
-            # Podemos usar os professores que já criamos e associá-los de forma mais flexível.
-            # Se o aluno é da escola A1 ou A2 (Cidade Alpha), usa prof_portugues1.
-            # Se o aluno é da escola B1 ou B2 (Cidade Beta), usa prof_portugues2.
-            if escola_do_aluno.id == escola_a1.id or escola_do_aluno.id == escola_a2.id:
-                professor_portugues_para_avaliacao = prof_portugues1
+            # Determina os professores corretos para o aluno
+            prof_portugues1 = session.query(Professor).filter(Professor.nome.contains("Ana Silva")).one()
+            prof_portugues2 = session.query(Professor).filter(Professor.nome.contains("Bia Costa")).one()
+            prof_matematica1 = session.query(Professor).filter(Professor.nome.contains("Carlos Santos")).one()
+            prof_matematica2 = session.query(Professor).filter(Professor.nome.contains("Daniel Pereira")).one()
+            portugues = session.query(Disciplina).filter_by(nome_disciplina="Português").one()
+            matematica = session.query(Disciplina).filter_by(nome_disciplina="Matemática").one()
+            materia_port_1 = session.query(Materia).filter(Materia.nome_materia == "Gramática").one()
+            materia_port_2 = session.query(Materia).filter(Materia.nome_materia == "Interpretação de Texto").one()
+            materia_mat_1 = session.query(Materia).filter(Materia.nome_materia == "Álgebra").one()
+            materia_mat_2 = session.query(Materia).filter(Materia.nome_materia == "Geometria").one()
+
+
+            if escola_do_aluno.id_municipio == municipio_a.id:
+                professor_portugues = prof_portugues1
+                professor_matematica = prof_matematica1
             else:
-                professor_portugues_para_avaliacao = prof_portugues2
+                professor_portugues = prof_portugues2
+                professor_matematica = prof_matematica2
 
-            # Avaliação de Português
-            nota_port = (
-                random.uniform(8.0, 10.0)
-                if is_municipio_a
-                else random.uniform(6.0, 8.5)
-            )
-
-            avaliacao_portugues = Avaliacao(
-                tipo_avaliacao="Prova Mensal",
-                data_avaliacao=date(2025, random.randint(3, 5), random.randint(1, 28)),
-                nota_1=round(nota_port, 2),
-                nota_2=round(random.uniform(nota_port * 0.9, nota_port * 1.1), 2),
-                nota_3=round(random.uniform(nota_port * 0.9, nota_port * 1.1), 2),
-                nota_4=round(random.uniform(nota_port * 0.9, nota_port * 1.1), 2),
+            # --- Avaliações de Português (1Va e 2Va) ---
+            nota_base_port = random.uniform(8.0, 10.0) if is_municipio_a else random.uniform(6.0, 8.5)
+            avaliacoes_para_adicionar.append(Avaliacao(
+                tipo_avaliacao="1Va",
+                data_avaliacao=date(2025, 4, random.randint(15, 28)),
+                nota=round(nota_base_port, 2),
                 id_aluno=aluno.id,
-                # AGORA SABEMOS QUE professor_portugues_para_avaliacao TEM UM OBJETO VÁLIDO
-                id_professor=professor_portugues_para_avaliacao.id,
+                id_professor=professor_portugues.id,
                 id_disciplina=portugues.id,
-                id_materia=random.choice([materia_port_1, materia_port_2]).id,
+                id_materia=random.choice([materia_port_1.id, materia_port_2.id]),
                 id_turma=aluno.id_turma,
-            )
-            session.add(avaliacao_portugues)
-
-            # --- Lógica para o Professor de Matemática ---
-            # Mesma lógica, mas para matemática.
-            if escola_do_aluno.id == escola_a1.id or escola_do_aluno.id == escola_a2.id:
-                professor_matematica_para_avaliacao = prof_matematica1
-            else:
-                professor_matematica_para_avaliacao = prof_matematica2
-
-            # Avaliação de Matemática
-            nota_mat = (
-                random.uniform(8.0, 10.0)
-                if not is_municipio_a
-                else random.uniform(6.0, 8.5)
-            )
-
-            avaliacao_matematica = Avaliacao(
-                tipo_avaliacao="Prova Bimestral",
-                data_avaliacao=date(2025, random.randint(3, 5), random.randint(1, 28)),
-                nota_1=round(nota_mat, 2),
-                nota_2=round(random.uniform(nota_mat * 0.9, nota_mat * 1.1), 2),
-                nota_3=round(random.uniform(nota_mat * 0.9, nota_mat * 1.1), 2),
-                nota_4=round(random.uniform(nota_mat * 0.9, nota_mat * 1.1), 2),
+            ))
+            avaliacoes_para_adicionar.append(Avaliacao(
+                tipo_avaliacao="2Va",
+                data_avaliacao=date(2025, 6, random.randint(15, 28)),
+                nota=round(min(10.0, nota_base_port * random.uniform(0.9, 1.1)), 2),
                 id_aluno=aluno.id,
-                # AGORA SABEMOS QUE professor_matematica_para_avaliacao TEM UM OBJETO VÁLIDO
-                id_professor=professor_matematica_para_avaliacao.id,
-                id_disciplina=matematica.id,
-                id_materia=random.choice([materia_mat_1, materia_mat_2]).id,
+                id_professor=professor_portugues.id,
+                id_disciplina=portugues.id,
+                id_materia=random.choice([materia_port_1.id, materia_port_2.id]),
                 id_turma=aluno.id_turma,
-            )
-            session.add(avaliacao_matematica)
+            ))
+
+            # --- Avaliações de Matemática (1Va e 2Va) ---
+            nota_base_mat = random.uniform(8.0, 10.0) if not is_municipio_a else random.uniform(6.0, 8.5)
+            avaliacoes_para_adicionar.append(Avaliacao(
+                tipo_avaliacao="1Va",
+                data_avaliacao=date(2025, 4, random.randint(15, 28)),
+                nota=round(nota_base_mat, 2),
+                id_aluno=aluno.id,
+                id_professor=professor_matematica.id,
+                id_disciplina=matematica.id,
+                id_materia=random.choice([materia_mat_1.id, materia_mat_2.id]),
+                id_turma=aluno.id_turma,
+            ))
+            avaliacoes_para_adicionar.append(Avaliacao(
+                tipo_avaliacao="2Va",
+                data_avaliacao=date(2025, 6, random.randint(15, 28)),
+                nota=round(min(10.0, nota_base_mat * random.uniform(0.9, 1.1)), 2),
+                id_aluno=aluno.id,
+                id_professor=professor_matematica.id,
+                id_disciplina=matematica.id,
+                id_materia=random.choice([materia_mat_1.id, materia_mat_2.id]),
+                id_turma=aluno.id_turma,
+            ))
+
+        session.add_all(avaliacoes_para_adicionar)
         session.commit()
         print("Avaliações geradas com sucesso.")
 
-        # Exemplo de consulta para verificar (agora com JOINs explícitos)
+        # --- Verificação de Dados Atualizada ---
         print("\n--- Verificando dados (amostra) ---")
+        portugues = session.query(Disciplina).filter_by(nome_disciplina="Português").one()
+        matematica = session.query(Disciplina).filter_by(nome_disciplina="Matemática").one()
+
         print("\nAlunos da Cidade Alpha com notas de Português:")
-        # Para consultar, precisamos de JOINs manuais no ORM
         alunos_alpha_query = (
-            session.query(Aluno, Escola, Municipio)
-            .join(Escola, Aluno.id_escola == Escola.id)
-            .join(Municipio, Escola.id_municipio == Municipio.id)
-            .filter(Municipio.nome == "Cidade Alpha")
-            .all()
+            session.query(Aluno).join(Escola).join(Municipio).filter(Municipio.nome == "Cidade Alpha")
         )
-
-        for aluno_obj, escola_obj, municipio_obj in alunos_alpha_query:
-            # Buscar a turma separadamente, se Aluno.turma não for um relationship
-            turma_do_aluno = (
-                session.query(Turma).filter_by(id=aluno_obj.id_turma).first()
+        for aluno_obj in alunos_alpha_query:
+            turma_do_aluno = session.query(Turma).filter_by(id=aluno_obj.id_turma).one()
+            avaliacoes = (
+                session.query(Avaliacao)
+                .filter(Avaliacao.id_aluno == aluno_obj.id, Avaliacao.id_disciplina == portugues.id)
+                .order_by(Avaliacao.tipo_avaliacao)
+                .all()
             )
-
-            avaliacoes_portugues_aluno = (
-                session.query(Avaliacao, Disciplina, Turma)
-                .join(Disciplina, Avaliacao.id_disciplina == Disciplina.id)
-                .join(Turma, Avaliacao.id_turma == Turma.id)
-                .filter(
-                    Avaliacao.id_aluno == aluno_obj.id,
-                    Disciplina.nome_disciplina == "Português",
-                )
-                .first()
-            )
-
-            if avaliacoes_portugues_aluno:
-                avaliacao, disciplina, turma_da_avaliacao = avaliacoes_portugues_aluno
-                # Usar turma_do_aluno.nome para ter certeza que é o nome da turma do aluno
-                print(
-                    f"- {aluno_obj.nome} (Escola: {escola_obj.nome}, Turma: {turma_do_aluno.nome}) - Português: {avaliacao.nota_1}"
-                )
+            notas_str = ", ".join([f"{ava.tipo_avaliacao}: {ava.nota}" for ava in avaliacoes])
+            print(f"- {aluno_obj.nome} (Turma: {turma_do_aluno.nome}) - Português: {notas_str}")
 
         print("\nAlunos da Cidade Beta com notas de Matemática:")
         alunos_beta_query = (
-            session.query(Aluno, Escola, Municipio)
-            .join(Escola, Aluno.id_escola == Escola.id)
-            .join(Municipio, Escola.id_municipio == Municipio.id)
-            .filter(Municipio.nome == "Cidade Beta")
-            .all()
+            session.query(Aluno).join(Escola).join(Municipio).filter(Municipio.nome == "Cidade Beta")
         )
-
-        for aluno_obj, escola_obj, municipio_obj in alunos_beta_query:
-            # Buscar a turma separadamente
-            turma_do_aluno = (
-                session.query(Turma).filter_by(id=aluno_obj.id_turma).first()
+        for aluno_obj in alunos_beta_query:
+            turma_do_aluno = session.query(Turma).filter_by(id=aluno_obj.id_turma).one()
+            avaliacoes = (
+                session.query(Avaliacao)
+                .filter(Avaliacao.id_aluno == aluno_obj.id, Avaliacao.id_disciplina == matematica.id)
+                .order_by(Avaliacao.tipo_avaliacao)
+                .all()
             )
-
-            avaliacoes_matematica_aluno = (
-                session.query(Avaliacao, Disciplina, Turma)
-                .join(Disciplina, Avaliacao.id_disciplina == Disciplina.id)
-                .join(Turma, Avaliacao.id_turma == Turma.id)
-                .filter(
-                    Avaliacao.id_aluno == aluno_obj.id,
-                    Disciplina.nome_disciplina == "Matemática",
-                )
-                .first()
-            )
-
-            if avaliacoes_matematica_aluno:
-                avaliacao, disciplina, turma_da_avaliacao = avaliacoes_matematica_aluno
-                print(
-                    f"- {aluno_obj.nome} (Escola: {escola_obj.nome}, Turma: {turma_do_aluno.nome}) - Matemática: {avaliacao.nota_1}"
-                )
+            notas_str = ", ".join([f"{ava.tipo_avaliacao}: {ava.nota}" for ava in avaliacoes])
+            print(f"- {aluno_obj.nome} (Turma: {turma_do_aluno.nome}) - Matemática: {notas_str}")
 
         print("\nPopulação de dados concluída!")
-
 
 if __name__ == "__main__":
     try:
