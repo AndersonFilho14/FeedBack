@@ -1,7 +1,7 @@
 import json
 from datetime import date
 
-from typing import Optional, List
+from typing import Optional, List, Dict
 
 from config import log
 from utils.validarCampos import ValidadorCampos
@@ -128,26 +128,19 @@ class ControllerProfessorAtualizarFalta:
     de um aluno específico no sistema.
     """
 
-    def __init__(
-        self, id_professor: str, id_aluno: str, nova_quantidade_de_faltas: int
-    ):
+    def __init__(self, id_professor: str, faltas_alunos: List[Dict[str, int]]) -> None:
         """
-        Inicializa o controlador com os dados necessários para a atualização de faltas.
+        Inicializa o controlador com o ID do professor e uma lista de dados de faltas dos alunos.
 
-        Valida a existência do professor e prepara os IDs do aluno e a nova quantidade de faltas.
-
-        :param id_professor: O ID do professor, em formato string, que está solicitando a atualização.
-        :param id_aluno: O ID do aluno, em formato string, cujas faltas serão atualizadas.
-        :param nova_quantidade_de_falta: A nova quantidade de faltas a ser atribuída ao aluno.
+        :param id_professor: ID do professor.
+        :param faltas_alunos: Lista de dicionários com os dados dos alunos e faltas.
+                              Exemplo: [{"id_aluno": 1, "faltas": 2}, ...]
         """
+        professor = ConsultarProfessor(id_professor=id_professor).get_professor_data()
+        self.__professor = professor
+        self.__faltas_alunos = faltas_alunos
 
-        self.__professor: Optional[ProfessorData] = ConsultarProfessor(
-            id_professor=id_professor
-        ).get_professor_data()
-        self.__id_aluno: int = int(id_aluno)
-        self.__faltas: int = int(nova_quantidade_de_faltas)
-
-    def fluxo_crud_de_nota_do_aluno(self) -> str:
+    def processar_faltas_para_alunos(self) -> str:
         """
         Executa o fluxo principal de atualização da quantidade de faltas do aluno.
 
@@ -158,12 +151,19 @@ class ControllerProfessorAtualizarFalta:
         """
         if not self.__professor:
             return "Professor não encontrado no banco. Validar credencial"
+        
+        resultados = []
 
-        status_da_atualizacao = self.__atualizar_falta_de_alunos()
+        for item in self.__faltas_alunos:
+            id_aluno = item.get("id_aluno")
+            faltas = item.get("faltas")
 
-        return status_da_atualizacao
+            resultado = self.__atualizar_falta_de_aluno(id_aluno, faltas)
+            resultados.append(resultado)
 
-    def __atualizar_falta_de_alunos(self) -> str:
+        return resultados
+    
+    def __atualizar_falta_de_aluno(self, id_aluno: int, faltas: int) -> str:
         """
         Chama o caso de uso para atualizar a quantidade de faltas de um aluno.
 
@@ -173,13 +173,14 @@ class ControllerProfessorAtualizarFalta:
         :return: Uma string indicando se a atualização foi bem-sucedida ou se houve falha na consulta.
         """
         retorno = AtualizarQuantidadeDeFaltasParaAluno(
-            id_aluno=self.__id_aluno,
+            id_aluno=id_aluno,
             id_professor=self.__professor.id,
-            nova_quantidade_de_faltas=self.__faltas,
+            nova_quantidade_de_faltas=faltas,
         ).fluxo_atualizar_falta_aluno()
+
         if not retorno:
-            return f"Não conseguio atualizar quantidade de faltas para aluno de id {self.__id_aluno}, validar requisitos"
-        return f"Conseguio atualizar quantidade de faltas para o aluno de id {self.__id_aluno} "
+            return f"Falha ao atualizar faltas para o aluno ID {id_aluno}."
+        return f"Faltas atualizadas para aluno ID {id_aluno}."
 
 
 class ConsultarProfessor:
@@ -284,7 +285,7 @@ class ControllerConsultarMateriaEDisciplinasVinculadasAoProfessor:
         return disciplinas
 
 
-class ControllerProfessorAdicionarNotaAoAluo:
+class ControllerProfessorAdicionarNotaAoAluno:
     """
     Controla o fluxo de negócio para um professor adicionar uma nota a um aluno.
 
