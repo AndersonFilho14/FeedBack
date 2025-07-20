@@ -2,9 +2,11 @@ import json
 from config import log
 
 from utils.validarCampos import ValidadorCampos
-from infra.repositories import TurmaRepository, ConsultaEscolaBanco
+from infra.repositories import TurmaRepository, ConsultaEscolaBanco, ListarAssociadosDaTurma
 from domain.models import Turma
 from infra.db.models_data import Turma as Turma_data
+from infra.db.models_data import Professor as Professor_data
+from infra.db.models_data import Aluno as Aluno_data
 
 from typing import Optional, List
 
@@ -149,14 +151,31 @@ class FormatarTurma:
         return turmas_dom
 
     def gerar_json(self, turmas_dominio: List[Turma]) -> str:
+            """
+            Gera um JSON com informações de turmas, incluindo professores e alunos associados.
 
-        lista = [
-            {
-                "id": turma.id,
-                "nome": turma.nome,
-                "ano_letivo": turma.ano_letivo,
-                "id_escola": turma.id_escola
-            }
-            for turma in turmas_dominio
-        ]
-        return json.dumps({"turmas": lista}, ensure_ascii=False, indent=4)
+            :param turmas_dominio: Lista de objetos Turma.
+            :return: String JSON formatada com indentação.
+            """
+            resultado = []
+
+            for turma in turmas_dominio:
+                consulta = ListarAssociadosDaTurma(id_turma= turma.id)
+                professores = consulta.listar_professores_associados()
+                alunos = consulta.listar_alunos_associados()
+
+                json_turma = {
+                    "turma_id": turma.id,
+                    "nome": turma.nome,
+                    "id_escola": turma.id_escola,
+                    "professores": [
+                        {"id": prof.id, "nome": prof.nome} for prof in professores
+                    ],
+                    "alunos": [
+                        {"id": aluno.id, "nome": aluno.nome} for aluno in alunos
+                    ]
+                }
+
+                resultado.append(json_turma)
+
+            return json.dumps(resultado, ensure_ascii=False, indent=4)

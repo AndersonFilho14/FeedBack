@@ -272,7 +272,7 @@ if __name__ == "__main__":
    
     #test_listar_escolas()
     #test_listar_professores()
-    #test_listar_turmas()
+    test_listar_turmas()
     #test_listar_alunos_escola()
     #test_listar_alunos_turma()
     #test_listar_materias()
@@ -293,7 +293,7 @@ if __name__ == "__main__":
     #test_deletar_municipio()  
 
     #test_historico_por_aluno()
-    test_historico_por_turma()
+    #test_historico_por_turma()
     #test_historico_por_escola()
 
     #test_ranking_por_aluno()

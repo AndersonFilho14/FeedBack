@@ -1,5 +1,8 @@
 from infra import DBConnectionHandler
 from infra.db.models_data import Turma as TurmaData
+from infra.db.models_data import Professor as ProfessorData
+from infra.db.models_data import Aluno as AlunoData
+from infra.db.models_data import ProfessorTurma as ProfessorTurma
 from domain.models import Turma
 from typing import List, Optional
 
@@ -46,3 +49,30 @@ class ConsultaTurmaBanco:
         """Busca a turma pelo ID. Retorna a turma se encontrada, ou None se não existir."""
         with DBConnectionHandler() as session:
             return session.query(TurmaData).filter_by(id=id_turma).first()
+
+class ListarAssociadosDaTurma:
+    def __init__(self, id_turma: int) -> None:
+        self.__id_turma = id_turma
+
+    def listar_professores_associados(self) -> List[ProfessorData]:
+        """
+        Retorna uma lista de professores vinculados à turma informada.
+        """
+        with DBConnectionHandler() as session:
+            professores = (
+                session.query(ProfessorData)
+                .join(ProfessorTurma, ProfessorTurma.id_professor == ProfessorData.id)
+                .filter(ProfessorTurma.id_turma == self.__id_turma)
+                .all()
+            )
+            return professores
+
+    def listar_alunos_associados(self) -> List[AlunoData]:
+        """Retorna uma lista de alunos vinculados a esta turma."""
+        with DBConnectionHandler() as session:
+            alunos = (
+                session.query(AlunoData)
+                .filter(AlunoData.id_turma == self.__id_turma)
+                .all()
+            )
+            return alunos
