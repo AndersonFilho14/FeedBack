@@ -113,7 +113,6 @@ def test_listar_municipios():
     print(resposta_json)
 
 
-
 # Funções de atualização:
 
 def test_atualizar_escola():
@@ -229,7 +228,7 @@ def test_historico_por_aluno():
     print(resposta)
 
 def test_historico_por_turma():
-    controller = ControllerHistoricoDesempenho(id_turma=ID_TURMA_TESTE)
+    controller = ControllerHistoricoDesempenho(id_turma=ID_TURMA_TESTE, id_professor=1)
     resposta = controller.listar_historico_avaliacoes_por_turma()
     print(resposta)
 
@@ -294,7 +293,7 @@ if __name__ == "__main__":
     #test_deletar_municipio()  
 
     #test_historico_por_aluno()
-    #test_historico_por_turma()
+    test_historico_por_turma()
     #test_historico_por_escola()
 
     #test_ranking_por_aluno()
