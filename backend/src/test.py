@@ -12,7 +12,7 @@ from user_cases import (
     ControllerProfessorAtualizarFalta,
     ControllerProfessorAlunosVinculados,
     ConsultarAlunosVinculadosAoProfessor,
-    ControllerProfessorAdicionarNotaAoAluo,
+    ControllerProfessorAdicionarNotaAoAluno,
     ConsultarAlunosVinculadosAoProfessorNoBanco,  # noqa: F811
 )
 
@@ -99,7 +99,7 @@ def testar_controller_atualizar_quantidade_de_faltas():
     faltas = "1"
     controller = ControllerProfessorAtualizarFalta(
         id_professor=id_professor, id_aluno=id_aluno, nova_quantidade_de_faltas=faltas
-    ).fluxo_crud_de_nota_do_aluno()
+    ).processar_faltas_para_alunos()()
     log.debug(controller)
     log.debug(type(controller))
 
@@ -116,9 +116,9 @@ def test_adicionar_nota_banco():
     log.trace(retorno)
     log.trace(type(retorno))
 
-def test_ControllerProfessorAdicionarNotaAoAluo():
+def test_ControllerProfessorAdicionarNotaAoAluno():
     post =  {"id_professor" : "1", "tipo_avaliacao": "2", "nota": "3", "id_aluno": "4", "id_materia": "5"}
-    controller = ControllerProfessorAdicionarNotaAoAluo(post= post)
+    controller = ControllerProfessorAdicionarNotaAoAluno(post= post)
     retorno = controller.fluxo_para_adicionar()
     log.debug(retorno)
     log.debug(type(retorno))
@@ -128,5 +128,24 @@ def test_consultar_turma_do_aluno():
     log.debug(retorno)
     log.debug(type(retorno))
 
+def teste_controller_atualizar_faltas():
+    print("\n=== Teste: Atualizar Faltas de Alunos ===")
+
+    # Suponha que esses IDs existam no banco
+    id_professor = "1"
+    lista_de_faltas = [
+        {"id_aluno": 1, "faltas": 2},
+        {"id_aluno": 2, "faltas": 0},
+        {"id_aluno": 3, "faltas": 4},
+    ]
+
+    controller = ControllerProfessorAtualizarFalta(
+        id_professor=id_professor,
+        faltas_alunos=lista_de_faltas
+    )
+
+    resultados = controller.processar_faltas_para_alunos()
+    print(resultados)
+
 if __name__ == "__main__":
-    test_consultar_turma_do_aluno()
+    teste_controller_atualizar_faltas()

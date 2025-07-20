@@ -159,3 +159,91 @@ DEBUG    | 19/07/2025 00:37:12 | 0:55:07.536628 |         professor.py:225   |  
 DEBUG    | 19/07/2025 00:37:12 | 0:55:07.538880 |         professor.py:225   |            professor.__init__             | 1
 DEBUG    | 19/07/2025 00:45:19 | 1:03:14.370736 |         professor.py:225   |            professor.__init__             | 1
 DEBUG    | 19/07/2025 00:45:19 | 1:03:14.373417 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 01:10:26 | 1:28:21.068180 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 01:10:26 | 1:28:21.077917 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 01:10:34 | 1:28:28.594504 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 01:10:34 | 1:28:28.604659 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 01:10:36 | 1:28:30.572613 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 01:10:36 | 1:28:30.584150 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 01:14:43 | 1:32:37.847836 |         professor.py:225   |            professor.__init__             | 1
+DEBUG    | 19/07/2025 01:14:43 | 1:32:37.859843 |         professor.py:225   |            professor.__init__             | 1
+INFO     | 20/07/2025 01:58:30 | 1 day, 2:16:24.832762 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 20/07/2025 02:00:04 | 0:00:00.282721 |              main.py:8     |                 main.<module>             | Iniciando projeto
+DEBUG    | 20/07/2025 02:01:42 | 0:01:37.645064 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:04:19 | 0:04:15.573808 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:04:19 | 0:04:15.587420 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:04:44 | 0:04:40.267735 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:04:44 | 0:04:40.278645 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:05:46 | 0:05:42.603770 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:05:46 | 0:05:42.614104 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:09:02 | 0:08:58.079830 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:09:02 | 0:08:58.091882 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:09:58 | 0:09:54.585337 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:10:57 | 0:10:53.034694 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:11:10 | 0:11:05.980090 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:12:59 | 0:12:54.773285 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:12:59 | 0:12:54.783556 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:13:09 | 0:13:05.206321 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:13:21 | 0:13:16.920609 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:14:01 | 0:13:57.495568 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:14:01 | 0:13:57.508482 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:14:09 | 0:14:05.354155 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:14:17 | 0:14:12.904320 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:14:17 | 0:14:12.914368 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:14:19 | 0:14:15.208350 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:14:19 | 0:14:15.220762 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:14:21 | 0:14:16.741328 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:14:21 | 0:14:16.751343 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:14:30 | 0:14:26.250317 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:15:58 | 0:15:53.811546 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:17:09 | 0:17:05.496579 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:17:09 | 0:17:05.510536 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:17:13 | 0:17:08.980239 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:17:13 | 0:17:08.990184 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 02:43:50 | 0:43:46.111085 |         professor.py:226   |            professor.__init__             | 2
+ERROR    | 20/07/2025 03:03:22 | 1:03:17.976715 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:05:17 | 1:05:12.772588 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:05:17 | 1:05:12.778150 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:05:17 | 1:05:12.783460 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:05:17 | 1:05:12.789174 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:05:17 | 1:05:12.795268 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:05:17 | 1:05:12.800693 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:05:28 | 1:05:23.861755 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:28:09 | 1:28:05.195927 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:28:09 | 1:28:05.200764 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:28:09 | 1:28:05.205967 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:28:09 | 1:28:05.210848 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:28:09 | 1:28:05.215184 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:28:09 | 1:28:05.220223 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:28:34 | 1:28:29.701786 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:28:34 | 1:28:29.707578 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:28:34 | 1:28:29.713410 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:28:34 | 1:28:29.719104 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:28:34 | 1:28:29.724254 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:28:34 | 1:28:29.729787 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:29:45 | 1:29:40.942454 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:29:45 | 1:29:40.947819 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:29:45 | 1:29:40.953400 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:29:45 | 1:29:40.959091 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:29:45 | 1:29:40.964132 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:29:45 | 1:29:40.969099 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:30:39 | 1:30:34.946405 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:30:39 | 1:30:34.966725 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:30:39 | 1:30:35.000395 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:30:39 | 1:30:35.023447 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:30:39 | 1:30:35.074306 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:30:39 | 1:30:35.101588 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:31:30 | 1:31:25.955618 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:31:30 | 1:31:25.969040 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:31:30 | 1:31:25.984329 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:31:30 | 1:31:26.017519 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:31:30 | 1:31:26.033672 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+ERROR    | 20/07/2025 03:31:30 | 1:31:26.052819 |         professor.py:328   |            professor.fluxo_para_adicionar | Post não contem campos necessarios para adicionar nota
+DEBUG    | 20/07/2025 03:32:22 | 1:32:18.106055 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 03:32:22 | 1:32:18.133393 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 03:43:21 | 1:43:16.799855 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 03:43:38 | 1:43:34.162557 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 03:43:38 | 1:43:34.209702 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 03:44:56 | 1:44:52.244077 |         professor.py:226   |            professor.__init__             | 1
+DEBUG    | 20/07/2025 03:44:56 | 1:44:52.254365 |         professor.py:226   |            professor.__init__             | 1
+TRACE    | 20/07/2025 03:45:14 | 1:45:09.748855 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso

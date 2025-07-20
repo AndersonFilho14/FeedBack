@@ -4,7 +4,7 @@ from user_cases import (
     ControllerAcesso,
     ControllerProfessorAtualizarFalta,
     ControllerProfessorAlunosVinculados,
-    ControllerProfessorAdicionarNotaAoAluo,  # noqa F401
+    ControllerProfessorAdicionarNotaAoAluno,  # noqa F401
     ControllerConsultarMateriaEDisciplinasVinculadasAoProfessor,
     ControllerEscola,
     ControllerMateria, 
@@ -59,29 +59,33 @@ def professor_visualizar_alunos_vinculados_a_ele(id_professor: str) -> str:
     return retorno
 
 
-@user_rout_bp.route(
-    "/professor/atualizar_quantidade_de_faltas_para_aluno/<string:id_professor>/<string:id_aluno>/<string:faltas>",
-    methods=["GET"],
-)
-def professor_atualizar_quantidade_de_faltas_para_unico_aluno(
-    id_professor: str, id_aluno: str, faltas: str
-) -> str:
-    """Atualiza a quantidade de faltas de um aluno específico.
-
-    .. warning::
-        Este endpoint utiliza o método GET para uma operação de escrita,
-        o que não é uma prática recomendada. O ideal seria migrar para
-        um método PUT ou POST, com os dados enviados no corpo da requisição.
-
-    :param id_professor: O ID do professor que está atualizando a falta.
-    :param id_aluno: O ID do aluno que terá as faltas atualizadas.
-    :param faltas: A nova quantidade total de faltas a ser registrada.
-    :return: Uma resposta JSON confirmando o sucesso ou a falha da operação.
+@user_rout_bp.route("/professor/atualizar_faltas_turma", methods=["POST"])
+def professor_atualizar_faltas_para_turma():
     """
+    Atualiza a quantidade de faltas de múltiplos alunos em uma turma.
+
+    Esta rota permite que um professor atualize, em lote, a quantidade de
+    faltas de diversos alunos associados a uma turma. Os dados são enviados
+    via JSON no corpo da requisição.
+
+    :request JSON: Um objeto contendo:
+        - id_professor (str): ID do professor que está realizando a operação.
+        - faltas (List[Dict]): Lista de objetos com id do aluno e nova quantidade de faltas.
+          Exemplo: [{"id_aluno": 1, "faltas": 2}, ...]
+
+    :return: Mensagem em string de sucesso ou erro.
+    """
+
+    dados = request.get_json()
+
+    id_professor = dados["id_professor"]
+    lista_faltas = dados["faltas"]  # Ex: [{ "id_aluno": 1, "faltas": 2 }, ...]
+
     controller = ControllerProfessorAtualizarFalta(
-        id_professor=id_professor, id_aluno=id_aluno, nova_quantidade_de_faltas=faltas
+        id_professor=id_professor,
+        faltas_alunos=lista_faltas
     )
-    retorno = controller.fluxo_crud_de_nota_do_aluno()
+    retorno = controller.processar_faltas_para_alunos()
     return retorno
 
 @user_rout_bp.route('/materia_e_disciplina_que_o_professor_ensina/<string:id_professor>', methods=['GET'])
@@ -140,7 +144,7 @@ def prof_aplicar_nota_a_aluno():
              - Em caso de falha (400 Bad Request), retorna: `{"erro": "mensagem"}`
     """
     post: dict = request.json
-    controller = ControllerProfessorAdicionarNotaAoAluo(post= post)
+    controller = ControllerProfessorAdicionarNotaAoAluno(post= post)
     retorno = controller.fluxo_para_adicionar()
     return make_response(jsonify(retorno))
 
@@ -705,7 +709,7 @@ def historico_avaliacoes_por_aluno(id_aluno):
     return make_response(resultado)
 
 
-@user_rout_bp.route("/historico/avaliacoes/turma/<int:id_turma>", methods=["GET","PUT"])
+@user_rout_bp.route("/historico/avaliacoes/turma/<int:id_turma>", methods=["GET"])
 def historico_avaliacoes_por_turma(id_turma):
     """
     Retorna o histórico de avaliações de uma turma.

@@ -15,6 +15,7 @@ export default function CadastrarPresenca() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   // Estado para armazenar as faltas editadas
+  const [isSaving, setIsSaving] = useState(false);
   const [faltasEditadas, setFaltasEditadas] = useState<{ [alunoId: number]: number }>({});
   const searchParams = useSearchParams();
   const turmaId = searchParams.get("turmaId");
@@ -62,12 +63,60 @@ export default function CadastrarPresenca() {
       }));
     }
   };
-
+  
   const handleSave = async () => {
-    alert("Função de salvar ainda não implementada. Verifique o console para ver os dados.");
-    console.log("Dados de faltas para salvar:", faltasEditadas);
-    // Aqui você implementaria a lógica para enviar os dados para o backend
-    // Ex: POST para /api/turma/{turmaId}/faltas com o corpo { faltas: faltasEditadas }
+    if (Object.keys(faltasEditadas).length === 0) {
+      alert("Nenhuma alteração para salvar.");
+      return;
+    }
+
+    setIsSaving(true);
+
+    const lista_faltas = Object.entries(faltasEditadas).map(
+      ([alunoId, faltas]) => ({
+        id_aluno: parseInt(alunoId, 10),
+        faltas: faltas,
+      })
+    );
+
+    // Assumindo que o ID do professor é "1", como na busca de dados.
+    const payload = {
+      id_professor: "1",
+      faltas: lista_faltas,
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/professor/atualizar_faltas_turma", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(responseData.message || "Falha ao salvar as faltas.");
+      }
+
+      // Atualiza o estado local dos alunos para refletir as novas faltas
+      setAlunos(currentAlunos =>
+        currentAlunos.map(aluno =>
+          faltasEditadas[aluno.id] !== undefined
+            ? { ...aluno, faltas: faltasEditadas[aluno.id] }
+            : aluno
+        )
+      );
+
+      alert("Faltas atualizadas com sucesso!");
+      setFaltasEditadas({}); // Limpa as edições pendentes
+    } catch (error: any) {
+      console.error("Erro ao salvar faltas:", error);
+      alert(`Erro ao salvar: ${error.message}`);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -101,7 +150,13 @@ export default function CadastrarPresenca() {
               ))
             )}
           </main>
-          <button onClick={handleSave} className="w-100 h-19 border-5 rounded-lg border-[#A4B465] flex  justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-4xl">Salvar</button>
+          <button 
+            onClick={handleSave} 
+            disabled={isSaving}
+            className="w-100 h-19 border-5 rounded-lg border-[#A4B465] flex justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-4xl disabled:bg-gray-300 disabled:cursor-not-allowed"
+          >
+            {isSaving ? "Salvando..." : "Salvar"}
+          </button>
           <Link className="w-34 h-10 border-5 rounded-lg border-[#727D73] flex  justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-lg mb-2" href={`/EdicaoTurma?turmaId=${turmaId}`}>Voltar</Link>
         </div>
       </div>
