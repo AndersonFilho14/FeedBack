@@ -52,11 +52,14 @@ def test_criar_aluno():
     controller = ControllerAluno(
         nome= "Maria teste",
         cpf="98765432100",
-        idade=14,
         faltas=0,
         nota_score_preditivo=8.5,
         id_escola=ID_ESCOLA_TESTE,
-        id_responsavel=1
+        nome_responsavel="João da Silva",
+        numero_responsavel="1234567890",
+        sexo="Feminino",
+        data_nascimento="2008-05-15",
+        nacionalidade="Brasileira",
     )
     resposta = controller.criar_aluno()
     print(resposta)
@@ -153,11 +156,15 @@ def test_atualizar_aluno():
     controller = ControllerAluno(
         id_aluno=25,  # ajuste para um ID válido
         nome="Maria atualizada",
-        cpf="123456789",
-        idade=15,
-        faltas=1,
-        id_turma=1,
-        id_responsavel=1
+        cpf="98765432100",
+        faltas=0,
+        nota_score_preditivo=8.5,
+        id_escola=ID_ESCOLA_TESTE,
+        nome_responsavel="João da Silva",
+        numero_responsavel="1234567890",
+        sexo="Feminino",
+        data_nascimento="2008-05-15",
+        nacionalidade="Brasileira",
     )
     resposta = controller.atualizar_aluno()
     print(resposta)
@@ -284,13 +291,13 @@ if __name__ == "__main__":
     #test_listar_escolas()
     #test_listar_professores()
     #test_listar_turmas()
-    #test_listar_alunos_escola()
+    test_listar_alunos_escola()
     #test_listar_alunos_turma()
     #test_listar_materias()
     #test_listar_municipios()
     
     #test_atualizar_escola()
-    test_atualizar_professor()
+    #test_atualizar_professor()
     #test_atualizar_turma()
     #test_atualizar_aluno()
     #test_atualizar_materia()

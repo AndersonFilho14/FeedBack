@@ -170,47 +170,40 @@ class ReservarToken:
     
 
 # --------------- CRIAR ALUNO ---------------
-@user_rout_bp.route("/aluno", methods=["POST"])
-def criar_aluno():
+# --------------- ATUALIZAR ALUNO ---------------
+@user_rout_bp.route("/aluno/<int:id_aluno>", methods=["PUT"])
+def atualizar_aluno(id_aluno):
     """
-    Cria um novo aluno.
+    Atualiza os dados de um aluno.
 
     **JSON Body esperado**:
     ```json
     {
-        "nome": "Maria Teste",
+        "nome": "Maria Atualizada",
         "cpf": "12345678901",
-        "idade": 14,
-        "data_nascimento": "2010-05-10",
-        "sexo": "feminino",
-        "nacionalidade": "Brasileira",
-        "faltas": 0,
-        "nota_score_preditivo": 8.5,
-        "id_escola": 1,
+        "idade": 15,
+        "faltas": 2,
         "id_turma": 2,
-        "id_responsavel": 3,
-        "senha": "senhaSegura123"
+        "id_responsavel": 3
     }
     ```
 
-    :return: JSON com mensagem de sucesso ou erro.
+    :param id_aluno: ID do aluno a ser atualizado.
+    :return: Mensagem em string de sucesso ou erro.
     """
     dados = request.json
-    
     controller = ControllerAluno(
+        id_aluno=id_aluno,
         nome=dados.get("nome"),
         cpf=dados.get("cpf"),
         idade=dados.get("idade"),
-        data_nascimento=dados.get("data_nascimento"),
-        sexo=dados.get("sexo"),
-        nacionalidade=dados.get("nacionalidade"),
         faltas=dados.get("faltas"),
-        nota_score_preditivo=dados.get("nota_score_preditivo"),
-        id_escola=dados.get("id_escola"),
         id_turma=dados.get("id_turma"),
+        id_responsavel=dados.get("id_responsavel")
     )
-    resultado = controller.criar_aluno()
+    resultado = controller.atualizar_aluno()
     return make_response(jsonify({"mensagem": resultado}))
+
 
 
 
@@ -253,10 +246,17 @@ def atualizar_aluno(id_aluno):
     {
         "nome": "Maria Atualizada",
         "cpf": "12345678901",
-        "idade": 15,
+        "data_nascimento": "2010-05-10",
+        "sexo": "feminino",
+        "nacionalidade": "Brasileira",
         "faltas": 2,
+        "nota_score_preditivo": 8.5,
+        "id_escola": 1,
         "id_turma": 2,
-        "id_responsavel": 3
+        "id_responsavel": 3,
+        "senha": "novaSenha123",
+        "nome_responsavel": "João Responsável",
+        "numero_responsavel": "11999999999"
     }
     ```
 
@@ -268,10 +268,17 @@ def atualizar_aluno(id_aluno):
         id_aluno=id_aluno,
         nome=dados.get("nome"),
         cpf=dados.get("cpf"),
-        idade=dados.get("idade"),
+        data_nascimento=dados.get("data_nascimento"),
+        sexo=dados.get("sexo"),
+        nacionalidade=dados.get("nacionalidade"),
         faltas=dados.get("faltas"),
+        nota_score_preditivo=dados.get("nota_score_preditivo"),
+        id_escola=dados.get("id_escola"),
         id_turma=dados.get("id_turma"),
-        id_responsavel=dados.get("id_responsavel")
+        id_responsavel=dados.get("id_responsavel"),
+        senha=dados.get("senha"),
+        nome_responsavel=dados.get("nome_responsavel"),
+        numero_responsavel=dados.get("numero_responsavel"),
     )
     resultado = controller.atualizar_aluno()
     return make_response(jsonify({"mensagem": resultado}))
@@ -604,7 +611,7 @@ def atualizar_professor(id_professor):
         "telefone": "11999999999",
         "email": "joao@email.com",
         "senha": "novaSenha123",
-        "sexo": "M"
+        "sexo": "Masculino"
     }
 
     :param id_professor: ID do professor a ser atualizado.

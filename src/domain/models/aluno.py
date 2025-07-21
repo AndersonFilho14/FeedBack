@@ -1,4 +1,5 @@
 from datetime import date
+from typing import Optional
 
 class Aluno:
     def __init__(
@@ -12,12 +13,13 @@ class Aluno:
         faltas: int,
         nota_score_preditivo: float,
         id_escola: int,
-        id_turma: int,
-        id_responsavel: int,
+        id_turma:  Optional[int] = None,
+        id_responsavel: Optional[int] = None,
+
     ) -> None:
         """Model de aluno com validações de tipo."""
 
-        for item in [id, faltas, id_escola, id_turma, id_responsavel]:
+        for item in [id, faltas, id_escola]:
             if not isinstance(item, int):
                 raise ValueError("Valor inválido: esperado inteiro")
 
