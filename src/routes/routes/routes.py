@@ -170,38 +170,41 @@ class ReservarToken:
     
 
 # --------------- CRIAR ALUNO ---------------
-# --------------- ATUALIZAR ALUNO ---------------
-@user_rout_bp.route("/aluno/<int:id_aluno>", methods=["PUT"])
-def atualizar_aluno(id_aluno):
+@user_rout_bp.route("/aluno", methods=["POST"])
+def criar_aluno():
     """
-    Atualiza os dados de um aluno.
+    Cria um novo aluno.
 
     **JSON Body esperado**:
     ```json
     {
-        "nome": "Maria Atualizada",
+        "nome": "Maria Teste",
         "cpf": "12345678901",
-        "idade": 15,
-        "faltas": 2,
-        "id_turma": 2,
-        "id_responsavel": 3
+        "data_nascimento": "2010-05-10",
+        "sexo": "feminino",
+        "nacionalidade": "Brasileira",
+        "id_escola": 1,
+        "nome_responsavel": "João Responsável",
+        "numero_responsavel": "11999999999"
     }
     ```
 
-    :param id_aluno: ID do aluno a ser atualizado.
-    :return: Mensagem em string de sucesso ou erro.
+    :return: JSON com mensagem de sucesso ou erro.
     """
     dados = request.json
+
     controller = ControllerAluno(
-        id_aluno=id_aluno,
         nome=dados.get("nome"),
         cpf=dados.get("cpf"),
         idade=dados.get("idade"),
+        data_nascimento=dados.get("data_nascimento"),
+        sexo=dados.get("sexo"),
+        nacionalidade=dados.get("nacionalidade"),
         faltas=dados.get("faltas"),
-        id_turma=dados.get("id_turma"),
-        id_responsavel=dados.get("id_responsavel")
+        nota_score_preditivo=dados.get("nota_score_preditivo"),
+        id_escola=dados.get("id_escola"),
     )
-    resultado = controller.atualizar_aluno()
+    resultado = controller.criar_aluno()
     return make_response(jsonify({"mensagem": resultado}))
 
 
@@ -250,11 +253,9 @@ def atualizar_aluno(id_aluno):
         "sexo": "feminino",
         "nacionalidade": "Brasileira",
         "faltas": 2,
-        "nota_score_preditivo": 8.5,
         "id_escola": 1,
         "id_turma": 2,
         "id_responsavel": 3,
-        "senha": "novaSenha123",
         "nome_responsavel": "João Responsável",
         "numero_responsavel": "11999999999"
     }

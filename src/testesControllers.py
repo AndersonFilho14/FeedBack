@@ -56,8 +56,6 @@ def test_criar_aluno():
     controller = ControllerAluno(
         nome= "pedro henrique",
         cpf="98765432127",
-        faltas=0,
-        nota_score_preditivo=8.5,
         id_escola=ID_ESCOLA_TESTE,
         nome_responsavel="João da Silva",
         numero_responsavel="1234567890",
@@ -297,7 +295,7 @@ if __name__ == "__main__":
     #test_criar_escola()
     #test_criar_professor()
     #test_criar_turma()
-    #test_criar_aluno()
+    test_criar_aluno()
     #test_criar_materia()
     #test_criar_municipio() 
    
