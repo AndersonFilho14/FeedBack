@@ -39,10 +39,14 @@ def test_criar_professor():
 
 
 def test_criar_turma():
+    ids_professores = [1, 2, 4]  # IDs de professores fictícios
+    ids_alunos = [25, 26, 27, 28]  # IDs de alunos
     controller = ControllerTurma(
         nome="3º Ano B",
         ano_letivo=2025,
-        id_escola=ID_ESCOLA_TESTE
+        id_escola=ID_ESCOLA_TESTE,
+        ids_professores=ids_professores,
+        ids_alunos=ids_alunos,
     )
     resposta = controller.criar_turma()
     print(resposta)
@@ -50,8 +54,8 @@ def test_criar_turma():
 
 def test_criar_aluno():
     controller = ControllerAluno(
-        nome= "Maria teste",
-        cpf="98765432100",
+        nome= "pedro henrique",
+        cpf="98765432127",
         faltas=0,
         nota_score_preditivo=8.5,
         id_escola=ID_ESCOLA_TESTE,
@@ -96,7 +100,7 @@ def test_listar_professores():
     print(resposta_json)
 
 def test_listar_turmas():
-    controller = ControllerTurma(id_escola=1)
+    controller = ControllerTurma(id_escola=ID_ESCOLA_TESTE)
     resultado = controller.listar_turmas()
     print(resultado)
 
@@ -170,9 +174,18 @@ def test_atualizar_aluno():
     print(resposta)
 
 def test_atualizar_turma():
+    ids_professores_anteriores = [1, 2, 4]  # IDs de professores fictícios
+    ids_alunos_anteriores = [25, 26, 27, 28]
+    ids_professores_atual = [1, 3]  # IDs de professores atuais
+    ids_alunos_atual = [25, 25, 2]  # IDs de alunos atuais
+    
     controller = ControllerTurma(
         id_turma=8,  # ajuste para um ID válido
         nome="3º Ano b atualizado",
+        ids_professores_anteriores=ids_professores_anteriores,
+        ids_alunos_anteriores=ids_alunos_anteriores,
+        ids_professores=ids_professores_atual,
+        ids_alunos=ids_alunos_atual,
     )
     resposta = controller.atualizar_turmas()
     print(resposta)
@@ -229,7 +242,7 @@ def test_deletar_materia():
     print(resposta)
     
 def test_deletar_turma():
-    controller = ControllerTurma(id_turma=1)
+    controller = ControllerTurma(id_turma=8)
     resposta = controller.deletar_turma()
     print(resposta)
 
@@ -291,7 +304,7 @@ if __name__ == "__main__":
     #test_listar_escolas()
     #test_listar_professores()
     #test_listar_turmas()
-    test_listar_alunos_escola()
+    #test_listar_alunos_escola()
     #test_listar_alunos_turma()
     #test_listar_materias()
     #test_listar_municipios()

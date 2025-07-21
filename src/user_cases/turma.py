@@ -1,5 +1,6 @@
 import json
 from config import log
+from datetime import datetime
 
 from utils.validarCampos import ValidadorCampos
 from infra.repositories import TurmaRepository, ConsultaEscolaBanco, ListarAssociadosDaTurma
@@ -13,15 +14,21 @@ from typing import Optional, List
 class ControllerTurma:
     """Controlador responsável por coordenar operações relacionadas a turmas."""
 
-    def __init__(self, nome: Optional[str] = None, ano_letivo: Optional[int] = None, id_escola: Optional[int] = None, id_turma: Optional[int] = None) -> None:
+    def __init__(self, nome: Optional[str] = None, ano_letivo: Optional[int] = None, id_escola: Optional[int] = None, id_turma: Optional[int] = None, ids_professores: Optional[List[int]] = None, ids_alunos: Optional[List[int]] = None, ids_professores_anteriores: Optional[List[int]] = None, ids_alunos_anteriores: Optional[List[int]] = None) -> None:
         self.__nome = nome
-        self.__ano_letivo = ano_letivo
         self.__id_escola = id_escola
         self.__id_turma = id_turma
+        self.__ids_professores = ids_professores
+        self.__ids_alunos = ids_alunos
+        self.__ids_professores_anteriores = ids_alunos_anteriores
+        self.__ids_alunos_anteriores = ids_alunos_anteriores
 
     def criar_turma(self) -> str:
         """Cria uma nova turma no banco de dados."""
-        resultado = CriarTurmaNoBanco(nome = self.__nome, ano_letivo = self.__ano_letivo, id_escola = self.__id_escola).executar()
+        resultado = CriarTurmaNoBanco(nome = self.__nome,
+                                      id_escola = self.__id_escola,
+                                      ids_alunos=self.__ids_alunos,
+                                      ids_professores=self.__ids_professores).executar()
         return resultado
 
     def listar_turmas(self) -> str:
@@ -35,8 +42,10 @@ class ControllerTurma:
         return AtualizarTurmaNoBanco(
             id_turma = self.__id_turma,
             novo_nome = self.__nome,
-            ano_letivo = self.__ano_letivo,
-            novo_id_escola = self.__id_escola
+            ids_alunos_atuais=self.__ids_alunos,
+            ids_professores_atuais=self.__ids_professores,
+            ids_alunos_anteriores=self.__ids_alunos_anteriores,
+            ids_professores_anteriores=self.__ids_professores_anteriores
         ).executar()
 
     def deletar_turma(self) -> str:
@@ -45,16 +54,15 @@ class ControllerTurma:
 
 
 class CriarTurmaNoBanco:
-    def __init__(self, nome: str, ano_letivo: int ,id_escola: int):
-        self.__turma = Turma(nome = nome, ano_letivo = ano_letivo, id_escola = id_escola, id = 0)
+    def __init__(self, nome: str, id_escola: int, ids_professores: List[int], ids_alunos: List[int]):
+        ano_letivo = datetime.now().year
+        self.__turma = Turma(nome = nome, ano_letivo = ano_letivo, id_escola = id_escola, id = 0, ids_professores= ids_professores, ids_alunos=ids_alunos)
 
     def executar(self) -> str:
         
         # Verifica se os atributos necessários estão todos preenchidos
         resultado = ValidadorCampos.validar_campos_preenchidos([
             self.__turma.nome,
-            self.__turma.ano_letivo,
-            self.__turma.id_escola
         ])
         
         if resultado is not None:
@@ -88,27 +96,33 @@ class ListarTurmasDaEscola:
 
 
 class AtualizarTurmaNoBanco:
-    def __init__(self, id_turma: int, novo_nome: str, ano_letivo: int, novo_id_escola: int):
+    def __init__(self, id_turma: int, novo_nome: str, ids_professores_atuais: List[int],
+                  ids_alunos_atuais: List[int], ids_professores_anteriores: List[int],
+                  ids_alunos_anteriores: List[int] ):
         self.__id = id_turma
         self.__novo_nome = novo_nome
-        self.__ano_letivo = ano_letivo
-        self.__novo_id_escola = novo_id_escola
+        self.__ids_professores_atuais = ids_professores_atuais
+        self.__ids_professores_anteriores = ids_professores_anteriores
+        self.__ids_alunos_atuais = ids_alunos_atuais
+        self.__ids_alunos_anteriores = ids_alunos_anteriores
+
 
     def executar(self) -> str:
         
         # Verifica se os atributos necessários estão todos preenchidos
         resultado = ValidadorCampos.validar_campos_preenchidos([
-            self.__id,
             self.__novo_nome,
-            self.__ano_letivo,
-            self.__novo_id_escola
         ])
         
         if resultado is not None:
             return resultado
         
         try:
-            atualizado = TurmaRepository().atualizar(id_turma = self.__id, novo_nome = self.__novo_nome, novo_ano_letivo = self.__ano_letivo, novo_id_escola = self.__novo_id_escola)
+            atualizado = TurmaRepository().atualizar(id_turma = self.__id, novo_nome = self.__novo_nome,
+                                                      ids_alunos_atuais=self.__ids_alunos_atuais,
+                                                      ids_alunos_anteriores=self.__ids_alunos_anteriores,
+                                                      ids_professores_atuais=self.__ids_professores_atuais,
+                                                      ids_professores_anteriores=self.__ids_professores_anteriores)
             if atualizado:
                 log.info(f"Turma {self.__id} atualizada com sucesso.")
                 return "Turma atualizada com sucesso"
@@ -141,6 +155,7 @@ class FormatarTurma:
     def formatar_turma_data_para_dominio(self, turmas_data: List[Turma_data]) -> List[Turma]:
         turmas_dom = []
         for turma in turmas_data:
+            
             turma_dom = Turma(
                 id = turma.id,
                 nome = turma.nome,
