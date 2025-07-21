@@ -55,7 +55,7 @@ def test_criar_turma():
 def test_criar_aluno():
     controller = ControllerAluno(
         nome= "pedro henrique",
-        cpf="98765432127",
+        cpf="98765432124",
         id_escola=ID_ESCOLA_TESTE,
         nome_responsavel="João da Silva",
         numero_responsavel="1234567890",
@@ -159,8 +159,6 @@ def test_atualizar_aluno():
         id_aluno=25,  # ajuste para um ID válido
         nome="Maria atualizada",
         cpf="98765432100",
-        faltas=0,
-        nota_score_preditivo=8.5,
         id_escola=ID_ESCOLA_TESTE,
         nome_responsavel="João da Silva",
         numero_responsavel="1234567890",
@@ -295,7 +293,7 @@ if __name__ == "__main__":
     #test_criar_escola()
     #test_criar_professor()
     #test_criar_turma()
-    test_criar_aluno()
+    #test_criar_aluno()
     #test_criar_materia()
     #test_criar_municipio() 
    
@@ -310,7 +308,7 @@ if __name__ == "__main__":
     #test_atualizar_escola()
     #test_atualizar_professor()
     #test_atualizar_turma()
-    #test_atualizar_aluno()
+    test_atualizar_aluno()
     #test_atualizar_materia()
     #test_atualizar_municipio() 
     

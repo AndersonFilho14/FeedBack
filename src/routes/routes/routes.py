@@ -252,10 +252,7 @@ def atualizar_aluno(id_aluno):
         "data_nascimento": "2010-05-10",
         "sexo": "feminino",
         "nacionalidade": "Brasileira",
-        "faltas": 2,
         "id_escola": 1,
-        "id_turma": 2,
-        "id_responsavel": 3,
         "nome_responsavel": "João Responsável",
         "numero_responsavel": "11999999999"
     }
