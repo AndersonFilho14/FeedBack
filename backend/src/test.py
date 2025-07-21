@@ -12,11 +12,11 @@ from user_cases import (
     ControllerProfessorAtualizarFalta,
     ControllerProfessorAlunosVinculados,
     ConsultarAlunosVinculadosAoProfessor,
-    ControllerProfessorAdicionarNotaAoAluno,
+    ControllerProfessorAtualizarNotaAoAluno,
     ConsultarAlunosVinculadosAoProfessorNoBanco,  # noqa: F811
 )
 
-from infra.repositories.professor_data import AtualizarQuantidadeDeFaltasParaAluno, ConsultarDisciplinasEMateriasVinculadasAoProfessor, AdicionarNotaParaAluno
+from infra.repositories.professor_data import AtualizarQuantidadeDeFaltasParaAluno, ConsultarDisciplinasEMateriasVinculadasAoProfessor, AtualizarNotaParaAluno
 from infra.repositories.aluno_data import ConsultarTurma
 
 from infra.db.models_data import (
@@ -66,6 +66,7 @@ def test_alunos_vinculado_ao_professor():
         professor_id=id_professor
     ).get_alunos()
     log.debug(f"retorno = {retorno} de tipo {type(retorno)}")
+    print (retorno)
 
 
 def test_ControllerProfessor():
@@ -74,6 +75,7 @@ def test_ControllerProfessor():
         id_professor=id_professor
     ).fluxo_para_consultar_professor_e_seus_alunos()
     log.debug(f"retorno = {retorno} de tipo {type(retorno)}")
+    print(retorno)
 
 
 def test_ConsultarAlunosVinculadosAoProfessor():
@@ -83,6 +85,7 @@ def test_ConsultarAlunosVinculadosAoProfessor():
     ).get_alunos_vinculados()
     log.debug(f"retorno = {lista_alunos} de tipo {type(lista_alunos)}")
     log.debug(len(lista_alunos))
+    print(lista_alunos)
 
 
 def test_consultar_se_aluno_esta_vinculado_ao_professor():
@@ -109,17 +112,21 @@ def test_consultar_materia_e_disciplinas_vinculadas_ao_professor():
     log.debug(disicplinas_e_materia)
     log.debug(type(disicplinas_e_materia))
 
-def test_adicionar_nota_banco():
-    ava = Avaliacao(id= 0, tipo_avaliacao= "3Va", data_avaliacao= date(2025, 4, 21), nota= 8.3, id_aluno=1, id_professor=1, id_disciplina=1, id_materia=1, id_turma=3)
-    adicionar = AdicionarNotaParaAluno(id_aluno=ava.id_aluno, id_professor=ava.id_professor, tipo_avaliacao= ava.tipo_avaliacao, nota=ava.nota, data_avaliacao= ava.data_avaliacao, id_disciplina= ava.id_disciplina, id_materia= ava.id_materia, id_turma= ava.id_turma)
-    retorno = adicionar.adicionar_nota()
-    log.trace(retorno)
-    log.trace(type(retorno))
+def test_atualizar_nota_banco():
+    lista_notas_alunos = [
+        {"nota": 8.5, "id_avaliacao": 1},
+        {"nota": 7.0, "id_avaliacao": 2},
+        {"nota": 9.0, "id_avaliacao": 3},
+    ]
+    adicionar = ControllerProfessorAtualizarNotaAoAluno(notas_alunos=lista_notas_alunos)
+    retorno = adicionar.atualizar_notas()
+    print(retorno)
+
 
 def test_ControllerProfessorAdicionarNotaAoAluno():
     post =  {"id_professor" : "1", "tipo_avaliacao": "2", "nota": "3", "id_aluno": "4", "id_materia": "5"}
-    controller = ControllerProfessorAdicionarNotaAoAluno(post= post)
-    retorno = controller.fluxo_para_adicionar()
+    controller = ControllerProfessorAtualizarNotaAoAluno(post= post)
+    retorno = controller.fluxo_para_atualizar_notas()
     log.debug(retorno)
     log.debug(type(retorno))
 
@@ -148,4 +155,4 @@ def teste_controller_atualizar_faltas():
     print(resultados)
 
 if __name__ == "__main__":
-    teste_controller_atualizar_faltas()
+    test_atualizar_nota_banco()

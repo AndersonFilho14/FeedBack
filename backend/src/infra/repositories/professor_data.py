@@ -229,82 +229,34 @@ class ConsultarDisciplinasEMateriasVinculadasAoProfessor:
 
         return disciplinas_formatadas
 
-class AdicionarNotaParaAluno:
+class AtualizarNotaParaAluno:
     """
     Caso de uso para adicionar uma nova avaliação (nota) para um aluno no banco de dados.
     """
-    def __init__(self, id_aluno: int, id_professor: int, nota: float, tipo_avaliacao: str,
-                 data_avaliacao: date, id_disciplina: int, id_materia: int, id_turma: int):
+    def __init__(self, nota: float, data_avaliacao: date, id_avaliacao: int) -> None:
 
-
-        self.__id_aluno = id_aluno
-        self.__id_professor = id_professor
         self.__nota = nota
-        self.__tipo_avaliacao = tipo_avaliacao
         self.__data_avaliacao = data_avaliacao
-        self.__id_disciplina = id_disciplina
-        self.__id_materia = id_materia
-        self.__id_turma = id_turma
+        self.__id_avaliacao = id_avaliacao
 
-    def adicionar_nota(self) -> dict:
-        """
-        Método público que orquestra a inserção da nota no banco de dados.
-        Inclui tratamento de erros.
+    def atualizar_nota_aluno(self) -> dict:
+            """
+            Atualiza a nota e a data de uma avaliação existente no banco de dados.
 
-        :return: Um dicionário com o resultado da operação.
-        """
-        try:
-            nova_avaliacao = self.__inserir_no_banco()
-            return {
-                "sucesso": True,
-                "nova_avaliacao_id": nova_avaliacao.id,
-                "mensagem": f"Avaliação para o aluno {self.__id_aluno} inserida com sucesso."
-            }
-        except Exception as e:
-            # Em caso de erro, o rollback já é tratado no __inserir_no_banco
-            log.error(f"Erro ao adicionar nota para o aluno {self.__id_aluno}: {e}")
-            return {
-                "sucesso": False,
-                "erro": str(e)
-            }
-
-    def __inserir_no_banco(self) -> AvaliacaoData:
-        """
-        Método privado que lida diretamente com a sessão do banco de dados
-        para inserir a nova avaliação.
-        """
-        with DBConnectionHandler() as session:
+            :return: Um dicionário indicando sucesso ou erro.
+            """
             try:
-                # 1. Cria uma instância do modelo 'Avaliacao' com os dados da classe
-                nova_avaliacao = AvaliacaoData(
-                    id_aluno=self.__id_aluno,
-                    id_professor=self.__id_professor,
-                    nota=self.__nota,
-                    tipo_avaliacao=self.__tipo_avaliacao,
-                    data_avaliacao=self.__data_avaliacao,
-                    id_disciplina=self.__id_disciplina,
-                    id_materia=self.__id_materia,
-                    id_turma=self.__id_turma
-                )
+                with DBConnectionHandler() as session:
+                    avaliacao = session.query(AvaliacaoData).filter(AvaliacaoData.id == self.__id_avaliacao).first()
+                    if not avaliacao:
+                        return {"erro": f"Avaliação com id {self.__id_avaliacao} não encontrada."}
 
-                # 2. Adiciona o novo objeto à sessão do SQLAlchemy
-                session.add(nova_avaliacao)
-
-                # 3. Confirma (commit) a transação, salvando os dados no banco
-                session.commit()
-
-                # 4. (Opcional, mas recomendado) Atualiza a instância 'nova_avaliacao'
-                #    para obter dados gerados pelo banco, como o 'id' autoincrementado.
-                session.refresh(nova_avaliacao)
-
-                return nova_avaliacao
-
+                    avaliacao.nota = self.__nota
+                    avaliacao.data_avaliacao = self.__data_avaliacao
+                    session.commit()
+                    return {"sucesso": f"Nota da avaliação {self.__id_avaliacao} atualizada com sucesso."}
             except Exception as e:
-                # 5. Em caso de qualquer erro (ex: um id_aluno que não existe),
-                #    desfaz a transação (rollback) para não deixar o banco em estado inconsistente.
-                session.rollback()
-                log.error(f"Ocorreu um rollback ao tentar inserir a avaliação: {e}")
-                raise e # Lança a exceção novamente para ser capturada pelo método público
+                return {"erro": f"Erro ao atualizar nota: {str(e)}"}
             
 
 class ProfessorRepository:
@@ -315,7 +267,15 @@ class ProfessorRepository:
         professor_orm = ProfessorData(nome = professor_dom.nome,
                                       cpf = professor_dom.cpf,
                                       cargo = professor_dom.cargo,
-                                      id_escola = professor_dom.id_escola)
+                                      id_escola = professor_dom.id_escola,
+                                      email = professor_dom.email,
+                                      telefone = professor_dom.telefone,
+                                      estado_civil = professor_dom.estado_civil,
+                                      data_nascimento = professor_dom.data_nascimento,
+                                      senha = professor_dom.senha,
+                                      nacionalidade = professor_dom.nacionalidade,
+                                      sexo = professor_dom.sexo
+                                    )
         
         with DBConnectionHandler() as session:
             session.add(professor_orm)
@@ -327,7 +287,11 @@ class ProfessorRepository:
             professores = session.query(ProfessorData).filter(ProfessorData.id_escola == id_escola).all()
             return professores
 
-    def atualizar(self, id_professor: int, novo_nome: str, novo_cargo: str, novo_cpf: int) -> bool:
+    def atualizar(self, id_professor: int,
+                   novo_nome: str, novo_cargo: str, 
+                   novo_cpf: int, novo_data_nascimento: date,
+                   novo_nacionalidade: str, novo_estado_civil: str,
+                   novo_telefone: str, novo_email: str, nova_senha: str, novo_sexo: str) -> bool:
         """Atualiza os dados do professor com base no ID. Retorna True se atualizado, False se não encontrado."""
         with DBConnectionHandler() as session:
             professor = session.query(ProfessorData).filter(ProfessorData.id == id_professor).first()
@@ -336,6 +300,13 @@ class ProfessorRepository:
             professor.nome = novo_nome
             professor.cargo = novo_cargo
             professor.cpf = novo_cpf
+            professor.data_nascimento = novo_data_nascimento
+            professor.nacionalidade = novo_nacionalidade
+            professor.estado_civil = novo_estado_civil
+            professor.telefone = novo_telefone
+            professor.email = novo_email
+            professor.senha = nova_senha
+            professor.sexo = novo_sexo
             session.commit()
             return True
 

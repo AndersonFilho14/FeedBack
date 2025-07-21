@@ -14,10 +14,11 @@ class AvaliacaoRepository:
         with DBConnectionHandler() as session:
             return (session.query(Avaliacao).filter(Avaliacao.id_aluno == id_aluno).all())
 
-    def buscar_por_turma(self, id_turma: int) -> List[Avaliacao]:
+    def buscar_por_turma(self, id_turma: int, id_professor: int) -> List[Avaliacao]:
         """Retorna todas as avaliações de uma turma específica."""
         with DBConnectionHandler() as session:
-            return (session.query(Avaliacao).filter(Avaliacao.id_turma == id_turma).all() )
+            return (session.query(Avaliacao).filter(Avaliacao.id_turma == id_turma
+                                                    , Avaliacao.id_professor == id_professor).all() )
 
     def buscar_por_escola(self, id_escola: int) -> List[Avaliacao]:
         """Retorna todas as avaliações de uma escola específica via join com aluno."""

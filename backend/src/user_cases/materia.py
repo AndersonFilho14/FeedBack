@@ -49,7 +49,7 @@ class ControllerMateria:
 
 class CriarMateriaNoBanco:
     def __init__(self, nome: str, id_disciplina: int, id_professor: int):
-        self.__materia = Materia(nome = nome, id_disciplina = id_disciplina, id_professor = id_professor, id_materia = 0)
+        self.__materia = Materia(nome = nome, id_professor = id_professor, id_materia = 0)
 
     def executar(self) -> str:
         

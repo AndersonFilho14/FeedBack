@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, Date
 from infra.db.settings.base import Base
 
 
@@ -23,12 +23,14 @@ class Aluno(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     nome = Column(String(100), nullable=False)
     cpf = Column(String(14), unique=True, nullable=False)
-    idade = Column(Integer, nullable=False)
     faltas = Column(Integer, default=0, nullable=False)
     nota_score_preditivo = Column(Float, nullable=True)  # Pode ser nulo no início
     id_escola = Column(Integer, ForeignKey("escola.id"), nullable=False)
-    id_turma = Column(Integer, ForeignKey("turma.id"), nullable=False)
+    id_turma = Column(Integer, ForeignKey("turma.id"))
     id_responsavel = Column(Integer, ForeignKey("responsavel.id"), nullable=False)
-
+    data_nascimento = Column(Date, nullable=False)
+    sexo = Column(String(20), nullable=False)
+    nacionalidade = Column(String(50), nullable=False)
+    
     def __repr__(self) -> str:
         return f"<Aluno id={self.id}, nome='{self.nome}'>"

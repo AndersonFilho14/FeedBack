@@ -23,19 +23,30 @@ def test_criar_escola():
 def test_criar_professor():
     controller=ControllerProfessor(
         nome="João Teste",
-        cpf="12345678900",
+        cpf="12245674980",
         cargo="Matemática",
-        id_escola=ID_ESCOLA_TESTE
+        id_escola=ID_ESCOLA_TESTE,
+        email="joao.teste@escola.com",
+        senha="senhaForteJoao2025",
+        telefone="1234567890",
+        data_nascimento="2000-01-01",
+        nacionalidade="Brasileiro",
+        estado_civil="Solteiro",
+        sexo="Masculino",
     )
     resposta = controller.criar_professor()
     print(resposta)
 
 
 def test_criar_turma():
+    ids_professores = [1, 2, 4]  # IDs de professores fictícios
+    ids_alunos = [25, 26, 27, 28]  # IDs de alunos
     controller = ControllerTurma(
         nome="3º Ano B",
         ano_letivo=2025,
-        id_escola=ID_ESCOLA_TESTE
+        id_escola=ID_ESCOLA_TESTE,
+        ids_professores=ids_professores,
+        ids_alunos=ids_alunos,
     )
     resposta = controller.criar_turma()
     print(resposta)
@@ -43,14 +54,16 @@ def test_criar_turma():
 
 def test_criar_aluno():
     controller = ControllerAluno(
-        nome= "Maria teste",
-        cpf="98765432100",
-        idade=14,
+        nome= "pedro henrique",
+        cpf="98765432127",
         faltas=0,
         nota_score_preditivo=8.5,
         id_escola=ID_ESCOLA_TESTE,
-        id_turma=1,
-        id_responsavel=1
+        nome_responsavel="João da Silva",
+        numero_responsavel="1234567890",
+        sexo="Feminino",
+        data_nascimento="2008-05-15",
+        nacionalidade="Brasileira",
     )
     resposta = controller.criar_aluno()
     print(resposta)
@@ -87,7 +100,7 @@ def test_listar_professores():
     print(resposta_json)
 
 def test_listar_turmas():
-    controller = ControllerTurma(id_escola=1)
+    controller = ControllerTurma(id_escola=ID_ESCOLA_TESTE)
     resultado = controller.listar_turmas()
     print(resultado)
 
@@ -113,7 +126,6 @@ def test_listar_municipios():
     print(resposta_json)
 
 
-
 # Funções de atualização:
 
 def test_atualizar_escola():
@@ -128,11 +140,18 @@ def test_atualizar_escola():
 
 def test_atualizar_professor():
     controller = ControllerProfessor(
-        id_professor=4,  # ajuste para um ID válido
-        nome="João Atualizado",
-        cpf="12345678900",
-        cargo="Física",
-        id_escola=ID_ESCOLA_TESTE
+        id_professor= 5,  # ajuste para um ID válido
+        nome="João Teste Atualizado",
+        cpf="12245674980",
+        cargo="Matemática",
+        id_escola=ID_ESCOLA_TESTE,
+        email="joao.teste@escola.com",
+        senha="senhaForteJoao2025",
+        telefone="1234567890",
+        data_nascimento="2000-01-01",
+        nacionalidade="Brasileiro",
+        estado_civil="Solteiro",
+        sexo="Masculino",
     )
     resposta = controller.atualizar_professor()
     print(resposta)
@@ -141,21 +160,32 @@ def test_atualizar_aluno():
     controller = ControllerAluno(
         id_aluno=25,  # ajuste para um ID válido
         nome="Maria atualizada",
-        cpf="123456789",
-        idade=15,
-        faltas=1,
-        id_turma=1,
-        id_responsavel=1
+        cpf="98765432100",
+        faltas=0,
+        nota_score_preditivo=8.5,
+        id_escola=ID_ESCOLA_TESTE,
+        nome_responsavel="João da Silva",
+        numero_responsavel="1234567890",
+        sexo="Feminino",
+        data_nascimento="2008-05-15",
+        nacionalidade="Brasileira",
     )
     resposta = controller.atualizar_aluno()
     print(resposta)
 
 def test_atualizar_turma():
+    ids_professores_anteriores = [1, 2, 4]  # IDs de professores fictícios
+    ids_alunos_anteriores = [25, 26, 27, 28]
+    ids_professores_atual = [1, 3]  # IDs de professores atuais
+    ids_alunos_atual = [25, 25, 2]  # IDs de alunos atuais
+    
     controller = ControllerTurma(
         id_turma=8,  # ajuste para um ID válido
         nome="3º Ano b atualizado",
-        ano_letivo = 2024,
-        id_escola=ID_ESCOLA_TESTE
+        ids_professores_anteriores=ids_professores_anteriores,
+        ids_alunos_anteriores=ids_alunos_anteriores,
+        ids_professores=ids_professores_atual,
+        ids_alunos=ids_alunos_atual,
     )
     resposta = controller.atualizar_turmas()
     print(resposta)
@@ -212,7 +242,7 @@ def test_deletar_materia():
     print(resposta)
     
 def test_deletar_turma():
-    controller = ControllerTurma(id_turma=1)
+    controller = ControllerTurma(id_turma=8)
     resposta = controller.deletar_turma()
     print(resposta)
 
@@ -229,7 +259,7 @@ def test_historico_por_aluno():
     print(resposta)
 
 def test_historico_por_turma():
-    controller = ControllerHistoricoDesempenho(id_turma=ID_TURMA_TESTE)
+    controller = ControllerHistoricoDesempenho(id_turma=ID_TURMA_TESTE, id_professor=1)
     resposta = controller.listar_historico_avaliacoes_por_turma()
     print(resposta)
 

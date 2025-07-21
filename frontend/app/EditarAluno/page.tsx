@@ -12,10 +12,18 @@ export default function EditarAluno() {
     const [sexo, setSexo] = useState("");
     const [cpf, setCpf] = useState("");
     const [nacionalidade, setNacionalidade] = useState("");
-    const [nomeMae, setNomeMae] = useState("");
-    const [nomePai, setNomePai] = useState("");
+    const [nomeResponsavel, setNomeResponsavel] = useState("");
     const [telefoneResponsavel, setTelefoneResponsavel] = useState("");
 
+    const handleTelefoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+            const value = e.target.value
+              .replace(/\D/g, '') // Remove todos os caracteres não numéricos
+              .replace(/^(\d{2})(\d)/, '($1) $2') // Coloca parênteses em volta dos dois primeiros dígitos
+              .replace(/(\d{5})(\d)/, '$1-$2') // Coloca um hífen após os próximos cinco dígitos
+              .slice(0, 15); // Limita ao tamanho máximo da máscara (XX) XXXXX-XXXX
+            setTelefoneResponsavel(value);
+        };
+        
     return (
         <>
             <header className="font-[InknutAntiqua] bg-[#727D73] border-[#A4B465] text-[#EEA03D] border-7 h-21 text-center text-7xl fixed top-0 left-0 w-full z-50">
@@ -64,16 +72,19 @@ export default function EditarAluno() {
                             <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="nacionalidade" value={nacionalidade} onChange={e => setNacionalidade(e.target.value)} />
                         </div>
                         <div className="flex flex-col gap-4">
-                            <h5>Nome da Mae</h5>
-                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="text" name="Nome mae" id="" value={nomeMae} onChange={e => setNomeMae(e.target.value)} />
-                            <h5>Nome do Pai</h5>
-                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="text" name="Nome pai" id="" value={nomePai} onChange={e => setNomePai(e.target.value)} />
+                            <h5>Nome do responsavel</h5>
+                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="text" name="Nome do responsavel" id="" value={nomeResponsavel} onChange={e => setNomeResponsavel(e.target.value)} />
+                            
                             <h5>Telefone do responsavel</h5>
-                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="text" name="Telefone responsavel" id="" value={telefoneResponsavel} onChange={e => setTelefoneResponsavel(e.target.value)} />
-                            <h5>Email</h5>
-                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="Email" name="Email" id="" value={email} onChange={e => setEmail(e.target.value)} />
-                            <h5>Senha para login</h5>
-                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="password" name="senha para login" value={password} onChange={e => setPassword(e.target.value)} />
+                            <input 
+                                className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" 
+                                type="tel" 
+                                name="Telefone responsavel" 
+                                id="" value={telefoneResponsavel} 
+                                onChange={handleTelefoneChange} 
+                                placeholder="(XX) XXXXX-XXXX" 
+                                maxLength={15} />
+                            
                         </div>
                     </form>
                     <Link className="w-100 h-19 border-5 rounded-lg border-[#727D73] flex  justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-4xl" href={""}>Salvar</Link>

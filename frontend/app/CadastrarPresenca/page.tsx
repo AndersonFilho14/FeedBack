@@ -126,7 +126,7 @@ export default function CadastrarPresenca() {
       </header>
       <div className="bg-[#F5ECD5] bg-[url('/imagem/backgroundloginimage.png')] bg-cover bg-center bg-no-repeat  flex flex-col justify-center items-center h-screen ">
         <div className="font-[Jomolhari] bg-[#F5ECD5] border-[#A7C1A8] w-329 h-212 rounded-3xl shadow-[0_19px_4px_4px_rgba(0,0,0,0.25)]  flex flex-col justify-center items-center mt-22 gap-7 border-11 ">
-          <div className="flex flex-col items-center gap-1"><h1 className="text-[#EEA03D] text-6xl ">Presenca</h1><h3>{turma}</h3></div>
+          <div className="flex flex-col items-center gap-1"><h1 className="text-[#EEA03D] text-6xl ">Faltas</h1><h3>{turma}</h3></div>
           <main className="w-300 h-150 border-7 border-[#889E89] rounded-lg flex flex-col items-center gap-4 bg-amber-50 shadow-[0_16px_7.8px_2px_rgba(0,0,0,0.25)] py-4 px-2 overflow-y-auto">
             {loading ? (
               <p>Carregando alunos...</p>

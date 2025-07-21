@@ -14,35 +14,30 @@ class ControllerRankingAvaliacao:
     def ranquear_alunos(self) -> str:
         """Ranqueia todos os alunos com base na média das avaliações."""
         avaliacoes_data = AvaliacaoRepository().buscar_todas()
-        formatter = FormatarAvaliacao()
-        avaliacoes_dom = formatter.formatar_avaliacao_data_para_dominio(avaliacoes_data)
+        avaliacoes_dom = FormatarAvaliacao().formatar_avaliacao_data_para_dominio(avaliacoes_data)
         ranking = RanquearAvaliacao.raquear_avaliacoes(avaliacoes_dom, criterio = "id_aluno")
-        return RanquearAvaliacao.gerar_json_ranqueado(ranking, criterio = "ranking_alunos")
+        return FormatarAvaliacao().gerar_json_ranqueado(ranking = ranking, criterio = "ranking_alunos")
 
     def ranquear_turmas(self) -> str:
         """Ranqueia todas as turmas com base na média das avaliações."""
         avaliacoes_data = AvaliacaoRepository().buscar_todas()
-        formatter = FormatarAvaliacao()
-        avaliacoes_dom = formatter.formatar_avaliacao_data_para_dominio(avaliacoes_data)
+        avaliacoes_dom = FormatarAvaliacao().formatar_avaliacao_data_para_dominio(avaliacoes_data)
         ranking = RanquearAvaliacao.raquear_avaliacoes(avaliacoes_dom, criterio = "id_turma")
-        return RanquearAvaliacao.gerar_json_ranqueado(ranking, criterio = "ranking_turmas")
+        return FormatarAvaliacao().gerar_json_ranqueado(ranking = ranking, criterio = "ranking_turmas")
 
     def ranquear_escolas(self) -> str:
         """Ranqueia todas as escolas com base na média das avaliações."""
         avaliacoes_data = AvaliacaoRepository().buscar_todas()
-        formatter = FormatarAvaliacao()
-        avaliacoes_dom = formatter.formatar_avaliacao_data_para_dominio(avaliacoes_data)
-
+        avaliacoes_dom = FormatarAvaliacao().formatar_avaliacao_data_para_dominio(avaliacoes_data)
         ranking = RanquearAvaliacao.raquear_por_escola(avaliacoes_dom)
-        return RanquearAvaliacao.gerar_json_ranqueado(ranking, criterio = "ranking_escolas")
+        return FormatarAvaliacao().gerar_json_ranqueado(ranking = ranking, criterio = "ranking_escolas")
     
     def ranquear_materias(self) -> str:
         """Retorna JSON ranqueado com as disciplinas de uma escola por média de nota."""
         avaliacoes_data = AvaliacaoRepository().buscar_todas()
-        formatter = FormatarAvaliacao()
-        avaliacoes_dom = formatter.formatar_avaliacao_data_para_dominio(avaliacoes_data)
+        avaliacoes_dom = FormatarAvaliacao().formatar_avaliacao_data_para_dominio(avaliacoes_data)
         ranking = RanquearAvaliacao.raquear_avaliacoes(avaliacoes_dom, "id_materia")
-        return RanquearAvaliacao.gerar_json_ranqueado(ranking, criterio = "ranking_materias")
+        return FormatarAvaliacao().gerar_json_ranqueado(ranking = ranking, criterio = "ranking_materias")
 
 
 class RanquearAvaliacao:
@@ -85,80 +80,19 @@ class RanquearAvaliacao:
             })
         return sorted(resultado, key=lambda x: x["media"], reverse=True)
 
-    def gerar_json_ranqueado(ranking: List[Dict], criterio: str, nome: str = "ranking") -> str:
-        """Gera JSON com a lista ranqueada, incluindo nomes e quantidade de avaliações."""
-
-        lista_formatada = []
-
-        if criterio == "ranking_alunos":
-            for item in ranking:
-                aluno = ConsultaAlunoBanco(id_aluno=item["id"]).buscar_aluno_por_id()
-                
-                if aluno is not None:
-                    turma = ConsultaTurmaBanco().buscar_por_id(aluno.id_turma)
-                    escola = ConsultaEscolaBanco().buscar_por_id(aluno.id_escola)
-                    
-                    if turma and escola is not None:
-                        lista_formatada.append({
-                            "id": aluno.id,
-                            "nome_aluno": aluno.nome,
-                            "nome_turma": turma.nome if turma else "Desconhecida",
-                            "nome_escola": escola.nome if escola else "Desconhecida",
-                            "media": item["media"],
-                            "quantidade_avaliacoes": item["quantidade_avaliacoes"]
-                        })
-
-        elif criterio == "ranking_turmas":
-            for item in ranking:
-                turma = ConsultaTurmaBanco().buscar_por_id(item["id"])
-
-                if turma is not None:
-                    escola = ConsultaEscolaBanco().buscar_por_id(turma.id_escola)
-
-                    if escola is not None: 
-                        lista_formatada.append({
-                            "id": turma.id,
-                            "nome_turma": turma.nome,
-                            "nome_escola": escola.nome if escola else "Desconhecida",
-                            "media": item["media"],
-                            "quantidade_avaliacoes": item["quantidade_avaliacoes"]
-                        })
-
-        elif criterio == "ranking_escolas":
-
-            for item in ranking:
-                escola = ConsultaEscolaBanco().buscar_por_id(item["id"])
-                if escola is not None:
-                    lista_formatada.append({
-                        "id": escola.id,
-                        "nome_escola": escola.nome,
-                        "media": item["media"],
-                        "quantidade_avaliacoes": item["quantidade_avaliacoes"]
-                    })
-
-        elif criterio == "ranking_materias":
-            for item in ranking:
-                materia = ConsultaMateriaBanco().buscar_materia_por_id(item["id"])
-                if materia is not None:
-                    lista_formatada.append({
-                        "id": materia.id,
-                        "nome_materia": materia.nome_materia,
-                        "media": item["media"],
-                        "quantidade_avaliacoes": item["quantidade_avaliacoes"]
-                    })
-        
-        return json.dumps({nome: lista_formatada}, ensure_ascii=False, indent=4)
-
 
 class ControllerHistoricoDesempenho:
     """Classe responsável por listar o histórico de avaliações por aluno, turma, escola ou matéria."""
 
     def __init__(self, id_aluno: Optional[int] = None,
                        id_turma: Optional[int] = None,
-                       id_escola: Optional[int] = None) -> None:
+                       id_escola: Optional[int] = None,
+                       id_professor: Optional[int] = None,) -> None:
+                       
         self.__id_aluno = id_aluno
         self.__id_turma = id_turma
         self.__id_escola = id_escola
+        self.__id_professor = id_professor
 
     def listar_historico_avaliacoes_por_aluno(self) -> str:
         """Retorna JSON com avaliações de um aluno."""
@@ -168,7 +102,7 @@ class ControllerHistoricoDesempenho:
 
     def listar_historico_avaliacoes_por_turma(self) -> str:
         """Retorna JSON com avaliações de uma turma."""
-        avaliacoes_data = AvaliacaoRepository().buscar_por_turma(self.__id_turma)
+        avaliacoes_data = AvaliacaoRepository().buscar_por_turma(self.__id_turma, self.__id_professor)
         avaliacoes_dom = FormatarAvaliacao().formatar_avaliacao_data_para_dominio(avaliacoes_data)
         return FormatarAvaliacao().gerar_json(avaliacoes_dom)
 
@@ -235,3 +169,67 @@ class FormatarAvaliacao:
             })
 
         return json.dumps({"avaliacoes": lista}, ensure_ascii=False, indent=4)
+    
+    def gerar_json_ranqueado(self, ranking: List[Dict], criterio: str, nome: str = "ranking") -> str:
+        """Gera JSON com a lista ranqueada, incluindo nomes e quantidade de avaliações."""
+
+        lista_formatada = []
+
+        if criterio == "ranking_alunos":
+            for item in ranking:
+                aluno = ConsultaAlunoBanco(id_aluno=item["id"]).buscar_aluno_por_id()
+                
+                if aluno is not None:
+                    turma = ConsultaTurmaBanco().buscar_por_id(aluno.id_turma)
+                    escola = ConsultaEscolaBanco().buscar_por_id(aluno.id_escola)
+                    
+                    if turma and escola is not None:
+                        lista_formatada.append({
+                            "id": aluno.id,
+                            "nome_aluno": aluno.nome,
+                            "nome_turma": turma.nome if turma else "Desconhecida",
+                            "nome_escola": escola.nome if escola else "Desconhecida",
+                            "media": item["media"],
+                            "quantidade_avaliacoes": item["quantidade_avaliacoes"]
+                        })
+
+        elif criterio == "ranking_turmas":
+            for item in ranking:
+                turma = ConsultaTurmaBanco().buscar_por_id(item["id"])
+
+                if turma is not None:
+                    escola = ConsultaEscolaBanco().buscar_por_id(turma.id_escola)
+
+                    if escola is not None: 
+                        lista_formatada.append({
+                            "id": turma.id,
+                            "nome_turma": turma.nome,
+                            "nome_escola": escola.nome if escola else "Desconhecida",
+                            "media": item["media"],
+                            "quantidade_avaliacoes": item["quantidade_avaliacoes"]
+                        })
+
+        elif criterio == "ranking_escolas":
+
+            for item in ranking:
+                escola = ConsultaEscolaBanco().buscar_por_id(item["id"])
+                if escola is not None:
+                    lista_formatada.append({
+                        "id": escola.id,
+                        "nome_escola": escola.nome,
+                        "media": item["media"],
+                        "quantidade_avaliacoes": item["quantidade_avaliacoes"]
+                    })
+
+        elif criterio == "ranking_materias":
+            for item in ranking:
+                materia = ConsultaMateriaBanco().buscar_materia_por_id(item["id"])
+                if materia is not None:
+                    lista_formatada.append({
+                        "id": materia.id,
+                        "nome_materia": materia.nome_materia,
+                        "media": item["media"],
+                        "quantidade_avaliacoes": item["quantidade_avaliacoes"]
+                    })
+        
+        return json.dumps({nome: lista_formatada}, ensure_ascii=False, indent=4)

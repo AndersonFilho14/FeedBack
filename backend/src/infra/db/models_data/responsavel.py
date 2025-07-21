@@ -17,8 +17,7 @@ class Responsavel(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     nome = Column(String(100), nullable=False)
-    cpf = Column(String(14), unique=True, nullable=False)
-    parentesco = Column(String(50), nullable=False)
+    telefone = Column(String(20), nullable=True)
 
     def __repr__(self) -> str:
         return f"<Responsavel id={self.id}, nome='{self.nome}'>"

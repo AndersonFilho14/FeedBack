@@ -5,8 +5,13 @@ from infra import DBConnectionHandler
 from infra.db.models_data import (
     Aluno as AlunoData,
     Turma as TurmaData,
+    Avaliacao as AvaliacaoData,
+    Materia as MateriaData,
+    Responsavel as ResponsavelData,
+    Escola as EscolaData,
 )
-from domain.models import Aluno
+from domain.models import Aluno, Responsavel
+from datetime import datetime
 
 
 class ConsultarTurma:
@@ -16,7 +21,7 @@ class ConsultarTurma:
         """Inicializa a classe ConsultarProfessor com o ID do professor."""
         self.__id_aluno = id_aluno
 
-    def __consultar_no_banco(self) -> Optional[int]:
+    def __consultar_no_banco(self) -> Optional[TurmaData.id]:
         """Consulta o banco de dados por um professor com o ID fornecido, retornando o objeto ProfessorData ou None."""
         with DBConnectionHandler() as session:
             retorno = (
@@ -24,7 +29,7 @@ class ConsultarTurma:
                 .filter(AlunoData.id == self.__id_aluno)
                 .first()
             )
-        if retorno and retorno.id_turma:
+        if retorno:
             return retorno.id
         return None
 
@@ -36,21 +41,58 @@ class ConsultarTurma:
 class AlunoRepository:
     """Repositório responsável por persistir e consultar dados relacionados alunos."""
 
-    def criar(self, aluno: Aluno) -> None:
+    def criar(self, aluno: Aluno, responsavel: Responsavel) -> None:
         """Insere um novo aluno no banco."""
         aluno_orm = AlunoData(
             nome = aluno.nome,
             cpf = aluno.cpf,
-            idade = aluno.idade,
             faltas = aluno.faltas,
             nota_score_preditivo = aluno.nota_score_preditivo,
             id_escola = aluno.id_escola,
-            id_turma = aluno.id_turma,
-            id_responsavel = aluno.id_responsavel,
+            data_nascimento = aluno.data_nascimento,
+            sexo = aluno.sexo,
+            nacionalidade = aluno.nacionalidade,
+            id_turma = aluno.id_turma, # Inicializado como 0, será atualizado na função de criação/edição de turmas
+            id_responsavel = aluno.id_responsavel,  # Inicializado como 0, será atualizado após a inserção do responsável no banco
         )
+
+        responsavel_orm = ResponsavelData(
+            nome = responsavel.nome,
+            telefone = responsavel.telefone
+        )
+
         with DBConnectionHandler() as session:
+            # Cadastra o responsável
+            session.add(responsavel_orm)
+            session.commit()
+            session.refresh(responsavel_orm)  # garante que id está atualizado
+
+            # Associa o id dele ao aluno e cadastra o aluno
+            aluno_orm.id_responsavel = responsavel_orm.id
             session.add(aluno_orm)
             session.commit()
+            session.refresh(aluno_orm)
+
+            # Busca todas as disciplinas
+            materias = session.query(MateriaData).all()
+
+            # Para cada matéria, cria 4 avaliações para o novo aluno
+            avaliacoes = []
+            for materia in materias:
+                for tipo in ["1Va", "2Va", "3Va", "4Va"]:
+                    avaliacao = AvaliacaoData(
+                        tipo_avaliacao=tipo,
+                        data_avaliacao=datetime.now(),
+                        nota=0.0,
+                        id_aluno=aluno_orm.id,
+                        id_materia = materia.id,
+                        id_professor = materia.id_professor,
+                    )
+                    avaliacoes.append(avaliacao)
+
+            session.add_all(avaliacoes)
+            session.commit()
+    
 
     def listar_por_escola(self, id_escola: int) -> List[AlunoData]:
         """Retorna lista de alunos filtrados por escola."""
@@ -68,11 +110,12 @@ class AlunoRepository:
         self,
         id_aluno: int,
         novo_nome: str,
-        nova_idade: int,
-        novas_faltas: int,
-        novo_id_turma: int,
-        novo_id_responsavel: int,
-        novo_cpf: int
+        novo_cpf: str,
+        nova_data_nascimento: str,
+        novo_sexo: str,
+        nova_nacionalidade: str,
+        novo_nome_responsavel: str,
+        novo_numero_responsavel: str,
     ) -> bool:
         """Atualiza os dados do aluno com base no ID. Retorna True se atualizado, False se não encontrado."""
         with DBConnectionHandler() as session:
@@ -85,11 +128,20 @@ class AlunoRepository:
                 return False
 
             aluno.nome = novo_nome
-            aluno.idade = nova_idade
-            aluno.faltas = novas_faltas
-            aluno.id_turma = novo_id_turma
-            aluno.id_responsavel = novo_id_responsavel
             aluno.cpf = novo_cpf
+            aluno.data_nascimento = nova_data_nascimento
+            aluno.sexo = novo_sexo
+            aluno.nacionalidade = nova_nacionalidade
+
+            # Atualiza o responsável
+            responsavel = (
+                session.query(ResponsavelData)
+                .filter(ResponsavelData.id == aluno.id_responsavel)
+                .first()
+            )
+            if responsavel is not None:
+                responsavel.nome = novo_nome_responsavel
+                responsavel.telefone = novo_numero_responsavel
             session.commit()
             return True
 
@@ -103,6 +155,10 @@ class AlunoRepository:
             )
             if not aluno:
                 return False
+
+            # Exclui todas as avaliações associadas ao aluno
+            session.query(AvaliacaoData).filter(AvaliacaoData.id_aluno == id_aluno).delete()
+
             session.delete(aluno)
             session.commit()
             return True
@@ -129,3 +185,37 @@ class ConsultaAlunoBanco:
         with DBConnectionHandler() as session:
             aluno = session.query(AlunoData).filter_by(cpf=self.__cpf).first()
             return aluno is not None and aluno.id != self.__id_aluno
+        
+
+class ConsultaDadosAluno:
+    """Consulta dados relacionados ao aluno: responsável, turma e escola."""
+
+    def __init__(self, id_aluno: int):
+        self.id_aluno = id_aluno
+
+    def nome_responsavel(self) -> Optional[str]:
+        with DBConnectionHandler() as session:
+            aluno = session.query(AlunoData).filter(AlunoData.id == self.id_aluno).first()
+            if aluno and aluno.id_responsavel:
+                responsavel = session.query(ResponsavelData).filter(ResponsavelData.id == aluno.id_responsavel).first()
+                if responsavel:
+                    return responsavel.nome
+            return None
+
+    def nome_turma(self) -> Optional[str]:
+        with DBConnectionHandler() as session:
+            aluno = session.query(AlunoData).filter(AlunoData.id == self.id_aluno).first()
+            if aluno and aluno.id_turma:
+                turma = session.query(TurmaData).filter(TurmaData.id == aluno.id_turma).first()
+                if turma:
+                    return turma.nome
+            return None
+
+    def nome_escola(self) -> Optional[str]:
+        with DBConnectionHandler() as session:
+            aluno = session.query(AlunoData).filter(AlunoData.id == self.id_aluno).first()
+            if aluno and aluno.id_escola:
+                escola = session.query(EscolaData).filter(EscolaData.id == aluno.id_escola).first()
+                if escola:
+                    return escola.nome
+            return None
