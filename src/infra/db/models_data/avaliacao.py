@@ -22,13 +22,13 @@ class Avaliacao(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     tipo_avaliacao = Column(String(5), nullable=False)
-    data_avaliacao = Column(Date, nullable=False)
+    data_avaliacao = Column(Date)
     nota = Column(Float, nullable=False)  # Coluna única para a nota
-    id_aluno = Column(Integer, ForeignKey("aluno.id"), nullable=False)
-    id_professor = Column(Integer, ForeignKey("professor.id"), nullable=False)
-    id_disciplina = Column(Integer, ForeignKey("disciplina.id"), nullable=False)
-    id_materia = Column(Integer, ForeignKey("materia.id"), nullable=False)
-    id_turma = Column(Integer, ForeignKey("turma.id"), nullable=False)
+    id_aluno = Column(Integer, ForeignKey("aluno.id"))
+    id_professor = Column(Integer, ForeignKey("professor.id"))
+    id_disciplina = Column(Integer, ForeignKey("disciplina.id"))
+    id_materia = Column(Integer, ForeignKey("materia.id"))
+    id_turma = Column(Integer, ForeignKey("turma.id"))
 
     def __repr__(self) -> str:
         return f"<Avaliacao id={self.id}, aluno_id={self.id_aluno}, tipo='{self.tipo_avaliacao}', nota={self.nota}>"
