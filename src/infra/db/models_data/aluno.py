@@ -26,7 +26,7 @@ class Aluno(Base):
     faltas = Column(Integer, default=0, nullable=False)
     nota_score_preditivo = Column(Float, nullable=True)  # Pode ser nulo no início
     id_escola = Column(Integer, ForeignKey("escola.id"), nullable=False)
-    id_turma = Column(Integer, ForeignKey("turma.id"), nullable=False)
+    id_turma = Column(Integer, ForeignKey("turma.id"))
     id_responsavel = Column(Integer, ForeignKey("responsavel.id"), nullable=False)
     data_nascimento = Column(Date, nullable=False)
     sexo = Column(String(20), nullable=False)
