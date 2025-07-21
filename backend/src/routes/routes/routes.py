@@ -169,44 +169,6 @@ class ReservarToken:
         return cls.__token
     
 
-# --------------- CRIAR ALUNO ---------------
-# --------------- ATUALIZAR ALUNO ---------------
-@user_rout_bp.route("/aluno/<int:id_aluno>", methods=["PUT"])
-def atualizar_aluno(id_aluno):
-    """
-    Atualiza os dados de um aluno.
-
-    **JSON Body esperado**:
-    ```json
-    {
-        "nome": "Maria Atualizada",
-        "cpf": "12345678901",
-        "idade": 15,
-        "faltas": 2,
-        "id_turma": 2,
-        "id_responsavel": 3
-    }
-    ```
-
-    :param id_aluno: ID do aluno a ser atualizado.
-    :return: Mensagem em string de sucesso ou erro.
-    """
-    dados = request.json
-    controller = ControllerAluno(
-        id_aluno=id_aluno,
-        nome=dados.get("nome"),
-        cpf=dados.get("cpf"),
-        idade=dados.get("idade"),
-        faltas=dados.get("faltas"),
-        id_turma=dados.get("id_turma"),
-        id_responsavel=dados.get("id_responsavel")
-    )
-    resultado = controller.atualizar_aluno()
-    return make_response(jsonify({"mensagem": resultado}))
-
-
-
-
 # --------------- LISTAR ALUNOS POR ESCOLA ---------------
 @user_rout_bp.route("/alunos/escola/<int:id_escola>", methods=["GET"])
 def listar_alunos_escola(id_escola):

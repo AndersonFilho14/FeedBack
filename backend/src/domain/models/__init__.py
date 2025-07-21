@@ -6,3 +6,4 @@ from domain.models.aluno import Aluno # noqa N
 from domain.models.turma import Turma # noqa N
 from domain.models.escola import Escola # noqa N
 from domain.models.municipio import Municipio # noqa N
+from domain.models.responsavel import Responsavel

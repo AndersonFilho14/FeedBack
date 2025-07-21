@@ -26,7 +26,7 @@ export default function EdicaoTurma() {
 
           <main className="w-126 h-120 border-5 border-[#889E89] rounded-lg flex flex-col justify-center items-center gap-10 bg-amber-50 shadow-[0_16px_7.8px_2px_rgba(0,0,0,0.25)]" >
             <Link className="w-80 h-24 border-5 rounded-lg border-[#A4B465] flex  justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] text-2xl" href={`/CadastrarPresenca?turmaId=${turmaId}`}>Gerenciar Faltas</Link>
-            <Link className="w-80 h-24 border-5 rounded-lg border-[#EEA03D] flex  justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] text-2xl" href={`/CadastrarNotas?turmaId=${turmaId}`}>Cadastrar Notas</Link>
+            <Link className="w-80 h-24 border-5 rounded-lg border-[#EEA03D] flex  justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] text-2xl" href={`/CadastrarNotas?turmaId=${turmaId}`}>Gerenciar Notas</Link>
             <Link 
               className="w-80 h-24 border-5 rounded-lg border-[#A4B465] flex  justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] text-2xl" 
               href={{ pathname: '/VisualizarAlunos', query: { turmaId } }}>Visualizar Alunos

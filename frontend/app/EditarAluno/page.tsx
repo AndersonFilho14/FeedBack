@@ -15,6 +15,16 @@ export default function EditarAluno() {
     const [nomeResponsavel, setNomeResponsavel] = useState("");
     const [telefoneResponsavel, setTelefoneResponsavel] = useState("");
 
+    const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value
+          .replace(/\D/g, '') // Remove todos os caracteres não numéricos
+          .replace(/(\d{3})(\d)/, '$1.$2') // Coloca um ponto após o terceiro dígito
+          .replace(/(\d{3})(\d)/, '$1.$2') // Coloca um ponto após o sexto dígito
+          .replace(/(\d{3})(\d{1,2})$/, '$1-$2') // Coloca um hífen antes dos dois últimos dígitos
+          .slice(0, 14); // Limita o tamanho
+        setCpf(value);
+    };
+
     const handleTelefoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             const value = e.target.value
               .replace(/\D/g, '') // Remove todos os caracteres não numéricos
@@ -67,7 +77,7 @@ export default function EditarAluno() {
                                 </label>
                             </div>
                             <h5>Cpf</h5>
-                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="text" name="cpf" id="" value={cpf} onChange={e => setCpf(e.target.value)} />
+                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="text" name="cpf" id="" value={cpf} onChange={handleCpfChange} placeholder="000.000.000-00" />
                             <h5>Nacionalidade</h5>
                             <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="nacionalidade" value={nacionalidade} onChange={e => setNacionalidade(e.target.value)} />
                         </div>

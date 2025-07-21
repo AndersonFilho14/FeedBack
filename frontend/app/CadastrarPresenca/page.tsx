@@ -87,17 +87,25 @@ export default function CadastrarPresenca() {
 
     try {
       const response = await fetch("http://localhost:5000/professor/atualizar_faltas_turma", {
-        method: "POST",
+        method: "PUT", 
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
       });
 
-      const responseData = await response.json();
-
       if (!response.ok) {
-        throw new Error(responseData.message || "Falha ao salvar as faltas.");
+        // Se o servidor retornar um erro, o corpo pode não ser JSON.
+        // Leia como texto primeiro para evitar um erro de análise.
+        const errorText = await response.text();
+        try {
+          // Em seguida, tente analisar como JSON para obter uma mensagem de erro estruturada.
+          const errorData = JSON.parse(errorText);
+          throw new Error(errorData.message || "Falha ao salvar as faltas.");
+        } catch (e) {
+          // Se não for JSON, lance o texto bruto (que pode ser uma página de erro HTML) ou um erro genérico.
+          throw new Error(errorText || "Falha ao salvar as faltas.");
+        }
       }
 
       // Atualiza o estado local dos alunos para refletir as novas faltas

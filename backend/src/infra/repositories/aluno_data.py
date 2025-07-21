@@ -15,26 +15,26 @@ from datetime import datetime
 
 
 class ConsultarTurma:
-    """Lida com a consulta de um único registro de professor no banco de dados."""
+    """Lida com a consulta da turma de um aluno no banco de dados."""
 
     def __init__(self, id_aluno: int) -> None:
-        """Inicializa a classe ConsultarProfessor com o ID do professor."""
+        """Inicializa a classe ConsultarTurma com o ID do aluno."""
         self.__id_aluno = id_aluno
 
-    def __consultar_no_banco(self) -> Optional[TurmaData.id]:
-        """Consulta o banco de dados por um professor com o ID fornecido, retornando o objeto ProfessorData ou None."""
+    def __consultar_no_banco(self) -> Optional[int]:
+        """Consulta o banco de dados por um aluno com o ID fornecido, retornando o ID da sua turma ou None."""
         with DBConnectionHandler() as session:
-            retorno = (
+            aluno = (
                 session.query(AlunoData)
                 .filter(AlunoData.id == self.__id_aluno)
                 .first()
             )
-        if retorno:
-            return retorno.id
+        if aluno:
+            return aluno.id_turma
         return None
 
-    def get_id_turma(self):
-        """Recupera os dados do professor, retornando o objeto ProfessorData ou None."""
+    def get_id_turma(self) -> Optional[int]:
+        """Recupera o ID da turma do aluno."""
         return self.__consultar_no_banco()
     
 
