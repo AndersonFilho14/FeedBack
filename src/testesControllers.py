@@ -23,9 +23,16 @@ def test_criar_escola():
 def test_criar_professor():
     controller=ControllerProfessor(
         nome="João Teste",
-        cpf="12345678900",
+        cpf="12245674980",
         cargo="Matemática",
-        id_escola=ID_ESCOLA_TESTE
+        id_escola=ID_ESCOLA_TESTE,
+        email="joao.teste@escola.com",
+        senha="senhaForteJoao2025",
+        telefone="1234567890",
+        data_nascimento="2000-01-01",
+        nacionalidade="Brasileiro",
+        estado_civil="Solteiro",
+        sexo="Masculino",
     )
     resposta = controller.criar_professor()
     print(resposta)
@@ -49,7 +56,6 @@ def test_criar_aluno():
         faltas=0,
         nota_score_preditivo=8.5,
         id_escola=ID_ESCOLA_TESTE,
-        id_turma=1,
         id_responsavel=1
     )
     resposta = controller.criar_aluno()
@@ -127,11 +133,18 @@ def test_atualizar_escola():
 
 def test_atualizar_professor():
     controller = ControllerProfessor(
-        id_professor=4,  # ajuste para um ID válido
-        nome="João Atualizado",
-        cpf="12345678900",
-        cargo="Física",
-        id_escola=ID_ESCOLA_TESTE
+        id_professor= 5,  # ajuste para um ID válido
+        nome="João Teste Atualizado",
+        cpf="12245674980",
+        cargo="Matemática",
+        id_escola=ID_ESCOLA_TESTE,
+        email="joao.teste@escola.com",
+        senha="senhaForteJoao2025",
+        telefone="1234567890",
+        data_nascimento="2000-01-01",
+        nacionalidade="Brasileiro",
+        estado_civil="Solteiro",
+        sexo="Masculino",
     )
     resposta = controller.atualizar_professor()
     print(resposta)
@@ -153,8 +166,6 @@ def test_atualizar_turma():
     controller = ControllerTurma(
         id_turma=8,  # ajuste para um ID válido
         nome="3º Ano b atualizado",
-        ano_letivo = 2024,
-        id_escola=ID_ESCOLA_TESTE
     )
     resposta = controller.atualizar_turmas()
     print(resposta)
@@ -272,14 +283,14 @@ if __name__ == "__main__":
    
     #test_listar_escolas()
     #test_listar_professores()
-    test_listar_turmas()
+    #test_listar_turmas()
     #test_listar_alunos_escola()
     #test_listar_alunos_turma()
     #test_listar_materias()
     #test_listar_municipios()
     
     #test_atualizar_escola()
-    #test_atualizar_professor()
+    test_atualizar_professor()
     #test_atualizar_turma()
     #test_atualizar_aluno()
     #test_atualizar_materia()
