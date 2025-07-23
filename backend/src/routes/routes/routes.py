@@ -681,6 +681,7 @@ def listar_turmas(id_escola):
     resultado_json = controller.listar_turmas()  # já retorna string JSON
     return make_response(resultado_json)
 
+
 # ------------------ ATUALIZAR TURMA ------------------
 @user_rout_bp.route("/turma/<int:id_turma>", methods=["PUT"])
 def atualizar_turma(id_turma):
