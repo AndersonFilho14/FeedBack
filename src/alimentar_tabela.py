@@ -124,35 +124,58 @@ def popular_dados():
             f"Disciplinas criadas: {portugues.nome_disciplina} (ID: {portugues.id}), {matematica.nome_disciplina} (ID: {matematica.id})"
         )
 
-        # 7. Criar Professores (Matemática e Português)
-        print("Criando professores...")
-        prof_portugues1 = Professor(
-            nome="Prof. Ana Silva",
-            cpf="11122233344",
-            cargo="Professor de Português",
-            id_escola=escola_a1.id,
-        )
-        prof_portugues2 = Professor(
-            nome="Prof. Bia Costa",
-            cpf="22233344455",
-            cargo="Professor de Português",
-            id_escola=escola_b1.id,
-        )
-        prof_matematica1 = Professor(
-            nome="Prof. Carlos Santos",
-            cpf="33344455566",
-            cargo="Professor de Matemática",
-            id_escola=escola_a2.id,
-        )
-        prof_matematica2 = Professor(
-            nome="Prof. Daniel Pereira",
-            cpf="44455566677",
-            cargo="Professor de Matemática",
-            id_escola=escola_b2.id,
-        )
-        session.add_all(
-            [prof_portugues1, prof_portugues2, prof_matematica1, prof_matematica2]
-        )
+        # 7. Criar Professores
+        print("Criando professores (4 por escola, 2 por matéria por turma)...")
+        professores = []
+        # Mapeamento para garantir CPF único e nomes descritivos
+        cpf_counter = 1000
+        
+        # Obtenha as turmas e agrupe-as por escola para facilitar a atribuição
+        turmas_por_escola = {escola.id: [] for escola in escolas_list}
+        for turma in turmas:
+            turmas_por_escola[turma.id_escola].append(turma)
+
+        for escola in escolas_list:
+            escola_turmas = turmas_por_escola[escola.id]
+            # Assumimos que cada escola terá 2 turmas para este exemplo
+            turma_a = escola_turmas[0]
+            turma_b = escola_turmas[1]
+
+            # Professores de Português para esta escola
+            prof_port_1 = Professor(
+                nome=f"Prof. Português 1 - {escola.nome[-2:]}",
+                cpf=f"{cpf_counter:011d}",
+                cargo="Professor de Português",
+                id_escola=escola.id,
+            )
+            cpf_counter += 1
+            prof_port_2 = Professor(
+                nome=f"Prof. Português 2 - {escola.nome[-2:]}",
+                cpf=f"{cpf_counter:011d}",
+                cargo="Professor de Português",
+                id_escola=escola.id,
+            )
+            cpf_counter += 1
+
+            # Professores de Matemática para esta escola
+            prof_mat_1 = Professor(
+                nome=f"Prof. Matemática 1 - {escola.nome[-2:]}",
+                cpf=f"{cpf_counter:011d}",
+                cargo="Professor de Matemática",
+                id_escola=escola.id,
+            )
+            cpf_counter += 1
+            prof_mat_2 = Professor(
+                nome=f"Prof. Matemática 2 - {escola.nome[-2:]}",
+                cpf=f"{cpf_counter:011d}",
+                cargo="Professor de Matemática",
+                id_escola=escola.id,
+            )
+            cpf_counter += 1
+
+            professores.extend([prof_port_1, prof_port_2, prof_mat_1, prof_mat_2])
+
+        session.add_all(professores)
         session.commit()
         for prof in professores:
             session.refresh(prof)
@@ -216,8 +239,8 @@ def popular_dados():
         for i in range(len(turmas) * 3):
             responsaveis.append(
                 Responsavel(
-                    nome=f"Responsável {i + 1}",
-                    telefone=f"(81) 9{random.randint(1000,9999)}-{random.randint(1000,9999)}"
+                    nome=f"Responsavel {i + 1}",
+                    telefone=f"{500 + i:09d}00",
                 )
             )
         session.add_all(responsaveis)
@@ -230,11 +253,9 @@ def popular_dados():
         print("Criando alunos...")
         alunos = []
         responsavel_idx = 0
-        global_aluno_count = 0  # Adicionado um contador global para o nome do aluno
-        for turma_idx, turma in enumerate(
-            turmas
-        ):  # Usei 'turma_idx' para evitar conflito com 'i' no f-string
-            for j in range(3):  # 'j' está corretamente definido aqui
+        global_aluno_count = 0
+        for turma_idx, turma in enumerate(turmas):
+            for j in range(3):
                 global_aluno_count += 1
                 aluno = Aluno(
                     nome=f"Aluno {global_aluno_count} - {turma.nome}",
@@ -244,13 +265,9 @@ def popular_dados():
                     id_escola=turma.id_escola,
                     id_turma=turma.id,
                     id_responsavel=responsaveis[responsavel_idx].id,
-                    data_nascimento=date(2015, random.randint(1, 12), random.randint(1, 28)),
-                    sexo=random.choice(["masculino", "feminino"]),
-                    nacionalidade="Brasileiro",
                 )
                 alunos.append(aluno)
                 responsavel_idx += 1
-
         session.add_all(alunos)
         session.commit()
         for aluno in alunos:
@@ -286,50 +303,52 @@ def popular_dados():
             materia_mat_1 = session.query(Materia).filter(Materia.id_disciplina == matematica.id).first()
 
             # --- Avaliações de Português (1Va e 2Va) ---
-            nota_base_port = random.uniform(8.0, 10.0) if is_municipio_a else random.uniform(6.0, 8.5)
-            avaliacoes_para_adicionar.append(Avaliacao(
-                tipo_avaliacao="1Va",
-                data_avaliacao=date(2025, 4, random.randint(15, 28)),
-                nota=round(nota_base_port, 2),
-                id_aluno=aluno.id,
-                id_professor=professor_portugues.id,
-                id_disciplina=portugues.id,
-                id_materia=random.choice([materia_port_1.id, materia_port_2.id]),
-                id_turma=aluno.id_turma,
-            ))
-            avaliacoes_para_adicionar.append(Avaliacao(
-                tipo_avaliacao="2Va",
-                data_avaliacao=date(2025, 6, random.randint(15, 28)),
-                nota=round(min(10.0, nota_base_port * random.uniform(0.9, 1.1)), 2),
-                id_aluno=aluno.id,
-                id_professor=professor_portugues.id,
-                id_disciplina=portugues.id,
-                id_materia=random.choice([materia_port_1.id, materia_port_2.id]),
-                id_turma=aluno.id_turma,
-            ))
+            if professor_portugues_turma and materia_port_1:
+                nota_base_port = random.uniform(8.0, 10.0) if is_municipio_a else random.uniform(6.0, 8.5)
+                avaliacoes_para_adicionar.append(Avaliacao(
+                    tipo_avaliacao="1Va",
+                    data_avaliacao=date(2025, 4, random.randint(15, 28)),
+                    nota=round(nota_base_port, 2),
+                    id_aluno=aluno.id,
+                    id_professor=professor_portugues_turma.id,
+                    id_disciplina=portugues.id,
+                    id_materia=materia_port_1.id,
+                    id_turma=aluno.id_turma,
+                ))
+                avaliacoes_para_adicionar.append(Avaliacao(
+                    tipo_avaliacao="2Va",
+                    data_avaliacao=date(2025, 6, random.randint(15, 28)),
+                    nota=round(min(10.0, nota_base_port * random.uniform(0.9, 1.1)), 2),
+                    id_aluno=aluno.id,
+                    id_professor=professor_portugues_turma.id,
+                    id_disciplina=portugues.id,
+                    id_materia=materia_port_1.id,
+                    id_turma=aluno.id_turma,
+                ))
 
             # --- Avaliações de Matemática (1Va e 2Va) ---
-            nota_base_mat = random.uniform(8.0, 10.0) if not is_municipio_a else random.uniform(6.0, 8.5)
-            avaliacoes_para_adicionar.append(Avaliacao(
-                tipo_avaliacao="1Va",
-                data_avaliacao=date(2025, 4, random.randint(15, 28)),
-                nota=round(nota_base_mat, 2),
-                id_aluno=aluno.id,
-                id_professor=professor_matematica.id,
-                id_disciplina=matematica.id,
-                id_materia=random.choice([materia_mat_1.id, materia_mat_2.id]),
-                id_turma=aluno.id_turma,
-            ))
-            avaliacoes_para_adicionar.append(Avaliacao(
-                tipo_avaliacao="2Va",
-                data_avaliacao=date(2025, 6, random.randint(15, 28)),
-                nota=round(min(10.0, nota_base_mat * random.uniform(0.9, 1.1)), 2),
-                id_aluno=aluno.id,
-                id_professor=professor_matematica.id,
-                id_disciplina=matematica.id,
-                id_materia=random.choice([materia_mat_1.id, materia_mat_2.id]),
-                id_turma=aluno.id_turma,
-            ))
+            if professor_matematica_turma and materia_mat_1:
+                nota_base_mat = random.uniform(8.0, 10.0) if not is_municipio_a else random.uniform(6.0, 8.5)
+                avaliacoes_para_adicionar.append(Avaliacao(
+                    tipo_avaliacao="1Va",
+                    data_avaliacao=date(2025, 4, random.randint(15, 28)),
+                    nota=round(nota_base_mat, 2),
+                    id_aluno=aluno.id,
+                    id_professor=professor_matematica_turma.id,
+                    id_disciplina=matematica.id,
+                    id_materia=materia_mat_1.id,
+                    id_turma=aluno.id_turma,
+                ))
+                avaliacoes_para_adicionar.append(Avaliacao(
+                    tipo_avaliacao="2Va",
+                    data_avaliacao=date(2025, 6, random.randint(15, 28)),
+                    nota=round(min(10.0, nota_base_mat * random.uniform(0.9, 1.1)), 2),
+                    id_aluno=aluno.id,
+                    id_professor=professor_matematica_turma.id,
+                    id_disciplina=matematica.id,
+                    id_materia=materia_mat_1.id,
+                    id_turma=aluno.id_turma,
+                ))
 
         session.add_all(avaliacoes_para_adicionar)
         session.commit()
