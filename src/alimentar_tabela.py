@@ -94,16 +94,14 @@ def popular_dados():
         print("Criando turmas...")
         turmas = []
         escolas_list = [escola_a1, escola_a2, escola_b1, escola_b2]
-        for escola in (
-            escolas_list
-        ):  # Removi 'i' desnecessário no loop externo, pois 'j' está no interno.
+        for escola in escolas_list:
             turma1 = Turma(
-                nome=f"1º Ano - {escola.nome[-2:]}",
+                nome=f"1º Ano - {escola.nome[-2:]} A",
                 ano_letivo=2025,
                 id_escola=escola.id,
             )
             turma2 = Turma(
-                nome=f"2º Ano - {escola.nome[-2:]}",
+                nome=f"1º Ano - {escola.nome[-2:]} B",
                 ano_letivo=2025,
                 id_escola=escola.id,
             )
@@ -127,98 +125,69 @@ def popular_dados():
         )
 
         # 7. Criar Professores (Matemática e Português)
+        print("Criando professores...")
         prof_portugues1 = Professor(
             nome="Prof. Ana Silva",
             cpf="11122233344",
             cargo="Professor de Português",
             id_escola=escola_a1.id,
-            data_nascimento=date(1980, 5, 20),
-            sexo="feminino",
-            nacionalidade="Brasileira",
-            estado_civil="Casada",
-            telefone="(81) 98888-1111",
-            email="ana.silva@escola.com",
-            senha="senhaForteAna2025"
         )
-
         prof_portugues2 = Professor(
             nome="Prof. Bia Costa",
             cpf="22233344455",
             cargo="Professor de Português",
             id_escola=escola_b1.id,
-            data_nascimento=date(1983, 3, 14),
-            sexo="feminino",
-            nacionalidade="Brasileira",
-            estado_civil="Solteira",
-            telefone="(81) 97777-2222",
-            email="bia.costa@escola.com",
-            senha="senhaForteBia2025"
         )
-
         prof_matematica1 = Professor(
             nome="Prof. Carlos Santos",
             cpf="33344455566",
             cargo="Professor de Matemática",
             id_escola=escola_a2.id,
-            data_nascimento=date(1985, 9, 15),
-            sexo="masculino",
-            nacionalidade="Brasileiro",
-            estado_civil="Solteiro",
-            telefone="(81) 91234-5678",
-            email="carlos.santos@escola.com",
-            senha="senhaForteCarlos2025"
         )
-
         prof_matematica2 = Professor(
             nome="Prof. Daniel Pereira",
             cpf="44455566677",
             cargo="Professor de Matemática",
             id_escola=escola_b2.id,
-            data_nascimento=date(1982, 11, 30),
-            sexo="masculino",
-            nacionalidade="Brasileiro",
-            estado_civil="Casado",
-            telefone="(81) 93456-7890",
-            email="daniel.pereira@escola.com",
-            senha="senhaForteDaniel2025"
         )
         session.add_all(
             [prof_portugues1, prof_portugues2, prof_matematica1, prof_matematica2]
         )
         session.commit()
-        session.refresh(prof_portugues1)
-        session.refresh(prof_portugues2)
-        session.refresh(prof_matematica1)
-        session.refresh(prof_matematica2)
+        for prof in professores:
+            session.refresh(prof)
         print("Professores criados.")
 
         # 8. Criar Tabela de Relação Professor-Turma
-        print("Vinculando professores às turmas...")
+        print("Vinculando professores às turmas (um professor por turma por matéria)...")
         prof_turma_data = []
-        prof_turma_data.append(
-            ProfessorTurma(id_professor=prof_portugues1.id, id_turma=turmas[0].id)
-        )
-        prof_turma_data.append(
-            ProfessorTurma(id_professor=prof_portugues1.id, id_turma=turmas[1].id)
-        )
-        prof_turma_data.append(
-            ProfessorTurma(id_professor=prof_matematica1.id, id_turma=turmas[2].id)
-        )
-        prof_turma_data.append(
-            ProfessorTurma(id_professor=prof_matematica1.id, id_turma=turmas[3].id)
-        )
-        prof_turma_data.append(
-            ProfessorTurma(id_professor=prof_portugues2.id, id_turma=turmas[4].id)
-        )
-        prof_turma_data.append(
-            ProfessorTurma(id_professor=prof_portugues2.id, id_turma=turmas[5].id)
-        )
-        prof_turma_data.append(
-            ProfessorTurma(id_professor=prof_matematica2.id, id_turma=turmas[6].id)
-        )
-        prof_turma_data.append(
-            ProfessorTurma(id_professor=prof_matematica2.id, id_turma=turmas[7].id)
-        )
+        professores_por_escola_e_disciplina = {escola.id: {'Português': [], 'Matemática': []} for escola in escolas_list}
+        
+        for prof in professores:
+            if "Português" in prof.cargo:
+                professores_por_escola_e_disciplina[prof.id_escola]['Português'].append(prof)
+            elif "Matemática" in prof.cargo:
+                professores_por_escola_e_disciplina[prof.id_escola]['Matemática'].append(prof)
+
+        for escola in escolas_list:
+            escola_turmas = sorted(turmas_por_escola[escola.id], key=lambda t: t.nome) # Ordenar para garantir consistência
+            
+            # Atribuir professores de Português
+            if len(escola_turmas) >= 2 and len(professores_por_escola_e_disciplina[escola.id]['Português']) >= 2:
+                prof_port_turma_a = professores_por_escola_e_disciplina[escola.id]['Português'][0]
+                prof_port_turma_b = professores_por_escola_e_disciplina[escola.id]['Português'][1]
+                
+                prof_turma_data.append(ProfessorTurma(id_professor=prof_port_turma_a.id, id_turma=escola_turmas[0].id))
+                prof_turma_data.append(ProfessorTurma(id_professor=prof_port_turma_b.id, id_turma=escola_turmas[1].id))
+            
+            # Atribuir professores de Matemática
+            if len(escola_turmas) >= 2 and len(professores_por_escola_e_disciplina[escola.id]['Matemática']) >= 2:
+                prof_mat_turma_a = professores_por_escola_e_disciplina[escola.id]['Matemática'][0]
+                prof_mat_turma_b = professores_por_escola_e_disciplina[escola.id]['Matemática'][1]
+                
+                prof_turma_data.append(ProfessorTurma(id_professor=prof_mat_turma_a.id, id_turma=escola_turmas[0].id))
+                prof_turma_data.append(ProfessorTurma(id_professor=prof_mat_turma_b.id, id_turma=escola_turmas[1].id))
+                
         session.add_all(prof_turma_data)
         session.commit()
         print("Professores vinculados às turmas.")
@@ -228,29 +197,17 @@ def popular_dados():
         materia_port_1 = Materia(
             nome_materia="Gramática",
             id_disciplina=portugues.id,
-            id_professor=prof_portugues1.id,
-        )
-        materia_port_2 = Materia(
-            nome_materia="Interpretação de Texto",
-            id_disciplina=portugues.id,
-            id_professor=prof_portugues2.id,
+            id_professor=professores_por_escola_e_disciplina[escola_a1.id]['Português'][0].id, # Exemplo: um professor de Português da Escola Alpha I
         )
         materia_mat_1 = Materia(
             nome_materia="Álgebra",
             id_disciplina=matematica.id,
-            id_professor=prof_matematica1.id,
+            id_professor=professores_por_escola_e_disciplina[escola_a1.id]['Matemática'][0].id, # Exemplo: um professor de Matemática da Escola Alpha I
         )
-        materia_mat_2 = Materia(
-            nome_materia="Geometria",
-            id_disciplina=matematica.id,
-            id_professor=prof_matematica2.id,
-        )
-        session.add_all([materia_port_1, materia_port_2, materia_mat_1, materia_mat_2])
+        session.add_all([materia_port_1, materia_mat_1]) # Use colchetes para passar múltiplos objetos
         session.commit()
         session.refresh(materia_port_1)
-        session.refresh(materia_port_2)
         session.refresh(materia_mat_1)
-        session.refresh(materia_mat_2)
         print("Matérias criadas.")
 
         # 10. Criar Responsáveis
@@ -274,8 +231,10 @@ def popular_dados():
         alunos = []
         responsavel_idx = 0
         global_aluno_count = 0  # Adicionado um contador global para o nome do aluno
-        for turma_idx, turma in enumerate(turmas):
-            for j in range(3):
+        for turma_idx, turma in enumerate(
+            turmas
+        ):  # Usei 'turma_idx' para evitar conflito com 'i' no f-string
+            for j in range(3):  # 'j' está corretamente definido aqui
                 global_aluno_count += 1
                 aluno = Aluno(
                     nome=f"Aluno {global_aluno_count} - {turma.nome}",
@@ -306,25 +265,25 @@ def popular_dados():
             municipio_da_escola = session.query(Municipio).filter_by(id=escola_do_aluno.id_municipio).one()
             is_municipio_a = municipio_da_escola.nome == "Cidade Alpha"
 
-            # Determina os professores corretos para o aluno
-            prof_portugues1 = session.query(Professor).filter(Professor.nome.contains("Ana Silva")).one()
-            prof_portugues2 = session.query(Professor).filter(Professor.nome.contains("Bia Costa")).one()
-            prof_matematica1 = session.query(Professor).filter(Professor.nome.contains("Carlos Santos")).one()
-            prof_matematica2 = session.query(Professor).filter(Professor.nome.contains("Daniel Pereira")).one()
+            # Obter os professores associados à turma do aluno
+            professores_da_turma = (
+                session.query(Professor)
+                .join(ProfessorTurma)
+                .filter(ProfessorTurma.id_turma == aluno.id_turma)
+                .all()
+            )
+            
+            # Filtrar professores por disciplina
+            professor_portugues_turma = next((p for p in professores_da_turma if "Português" in p.cargo), None)
+            professor_matematica_turma = next((p for p in professores_da_turma if "Matemática" in p.cargo), None)
+
+            # Obter as disciplinas
             portugues = session.query(Disciplina).filter_by(nome_disciplina="Português").one()
             matematica = session.query(Disciplina).filter_by(nome_disciplina="Matemática").one()
-            materia_port_1 = session.query(Materia).filter(Materia.nome_materia == "Gramática").one()
-            materia_port_2 = session.query(Materia).filter(Materia.nome_materia == "Interpretação de Texto").one()
-            materia_mat_1 = session.query(Materia).filter(Materia.nome_materia == "Álgebra").one()
-            materia_mat_2 = session.query(Materia).filter(Materia.nome_materia == "Geometria").one()
-
-
-            if escola_do_aluno.id_municipio == municipio_a.id:
-                professor_portugues = prof_portugues1
-                professor_matematica = prof_matematica1
-            else:
-                professor_portugues = prof_portugues2
-                professor_matematica = prof_matematica2
+            
+            # Obter as matérias (exemplo, você pode precisar de mais lógica aqui se tiver várias matérias por disciplina)
+            materia_port_1 = session.query(Materia).filter(Materia.id_disciplina == portugues.id).first()
+            materia_mat_1 = session.query(Materia).filter(Materia.id_disciplina == matematica.id).first()
 
             # --- Avaliações de Português (1Va e 2Va) ---
             nota_base_port = random.uniform(8.0, 10.0) if is_municipio_a else random.uniform(6.0, 8.5)
@@ -348,26 +307,6 @@ def popular_dados():
                 id_materia=random.choice([materia_port_1.id, materia_port_2.id]),
                 id_turma=aluno.id_turma,
             ))
-            avaliacoes_para_adicionar.append(Avaliacao(
-                tipo_avaliacao="3Va",
-                data_avaliacao=date(2025, 8, random.randint(15, 28)),
-                nota=round(min(10.0, nota_base_port * random.uniform(0.85, 1.05)), 2),
-                id_aluno=aluno.id,
-                id_professor=professor_portugues.id,
-                id_disciplina=portugues.id,
-                id_materia=random.choice([materia_port_1.id, materia_port_2.id]),
-                id_turma=aluno.id_turma,
-            ))
-            avaliacoes_para_adicionar.append(Avaliacao(
-                tipo_avaliacao="4Va",
-                data_avaliacao=date(2025, 10, random.randint(15, 28)),
-                nota=round(min(10.0, nota_base_port * random.uniform(0.8, 1.0)), 2),
-                id_aluno=aluno.id,
-                id_professor=professor_portugues.id,
-                id_disciplina=portugues.id,
-                id_materia=random.choice([materia_port_1.id, materia_port_2.id]),
-                id_turma=aluno.id_turma,
-            ))
 
             # --- Avaliações de Matemática (1Va e 2Va) ---
             nota_base_mat = random.uniform(8.0, 10.0) if not is_municipio_a else random.uniform(6.0, 8.5)
@@ -385,26 +324,6 @@ def popular_dados():
                 tipo_avaliacao="2Va",
                 data_avaliacao=date(2025, 6, random.randint(15, 28)),
                 nota=round(min(10.0, nota_base_mat * random.uniform(0.9, 1.1)), 2),
-                id_aluno=aluno.id,
-                id_professor=professor_matematica.id,
-                id_disciplina=matematica.id,
-                id_materia=random.choice([materia_mat_1.id, materia_mat_2.id]),
-                id_turma=aluno.id_turma,
-            ))
-            avaliacoes_para_adicionar.append(Avaliacao(
-                tipo_avaliacao="3Va",
-                data_avaliacao=date(2025, 8, random.randint(15, 28)),
-                nota=round(min(10.0, nota_base_mat * random.uniform(0.85, 1.05)), 2),
-                id_aluno=aluno.id,
-                id_professor=professor_matematica.id,
-                id_disciplina=matematica.id,
-                id_materia=random.choice([materia_mat_1.id, materia_mat_2.id]),
-                id_turma=aluno.id_turma,
-            ))
-            avaliacoes_para_adicionar.append(Avaliacao(
-                tipo_avaliacao="4Va",
-                data_avaliacao=date(2025, 10, random.randint(15, 28)),
-                nota=round(min(10.0, nota_base_mat * random.uniform(0.8, 1.0)), 2),
                 id_aluno=aluno.id,
                 id_professor=professor_matematica.id,
                 id_disciplina=matematica.id,
@@ -458,7 +377,3 @@ if __name__ == "__main__":
         popular_dados()
     except Exception as exception:
         print(f"Erro ao popular os dados. Tipo de erro: {str(exception)}")
-        # Removendo 'raise exception' para que o script termine após a mensagem de erro,
-        # sem mostrar todo o traceback se for um erro conhecido.
-        # Se você ainda precisar do traceback completo para depuração, pode adicionar de volta.
-        # raise exception
