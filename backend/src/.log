@@ -461,3 +461,42 @@ DEBUG    | 21/07/2025 14:38:57 | 1:45:10.839844 |         professor.py:505   |  
 DEBUG    | 21/07/2025 14:38:57 | 1:45:10.846930 |         professor.py:505   |            professor._executar            | 2 professores encontrados na escola 1.
 INFO     | 21/07/2025 14:39:08 | 1:45:21.785361 |         professor.py:592   |            professor._executar            | Professor 5 deletado.
 DEBUG    | 21/07/2025 14:39:28 | 1:45:41.319613 |         professor.py:505   |            professor._executar            | 1 professores encontrados na escola 1.
+DEBUG    | 21/07/2025 15:04:41 | 2:10:54.843674 |         professor.py:505   |            professor._executar            | 1 professores encontrados na escola 1.
+INFO     | 22/07/2025 20:44:06 | 0:00:00.311080 |              main.py:8     |                 main.<module>             | Iniciando projeto
+INFO     | 22/07/2025 20:44:14 | 0:00:08.403129 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 22/07/2025 21:00:26 | 0:00:00.244283 |              main.py:8     |                 main.<module>             | Iniciando projeto
+DEBUG    | 22/07/2025 21:09:18 | 0:08:52.465260 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:09:40 | 0:09:13.914232 |             aluno.py:192   |                aluno.listar_alunos_turma  | 3 alunos encontrados na turma 1.
+DEBUG    | 22/07/2025 21:09:44 | 0:09:17.556078 |             aluno.py:192   |                aluno.listar_alunos_turma  | 3 alunos encontrados na turma 2.
+DEBUG    | 22/07/2025 21:09:46 | 0:09:19.845881 |         professor.py:245   |            professor.__init__             | 2
+DEBUG    | 22/07/2025 21:10:12 | 0:09:45.666155 |         professor.py:505   |            professor._executar            | 1 professores encontrados na escola 1.
+DEBUG    | 22/07/2025 21:10:12 | 0:09:45.669517 |         professor.py:505   |            professor._executar            | 1 professores encontrados na escola 1.
+DEBUG    | 22/07/2025 21:10:14 | 0:09:47.689925 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:10:14 | 0:09:47.692960 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:10:24 | 0:09:58.426710 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:10:24 | 0:09:58.429913 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:19:52 | 0:19:26.380376 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:19:53 | 0:19:26.690129 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:20:05 | 0:19:39.367751 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:20:05 | 0:19:39.370438 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:20:07 | 0:19:41.041787 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:20:07 | 0:19:41.042692 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:20:09 | 0:19:42.514558 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:20:09 | 0:19:42.517979 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:20:10 | 0:19:44.464665 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:20:11 | 0:19:44.465920 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:20:12 | 0:19:46.375702 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:20:12 | 0:19:46.378337 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+INFO     | 22/07/2025 21:36:52 | 0:36:25.729735 |             aluno.py:168   |                aluno.executar             | Aluno 'julia' criado com sucesso.
+DEBUG    | 22/07/2025 21:36:55 | 0:36:29.245810 |             aluno.py:192   |                aluno.listar_alunos_turma  | 3 alunos encontrados na turma 2.
+DEBUG    | 22/07/2025 21:37:03 | 0:36:36.569334 |             aluno.py:183   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:37:21 | 0:36:55.212054 |             aluno.py:183   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:37:21 | 0:36:55.215614 |             aluno.py:183   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:39:46 | 0:39:20.221698 |             aluno.py:183   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:40:00 | 0:39:34.297837 |             aluno.py:183   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+INFO     | 22/07/2025 21:40:20 | 0:39:53.981886 |             aluno.py:271   |                aluno.executar             | Aluno 25 atualizado com sucesso.
+DEBUG    | 22/07/2025 21:40:23 | 0:39:56.785336 |             aluno.py:183   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:40:26 | 0:39:59.670458 |             aluno.py:183   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 22/07/2025 21:40:26 | 0:39:59.671373 |             aluno.py:183   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+INFO     | 22/07/2025 21:40:30 | 0:40:04.036179 |             aluno.py:288   |                aluno.executar             | Aluno 25 deletado.
+DEBUG    | 22/07/2025 21:40:32 | 0:40:06.363171 |             aluno.py:183   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.

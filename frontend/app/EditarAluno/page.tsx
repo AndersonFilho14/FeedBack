@@ -1,12 +1,19 @@
 "use client";
-import React,{useState} from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
+interface AlunoData {
+    nome: string;
+    cpf: string;
+    data_nascimento: string;
+    sexo: string;
+    nacionalidade: string;
+    nome_responsavel: string;
+    numero_responsavel: string;
+}
 
 export default function EditarAluno() {
-   
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
     const [nome, setNome] = useState("");
     const [data, setData] = useState("");
     const [sexo, setSexo] = useState("");
@@ -14,6 +21,57 @@ export default function EditarAluno() {
     const [nacionalidade, setNacionalidade] = useState("");
     const [nomeResponsavel, setNomeResponsavel] = useState("");
     const [telefoneResponsavel, setTelefoneResponsavel] = useState("");
+
+    const searchParams = useSearchParams();
+    const alunoId = searchParams.get("id");
+
+    const [loading, setLoading] = useState(true);
+    const [isSaving, setIsSaving] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [message, setMessage] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (!alunoId) {
+            setError("ID do aluno não encontrado.");
+            setLoading(false);
+            return;
+        }
+
+        async function fetchAluno() {
+            setLoading(true);
+            try {
+                // Buscamos na rota que lista todos os alunos
+                const response = await fetch(`http://localhost:5000/alunos/escola/1`);
+                if (!response.ok) {
+                    throw new Error("Falha ao buscar a lista de alunos.");
+                }
+                const data = await response.json();
+
+                // Encontramos o aluno correto na lista
+                const aluno = data.alunos?.find((a: any) => a.id.toString() === alunoId);
+
+                if (!aluno) {
+                    throw new Error("Aluno com o ID especificado não foi encontrado.");
+                }
+
+                // Preenchemos o formulário com os dados encontrados
+                setNome(aluno.nome || "");
+                setCpf(aluno.cpf || "");
+                setData(aluno.data_nascimento ? aluno.data_nascimento.split('T')[0] : "");
+                setSexo(aluno.sexo || "");
+                setNacionalidade(aluno.nacionalidade || "");
+                setNomeResponsavel(aluno.nome_responsavel || "");
+                setTelefoneResponsavel(aluno.numero_responsavel || "");
+
+            } catch (err: any) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchAluno();
+    }, [alunoId]);
 
     const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
@@ -33,6 +91,44 @@ export default function EditarAluno() {
               .slice(0, 15); // Limita ao tamanho máximo da máscara (XX) XXXXX-XXXX
             setTelefoneResponsavel(value);
         };
+
+    const handleSave = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!alunoId) {
+            setError("Não é possível salvar sem um ID de aluno.");
+            return;
+        }
+
+        setIsSaving(true);
+        setError(null);
+        setMessage(null);
+
+        const alunoData: AlunoData = {
+            nome,
+            cpf: cpf.replace(/\D/g, ''),
+            data_nascimento: data,
+            sexo,
+            nacionalidade,
+            nome_responsavel: nomeResponsavel,
+            numero_responsavel: telefoneResponsavel.replace(/\D/g, ''),
+        };
+
+        try {
+            const response = await fetch(`http://localhost:5000/aluno/${alunoId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(alunoData),
+            });
+
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.mensagem || "Falha ao atualizar o aluno.");
+            setMessage(result.mensagem);
+        } catch (err: any) {
+            setError(err.message);
+        } finally {
+            setIsSaving(false);
+        }
+    };
         
     return (
         <>
@@ -41,8 +137,13 @@ export default function EditarAluno() {
             </header>
             <div className="bg-[#F5ECD5] bg-[url('/imagem/backgroundloginimage.png')] bg-cover bg-center bg-no-repeat  flex  justify-center items-center h-screen ">
                 <div className="font-[Jomolhari] bg-[#F5ECD5] border-[#A7C1A8] w-330 h-200  rounded-3xl shadow-[0_19px_4px_4px_rgba(0,0,0,0.25)]  flex flex-col gap-8 justify-center items-center mt-22  border-11 ">
-                    <h1 className="text-[#EEA03D] text-5xl ">Editar Aluno</h1>
-                    <form className="flex  justify-center items-center gap-30 " >
+                    <h1 className="text-[#EEA03D] text-5xl ">Editar Cadastro do Aluno</h1>
+                    {loading && <p>Carregando dados do aluno...</p>}
+                    {error && <p className="text-red-500 text-center -my-4">{error}</p>}
+                    {message && <p className="text-green-600 text-center -my-4">{message}</p>}
+
+                    {!loading && !error && (
+                    <form className="flex  justify-center items-center gap-30 " onSubmit={handleSave}>
                         <div className="flex flex-col gap-4">
                             <h5>Nome</h5>
                             <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="text" alt="nome" value={nome} onChange={e => setNome(e.target.value)} />
@@ -97,7 +198,15 @@ export default function EditarAluno() {
                             
                         </div>
                     </form>
-                    <Link className="w-100 h-19 border-5 rounded-lg border-[#727D73] flex  justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-4xl" href={""}>Salvar</Link>
+                    )}
+                    <button 
+                        type="submit" 
+                        onClick={handleSave}
+                        disabled={isSaving || loading || !!error}
+                        className="w-100 h-19 border-5 rounded-lg border-[#727D73] flex  justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-4xl disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    >
+                        {isSaving ? "Salvando..." : "Salvar"}
+                    </button>
                     <Link className=" w-44 h-13 border-5 rounded-lg border-[#727D73] flex  justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-2xl " href={"/ListaAlunos"}>Voltar</Link>
                 </div>
                 

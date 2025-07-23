@@ -169,6 +169,44 @@ class ReservarToken:
         return cls.__token
     
 
+# --------------- CRIAR ALUNO ---------------
+@user_rout_bp.route("/aluno", methods=["POST"])
+def criar_aluno():
+    """
+    Cria um novo aluno.
+
+    **JSON Body esperado**:
+    ```json
+    {
+        "nome": "Maria Teste",
+        "cpf": "12345678901",
+        "data_nascimento": "2010-05-10",
+        "sexo": "feminino",
+        "nacionalidade": "Brasileira",
+        "id_escola": 1,
+        "nome_responsavel": "João Responsável",
+        "numero_responsavel": "11999999999"
+    }
+    ```
+
+    :return: JSON com mensagem de sucesso ou erro.
+    """
+    dados = request.json
+
+    controller = ControllerAluno(
+        nome=dados.get("nome"),
+        cpf=dados.get("cpf"),
+        data_nascimento=dados.get("data_nascimento"),
+        sexo=dados.get("sexo"),
+        nacionalidade=dados.get("nacionalidade"),
+        id_escola=dados.get("id_escola"),
+        nome_responsavel=dados.get("nome_responsavel"),
+        numero_responsavel=dados.get("numero_responsavel")
+    )
+    resultado = controller.criar_aluno()
+    return make_response(jsonify({"mensagem": resultado}))
+
+
 # --------------- LISTAR ALUNOS POR ESCOLA ---------------
 @user_rout_bp.route("/alunos/escola/<int:id_escola>", methods=["GET"])
 def listar_alunos_escola(id_escola):
@@ -206,17 +244,12 @@ def atualizar_aluno(id_aluno):
     **JSON Body esperado**:
     ```json
     {
+        "id_aluno": 1,
         "nome": "Maria Atualizada",
         "cpf": "12345678901",
         "data_nascimento": "2010-05-10",
         "sexo": "feminino",
         "nacionalidade": "Brasileira",
-        "faltas": 2,
-        "nota_score_preditivo": 8.5,
-        "id_escola": 1,
-        "id_turma": 2,
-        "id_responsavel": 3,
-        "senha": "novaSenha123",
         "nome_responsavel": "João Responsável",
         "numero_responsavel": "11999999999"
     }
@@ -233,12 +266,6 @@ def atualizar_aluno(id_aluno):
         data_nascimento=dados.get("data_nascimento"),
         sexo=dados.get("sexo"),
         nacionalidade=dados.get("nacionalidade"),
-        faltas=dados.get("faltas"),
-        nota_score_preditivo=dados.get("nota_score_preditivo"),
-        id_escola=dados.get("id_escola"),
-        id_turma=dados.get("id_turma"),
-        id_responsavel=dados.get("id_responsavel"),
-        senha=dados.get("senha"),
         nome_responsavel=dados.get("nome_responsavel"),
         numero_responsavel=dados.get("numero_responsavel"),
     )
