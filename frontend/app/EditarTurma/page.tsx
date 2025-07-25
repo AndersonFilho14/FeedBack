@@ -89,9 +89,7 @@ export default function EditarTurma() {
             setProfessoresSelecionados(prev => [...prev, professor]);
         }
     };
-    const handleRemoveProfessor = (professorId: number) => {
-        setProfessoresSelecionados(prev => prev.filter(p => p.id !== professorId));
-    };
+   
 
     const handleSelectAluno = (aluno: Aluno) => {
         if (!alunosSelecionados.some(a => a.id === aluno.id)) {
@@ -211,18 +209,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                     />
                     <div className="flex flex-wrap gap-10 justify-center items-start">
                         <div className="flex flex-col gap-4 w-80">
-                            <h5 className="text-2xl">Procurar Professor</h5>
-                            <input 
-                                className="w-80 h-10 border-5 rounded-lg border-[#A4B465] bg-amber-50 shadow-md p-2" 
-                                placeholder="Buscar professor disponível..."
-                                value={filtroProfessor}
-                                onChange={e => setFiltroProfessor(e.target.value)}
-                            />
-                            <div className="overflow-y-auto h-20 mt-2 border rounded-lg">
-                                {professoresFiltrados.map(prof => (
-                                    <div key={prof.id} onClick={() => handleSelectProfessor(prof)} className="w-full p-2 border-b cursor-pointer hover:bg-amber-100">{prof.nome}</div>
-                                ))}
-                            </div>
+                            
                             <h5 className="text-2xl">Procurar Aluno</h5>
                             <input 
                                 className="w-80 h-10 border-5 rounded-lg border-[#A4B465] bg-amber-50 shadow-md p-2" 
@@ -242,7 +229,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                                 {professoresSelecionados.map(prof => (
                                     <div key={prof.id} className="w-full p-2 border-4 rounded-lg border-[#A4B465] bg-green-100 flex justify-between items-center">
                                         <span>👑 {prof.nome}</span>
-                                        <button type="button" onClick={() => handleRemoveProfessor(prof.id)} className="p-1"><img className="w-6" src="/imagem/lixo.png" alt="Remover" /></button>
+                                        
                                     </div>
                                 ))}
                                 {(professoresSelecionados.length > 0 && alunosSelecionados.length > 0) && <hr className="w-full my-2 border-t-2"/>}

@@ -12,7 +12,7 @@ export default function ListaAlunos() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [alunoParaDeletar, setAlunoParaDeletar] = useState<number | null>(null);
-
+  
   useEffect(() => {
     async function fetchAlunos() {
       try {

@@ -1,137 +1,289 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
+// --- Interfaces e Mapeamentos ---
+// Reutilizamos as mesmas estruturas e mapeamentos da tela de edição para consistência.
+interface TurmaData {
+    id: number;
+    nome: string;
+}
+
+const etniaOptions = [
+    { value: 1, label: "Branca" },
+    { value: 2, label: "Preta" },
+    { value: 3, label: "Parda" },
+    { value: 4, label: "Amarela" },
+    { value: 5, label: "Indígena" },
+    { value: 99, label: "Não declarado" },
+];
+
+const educacaoPaisOptions = [
+    { value: 0, label: "Nenhuma" },
+    { value: 1, label: "Fundamental" },
+    { value: 2, label: "Médio" },
+    { value: 3, label: "Superior" },
+    { value: 4, label: "Pós-graduação" },
+];
+
 export default function CadastrarAluno() {
-    // 1. Estados alinhados com a API de aluno
+    // --- Estados do Formulário ---
+    // Dados Pessoais
     const [nome, setNome] = useState("");
-    const [cpf, setCpf] = useState("");
     const [data, setData] = useState("");
     const [sexo, setSexo] = useState("");
+    const [cpf, setCpf] = useState("");
     const [nacionalidade, setNacionalidade] = useState("");
+    const [etnia, setEtnia] = useState("");
+
+    // Dados do Responsável
     const [nomeResponsavel, setNomeResponsavel] = useState("");
     const [telefoneResponsavel, setTelefoneResponsavel] = useState("");
-    const [mensagem, setMensagem] = useState(""); // Estado para feedback
 
-    // 2. Adicionada a máscara para o CPF
+    // Dados Acadêmicos e Comportamentais
+    const [idTurma, setIdTurma] = useState("");
+    const [faltas, setFaltas] = useState("0"); // Novo aluno começa com 0 faltas
+    const [educacaoPais, setEducacaoPais] = useState("");
+    const [tempoEstudoSemanal, setTempoEstudoSemanal] = useState("");
+    
+    // Checkboxes (true/false)
+    const [apoioPais, setApoioPais] = useState(false);
+    const [aulasParticulares, setAulasParticulares] = useState(false);
+    const [extraCurriculares, setExtraCurriculares] = useState(false);
+    const [esportes, setEsportes] = useState(false);
+    const [aulaMusica, setAulaMusica] = useState(false);
+    const [voluntariado, setVoluntariado] = useState(false);
+
+    const [turmas, setTurmas] = useState<TurmaData[]>([]);
+
+    // --- Estados de Controle da UI ---
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [message, setMessage] = useState<string | null>(null);
+
+    // --- Busca de Dados (Apenas Turmas) ---
+    useEffect(() => {
+        async function fetchTurmas() {
+            try {
+                const response = await fetch(`http://localhost:5000/turmas/escola/1`);
+                if (!response.ok) {
+                    throw new Error("Falha ao carregar a lista de turmas.");
+                }
+                const data: { turmas: TurmaData[] } = await response.json();
+                setTurmas(data.turmas || []);
+            } catch (err: any) {
+                setError(err.message);
+            }
+        }
+        fetchTurmas();
+    }, []); // Executa apenas uma vez, ao montar o componente
+
+    // --- Handlers de Input com Máscara ---
     const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
-            .replace(/\D/g, '') // Remove todos os caracteres não numéricos
-            .replace(/(\d{3})(\d)/, '$1.$2') // Coloca um ponto após o terceiro dígito
-            .replace(/(\d{3})(\d)/, '$1.$2') // Coloca um ponto após o sexto dígito
-            .replace(/(\d{3})(\d{1,2})$/, '$1-$2') // Coloca um hífen antes dos dois últimos dígitos
-            .slice(0, 14); // Limita o tamanho
+          .replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2')
+          .replace(/(\d{3})(\d{1,2})$/, '$1-$2').slice(0, 14);
         setCpf(value);
     };
 
     const handleTelefoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
-            .replace(/\D/g, '') // Remove todos os caracteres não numéricos
-            .replace(/^(\d{2})(\d)/, '($1) $2') // Coloca parênteses em volta dos dois primeiros dígitos
-            .replace(/(\d{5})(\d)/, '$1-$2') // Coloca um hífen após os próximos cinco dígitos
-            .slice(0, 15); // Limita ao tamanho máximo da máscara (XX) XXXXX-XXXX
+          .replace(/\D/g, '').replace(/^(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2')
+          .slice(0, 15);
         setTelefoneResponsavel(value);
     };
+    
+    const resetForm = () => {
+        setNome("");
+        setData("");
+        setSexo("");
+        setCpf("");
+        setNacionalidade("");
+        setEtnia("");
+        setNomeResponsavel("");
+        setTelefoneResponsavel("");
+        setIdTurma("");
+        setFaltas("0");
+        setEducacaoPais("");
+        setTempoEstudoSemanal("");
+        setApoioPais(false);
+        setAulasParticulares(false);
+        setExtraCurriculares(false);
+        setEsportes(false);
+        setAulaMusica(false);
+        setVoluntariado(false);
+    };
 
-    // 3. Função para submeter o formulário (handleSubmit)
+    // --- Ação de Salvar ---
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault(); // Impede o recarregamento da página
-        setMensagem(""); // Limpa mensagens anteriores
+        e.preventDefault();
+        setIsSubmitting(true);
+        setError(null);
+        setMessage(null);
 
-        const novoAluno = {
+        const payload = {
+            // id_escola é fixo, enviado para a API
+            id_escola: 1, 
             nome,
-            cpf: cpf.replace(/\D/g, ''), // Envia o CPF sem a máscara
+            cpf: cpf.replace(/\D/g, ''),
             data_nascimento: data,
             sexo,
             nacionalidade,
-            id_escola: 1, // Valor fixo, conforme o exemplo do backend
             nome_responsavel: nomeResponsavel,
-            numero_responsavel: telefoneResponsavel.replace(/\D/g, ''), // Envia o telefone sem a máscara
+            numero_responsavel: telefoneResponsavel.replace(/\D/g, ''),
+            // Campos novos, com conversão de tipo
+            id_turma: idTurma ? parseInt(idTurma) : null,
+            faltas: faltas ? parseInt(faltas) : 0,
+            etnia: etnia ? parseInt(etnia) : null,
+            educacaoPais: educacaoPais ? parseInt(educacaoPais) : null,
+            tempoEstudoSemanal: tempoEstudoSemanal ? parseFloat(tempoEstudoSemanal) : null,
+            apoioPais: apoioPais ? 1 : 0,
+            aulasParticulares: aulasParticulares ? 1 : 0,
+            extraCurriculares: extraCurriculares ? 1 : 0,
+            esportes: esportes ? 1 : 0,
+            aulaMusica: aulaMusica ? 1 : 0,
+            voluntariado: voluntariado ? 1 : 0,
         };
 
         try {
-            const response = await fetch("http://localhost:5000/aluno", {
+            const response = await fetch(`http://localhost:5000/aluno`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(novoAluno),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
             });
 
-            const data = await response.json();
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.mensagem || "Falha ao cadastrar o aluno.");
+            
+            setMessage(result.mensagem || "Aluno cadastrado com sucesso!");
+            resetForm(); // Limpa o formulário após o sucesso
 
-            if (response.ok) {
-                setMensagem(data.mensagem || "Aluno cadastrado com sucesso!");
-                // Limpa os campos do formulário
-                setNome("");
-                setCpf("");
-                setData("");
-                setSexo("");
-                setNacionalidade("");
-                setNomeResponsavel("");
-                setTelefoneResponsavel("");
-            } else {
-                setMensagem(data.mensagem || "Erro ao cadastrar aluno.");
-            }
-        } catch (error) {
-            console.error("Erro de conexão:", error);
-            setMensagem("Não foi possível conectar ao servidor. Tente novamente mais tarde.");
+        } catch (err: any) {
+            setError(err.message);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
+    // --- Componente de Checkbox Reutilizável ---
+    const BooleanCheckbox = ({ label, checked, onChange }: { label: string, checked: boolean, onChange: (e: React.ChangeEvent<HTMLInputElement>) => void }) => (
+        <label className="flex items-center bg-[#A7C1A8] px-3 py-2 rounded-lg shadow-sm cursor-pointer hover:bg-[#8FAE91] transition-colors">
+            <input type="checkbox" checked={checked} onChange={onChange} className="mr-2 accent-[#EEA03D] w-5 h-5"/>
+            <span>{label}</span>
+        </label>
+    );
+        
     return (
         <>
             <header className="font-[InknutAntiqua] bg-[#727D73] border-[#A4B465] text-[#EEA03D] border-7 h-21 text-center text-7xl fixed top-0 left-0 w-full z-50">
                 IMD-IA
             </header>
-            <div className="bg-[#F5ECD5] bg-[url('/imagem/backgroundloginimage.png')] bg-cover bg-center bg-no-repeat flex justify-center items-center min-h-screen py-28">
-                <div className="font-[Jomolhari] bg-[#F5ECD5] border-[#A7C1A8] w-auto max-w-6xl p-8 rounded-3xl shadow-[0_19px_4px_4px_rgba(0,0,0,0.25)] flex flex-col gap-8 justify-center items-center border-11">
-                    <h1 className="text-[#EEA03D] text-5xl">Cadastrar Novo Aluno</h1>
-                    {/* 4. Conectado o formulário à função handleSubmit */}
-                    <form className="flex flex-wrap justify-center items-start gap-x-30 gap-y-4" onSubmit={handleSubmit}>
-                        <div className="flex flex-col gap-4">
-                            <h5>Nome</h5>
-                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)] px-2" type="text" alt="nome" value={nome} onChange={e => setNome(e.target.value)} required />
-                            <h5>Data de Nascimento</h5>
-                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)] px-2" type="date" alt="data" value={data} onChange={e => setData(e.target.value)} required />
-                            <h5>Sexo</h5>
-                            <div className="flex gap-4 items-center">
-                                <label className="flex items-center bg-[#A7C1A8] px-4 py-2 rounded-lg shadow-[0_2px_4px_rgba(0,0,0,0.10)] cursor-pointer">
-                                    <input type="checkbox" checked={sexo === "masculino"} onChange={() => setSexo(sexo === "masculino" ? "" : "masculino")} className="mr-2 accent-[#EEA03D] w-5 h-5 rounded"/>
-                                    <span className="text-lg">Masculino</span>
-                                </label>
-                                <label className="flex items-center bg-[#A7C1A8] px-4 py-2 rounded-lg shadow-[0_2px_4px_rgba(0,0,0,0.10)] cursor-pointer">
-                                    <input type="checkbox" checked={sexo === "feminino"} onChange={() => setSexo(sexo === "feminino" ? "" : "feminino")} className="mr-2 accent-[#EEA03D] w-5 h-5 rounded"/>
-                                    <span className="text-lg">Feminino</span>
-                                </label>
+
+            <main className="bg-[#F5ECD5] bg-[url('/imagem/backgroundloginimage.png')] bg-cover bg-center bg-no-repeat flex justify-center items-center min-h-screen py-32">
+                <div className="font-[Jomolhari] bg-[#F5ECD5] border-[#A7C1A8] w-[90%] max-w-6xl p-8 rounded-3xl shadow-[0_19px_4px_4px_rgba(0,0,0,0.25)] flex flex-col gap-6 border-11">
+                    <h1 className="text-[#EEA03D] text-5xl text-center">Cadastrar Novo Aluno</h1>
+                    
+                    {error && <p className="text-red-600 bg-red-100 p-3 rounded-md text-center font-semibold -my-2">{error}</p>}
+                    {message && <p className="text-green-700 bg-green-100 p-3 rounded-md text-center font-semibold -my-2">{message}</p>}
+
+                    <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+                        {/* Seção de Dados Pessoais e Responsável */}
+                        <fieldset className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
+                            <div>
+                                <h5>Nome Completo</h5>
+                                <input className="w-full h-10 bg-[#A7C1A8] rounded px-3" type="text" value={nome} onChange={e => setNome(e.target.value)} required />
                             </div>
-                            <h5>CPF</h5>
-                            {/* 5. Usando o handleCpfChange e placeholder correto */}
-                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)] px-2" type="text" value={cpf} onChange={handleCpfChange} placeholder="000.000.000-00" required />
-                            <h5>Nacionalidade</h5>
-                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)] px-2" type="text" value={nacionalidade} onChange={e => setNacionalidade(e.target.value)} required />
+                            <div>
+                                <h5>Nome do Responsável</h5>
+                                <input className="w-full h-10 bg-[#A7C1A8] rounded px-3" type="text" value={nomeResponsavel} onChange={e => setNomeResponsavel(e.target.value)} required />
+                            </div>
+                            <div>
+                                <h5>Data de Nascimento</h5>
+                                <input className="w-full h-10 bg-[#A7C1A8] rounded px-3" type="date" value={data} onChange={e => setData(e.target.value)} required />
+                            </div>
+                            <div>
+                                <h5>Telefone do Responsável</h5>
+                                <input className="w-full h-10 bg-[#A7C1A8] rounded px-3" type="tel" value={telefoneResponsavel} onChange={handleTelefoneChange} placeholder="(XX) XXXXX-XXXX" required />
+                            </div>
+                            <div>
+                                <h5>CPF</h5>
+                                <input className="w-full h-10 bg-[#A7C1A8] rounded px-3" type="text" value={cpf} onChange={handleCpfChange} placeholder="000.000.000-00" required />
+                            </div>
+                            <div>
+                                <h5>Nacionalidade</h5>
+                                <input className="w-full h-10 bg-[#A7C1A8] rounded px-3" type="text" value={nacionalidade} onChange={e => setNacionalidade(e.target.value)} required />
+                            </div>
+                             <div>
+                                <h5>Gênero</h5>
+                                <select value={sexo} onChange={e => setSexo(e.target.value)} className="w-full h-10 bg-[#A7C1A8] rounded px-3" required>
+                                    <option value="" disabled>Selecione...</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Feminino">Feminino</option>
+                                    <option value="Outro">Outro</option>
+                                </select>
+                            </div>
+                             <div>
+                                <h5>Etnia</h5>
+                                <select value={etnia} onChange={e => setEtnia(e.target.value)} className="w-full h-10 bg-[#A7C1A8] rounded px-3">
+                                    <option value="">Selecione...</option>
+                                    {etniaOptions.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+                                </select>
+                            </div>
+                        </fieldset>
+
+                         {/* Seção de Dados Acadêmicos */}
+                         <fieldset className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-4">
+                            <div>
+                                <h5>Turma</h5>
+                                <select value={idTurma} onChange={e => setIdTurma(e.target.value)} className="w-full h-10 bg-[#A7C1A8] rounded px-3">
+                                    <option value="">Alocar depois</option>
+                                    {turmas.map(t => <option key={t.id} value={t.id}>{t.nome}</option>)}
+                                </select>
+                            </div>
+                            <div>
+                                <h5>Total de Faltas</h5>
+                                <input className="w-full h-10 bg-[#A7C1A8] rounded px-3" type="number" min="0" value={faltas} onChange={e => setFaltas(e.target.value)} />
+                            </div>
+                            <div>
+                                <h5>Escolaridade dos Pais</h5>
+                                 <select value={educacaoPais} onChange={e => setEducacaoPais(e.target.value)} className="w-full h-10 bg-[#A7C1A8] rounded px-3">
+                                    <option value="">Selecione...</option>
+                                    {educacaoPaisOptions.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+                                </select>
+                            </div>
+                            <div>
+                                <h5>Estudo Semanal (horas)</h5>
+                                <input className="w-full h-10 bg-[#A7C1A8] rounded px-3" type="number" min="0" step="0.5" value={tempoEstudoSemanal} onChange={e => setTempoEstudoSemanal(e.target.value)} placeholder="Ex: 3.5" />
+                            </div>
+                        </fieldset>
+
+                        {/* Seção de Atividades e Apoio */}
+                        <div className="flex flex-col gap-4 pt-4">
+                            <h3 className="text-xl font-semibold text-[#727D73] border-b-2 border-[#A7C1A8] pb-2 mb-2">
+                                Atividades e Apoio
+                            </h3>
+                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                                <BooleanCheckbox label="Apoio dos Pais" checked={apoioPais} onChange={e => setApoioPais(e.target.checked)} />
+                                <BooleanCheckbox label="Aulas Particulares" checked={aulasParticulares} onChange={e => setAulasParticulares(e.target.checked)} />
+                                <BooleanCheckbox label="Ativ. Extracurriculares" checked={extraCurriculares} onChange={e => setExtraCurriculares(e.target.checked)} />
+                                <BooleanCheckbox label="Pratica Esportes" checked={esportes} onChange={e => setEsportes(e.target.checked)} />
+                                <BooleanCheckbox label="Aulas de Música" checked={aulaMusica} onChange={e => setAulaMusica(e.target.checked)} />
+                                <BooleanCheckbox label="Faz Voluntariado" checked={voluntariado} onChange={e => setVoluntariado(e.target.checked)} />
+                            </div>
                         </div>
-                        <div className="flex flex-col gap-4">
-                            <h5>Nome do Responsável</h5>
-                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)] px-2" type="text" value={nomeResponsavel} onChange={e => setNomeResponsavel(e.target.value)} required />
-                            <h5>Telefone do Responsável</h5>
-                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)] px-2" type="tel" value={telefoneResponsavel} onChange={handleTelefoneChange} placeholder="(00) 00000-0000" maxLength={15} required />
-                        </div>
-                        {/* 6. Movido o botão para dentro do form e a mensagem de feedback para fora */}
-                        <div className="w-full flex flex-col items-center gap-4 mt-6">
-                            {/* 7. Botão de cadastrar alterado de Link para button type="submit" */}
-                            <button type="submit" className="w-100 h-19 border-5 rounded-lg border-[#727D73] flex justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-4xl">
-                                Cadastrar
-                            </button>
-                            {/* Exibe a mensagem de sucesso ou erro */}
-                            {mensagem && <p className="text-xl text-center font-semibold text-[#727D73]">{mensagem}</p>}
-                            <Link className="w-44 h-13 border-5 rounded-lg border-[#727D73] flex justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-2xl" href={"/ListaAlunos"}>
+                        
+                        {/* Botões de Ação */}
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-4">
+                            <Link className="w-full sm:w-44 h-13 border-5 rounded-lg border-[#727D73] flex justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-2xl order-2 sm:order-1" href={"/ListaAlunos"}>
                                 Voltar
                             </Link>
+                            <button type="submit" disabled={isSubmitting} className="w-full sm:w-100 h-19 border-5 rounded-lg border-[#727D73] flex justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-4xl disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-gray-600 order-1 sm:order-2">
+                                {isSubmitting ? "Cadastrando..." : "Cadastrar"}
+                            </button>
                         </div>
                     </form>
                 </div>
-            </div>
+            </main>
         </>
     );
 }
