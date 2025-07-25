@@ -184,8 +184,18 @@ def criar_aluno():
         "sexo": "feminino",
         "nacionalidade": "Brasileira",
         "id_escola": 1,
+        "id_turma": 2,
         "nome_responsavel": "João Responsável",
-        "numero_responsavel": "11999999999"
+        "numero_responsavel": "11999999999",
+        "etnia": 1,
+        "educacao_pais": 3,
+        "tempo_estudo_semanal": 6.0,
+        "apoio_pais": 1,
+        "aulas_particulares": 0,
+        "extra_curriculares": 1,
+        "esportes": 0,
+        "aula_musica": 0,
+        "voluntariado": 1
     }
     ```
 
@@ -200,11 +210,23 @@ def criar_aluno():
         sexo=dados.get("sexo"),
         nacionalidade=dados.get("nacionalidade"),
         id_escola=dados.get("id_escola"),
+        id_turma=dados.get("id_turma"),
         nome_responsavel=dados.get("nome_responsavel"),
-        numero_responsavel=dados.get("numero_responsavel")
+        numero_responsavel=dados.get("numero_responsavel"),
+        etnia=dados.get("etnia"),
+        educacao_pais=dados.get("educacao_pais"),
+        tempo_estudo_semanal=dados.get("tempo_estudo_semanal"),
+        apoio_pais=dados.get("apoio_pais"),
+        aulas_particulares=dados.get("aulas_particulares"),
+        extra_curriculares=dados.get("extra_curriculares"),
+        esportes=dados.get("esportes"),
+        aula_musica=dados.get("aula_musica"),
+        voluntariado=dados.get("voluntariado")
     )
+
     resultado = controller.criar_aluno()
     return make_response(jsonify({"mensagem": resultado}))
+
 
 
 # --------------- LISTAR ALUNOS POR ESCOLA ---------------
@@ -251,7 +273,16 @@ def atualizar_aluno(id_aluno):
         "sexo": "feminino",
         "nacionalidade": "Brasileira",
         "nome_responsavel": "João Responsável",
-        "numero_responsavel": "11999999999"
+        "numero_responsavel": "11999999999",
+        "etnia": 2,
+        "educacao_pais": 3,
+        "tempo_estudo_semanal": 5.5,
+        "apoio_pais": 1,
+        "aulas_particulares": 0,
+        "extra_curriculares": 1,
+        "esportes": 1,
+        "aula_musica": 0,
+        "voluntariado": 1
     }
     ```
 
@@ -268,6 +299,15 @@ def atualizar_aluno(id_aluno):
         nacionalidade=dados.get("nacionalidade"),
         nome_responsavel=dados.get("nome_responsavel"),
         numero_responsavel=dados.get("numero_responsavel"),
+        etnia=dados.get("etnia"),
+        educacao_pais=dados.get("educacao_pais"),
+        tempo_estudo_semanal=dados.get("tempo_estudo_semanal"),
+        apoio_pais=dados.get("apoio_pais"),
+        aulas_particulares=dados.get("aulas_particulares"),
+        extra_curriculares=dados.get("extra_curriculares"),
+        esportes=dados.get("esportes"),
+        aula_musica=dados.get("aula_musica"),
+        voluntariado=dados.get("voluntariado"),
     )
     resultado = controller.atualizar_aluno()
     return make_response(jsonify({"mensagem": resultado}))
