@@ -62,6 +62,15 @@ def test_criar_aluno():
         sexo="Feminino",
         data_nascimento="2008-05-15",
         nacionalidade="Brasileira",
+        etnia=1,
+        educacao_pais=1,
+        tempo_estudo_semanal=10.0,
+        apoio_pais=1,
+        aulas_particulares=1,
+        extra_curriculares=1,
+        esportes=1,
+        aula_musica=1,
+        voluntariado=1
     )
     resposta = controller.criar_aluno()
     print(resposta)
@@ -165,6 +174,15 @@ def test_atualizar_aluno():
         sexo="Feminino",
         data_nascimento="2008-05-15",
         nacionalidade="Brasileira",
+        etnia=1,
+        educacao_pais=1,
+        tempo_estudo_semanal=10.0,
+        apoio_pais=1,
+        aulas_particulares=1,
+        extra_curriculares=1,
+        esportes=1,
+        aula_musica=1,
+        voluntariado=1
     )
     resposta = controller.atualizar_aluno()
     print(resposta)
