@@ -68,16 +68,20 @@ class RanquearAvaliacao:
         return sorted(medias, key=lambda x: x["media"], reverse=True)
     
     def _calcular_media(agrupado: Dict[int, List[Avaliacao]]) -> List[Dict]:
-        """Calcula a média e quantidade de avaliações de cada grupo."""
+        """Calcula a média e quantidade de avaliações válidas (nota >= 0) de cada grupo."""
         resultado = []
         for id_grupo, avaliacoes in agrupado.items():
-            total = len(avaliacoes)
-            media = round(sum(a.nota for a in avaliacoes) / total, 2)
+            notas_validas = [a.nota for a in avaliacoes if a.nota >= 0]
+            total_validas = len(notas_validas)
+
+            media = round(sum(notas_validas) / total_validas, 2) if total_validas > 0 else 0.0
+
             resultado.append({
                 "id": id_grupo,
                 "media": media,
-                "quantidade_avaliacoes": total
+                "quantidade_avaliacoes": total_validas
             })
+
         return sorted(resultado, key=lambda x: x["media"], reverse=True)
 
 
