@@ -583,8 +583,8 @@ def criar_professor():
         "nacionalidade": "Brasileiro",
         "estado_civil": "Solteiro",
         "telefone": "11999999999",
-        "email": "joao@email.com",
-        "senha": "senha123",
+        "email": "joao_user.com",
+        "senha": "mortadela123",
         "data_nascimento": "2000-01-01",
         "sexo": "Masculino"
     }
@@ -600,7 +600,7 @@ def criar_professor():
         nacionalidade=dados.get("nacionalidade"),
         estado_civil=dados.get("estado_civil"),
         telefone=dados.get("telefone"),
-        email=dados.get("email"),
+        nome_usuario=dados.get("email"),
         senha=dados.get("senha"),
         data_nascimento=dados.get("data_nascimento"),
         sexo=dados.get("sexo")
@@ -638,8 +638,8 @@ def atualizar_professor(id_professor):
         "nacionalidade": "Brasileiro",
         "estado_civil": "Solteiro",
         "telefone": "11999999999",
-        "email": "joao@email.com",
-        "senha": "novaSenha123",
+        "nome_usuario": "joao_user_atualizado",
+        "senha": "mortadela123",
         "sexo": "Masculino"
     }
 
@@ -656,7 +656,7 @@ def atualizar_professor(id_professor):
         nacionalidade=dados.get("nacionalidade"),
         estado_civil=dados.get("estado_civil"),
         telefone=dados.get("telefone"),
-        email=dados.get("email"),
+        nome_usuario=dados.get("email"),
         senha=dados.get("senha"),
         sexo=dados.get("sexo")
     )

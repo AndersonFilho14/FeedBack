@@ -16,7 +16,8 @@ from infra.repositories import (
     ConsultarDisciplinasEMateriasVinculadasAoProfessor,
     ProfessorRepository,
     ConsultaEscolaBanco,
-    ConsultaAlunoBanco
+    ConsultaAlunoBanco,
+    buscar_acesso_professor
 )
 
 from infra.db.models_data import Professor as ProfessorData, Aluno as AlunoData
@@ -61,6 +62,7 @@ class ControllerProfessorAlunosVinculados:
 
         :return str: Uma string JSON contendo os dados do professor e seus alunos, ou uma mensagem de erro.
         """
+        acesso_professor = buscar_acesso_professor(id_professor=professor_data.id).buscar_acesso()
         professor = Professor(
             id=professor_data.id,
             nome=professor_data.nome,
@@ -70,9 +72,9 @@ class ControllerProfessorAlunosVinculados:
             nacionalidade=professor_data.nacionalidade,
             estado_civil=professor_data.estado_civil,
             telefone=professor_data.telefone,
-            email=professor_data.email,
+            nome_usuario= acesso_professor.usuario if acesso_professor else "Não possui nome de usuário",
+            senha=acesso_professor.senha if acesso_professor else "Não possui senha",
             data_nascimento=professor_data.data_nascimento,
-            senha=professor_data.senha,
             sexo=professor_data.sexo
         )
         return professor
@@ -126,8 +128,8 @@ class ControllerProfessorAlunosVinculados:
                 "nacionalidade": self.__professor.nacionalidade,
                 "estado_civil": self.__professor.estado_civil,
                 "telefone": self.__professor.telefone,
-                "email": self.__professor.email,
                 "data_nascimento": self.__professor.data_nascimento.strftime("%Y-%m-%d") if self.__professor.data_nascimento else None,
+                "nome_de_usuario": self.__professor.nome_usuario,
                 "senha": self.__professor.senha
             },
             "total_alunos_vinculados": len(self.__list_alunos)
@@ -354,7 +356,7 @@ class ControllerProfessor:
                  nacionalidade: Optional[str] = None,
                  estado_civil: Optional[str] = None,
                  telefone: Optional[str] = None,
-                 email: Optional[str] = None,
+                 nome_usuario: Optional[str] = None,
                  senha: Optional[str] = None,
                  data_nascimento: Optional[str] = None,
                  sexo: Optional[str] = None
@@ -367,7 +369,7 @@ class ControllerProfessor:
         self.__nacionalidade = nacionalidade
         self.__estado_civil = estado_civil
         self.__telefone = telefone
-        self.__email = email
+        self.__nome_usuario = nome_usuario
         self.__senha = senha
         self.__data_nascimento = data_nascimento
         self.__sexo = sexo
@@ -381,7 +383,7 @@ class ControllerProfessor:
                                           nacionalidade=self.__nacionalidade,
                                           estado_civil=self.__estado_civil,
                                           telefone=self.__telefone,
-                                          email=self.__email,
+                                          nome_usuario=self.__nome_usuario,
                                           senha=self.__senha,
                                           data_nascimento=self.__data_nascimento,
                                           sexo=self.__sexo)._executar()
@@ -405,7 +407,7 @@ class ControllerProfessor:
                                          novo_nacionalidade = self.__nacionalidade,
                                          novo_estado_civil = self.__estado_civil,
                                          novo_telefone = self.__telefone,
-                                         novo_email = self.__email,
+                                         novo_nome_usuario = self.__nome_usuario,
                                          novo_senha = self.__senha   
                                          )._executar()
 
@@ -423,7 +425,7 @@ class CriarProfessorNoBanco:
                   nacionalidade: str,
                   estado_civil: str,
                   telefone: str,
-                  email: str,
+                  nome_usuario: str,
                   senha: str,
                   data_nascimento: str,
                   sexo: str
@@ -437,7 +439,7 @@ class CriarProfessorNoBanco:
                                      nacionalidade=nacionalidade, 
                                      estado_civil=estado_civil,
                                      telefone=telefone,
-                                     email=email,
+                                     nome_usuario=nome_usuario,
                                      senha=senha,
                                      data_nascimento=data_nascimento,
                                      sexo=sexo)
@@ -453,7 +455,7 @@ class CriarProfessorNoBanco:
             self.__professor.nacionalidade,
             self.__professor.estado_civil,
             self.__professor.telefone,
-            self.__professor.email,
+            self.__professor.nome_usuario,
             self.__professor.senha
         ])
         
@@ -475,17 +477,13 @@ class CriarProfessorNoBanco:
                 log.warning(f"Tentativa de cadastro com CPF já existente: {self.__professor.cpf}")
                 return "CPF já vinculado, professor, professor."
 
-            resultado_email = ValidadorCampos.validar_email(self.__professor.email)
-            if resultado_email is not None:
-                return resultado_email
-
             resultado_telefone = ValidadorCampos.validar_telefone(self.__professor.telefone)
             if resultado_telefone is not None:
                 return resultado_telefone
+            
             resultado_cpf = ValidadorCampos.validar_cpf(self.__professor.cpf)
             if resultado_cpf is not None:
                 return resultado_cpf    
-            
             
             ProfessorRepository().criar(self.__professor)
             log.info(f"Professor '{self.__professor.nome}' criado com sucesso.")
@@ -512,7 +510,7 @@ class ListarProfessoresDaEscola:
 class AtualizarProfessorNoBanco:
     def __init__(self, id_professor: int, novo_nome: str, novo_cargo: str, novo_cpf: int, novo_data_nascimento: str, 
                  novo_nacionalidade: str = None, novo_estado_civil: str = None, novo_telefone: str = None, 
-                 novo_email: str = None, novo_senha: str = None, novo_sexo: str = None) -> None:
+                 novo_nome_usuario: str = None, novo_senha: str = None, novo_sexo: str = None) -> None:
         self.__id = id_professor
         self.__novo_nome = novo_nome
         self.__novo_cargo = novo_cargo
@@ -522,7 +520,7 @@ class AtualizarProfessorNoBanco:
         self.__novo_nacionalidade = novo_nacionalidade
         self.__novo_estado_civil = novo_estado_civil
         self.__novo_telefone = novo_telefone
-        self.__novo_email = novo_email
+        self.__novo_nome_usuario = novo_nome_usuario
         self.__novo_senha = novo_senha
         self.__novo_sexo = novo_sexo
     """Classe responsável por atualizar os dados de um professor no banco de dados."""
@@ -539,7 +537,7 @@ class AtualizarProfessorNoBanco:
             self.__novo_nacionalidade,
             self.__novo_estado_civil,
             self.__novo_telefone,
-            self.__novo_email,
+            self.__novo_nome_usuario,
             self.__novo_senha,
         ])
         
@@ -550,17 +548,13 @@ class AtualizarProfessorNoBanco:
             # Verifica existencia de algum aluno com cpf fornecido
             if ConsultaAlunoBanco(id_aluno =  self.__id, cpf = self.__novo_cpf).buscar_por_cpf_e_id():
                 log.warning(f"Tentativa de atualização com CPF já existente: {self.__novo_cpf}")
-                return "CPF já vinculado."
+                return "CPF já vinculado. Aluno"
             
             # Verifica existência de algum professor com cpf existente
             if ConsultarProfessorBanco(id_professor=self.__id, cpf= self.__novo_cpf).get_professor_retorno_cpf_e_id():
                 log.warning(f"Tentativa de atualização com CPF já existente: {self.__novo_cpf}")
-                return "CPF já vinculado."  
-            
-            resultado_email = ValidadorCampos.validar_email(self.__novo_email)
-            if resultado_email is not None:
-                return resultado_email  
-            
+                return "CPF já vinculado. Professor"
+
             resultado_telefone = ValidadorCampos.validar_telefone(self.__novo_telefone)
             if resultado_telefone is not None:  
                 return resultado_telefone
@@ -569,7 +563,7 @@ class AtualizarProfessorNoBanco:
                                                          self.__novo_cargo,
                                                          self.__novo_cpf, self.__novo_data_nascimento,
                                                          self.__novo_nacionalidade, self.__novo_estado_civil,
-                                                         self.__novo_telefone, self.__novo_email,
+                                                         self.__novo_telefone, self.__novo_nome_usuario,
                                                          self.__novo_senha, self.__novo_sexo)
             if atualizado:
                 log.info(f"Professor {self.__id} atualizado com sucesso.")
@@ -604,20 +598,22 @@ class FormatarProfessor:
         """Converte uma lista de ProfessorData (ORM) para Professor (domínio)."""
         professores_dom = []
         for professor in professores_data:
-            prof_dom = Professor(  id = professor.id,
-                                   nome = professor.nome,
-                                   cpf = professor.cpf,
-                                   cargo = professor.cargo,
-                                   id_escola = professor.id_escola,
-                                   nacionalidade = professor.nacionalidade,
-                                   estado_civil = professor.estado_civil,
-                                   telefone = professor.telefone,
-                                   email = professor.email,
-                                   data_nascimento = professor.data_nascimento,
-                                   senha = professor.senha,
-                                   sexo= professor.sexo
-                                   )
-            professores_dom.append(prof_dom)
+            acesso_professor = buscar_acesso_professor(id_professor=professor.id).buscar_acesso()
+            professor_dom = Professor(
+                id=professor.id,
+                nome=professor.nome,
+                cpf=professor.cpf,
+                cargo=professor.cargo,
+                id_escola=professor.id_escola,
+                nacionalidade=professor.nacionalidade,
+                estado_civil=professor.estado_civil,
+                telefone=professor.telefone,
+                nome_usuario= acesso_professor.usuario if acesso_professor else "Não possui nome de usuário",
+                senha=acesso_professor.senha if acesso_professor else "Não possui senha",
+                data_nascimento=professor.data_nascimento,
+                sexo=professor.sexo
+            )
+            professores_dom.append(professor_dom)
         return professores_dom
 
     def gerar_json(self, professores_dominio: List[Professor]) -> str:
@@ -632,8 +628,8 @@ class FormatarProfessor:
                 "nacionalidade": prof.nacionalidade,
                 "estado_civil": prof.estado_civil,
                 "telefone": prof.telefone,
-                "email": prof.email,
                 "data_nascimento": prof.data_nascimento.strftime("%Y-%m-%d") if prof.data_nascimento else None,
+                "nome_de_usuario": prof.nome_usuario,
                 "senha": prof.senha,
                 "sexo": prof.sexo
             }

@@ -7,7 +7,8 @@ from infra.repositories.professor_data import (
     AtualizarQuantidadeDeFaltasParaAluno,   # noqa : F401
     ConsultarAlunosVinculadosAoProfessorNoBanco,  # noqa : F401
     ConsultarDisciplinasEMateriasVinculadasAoProfessor,   # noqa : F401
-    ProfessorRepository # noqa : F401
+    ProfessorRepository,  # noqa : F401
+    buscar_acesso_professor  # noqa : F401
 )
 
 from infra.repositories.aluno_data import ConsultarTurma, AlunoRepository, ConsultaAlunoBanco, ConsultaDadosAluno  # noqa : F401
