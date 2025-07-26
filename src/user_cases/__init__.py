@@ -13,4 +13,4 @@ from user_cases.materia import ControllerMateria # noqa : F401
 from user_cases.aluno import ControllerAluno # noqa : F401
 from user_cases.municipio import ControllerMunicipio # noqa : F401
 from user_cases.turma import ControllerTurma # noqa : F401
-from user_cases.avaliacao import ControllerRankingAvaliacao, ControllerHistoricoDesempenho
+from user_cases.avaliacao import ControllerRankingAvaliacao, ControllerHistoricoAvaliacoes

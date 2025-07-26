@@ -13,7 +13,7 @@ from user_cases import (
     ControllerProfessor,
     ControllerTurma,
     ControllerRankingAvaliacao, 
-    ControllerHistoricoDesempenho
+    ControllerHistoricoAvaliacoes
 )
 
 user_rout_bp = Blueprint("user_routes", __name__)
@@ -777,7 +777,7 @@ def historico_avaliacoes_por_aluno(id_aluno):
     """
     Retorna o histórico de avaliações de um aluno.
     """
-    controller = ControllerHistoricoDesempenho(id_aluno=id_aluno)
+    controller = ControllerHistoricoAvaliacoes(id_aluno=id_aluno)
     resultado = controller.listar_historico_avaliacoes_por_aluno()
     return make_response(resultado)
 
@@ -787,7 +787,7 @@ def historico_avaliacoes_por_turma(id_turma, id_professor):
     """
     Retorna o histórico de avaliações de uma turma.
     """
-    controller = ControllerHistoricoDesempenho(id_turma=id_turma, id_professor=id_professor)
+    controller = ControllerHistoricoAvaliacoes(id_turma=id_turma, id_professor=id_professor)
     resultado = controller.listar_historico_avaliacoes_por_turma()
     return make_response(resultado)
 
@@ -797,7 +797,7 @@ def historico_avaliacoes_por_escola(id_escola):
     """
     Retorna o histórico de avaliações de uma escola.
     """
-    controller = ControllerHistoricoDesempenho(id_escola=id_escola)
+    controller = ControllerHistoricoAvaliacoes(id_escola=id_escola)
     resultado = controller.listar_historico_avaliacoes_por_escola()
     return make_response(resultado)
 
@@ -807,7 +807,7 @@ def historico_avaliacoes_por_materia(id_materia):
     """
     Retorna o histórico de avaliações de uma matéria.
     """
-    controller = ControllerHistoricoDesempenho(id_materia=id_materia)
+    controller = ControllerHistoricoAvaliacoes(id_materia=id_materia)
     resultado = controller.listar_historico_avaliacoes_por_materia()
     return make_response(resultado)
 
@@ -819,7 +819,7 @@ def ranking_alunos():
     Retorna o ranking geral dos alunos por média de nota.
     """
     controller = ControllerRankingAvaliacao()
-    resultado = controller.ranquear_alunos()
+    resultado = controller.ranquear_alunos_geral()
     return make_response(resultado)
 
 
@@ -829,7 +829,7 @@ def ranking_turmas():
     Retorna o ranking geral das turmas por média de nota.
     """
     controller = ControllerRankingAvaliacao()
-    resultado = controller.ranquear_turmas()
+    resultado = controller.ranquear_turmas_geral()
     return make_response(resultado)
 
 
