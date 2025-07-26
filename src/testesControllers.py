@@ -4,7 +4,7 @@ from user_cases.turma import ControllerTurma
 from user_cases.materia import ControllerMateria
 from user_cases.municipio import ControllerMunicipio
 from user_cases.escola import ControllerEscola
-from user_cases.avaliacao import ControllerRankingAvaliacao, ControllerHistoricoDesempenho
+from user_cases.avaliacao import ControllerRankingAvaliacao, ControllerHistoricoAvaliacoes
 
 ID_ESCOLA_TESTE = 1
 
@@ -265,43 +265,67 @@ ID_DISCIPLINA_TESTE = 1
 # Testes de histórico de desempenho (listar avaliações)
 
 def test_historico_por_aluno():
-    controller = ControllerHistoricoDesempenho(id_aluno=ID_ALUNO_TESTE)
+    controller = ControllerHistoricoAvaliacoes(id_aluno=ID_ALUNO_TESTE)
     resposta = controller.listar_historico_avaliacoes_por_aluno()
     print(resposta)
 
 def test_historico_por_turma():
-    controller = ControllerHistoricoDesempenho(id_turma=ID_TURMA_TESTE, id_professor=1)
+    controller = ControllerHistoricoAvaliacoes(id_turma=ID_TURMA_TESTE, id_professor=1)
     resposta = controller.listar_historico_avaliacoes_por_turma()
     print(resposta)
 
 def test_historico_por_escola():
-    controller = ControllerHistoricoDesempenho(id_escola=2)
+    controller = ControllerHistoricoAvaliacoes(id_escola=2)
     resposta = controller.listar_historico_avaliacoes_por_escola()
     print(resposta)
 
 
-# Testes de ranking de desempenho (ranquear por critério)
+# Testes de ranking 
 
-def test_ranking_por_aluno():
+def test_ranking_por_aluno_geral():
     controller = ControllerRankingAvaliacao()
-    resposta = controller.ranquear_alunos()
+    resposta = controller.ranquear_alunos_geral()
     print(resposta)
 
-def test_ranking_por_turma():
+def test_ranking_por_turma_geral():
     controller = ControllerRankingAvaliacao()
-    resposta = controller.ranquear_turmas()
+    resposta = controller.ranquear_turmas_geral()
     print(resposta)
 
-def test_ranking_por_escola():
+def test_ranking_por_escola_geral():
     controller = ControllerRankingAvaliacao()
-    resposta = controller.ranquear_escolas()
+    resposta = controller.ranquear_escolas_geral()
     print(resposta)
 
-def test_ranking_por_disciplina_na_escola():
+def test_ranking_por_materia_geral():
     controller = ControllerRankingAvaliacao()
-    resposta = controller.ranquear_materias()
+    resposta = controller.ranquear_materias_geral()
     print(resposta)
 
+def teste_ranking_por_aluno_escola():
+    controller = ControllerRankingAvaliacao(id_escola=ID_ESCOLA_TESTE)
+    resposta = controller.ranquear_alunos_por_escola()
+    print(resposta)
+
+def teste_ranking_por_turma_escola():
+    controller = ControllerRankingAvaliacao(id_escola=ID_ESCOLA_TESTE)
+    resposta = controller.ranquear_turmas_por_escola()
+    print(resposta)
+
+def teste_ranking_por_materia_escola():
+    controller = ControllerRankingAvaliacao(id_escola=ID_ESCOLA_TESTE)
+    resposta = controller.ranquear_materias_por_escola()
+    print(resposta)
+
+def teste_ranking_tipo_avaliacao_geral():
+    controller = ControllerRankingAvaliacao()
+    resposta = controller.ranquear_por_tipo_avaliacao_geral()
+    print(resposta)
+
+def teste_ranking_tipo_avaliacao_escola():
+    controller = ControllerRankingAvaliacao(id_escola=ID_ESCOLA_TESTE)
+    resposta = controller.ranquear_por_tipo_avaliacao_por_escola()
+    print(resposta)
 
 if __name__ == "__main__":
     print("descomente a função que deseja testar")
@@ -322,7 +346,7 @@ if __name__ == "__main__":
     
     #test_atualizar_escola()
     #test_atualizar_professor()
-    test_atualizar_turma()
+    #test_atualizar_turma()
     #test_atualizar_aluno()
     #test_atualizar_materia()
     #test_atualizar_municipio() 
@@ -338,7 +362,12 @@ if __name__ == "__main__":
     #test_historico_por_turma()
     #test_historico_por_escola()
 
-    #test_ranking_por_aluno()
-    #test_ranking_por_turma()
-    #test_ranking_por_escola()
-    #test_ranking_por_disciplina_na_escola()
+    #test_ranking_por_aluno_geral()
+    #test_ranking_por_turma_geral()
+    #test_ranking_por_escola_geral()
+    #test_ranking_por_materia_geral()
+    #teste_ranking_por_aluno_escola()
+    #teste_ranking_por_turma_escola()
+    #teste_ranking_por_materia_escola()
+    #teste_ranking_tipo_avaliacao_geral()
+    teste_ranking_tipo_avaliacao_escola()
