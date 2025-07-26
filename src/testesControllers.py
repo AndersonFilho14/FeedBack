@@ -26,7 +26,7 @@ def test_criar_professor():
         cpf="12245674980",
         cargo="Matemática",
         id_escola=ID_ESCOLA_TESTE,
-        email="joao.teste@escola.com",
+        nome_usuario="joao_teste_user",
         senha="senhaForteJoao2025",
         telefone="1234567890",
         data_nascimento="2000-01-01",
@@ -147,12 +147,12 @@ def test_atualizar_escola():
 
 def test_atualizar_professor():
     controller = ControllerProfessor(
-        id_professor= 5,  # ajuste para um ID válido
+        id_professor= 17,  # ajuste para um ID válido
         nome="João Teste Atualizado",
         cpf="12245674980",
         cargo="Matemática",
         id_escola=ID_ESCOLA_TESTE,
-        email="joao.teste@escola.com",
+        nome_usuario="joao_teste_user_atualizado",
         senha="senhaForteJoao2025",
         telefone="1234567890",
         data_nascimento="2000-01-01",
@@ -324,9 +324,9 @@ if __name__ == "__main__":
     #test_listar_municipios()
     
     #test_atualizar_escola()
-    #test_atualizar_professor()
+    test_atualizar_professor()
     #test_atualizar_turma()
-    test_atualizar_aluno()
+    #test_atualizar_aluno()
     #test_atualizar_materia()
     #test_atualizar_municipio() 
     
