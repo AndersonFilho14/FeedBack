@@ -688,7 +688,7 @@ def criar_turma():
     {
         "nome": "Turma A",
         "escola_id": 1,
-        "ids_professores": [1, 2, 3],
+        "id_professor": 1,
         "ids_alunos_associados": [10, 11, 12]
     }
     ```
@@ -701,7 +701,7 @@ def criar_turma():
         nome=dados.get("nome"),
         ano_letivo=dados.get("ano_letivo"),
         id_escola=dados.get("escola_id"),
-        ids_professores=dados.get("ids_professores", []),
+        id_professor=dados.get("id_professor"),
         ids_alunos=dados.get("ids_alunos", [])
     )
     resultado = controller.criar_turma()
@@ -732,8 +732,8 @@ def atualizar_turma(id_turma):
     {
         "nome": "3º Ano C",
         "ano_letivo": 2025,
-        "ids_professores_atuais": [1, 2],
-        "ids_professores_anteriores": [1, 3], 
+        "id_professor_atual": 1,
+        "id_professor_anterior": 2,  
         "ids_alunos_atuais": [10, 11],
         "ids_alunos_anteriores": [10, 12]
     }
@@ -748,8 +748,8 @@ def atualizar_turma(id_turma):
         id_turma=id_turma,
         nome=dados.get("nome"),
         ano_letivo=dados.get("ano_letivo"),
-        ids_professores=dados.get("ids_professores_atuais", []),
-        ids_professores_anteriores=dados.get("ids_professores_anteriores", []),
+        id_professor=dados.get("id_professor_atual"),
+        id_professor_anterior=dados.get("id_professor_anterior"),
         ids_alunos=dados.get("ids_alunos_atuais", []),
         ids_alunos_anteriores=dados.get("ids_alunos_anteriores", [])
     )

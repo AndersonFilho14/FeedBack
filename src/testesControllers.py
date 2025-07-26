@@ -39,13 +39,12 @@ def test_criar_professor():
 
 
 def test_criar_turma():
-    ids_professores = [1, 2, 4]  # IDs de professores fictícios
     ids_alunos = [25, 26, 27, 28]  # IDs de alunos
     controller = ControllerTurma(
         nome="3º Ano B",
         ano_letivo=2025,
         id_escola=ID_ESCOLA_TESTE,
-        ids_professores=ids_professores,
+        id_professor=1,
         ids_alunos=ids_alunos,
     )
     resposta = controller.criar_turma()
@@ -54,8 +53,8 @@ def test_criar_turma():
 
 def test_criar_aluno():
     controller = ControllerAluno(
-        nome= "pedro henrique",
-        cpf="98765432124",
+        nome= "Fernanda Maria",
+        cpf="91765442114",
         id_escola=ID_ESCOLA_TESTE,
         nome_responsavel="João da Silva",
         numero_responsavel="1234567890",
@@ -188,17 +187,15 @@ def test_atualizar_aluno():
     print(resposta)
 
 def test_atualizar_turma():
-    ids_professores_anteriores = [1, 2, 4]  # IDs de professores fictícios
     ids_alunos_anteriores = [25, 26, 27, 28]
-    ids_professores_atual = [1, 3]  # IDs de professores atuais
-    ids_alunos_atual = [25, 25, 2]  # IDs de alunos atuais
+    ids_alunos_atual = [25, 26, 2]  # IDs de alunos atuais
     
     controller = ControllerTurma(
-        id_turma=8,  # ajuste para um ID válido
+        id_turma=10,  # ajuste para um ID válido
         nome="3º Ano b atualizado",
-        ids_professores_anteriores=ids_professores_anteriores,
+        id_professor_anterior=1,
         ids_alunos_anteriores=ids_alunos_anteriores,
-        ids_professores=ids_professores_atual,
+        id_professor=2,
         ids_alunos=ids_alunos_atual,
     )
     resposta = controller.atualizar_turmas()
@@ -256,7 +253,7 @@ def test_deletar_materia():
     print(resposta)
     
 def test_deletar_turma():
-    controller = ControllerTurma(id_turma=8)
+    controller = ControllerTurma(id_turma=9)
     resposta = controller.deletar_turma()
     print(resposta)
 
@@ -324,8 +321,8 @@ if __name__ == "__main__":
     #test_listar_municipios()
     
     #test_atualizar_escola()
-    test_atualizar_professor()
-    #test_atualizar_turma()
+    #test_atualizar_professor()
+    test_atualizar_turma()
     #test_atualizar_aluno()
     #test_atualizar_materia()
     #test_atualizar_municipio() 
