@@ -1,4 +1,5 @@
 from datetime import date
+from typing import Optional
 
 class Avaliacao:
     """
@@ -13,9 +14,9 @@ class Avaliacao:
         nota: float,
         id_aluno: int,
         id_professor: int,
-        id_disciplina: int,
         id_materia: int,
-        id_turma: int,
+        id_disciplina: Optional[int] = None,
+        id_turma: Optional[int] = None,
     ) -> None:
 
         # --- Bloco de Validação de Tipos ---
@@ -26,8 +27,7 @@ class Avaliacao:
 
         # Valida campos que devem ser inteiros
         for campo_nome, valor in {
-            "id": id, "id_aluno": id_aluno, "id_professor": id_professor,
-            "id_disciplina": id_disciplina, "id_materia": id_materia, "id_turma": id_turma
+            "id": id, "id_aluno": id_aluno, "id_professor": id_professor, "id_materia": id_materia
         }.items():
             if not isinstance(valor, int):
                 raise ValueError(f"O campo '{campo_nome}' deve ser um inteiro (int), mas recebeu {type(valor).__name__}")
