@@ -21,7 +21,7 @@ class ConsultarTurma:
         """Inicializa a classe ConsultarProfessor com o ID do professor."""
         self.__id_aluno = id_aluno
 
-    def __consultar_no_banco(self) -> Optional[TurmaData.id]:
+    def __consultar_no_banco(self) -> Optional[int]:
         """Consulta o banco de dados por um professor com o ID fornecido, retornando o objeto ProfessorData ou None."""
         with DBConnectionHandler() as session:
             retorno = (
