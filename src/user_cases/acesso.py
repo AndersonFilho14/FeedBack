@@ -23,7 +23,7 @@ class ControllerAcesso:
         self.__user = user_name
         self.__passworld = passworld
 
-    def return_user_ou_texto(self):
+    def return_user_ou_texto(self) -> str:
         """Retorna os dados do usuário autenticado ou uma mensagem de erro."""
         retorno_banco: Acesso | str = BucarAcessoBanco(
             user_name=self.__user, passworld=self.__passworld

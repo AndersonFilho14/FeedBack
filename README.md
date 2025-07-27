@@ -111,3 +111,80 @@ A API oferece os seguintes endpoints para interação com o sistema:
         curl [http://127.0.0.1:5000/professor/atualizar_quantidade_de_faltas_para_aluno/1/1/1
         ```
         (Substitua os placeholders pelos valores corretos).
+
+
+### **4. Consultar Disciplinas e Matérias do Professor**
+
+* **Endpoint:** `/materia_e_disciplina_que_o_professor_ensina/<int:id_professor>`
+* **Método:** `GET`
+* **Descrição:** Retorna uma estrutura aninhada com todas as disciplinas e matérias que um professor específico leciona.
+
+* **Exemplo de Requisição (com `curl`):**
+    ```bash
+    curl [http://127.0.0.1:5000/materia_e_disciplina_que_o_professor_ensina/1](http://127.0.0.1:5000/materia_e_disciplina_que_o_professor_ensina/1)
+    ```
+
+* **Respostas:**
+    * **Sucesso (JSON):** Retorna um objeto onde as chaves são os nomes das disciplinas.
+        ```json
+        {
+            "Português": {
+                "id_disciplina": 1,
+                "materias": [
+                    {
+                        "id_materia": 1,
+                        "nome_materia": "Gramática"
+                    }
+                ]
+            },
+            "Matemática": {
+                "id_disciplina": 2,
+                "materias": [
+                    {
+                        "id_materia": 3,
+                        "nome_materia": "Álgebra"
+                    }
+                ]
+            }
+        }
+        ```
+    * **Falha:** Retorna um objeto JSON vazio `{}` se o professor não for encontrado.
+
+### **5. Adicionar Nota de Avaliação a um Aluno**
+
+* **Endpoint:** `/professor/adicionar_nota`
+* **Método:** `POST`
+* **Descrição:** Permite que um professor adicione uma nova nota de avaliação para um aluno. Os dados devem ser enviados no corpo (body) da requisição em formato JSON.
+
+* **Corpo da Requisição (JSON):**
+    ```json
+    {
+        "id_professor": 1,
+        "id_aluno": 101,
+        "id_materia": 3,
+        "id_disciplina": 2,
+        "tipo_avaliacao": "Prova Bimestral",
+        "nota": 8.5
+    }
+    ```
+
+* **Exemplo de Requisição (com `curl`):**
+    ```bash
+    curl -X POST -H "Content-Type: application/json" \
+    -d '{ "id_professor": 1, "id_aluno": 101, "id_materia": 3, "id_disciplina": 2, "tipo_avaliacao": "Prova Bimestral", "nota": 8.5 }' \
+    [http://127.0.0.1:5000/professor/adicionar_nota](http://127.0.0.1:5000/professor/adicionar_nota)
+    ```
+
+* **Respostas:**
+    * **Sucesso (201 Created):** Retorna um JSON confirmando que a nota foi adicionada.
+        ```json
+        {
+          "sucesso": "Nota para o aluno 101 inserida com sucesso."
+        }
+        ```
+    * **Falha (400 Bad Request):** Retorna um JSON com uma mensagem de erro se houver campos faltando ou se os valores forem inválidos.
+        ```json
+        {
+          "erro": "Payload inválido. Verifique as chaves obrigatórias."
+        }
+        ```
