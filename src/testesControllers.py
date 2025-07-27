@@ -15,6 +15,8 @@ def test_criar_escola():
         nome="Escola Modelo",
         id_escola=1,
         id_municipio=1,
+        nome_usuario="escola_modelo_user",
+        senha="senhaForte2025"
     )
     resposta = controller.criar_escola()
     print(resposta)
@@ -53,8 +55,8 @@ def test_criar_turma():
 
 def test_criar_aluno():
     controller = ControllerAluno(
-        nome= "Fernanda Maria",
-        cpf="91765442114",
+        nome= "fulano de tal",
+        cpf="91765442714",
         id_escola=ID_ESCOLA_TESTE,
         nome_responsavel="João da Silva",
         numero_responsavel="1234567890",
@@ -138,7 +140,9 @@ def test_atualizar_escola():
     controller = ControllerEscola(
         id_escola=4,  # Substitua pelo ID real
         nome="Escola Modelo Atualizada",
-        id_municipio=2
+        id_municipio=2, 
+        nome_usuario="escola_modelo_user_atualizado",
+        senha="senhaForteAtualizada2025"
     )
     resposta = controller.atualizar_escola()
     print(resposta)
@@ -351,7 +355,7 @@ if __name__ == "__main__":
     #test_atualizar_materia()
     #test_atualizar_municipio() 
     
-    #test_deletar_escola()
+    test_deletar_escola()
     #test_deletar_professor()
     #test_deletar_turma()
     #test_deletar_aluno()
@@ -370,4 +374,4 @@ if __name__ == "__main__":
     #teste_ranking_por_turma_escola()
     #teste_ranking_por_materia_escola()
     #teste_ranking_tipo_avaliacao_geral()
-    teste_ranking_tipo_avaliacao_escola()
+    #teste_ranking_tipo_avaliacao_escola()

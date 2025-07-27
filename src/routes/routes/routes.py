@@ -336,7 +336,9 @@ def criar_escola():
     Espera um JSON com os campos:
     {
         "nome": "Escola Exemplo",
-        "id_municipio": 1
+        "id_municipio": 1,
+        "nome_usuario": "escola_exemplo",
+        "senha": "senha123"
     }
 
     :return: Mensagem em string de sucesso ou erro.
@@ -344,7 +346,9 @@ def criar_escola():
     dados = request.json
     controller = ControllerEscola(
         nome=dados.get("nome"),
-        id_municipio=dados.get("id_municipio")
+        id_municipio=dados.get("id_municipio"),
+        nome_usuario=dados.get("nome_usuario"),
+        senha=dados.get("senha")
     )
     resultado = controller.criar_escola()
     return make_response(jsonify({"mensagem": resultado}))
@@ -372,7 +376,8 @@ def atualizar_escola(id_escola):
     Espera um JSON com os campos:
     {
         "nome": "Novo Nome da Escola",
-        "id_municipio": 2
+        "nome_usuario": "novo_usuario",
+        "senha": "nova_senha"
     }
 
     :param id_escola: ID da escola a ser atualizada.
@@ -382,7 +387,8 @@ def atualizar_escola(id_escola):
     controller = ControllerEscola(
         id_escola=id_escola,
         nome=dados.get("nome"),
-        id_municipio=dados.get("id_municipio")
+        nome_usuario=dados.get("nome_usuario"),
+        senha=dados.get("senha")
     )
     resultado = controller.atualizar_escola()
     return make_response(jsonify({"mensagem": resultado}))

@@ -1,6 +1,7 @@
 import json
 from typing import Optional
 from config import log
+from infra.repositories.escola_data import ConsultaEscolaBanco
 from utils.validarCampos import ValidadorCampos
 
 from domain.models.escola import Escola
@@ -12,14 +13,17 @@ from typing import List
 class ControllerEscola:
     """Controlador responsável por coordenar operações relacionadas a escola"""
 
-    def __init__(self, nome: Optional[str] = None, id_municipio: Optional[int] = None, id_escola: Optional[int] = None) -> None:
+    def __init__(self, nome: Optional[str] = None, id_municipio: Optional[int] = None, id_escola: Optional[int] = None, nome_usuario: Optional[str] = None, senha: Optional[str] = None) -> None:
         self.__nome = nome
         self.__id_municipio = id_municipio
         self.__id_escola = id_escola
+        self.__nome_usuario = nome_usuario
+        self.__senha = senha
 
     def criar_escola(self) -> str:
         """Cria uma nova escola no banco de dados."""
-        resultado = CriarEscolaNoBanco(nome = self.__nome, id_municipio = self.__id_municipio).executar()
+        resultado = CriarEscolaNoBanco(nome = self.__nome, id_municipio = self.__id_municipio, 
+                                       nome_usuario = self.__nome_usuario, senha = self.__senha).executar()
         return resultado
 
     def listar_escolas(self) -> list[dict]:
@@ -31,7 +35,9 @@ class ControllerEscola:
 
     def atualizar_escola(self) -> str:
         """Atualiza o nome e o município da escola com o ID informado."""
-        return AtualizarEscolaNoBanco(id_escola = self.__id_escola, novo_nome = self.__nome, novo_id_municipio = self.__id_municipio).executar()
+        return AtualizarEscolaNoBanco(id_escola = self.__id_escola, novo_nome = self.__nome,
+                                       novo_id_municipio = self.__id_municipio,
+                                       novo_nome_usuario = self.__nome_usuario, nova_senha = self.__senha).executar()
 
     def deletar_escola(self) -> str:
         """Remove uma escola do banco pelo ID."""
@@ -39,15 +45,17 @@ class ControllerEscola:
 
 
 class CriarEscolaNoBanco:
-    def __init__(self,  nome: str, id_municipio: int):
-        self.__escola = Escola(nome = nome, id_municipio = id_municipio, id = 0)
+    def __init__(self,  nome: str, id_municipio: int, nome_usuario: str = None, senha: str = None):
+        self.__escola = Escola(nome = nome, id_municipio = id_municipio, id = 0, nome_usuario = nome_usuario, senha = senha)
 
     def executar(self) -> str:
         
         # Validação dos campos obrigatórios
         resultado = ValidadorCampos.validar_campos_preenchidos([
             self.__escola.nome,
-            self.__escola.id_municipio
+            self.__escola.id_municipio,
+            self.__escola.nome_usuario,
+            self.__escola.senha
         ])
         
         if resultado is not None:
@@ -82,10 +90,12 @@ class ListarEscolasDoBanco:
 
 
 class AtualizarEscolaNoBanco:
-    def __init__(self, id_escola: int, novo_nome: str, novo_id_municipio: int):
+    def __init__(self, id_escola: int, novo_nome: str, novo_id_municipio: int, novo_nome_usuario: str, nova_senha: str):
         self.__id = id_escola
         self.__novo_nome = novo_nome
         self.__novo_id_municipio = novo_id_municipio
+        self.__novo_nome_usuario = novo_nome_usuario
+        self.__nova_senha = nova_senha
 
     def executar(self) -> str:
         
@@ -93,7 +103,9 @@ class AtualizarEscolaNoBanco:
         resultado = ValidadorCampos.validar_campos_preenchidos([
             self.__id,
             self.__novo_nome,
-            self.__novo_id_municipio
+            self.__novo_id_municipio, 
+            self.__novo_nome_usuario,
+            self.__nova_senha
         ])
         
         if resultado is not None:
@@ -146,12 +158,16 @@ class FormatarEscola:
         return escolas_dom
 
     def gerar_json(self, escolas_dominio: List[Escola]) -> str:
-        lista = [
-            {
+        """Gera um JSON formatado com os dados das escolas."""
+        lista = []
+        for escola in escolas_dominio:
+            acesso = ConsultaEscolaBanco().buscar_acesso(escola.id)
+            lista.append({
                 "id": escola.id,
                 "nome": escola.nome,
-                "id_municipio": escola.id_municipio
-            }
-            for escola in escolas_dominio
-        ]
+                "id_municipio": escola.id_municipio,
+                "nome_usuario": acesso.usuario if acesso else "não definida",
+                "senha": acesso.senha if acesso else "não definida"
+            })
+
         return json.dumps({"escolas": lista}, ensure_ascii=False, indent=4)

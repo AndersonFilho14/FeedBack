@@ -11,7 +11,7 @@ from infra.repositories.professor_data import (
     buscar_acesso_professor  # noqa : F401
 )
 
-from infra.repositories.aluno_data import ConsultarTurma, AlunoRepository, ConsultaAlunoBanco, ConsultaDadosAluno  # noqa : F401
+from infra.repositories.aluno_data import ConsultarTurma, AlunoRepository, ConsultaDadosAluno, AlunoIARepository, ConsultaAlunoBanco # noqa : F401
 from infra.repositories.escola_data import EscolaRepository, ConsultaEscolaBanco  # noqa : F401
 from infra.repositories.materia_data import MateriaRepository, ConsultaMateriaBanco # noqa : F401
 from infra.repositories.municipio_data import MunicipioRepository, ConsultaMunicipioBanco # noqa : F401
