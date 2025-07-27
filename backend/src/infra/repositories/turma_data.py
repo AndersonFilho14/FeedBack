@@ -25,14 +25,12 @@ class TurmaRepository:
             session.query(AvaliacaoData).filter(AvaliacaoData.id_aluno.in_(turma.ids_alunos)) \
                 .update({AvaliacaoData.id_turma: turma_orm.id}, synchronize_session=False)
 
-            # Cria os vínculos na tabela professor_turma
-            for id_professor in turma.ids_professores:
-                professor_turma = ProfessorTurma(
-                    id_professor=id_professor,
-                    id_turma=turma_orm.id
-                )
-                session.add(professor_turma)
-
+            # Criando os vinculo na tabela professor_turma
+            professor_turma = ProfessorTurma(
+                id_professor=turma.id_professor,
+                id_turma=turma_orm.id
+            )
+            session.add(professor_turma)
             session.commit()
 
     def listar_por_escola(self, id_escola: int) -> List[TurmaData]:
@@ -41,8 +39,8 @@ class TurmaRepository:
             turmas = session.query(TurmaData).filter(TurmaData.id_escola == id_escola).all()
             return turmas
 
-    def atualizar(self, id_turma: int, novo_nome, ids_professores_atuais: List[int],
-                   ids_alunos_atuais: List[int], ids_professores_anteriores: List[int],
+    def atualizar(self, id_turma: int, novo_nome, id_professor_atual: int,
+                   ids_alunos_atuais: List[int], id_professor_anterior: int,
                    ids_alunos_anteriores: List[int]) -> bool:
         """Atualiza os dados da turma com base no ID. Retorna True se atualizado, False se não encontrado."""
         with DBConnectionHandler() as session:
@@ -53,19 +51,9 @@ class TurmaRepository:
             session.commit()
 
             # ---------------- PROFESSORES ----------------
-            set_atuais_prof = set(ids_professores_atuais)
-            set_anteriores_prof = set(ids_professores_anteriores)
-
-            profs_a_remover = set_anteriores_prof - set_atuais_prof
-            profs_a_adicionar = set_atuais_prof - set_anteriores_prof
-
-            for id_prof in profs_a_remover:
-                session.query(ProfessorTurma).filter_by(id_turma=id_turma, id_professor=id_prof).delete()
-
-            for id_prof in profs_a_adicionar:
-                novo_vinculo = ProfessorTurma(id_turma=id_turma, id_professor=id_prof)
-                session.add(novo_vinculo)
-
+            turma = session.query(ProfessorTurma).filter_by(id_turma=id_turma, id_professor=id_professor_anterior).first()
+            turma.id_professor = id_professor_atual
+            
             # ---------------- ALUNOS ----------------
             set_atuais_alunos = set(ids_alunos_atuais)
             set_anteriores_alunos = set(ids_alunos_anteriores)
@@ -137,18 +125,17 @@ class ListarAssociadosDaTurma:
     def __init__(self, id_turma: int) -> None:
         self.__id_turma = id_turma
 
-    def listar_professores_associados(self) -> List[ProfessorData]:
+    def buscar_professor_associado(self) -> ProfessorData:
         """
-        Retorna uma lista de professores vinculados à turma informada.
+        Retorna um professor vinculado à turma informada.
         """
         with DBConnectionHandler() as session:
-            professores = (
+            return (
                 session.query(ProfessorData)
                 .join(ProfessorTurma, ProfessorTurma.id_professor == ProfessorData.id)
                 .filter(ProfessorTurma.id_turma == self.__id_turma)
-                .all()
+                .first()
             )
-            return professores
 
     def listar_alunos_associados(self) -> List[AlunoData]:
         """Retorna uma lista de alunos vinculados a esta turma."""

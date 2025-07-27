@@ -14,13 +14,13 @@ from typing import Optional, List
 class ControllerTurma:
     """Controlador responsável por coordenar operações relacionadas a turmas."""
 
-    def __init__(self, nome: Optional[str] = None, ano_letivo: Optional[int] = None, id_escola: Optional[int] = None, id_turma: Optional[int] = None, ids_professores: Optional[List[int]] = None, ids_alunos: Optional[List[int]] = None, ids_professores_anteriores: Optional[List[int]] = None, ids_alunos_anteriores: Optional[List[int]] = None) -> None:
+    def __init__(self, nome: Optional[str] = None, ano_letivo: Optional[int] = None, id_escola: Optional[int] = None, id_turma: Optional[int] = None, id_professor: Optional[int] = None, ids_alunos: Optional[List[int]] = None, id_professor_anterior: Optional[List[int]] = None, ids_alunos_anteriores: Optional[List[int]] = None) -> None:
         self.__nome = nome
         self.__id_escola = id_escola
         self.__id_turma = id_turma
-        self.__ids_professores = ids_professores
+        self.__id_professor = id_professor
         self.__ids_alunos = ids_alunos
-        self.__ids_professores_anteriores = ids_alunos_anteriores
+        self.__id_professor_anterior = id_professor_anterior
         self.__ids_alunos_anteriores = ids_alunos_anteriores
 
     def criar_turma(self) -> str:
@@ -28,7 +28,7 @@ class ControllerTurma:
         resultado = CriarTurmaNoBanco(nome = self.__nome,
                                       id_escola = self.__id_escola,
                                       ids_alunos=self.__ids_alunos,
-                                      ids_professores=self.__ids_professores).executar()
+                                      id_professor=self.__id_professor).executar()
         return resultado
 
     def listar_turmas(self) -> str:
@@ -43,9 +43,9 @@ class ControllerTurma:
             id_turma = self.__id_turma,
             novo_nome = self.__nome,
             ids_alunos_atuais=self.__ids_alunos,
-            ids_professores_atuais=self.__ids_professores,
+            id_professor_atual=self.__id_professor,
             ids_alunos_anteriores=self.__ids_alunos_anteriores,
-            ids_professores_anteriores=self.__ids_professores_anteriores
+            id_professor_anterior=self.__id_professor_anterior
         ).executar()
 
     def deletar_turma(self) -> str:
@@ -54,9 +54,9 @@ class ControllerTurma:
 
 
 class CriarTurmaNoBanco:
-    def __init__(self, nome: str, id_escola: int, ids_professores: List[int], ids_alunos: List[int]):
+    def __init__(self, nome: str, id_escola: int, id_professor: List[int], ids_alunos: List[int]):
         ano_letivo = datetime.now().year
-        self.__turma = Turma(nome = nome, ano_letivo = ano_letivo, id_escola = id_escola, id = 0, ids_professores= ids_professores, ids_alunos=ids_alunos)
+        self.__turma = Turma(nome = nome, ano_letivo = ano_letivo, id_escola = id_escola, id = 0, id_professor= id_professor, ids_alunos=ids_alunos)
 
     def executar(self) -> str:
         
@@ -69,10 +69,6 @@ class CriarTurmaNoBanco:
             return resultado
         
         try:
-            # Verifica existência da escola
-            if ConsultaEscolaBanco().buscar_por_id(self.__turma.id_escola) is None:
-                return f"Escola com ID {self.__aluno.id_escola} não encontrada."
-            
             TurmaRepository().criar(self.__turma)
             log.info(f"Turma '{self.__turma.nome}' criada com sucesso.")
             return "Turma criada com sucesso"
@@ -96,13 +92,12 @@ class ListarTurmasDaEscola:
 
 
 class AtualizarTurmaNoBanco:
-    def __init__(self, id_turma: int, novo_nome: str, ids_professores_atuais: List[int],
-                  ids_alunos_atuais: List[int], ids_professores_anteriores: List[int],
-                  ids_alunos_anteriores: List[int] ):
+    def __init__(self, id_turma: int, novo_nome: str, id_professor_atual: int, id_professor_anterior: int,
+                  ids_alunos_atuais: List[int], ids_alunos_anteriores: List[int] ):
         self.__id = id_turma
         self.__novo_nome = novo_nome
-        self.__ids_professores_atuais = ids_professores_atuais
-        self.__ids_professores_anteriores = ids_professores_anteriores
+        self.__id_professor_atual = id_professor_atual
+        self.__id_professor_anterior = id_professor_anterior
         self.__ids_alunos_atuais = ids_alunos_atuais
         self.__ids_alunos_anteriores = ids_alunos_anteriores
 
@@ -121,8 +116,8 @@ class AtualizarTurmaNoBanco:
             atualizado = TurmaRepository().atualizar(id_turma = self.__id, novo_nome = self.__novo_nome,
                                                       ids_alunos_atuais=self.__ids_alunos_atuais,
                                                       ids_alunos_anteriores=self.__ids_alunos_anteriores,
-                                                      ids_professores_atuais=self.__ids_professores_atuais,
-                                                      ids_professores_anteriores=self.__ids_professores_anteriores)
+                                                      id_professor_atual=self.__id_professor_atual, 
+                                                      id_professor_anterior=self.__id_professor_anterior)
             if atualizado:
                 log.info(f"Turma {self.__id} atualizada com sucesso.")
                 return "Turma atualizada com sucesso"
@@ -155,12 +150,15 @@ class FormatarTurma:
     def formatar_turma_data_para_dominio(self, turmas_data: List[Turma_data]) -> List[Turma]:
         turmas_dom = []
         for turma in turmas_data:
+            consulta = ListarAssociadosDaTurma(id_turma= turma.id)
+            professor = consulta.buscar_professor_associado()
             
             turma_dom = Turma(
                 id = turma.id,
                 nome = turma.nome,
                 ano_letivo = turma.ano_letivo,
-                id_escola = turma.id_escola
+                id_escola = turma.id_escola,
+                id_professor = professor.id if professor else None,
             )
             turmas_dom.append(turma_dom)
         return turmas_dom
@@ -176,19 +174,15 @@ class FormatarTurma:
 
             for turma in turmas_dominio:
                 consulta = ListarAssociadosDaTurma(id_turma= turma.id)
-                professores = consulta.listar_professores_associados()
                 alunos = consulta.listar_alunos_associados()
 
                 json_turma = {
                     "turma_id": turma.id,
                     "nome": turma.nome,
                     "id_escola": turma.id_escola,
-                    "professores": [
-                        {"id": prof.id, "nome": prof.nome} for prof in professores
-                    ],
-                    "alunos": [
-                        {"id": aluno.id, "nome": aluno.nome} for aluno in alunos
-                    ]
+                    "professor": turma.id_professor,
+                    "ano_letivo": turma.ano_letivo,
+                    "alunos": [{"id": aluno.id, "nome": aluno.nome} for aluno in alunos ]
                 }
 
                 resultado.append(json_turma)

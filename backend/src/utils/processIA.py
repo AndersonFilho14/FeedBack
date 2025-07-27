@@ -1,6 +1,6 @@
 import joblib
 import numpy as np
-
+import os
 
 class Aluno:
     id: int | None
@@ -19,11 +19,47 @@ class Aluno:
     voluntariado: int
     notaFinal: str
 
+    def __init__(
+        self,
+        id: int | None,
+        nome: str,
+        idade: int,
+        sexo: int,
+        etnia: int,
+        educacaoPais: int,
+        tempoEstudoSemanal: float,
+        faltas: int,
+        apoioPais: int,
+        aulasParticulares: int,
+        extraCurriculares: int,
+        esportes: int,
+        aulaMusica: int,
+        voluntariado: int,
+        notaFinal: str
+    ):
+        self.id = id
+        self.nome = nome
+        self.idade = idade
+        self.sexo = sexo
+        self.etnia = etnia
+        self.educacaoPais = educacaoPais
+        self.tempoEstudoSemanal = tempoEstudoSemanal
+        self.faltas = faltas
+        self.apoioPais = apoioPais
+        self.aulasParticulares = aulasParticulares
+        self.extraCurriculares = extraCurriculares
+        self.esportes = esportes
+        self.aulaMusica = aulaMusica
+        self.voluntariado = voluntariado
+        self.notaFinal = notaFinal
+
+BASE_DIR = os.path.dirname(__file__)
+MODEL_PATH = os.path.join(BASE_DIR, 'RNA_model.pkl')
 
 def processIA(aluno: Aluno) -> str:
     try:
-        model = joblib.load(open('RNA_model.pkl', 'rb'))
-        
+        model = joblib.load(MODEL_PATH)   
+             
         features = np.array([[
             int(aluno.idade),
             int(aluno.sexo),

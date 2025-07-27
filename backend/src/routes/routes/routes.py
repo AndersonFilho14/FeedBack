@@ -13,7 +13,7 @@ from user_cases import (
     ControllerProfessor,
     ControllerTurma,
     ControllerRankingAvaliacao, 
-    ControllerHistoricoDesempenho
+    ControllerHistoricoAvaliacoes
 )
 
 user_rout_bp = Blueprint("user_routes", __name__)
@@ -184,8 +184,18 @@ def criar_aluno():
         "sexo": "feminino",
         "nacionalidade": "Brasileira",
         "id_escola": 1,
+        "id_turma": 2,
         "nome_responsavel": "João Responsável",
-        "numero_responsavel": "11999999999"
+        "numero_responsavel": "11999999999",
+        "etnia": 1,
+        "educacao_pais": 3,
+        "tempo_estudo_semanal": 6.0,
+        "apoio_pais": 1,
+        "aulas_particulares": 0,
+        "extra_curriculares": 1,
+        "esportes": 0,
+        "aula_musica": 0,
+        "voluntariado": 1
     }
     ```
 
@@ -200,11 +210,23 @@ def criar_aluno():
         sexo=dados.get("sexo"),
         nacionalidade=dados.get("nacionalidade"),
         id_escola=dados.get("id_escola"),
+        id_turma=dados.get("id_turma"),
         nome_responsavel=dados.get("nome_responsavel"),
-        numero_responsavel=dados.get("numero_responsavel")
+        numero_responsavel=dados.get("numero_responsavel"),
+        etnia=dados.get("etnia"),
+        educacao_pais=dados.get("educacao_pais"),
+        tempo_estudo_semanal=dados.get("tempo_estudo_semanal"),
+        apoio_pais=dados.get("apoio_pais"),
+        aulas_particulares=dados.get("aulas_particulares"),
+        extra_curriculares=dados.get("extra_curriculares"),
+        esportes=dados.get("esportes"),
+        aula_musica=dados.get("aula_musica"),
+        voluntariado=dados.get("voluntariado")
     )
+
     resultado = controller.criar_aluno()
     return make_response(jsonify({"mensagem": resultado}))
+
 
 
 # --------------- LISTAR ALUNOS POR ESCOLA ---------------
@@ -251,7 +273,16 @@ def atualizar_aluno(id_aluno):
         "sexo": "feminino",
         "nacionalidade": "Brasileira",
         "nome_responsavel": "João Responsável",
-        "numero_responsavel": "11999999999"
+        "numero_responsavel": "11999999999",
+        "etnia": 2,
+        "educacao_pais": 3,
+        "tempo_estudo_semanal": 5.5,
+        "apoio_pais": 1,
+        "aulas_particulares": 0,
+        "extra_curriculares": 1,
+        "esportes": 1,
+        "aula_musica": 0,
+        "voluntariado": 1
     }
     ```
 
@@ -268,6 +299,15 @@ def atualizar_aluno(id_aluno):
         nacionalidade=dados.get("nacionalidade"),
         nome_responsavel=dados.get("nome_responsavel"),
         numero_responsavel=dados.get("numero_responsavel"),
+        etnia=dados.get("etnia"),
+        educacao_pais=dados.get("educacao_pais"),
+        tempo_estudo_semanal=dados.get("tempo_estudo_semanal"),
+        apoio_pais=dados.get("apoio_pais"),
+        aulas_particulares=dados.get("aulas_particulares"),
+        extra_curriculares=dados.get("extra_curriculares"),
+        esportes=dados.get("esportes"),
+        aula_musica=dados.get("aula_musica"),
+        voluntariado=dados.get("voluntariado"),
     )
     resultado = controller.atualizar_aluno()
     return make_response(jsonify({"mensagem": resultado}))
@@ -296,7 +336,9 @@ def criar_escola():
     Espera um JSON com os campos:
     {
         "nome": "Escola Exemplo",
-        "id_municipio": 1
+        "id_municipio": 1,
+        "nome_usuario": "escola_exemplo",
+        "senha": "senha123"
     }
 
     :return: Mensagem em string de sucesso ou erro.
@@ -304,7 +346,9 @@ def criar_escola():
     dados = request.json
     controller = ControllerEscola(
         nome=dados.get("nome"),
-        id_municipio=dados.get("id_municipio")
+        id_municipio=dados.get("id_municipio"),
+        nome_usuario=dados.get("nome_usuario"),
+        senha=dados.get("senha")
     )
     resultado = controller.criar_escola()
     return make_response(jsonify({"mensagem": resultado}))
@@ -332,7 +376,8 @@ def atualizar_escola(id_escola):
     Espera um JSON com os campos:
     {
         "nome": "Novo Nome da Escola",
-        "id_municipio": 2
+        "nome_usuario": "novo_usuario",
+        "senha": "nova_senha"
     }
 
     :param id_escola: ID da escola a ser atualizada.
@@ -342,7 +387,8 @@ def atualizar_escola(id_escola):
     controller = ControllerEscola(
         id_escola=id_escola,
         nome=dados.get("nome"),
-        id_municipio=dados.get("id_municipio")
+        nome_usuario=dados.get("nome_usuario"),
+        senha=dados.get("senha")
     )
     resultado = controller.atualizar_escola()
     return make_response(jsonify({"mensagem": resultado}))
@@ -543,8 +589,8 @@ def criar_professor():
         "nacionalidade": "Brasileiro",
         "estado_civil": "Solteiro",
         "telefone": "11999999999",
-        "email": "joao@email.com",
-        "senha": "senha123",
+        "email": "joao_user.com",
+        "senha": "mortadela123",
         "data_nascimento": "2000-01-01",
         "sexo": "Masculino"
     }
@@ -560,7 +606,7 @@ def criar_professor():
         nacionalidade=dados.get("nacionalidade"),
         estado_civil=dados.get("estado_civil"),
         telefone=dados.get("telefone"),
-        email=dados.get("email"),
+        nome_usuario=dados.get("email"),
         senha=dados.get("senha"),
         data_nascimento=dados.get("data_nascimento"),
         sexo=dados.get("sexo")
@@ -598,8 +644,8 @@ def atualizar_professor(id_professor):
         "nacionalidade": "Brasileiro",
         "estado_civil": "Solteiro",
         "telefone": "11999999999",
-        "email": "joao@email.com",
-        "senha": "novaSenha123",
+        "nome_usuario": "joao_user_atualizado",
+        "senha": "mortadela123",
         "sexo": "Masculino"
     }
 
@@ -616,7 +662,7 @@ def atualizar_professor(id_professor):
         nacionalidade=dados.get("nacionalidade"),
         estado_civil=dados.get("estado_civil"),
         telefone=dados.get("telefone"),
-        email=dados.get("email"),
+        nome_usuario=dados.get("email"),
         senha=dados.get("senha"),
         sexo=dados.get("sexo")
     )
@@ -648,7 +694,7 @@ def criar_turma():
     {
         "nome": "Turma A",
         "escola_id": 1,
-        "ids_professores": [1, 2, 3],
+        "id_professor": 1,
         "ids_alunos_associados": [10, 11, 12]
     }
     ```
@@ -661,7 +707,7 @@ def criar_turma():
         nome=dados.get("nome"),
         ano_letivo=dados.get("ano_letivo"),
         id_escola=dados.get("escola_id"),
-        ids_professores=dados.get("ids_professores", []),
+        id_professor=dados.get("id_professor"),
         ids_alunos=dados.get("ids_alunos", [])
     )
     resultado = controller.criar_turma()
@@ -681,7 +727,6 @@ def listar_turmas(id_escola):
     resultado_json = controller.listar_turmas()  # já retorna string JSON
     return make_response(resultado_json)
 
-
 # ------------------ ATUALIZAR TURMA ------------------
 @user_rout_bp.route("/turma/<int:id_turma>", methods=["PUT"])
 def atualizar_turma(id_turma):
@@ -693,8 +738,8 @@ def atualizar_turma(id_turma):
     {
         "nome": "3º Ano C",
         "ano_letivo": 2025,
-        "ids_professores_atuais": [1, 2],
-        "ids_professores_anteriores": [1, 3], 
+        "id_professor_atual": 1,
+        "id_professor_anterior": 2,  
         "ids_alunos_atuais": [10, 11],
         "ids_alunos_anteriores": [10, 12]
     }
@@ -709,8 +754,8 @@ def atualizar_turma(id_turma):
         id_turma=id_turma,
         nome=dados.get("nome"),
         ano_letivo=dados.get("ano_letivo"),
-        ids_professores=dados.get("ids_professores_atuais", []),
-        ids_professores_anteriores=dados.get("ids_professores_anteriores", []),
+        id_professor=dados.get("id_professor_atual"),
+        id_professor_anterior=dados.get("id_professor_anterior"),
         ids_alunos=dados.get("ids_alunos_atuais", []),
         ids_alunos_anteriores=dados.get("ids_alunos_anteriores", [])
     )
@@ -738,7 +783,7 @@ def historico_avaliacoes_por_aluno(id_aluno):
     """
     Retorna o histórico de avaliações de um aluno.
     """
-    controller = ControllerHistoricoDesempenho(id_aluno=id_aluno)
+    controller = ControllerHistoricoAvaliacoes(id_aluno=id_aluno)
     resultado = controller.listar_historico_avaliacoes_por_aluno()
     return make_response(resultado)
 
@@ -748,7 +793,7 @@ def historico_avaliacoes_por_turma(id_turma, id_professor):
     """
     Retorna o histórico de avaliações de uma turma.
     """
-    controller = ControllerHistoricoDesempenho(id_turma=id_turma, id_professor=id_professor)
+    controller = ControllerHistoricoAvaliacoes(id_turma=id_turma, id_professor=id_professor)
     resultado = controller.listar_historico_avaliacoes_por_turma()
     return make_response(resultado)
 
@@ -758,7 +803,7 @@ def historico_avaliacoes_por_escola(id_escola):
     """
     Retorna o histórico de avaliações de uma escola.
     """
-    controller = ControllerHistoricoDesempenho(id_escola=id_escola)
+    controller = ControllerHistoricoAvaliacoes(id_escola=id_escola)
     resultado = controller.listar_historico_avaliacoes_por_escola()
     return make_response(resultado)
 
@@ -768,7 +813,7 @@ def historico_avaliacoes_por_materia(id_materia):
     """
     Retorna o histórico de avaliações de uma matéria.
     """
-    controller = ControllerHistoricoDesempenho(id_materia=id_materia)
+    controller = ControllerHistoricoAvaliacoes(id_materia=id_materia)
     resultado = controller.listar_historico_avaliacoes_por_materia()
     return make_response(resultado)
 
@@ -780,7 +825,7 @@ def ranking_alunos():
     Retorna o ranking geral dos alunos por média de nota.
     """
     controller = ControllerRankingAvaliacao()
-    resultado = controller.ranquear_alunos()
+    resultado = controller.ranquear_alunos_geral()
     return make_response(resultado)
 
 
@@ -790,7 +835,7 @@ def ranking_turmas():
     Retorna o ranking geral das turmas por média de nota.
     """
     controller = ControllerRankingAvaliacao()
-    resultado = controller.ranquear_turmas()
+    resultado = controller.ranquear_turmas_geral()
     return make_response(resultado)
 
 

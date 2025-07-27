@@ -1,6 +1,8 @@
 from datetime import date
 from typing import List, Optional
 
+from flask import session
+
 from config import log
 
 from infra import DBConnectionHandler
@@ -13,6 +15,8 @@ from infra.db.models_data import (
     Disciplina as DisciplinaData,
     Materia as MateriaData,
     Avaliacao as AvaliacaoData,
+    Acesso as AcessoData,
+    Cargo as CargoData
 )
 from domain.models import Professor
 
@@ -260,6 +264,8 @@ class AtualizarNotaParaAluno:
             
 
 class ProfessorRepository:
+    """Repositório para gerenciar operações relacionadas a professores no banco de dados."""
+
     def criar(self, professor_dom: Professor) -> None:
         """Insere um novo professor no banco."""
         
@@ -268,11 +274,9 @@ class ProfessorRepository:
                                       cpf = professor_dom.cpf,
                                       cargo = professor_dom.cargo,
                                       id_escola = professor_dom.id_escola,
-                                      email = professor_dom.email,
                                       telefone = professor_dom.telefone,
                                       estado_civil = professor_dom.estado_civil,
                                       data_nascimento = professor_dom.data_nascimento,
-                                      senha = professor_dom.senha,
                                       nacionalidade = professor_dom.nacionalidade,
                                       sexo = professor_dom.sexo
                                     )
@@ -280,6 +284,26 @@ class ProfessorRepository:
         with DBConnectionHandler() as session:
             session.add(professor_orm)
             session.commit()
+            session.refresh(professor_orm)  # Atualiza o objeto com o ID gerado pelo banco
+
+            # Criando o acesso do professor
+            cargo = session.query(CargoData).filter_by(nome_cargo="Professor").first()
+            id_cargo = cargo.id
+
+            if id_cargo is not None:
+                acesso = AcessoData(
+                    usuario=professor_dom.nome_usuario,
+                    senha=professor_dom.senha,
+                    id_user=professor_orm.id,
+                    id_cargo=id_cargo
+                )
+                session.add(acesso)
+                session.commit()
+            else:
+                # Se o cargo não for encontrado, loga o erro e levanta uma exceção
+                log.error("Cargo 'Professor' não encontrado no banco de dados.")
+                raise ValueError("Cargo 'Professor' não encontrado no banco de dados.")
+
 
     def listar_por_escola(self, id_escola: int) -> List[ProfessorData]:
         """Retorna lista de professores filtrados por escola."""
@@ -291,7 +315,7 @@ class ProfessorRepository:
                    novo_nome: str, novo_cargo: str, 
                    novo_cpf: int, novo_data_nascimento: date,
                    novo_nacionalidade: str, novo_estado_civil: str,
-                   novo_telefone: str, novo_email: str, nova_senha: str, novo_sexo: str) -> bool:
+                   novo_telefone: str, novo_nome_usuario: str, nova_senha: str, novo_sexo: str) -> bool:
         """Atualiza os dados do professor com base no ID. Retorna True se atualizado, False se não encontrado."""
         with DBConnectionHandler() as session:
             professor = session.query(ProfessorData).filter(ProfessorData.id == id_professor).first()
@@ -304,11 +328,18 @@ class ProfessorRepository:
             professor.nacionalidade = novo_nacionalidade
             professor.estado_civil = novo_estado_civil
             professor.telefone = novo_telefone
-            professor.email = novo_email
-            professor.senha = nova_senha
             professor.sexo = novo_sexo
             session.commit()
-            return True
+
+            acesso = session.query(AcessoData).filter_by(id_user=id_professor).first()
+            if acesso is not None:
+                acesso.usuario = novo_nome_usuario
+                acesso.senha = nova_senha
+                session.commit()   
+                return True
+            else:
+                log.error(f"Acesso não encontrado para o professor com ID {id_professor}.")
+                raise ValueError(f"Acesso não encontrado para o professor com ID {id_professor}.")
 
     def deletar(self, id_professor: int) -> bool:
         """Deleta o professor pelo id. Retorna True se deletado, False se não encontrado."""
@@ -318,4 +349,23 @@ class ProfessorRepository:
                 return False
             session.delete(professor)
             session.commit()
+
+            # Deletando o acesso do professor
+            acesso = session.query(AcessoData).filter_by(id_user=id_professor).first()
+            session.delete(acesso)
+            session.commit()    
             return True
+
+
+class buscar_acesso_professor:
+    """Classe para buscar o acesso de um professor no banco de dados."""
+
+    def __init__(self, id_professor: int) -> None:
+        """Inicializa a classe com o ID do professor."""
+        self.__id_professor = id_professor
+
+    def buscar_acesso(self) -> Optional[AcessoData]:
+        """Busca o acesso do professor pelo ID."""
+        with DBConnectionHandler() as session:
+            acesso = session.query(AcessoData).filter(AcessoData.id_user == self.__id_professor).first()
+            return acesso

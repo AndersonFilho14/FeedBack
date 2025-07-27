@@ -26,8 +26,6 @@ class Professor(Base):
     nacionalidade = Column(String(50), nullable=True)
     estado_civil = Column(String(20), nullable=True)
     telefone = Column(String(20), nullable=True)
-    email = Column(String(120), nullable=True)
-    senha = Column(String(255), nullable=False)
-    
+
     def __repr__(self) -> str:
         return f"<Professor id={self.id}, nome='{self.nome}'>"

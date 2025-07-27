@@ -4,7 +4,7 @@ from user_cases.turma import ControllerTurma
 from user_cases.materia import ControllerMateria
 from user_cases.municipio import ControllerMunicipio
 from user_cases.escola import ControllerEscola
-from user_cases.avaliacao import ControllerRankingAvaliacao, ControllerHistoricoDesempenho
+from user_cases.avaliacao import ControllerRankingAvaliacao, ControllerHistoricoAvaliacoes
 
 ID_ESCOLA_TESTE = 1
 
@@ -15,6 +15,8 @@ def test_criar_escola():
         nome="Escola Modelo",
         id_escola=1,
         id_municipio=1,
+        nome_usuario="escola_modelo_user",
+        senha="senhaForte2025"
     )
     resposta = controller.criar_escola()
     print(resposta)
@@ -26,7 +28,7 @@ def test_criar_professor():
         cpf="12245674980",
         cargo="Matemática",
         id_escola=ID_ESCOLA_TESTE,
-        email="joao.teste@escola.com",
+        nome_usuario="joao_teste_user",
         senha="senhaForteJoao2025",
         telefone="1234567890",
         data_nascimento="2000-01-01",
@@ -39,13 +41,12 @@ def test_criar_professor():
 
 
 def test_criar_turma():
-    ids_professores = [1, 2, 4]  # IDs de professores fictícios
     ids_alunos = [25, 26, 27, 28]  # IDs de alunos
     controller = ControllerTurma(
         nome="3º Ano B",
         ano_letivo=2025,
         id_escola=ID_ESCOLA_TESTE,
-        ids_professores=ids_professores,
+        id_professor=1,
         ids_alunos=ids_alunos,
     )
     resposta = controller.criar_turma()
@@ -54,16 +55,23 @@ def test_criar_turma():
 
 def test_criar_aluno():
     controller = ControllerAluno(
-        nome= "pedro henrique",
-        cpf="98765432127",
-        faltas=0,
-        nota_score_preditivo=8.5,
+        nome= "fulano de talal",
+        cpf="91765442726",
         id_escola=ID_ESCOLA_TESTE,
-        nome_responsavel="João da Silva",
-        numero_responsavel="1234567890",
+        nome_responsavel="João da Silvaakl",
+        numero_responsavel="1234567852",
         sexo="Feminino",
         data_nascimento="2008-05-15",
-        nacionalidade="Brasileira",
+        nacionalidade="Japonesa",
+        etnia=4,
+        educacao_pais=1,
+        tempo_estudo_semanal=0,
+        apoio_pais=0,
+        aulas_particulares=0,
+        extra_curriculares=0,
+        esportes=0,
+        aula_musica=0,
+        voluntariado=0
     )
     resposta = controller.criar_aluno()
     print(resposta)
@@ -132,7 +140,9 @@ def test_atualizar_escola():
     controller = ControllerEscola(
         id_escola=4,  # Substitua pelo ID real
         nome="Escola Modelo Atualizada",
-        id_municipio=2
+        id_municipio=2, 
+        nome_usuario="escola_modelo_user_atualizado",
+        senha="senhaForteAtualizada2025"
     )
     resposta = controller.atualizar_escola()
     print(resposta)
@@ -140,12 +150,12 @@ def test_atualizar_escola():
 
 def test_atualizar_professor():
     controller = ControllerProfessor(
-        id_professor= 5,  # ajuste para um ID válido
+        id_professor= 17,  # ajuste para um ID válido
         nome="João Teste Atualizado",
         cpf="12245674980",
         cargo="Matemática",
         id_escola=ID_ESCOLA_TESTE,
-        email="joao.teste@escola.com",
+        nome_usuario="joao_teste_user_atualizado",
         senha="senhaForteJoao2025",
         telefone="1234567890",
         data_nascimento="2000-01-01",
@@ -161,30 +171,35 @@ def test_atualizar_aluno():
         id_aluno=25,  # ajuste para um ID válido
         nome="Maria atualizada",
         cpf="98765432100",
-        faltas=0,
-        nota_score_preditivo=8.5,
         id_escola=ID_ESCOLA_TESTE,
         nome_responsavel="João da Silva",
         numero_responsavel="1234567890",
         sexo="Feminino",
         data_nascimento="2008-05-15",
         nacionalidade="Brasileira",
+        etnia=1,
+        educacao_pais=1,
+        tempo_estudo_semanal=10.0,
+        apoio_pais=1,
+        aulas_particulares=1,
+        extra_curriculares=1,
+        esportes=1,
+        aula_musica=1,
+        voluntariado=1
     )
     resposta = controller.atualizar_aluno()
     print(resposta)
 
 def test_atualizar_turma():
-    ids_professores_anteriores = [1, 2, 4]  # IDs de professores fictícios
     ids_alunos_anteriores = [25, 26, 27, 28]
-    ids_professores_atual = [1, 3]  # IDs de professores atuais
-    ids_alunos_atual = [25, 25, 2]  # IDs de alunos atuais
+    ids_alunos_atual = [25, 26, 2]  # IDs de alunos atuais
     
     controller = ControllerTurma(
-        id_turma=8,  # ajuste para um ID válido
+        id_turma=10,  # ajuste para um ID válido
         nome="3º Ano b atualizado",
-        ids_professores_anteriores=ids_professores_anteriores,
+        id_professor_anterior=1,
         ids_alunos_anteriores=ids_alunos_anteriores,
-        ids_professores=ids_professores_atual,
+        id_professor=2,
         ids_alunos=ids_alunos_atual,
     )
     resposta = controller.atualizar_turmas()
@@ -242,7 +257,7 @@ def test_deletar_materia():
     print(resposta)
     
 def test_deletar_turma():
-    controller = ControllerTurma(id_turma=8)
+    controller = ControllerTurma(id_turma=9)
     resposta = controller.deletar_turma()
     print(resposta)
 
@@ -254,43 +269,67 @@ ID_DISCIPLINA_TESTE = 1
 # Testes de histórico de desempenho (listar avaliações)
 
 def test_historico_por_aluno():
-    controller = ControllerHistoricoDesempenho(id_aluno=ID_ALUNO_TESTE)
+    controller = ControllerHistoricoAvaliacoes(id_aluno=ID_ALUNO_TESTE)
     resposta = controller.listar_historico_avaliacoes_por_aluno()
     print(resposta)
 
 def test_historico_por_turma():
-    controller = ControllerHistoricoDesempenho(id_turma=ID_TURMA_TESTE, id_professor=1)
+    controller = ControllerHistoricoAvaliacoes(id_turma=ID_TURMA_TESTE, id_professor=1)
     resposta = controller.listar_historico_avaliacoes_por_turma()
     print(resposta)
 
 def test_historico_por_escola():
-    controller = ControllerHistoricoDesempenho(id_escola=2)
+    controller = ControllerHistoricoAvaliacoes(id_escola=2)
     resposta = controller.listar_historico_avaliacoes_por_escola()
     print(resposta)
 
 
-# Testes de ranking de desempenho (ranquear por critério)
+# Testes de ranking 
 
-def test_ranking_por_aluno():
+def test_ranking_por_aluno_geral():
     controller = ControllerRankingAvaliacao()
-    resposta = controller.ranquear_alunos()
+    resposta = controller.ranquear_alunos_geral()
     print(resposta)
 
-def test_ranking_por_turma():
+def test_ranking_por_turma_geral():
     controller = ControllerRankingAvaliacao()
-    resposta = controller.ranquear_turmas()
+    resposta = controller.ranquear_turmas_geral()
     print(resposta)
 
-def test_ranking_por_escola():
+def test_ranking_por_escola_geral():
     controller = ControllerRankingAvaliacao()
-    resposta = controller.ranquear_escolas()
+    resposta = controller.ranquear_escolas_geral()
     print(resposta)
 
-def test_ranking_por_disciplina_na_escola():
+def test_ranking_por_materia_geral():
     controller = ControllerRankingAvaliacao()
-    resposta = controller.ranquear_materias()
+    resposta = controller.ranquear_materias_geral()
     print(resposta)
 
+def teste_ranking_por_aluno_escola():
+    controller = ControllerRankingAvaliacao(id_escola=ID_ESCOLA_TESTE)
+    resposta = controller.ranquear_alunos_por_escola()
+    print(resposta)
+
+def teste_ranking_por_turma_escola():
+    controller = ControllerRankingAvaliacao(id_escola=ID_ESCOLA_TESTE)
+    resposta = controller.ranquear_turmas_por_escola()
+    print(resposta)
+
+def teste_ranking_por_materia_escola():
+    controller = ControllerRankingAvaliacao(id_escola=ID_ESCOLA_TESTE)
+    resposta = controller.ranquear_materias_por_escola()
+    print(resposta)
+
+def teste_ranking_tipo_avaliacao_geral():
+    controller = ControllerRankingAvaliacao()
+    resposta = controller.ranquear_por_tipo_avaliacao_geral()
+    print(resposta)
+
+def teste_ranking_tipo_avaliacao_escola():
+    controller = ControllerRankingAvaliacao(id_escola=ID_ESCOLA_TESTE)
+    resposta = controller.ranquear_por_tipo_avaliacao_por_escola()
+    print(resposta)
 
 if __name__ == "__main__":
     print("descomente a função que deseja testar")
@@ -304,7 +343,7 @@ if __name__ == "__main__":
     #test_listar_escolas()
     #test_listar_professores()
     #test_listar_turmas()
-    #test_listar_alunos_escola()
+    test_listar_alunos_escola()
     #test_listar_alunos_turma()
     #test_listar_materias()
     #test_listar_municipios()
@@ -327,7 +366,12 @@ if __name__ == "__main__":
     #test_historico_por_turma()
     #test_historico_por_escola()
 
-    #test_ranking_por_aluno()
-    #test_ranking_por_turma()
-    #test_ranking_por_escola()
-    #test_ranking_por_disciplina_na_escola()
+    #test_ranking_por_aluno_geral()
+    #test_ranking_por_turma_geral()
+    #test_ranking_por_escola_geral()
+    #test_ranking_por_materia_geral()
+    #teste_ranking_por_aluno_escola()
+    #teste_ranking_por_turma_escola()
+    #teste_ranking_por_materia_escola()
+    #teste_ranking_tipo_avaliacao_geral()
+    #teste_ranking_tipo_avaliacao_escola()

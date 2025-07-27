@@ -1,13 +1,8 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
-// --- Interfaces e Mapeamentos ---
-// Reutilizamos as mesmas estruturas e mapeamentos da tela de edição para consistência.
-interface TurmaData {
-    id: number;
-    nome: string;
-}
+// A interface TurmaData e a busca de turmas foram removidas por não serem mais necessárias aqui.
 
 const etniaOptions = [
     { value: 1, label: "Branca" },
@@ -28,25 +23,18 @@ const educacaoPaisOptions = [
 
 export default function CadastrarAluno() {
     // --- Estados do Formulário ---
-    // Dados Pessoais
     const [nome, setNome] = useState("");
     const [data, setData] = useState("");
     const [sexo, setSexo] = useState("");
     const [cpf, setCpf] = useState("");
     const [nacionalidade, setNacionalidade] = useState("");
     const [etnia, setEtnia] = useState("");
-
-    // Dados do Responsável
     const [nomeResponsavel, setNomeResponsavel] = useState("");
     const [telefoneResponsavel, setTelefoneResponsavel] = useState("");
-
-    // Dados Acadêmicos e Comportamentais
-    const [idTurma, setIdTurma] = useState("");
-    const [faltas, setFaltas] = useState("0"); // Novo aluno começa com 0 faltas
+    // idTurma e turmas foram removidos
+    const [faltas, setFaltas] = useState("0");
     const [educacaoPais, setEducacaoPais] = useState("");
     const [tempoEstudoSemanal, setTempoEstudoSemanal] = useState("");
-    
-    // Checkboxes (true/false)
     const [apoioPais, setApoioPais] = useState(false);
     const [aulasParticulares, setAulasParticulares] = useState(false);
     const [extraCurriculares, setExtraCurriculares] = useState(false);
@@ -54,37 +42,28 @@ export default function CadastrarAluno() {
     const [aulaMusica, setAulaMusica] = useState(false);
     const [voluntariado, setVoluntariado] = useState(false);
 
-    const [turmas, setTurmas] = useState<TurmaData[]>([]);
-
     // --- Estados de Controle da UI ---
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [message, setMessage] = useState<string | null>(null);
 
-    // --- Busca de Dados (Apenas Turmas) ---
-    useEffect(() => {
-        async function fetchTurmas() {
-            try {
-                const response = await fetch(`http://localhost:5000/turmas/escola/1`);
-                if (!response.ok) {
-                    throw new Error("Falha ao carregar a lista de turmas.");
-                }
-                const data: { turmas: TurmaData[] } = await response.json();
-                setTurmas(data.turmas || []);
-            } catch (err: any) {
-                setError(err.message);
-            }
-        }
-        fetchTurmas();
-    }, []); // Executa apenas uma vez, ao montar o componente
+    // useEffect para buscar turmas foi removido.
 
     // --- Handlers de Input com Máscara ---
     const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value
-          .replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2')
-          .replace(/(\d{3})(\d{1,2})$/, '$1-$2').slice(0, 14);
-        setCpf(value);
-    };
+    let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não for número
+
+    if (value.length > 11) {
+        value = value.slice(0, 11); // Limita a 11 dígitos (CPF)
+    }
+
+    // Aplica a máscara
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+    setCpf(value);
+};
 
     const handleTelefoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
@@ -102,7 +81,7 @@ export default function CadastrarAluno() {
         setEtnia("");
         setNomeResponsavel("");
         setTelefoneResponsavel("");
-        setIdTurma("");
+        // setIdTurma(""); // Removido
         setFaltas("0");
         setEducacaoPais("");
         setTempoEstudoSemanal("");
@@ -122,7 +101,6 @@ export default function CadastrarAluno() {
         setMessage(null);
 
         const payload = {
-            // id_escola é fixo, enviado para a API
             id_escola: 1, 
             nome,
             cpf: cpf.replace(/\D/g, ''),
@@ -131,17 +109,16 @@ export default function CadastrarAluno() {
             nacionalidade,
             nome_responsavel: nomeResponsavel,
             numero_responsavel: telefoneResponsavel.replace(/\D/g, ''),
-            // Campos novos, com conversão de tipo
-            id_turma: idTurma ? parseInt(idTurma) : null,
+            // id_turma: foi removido do payload
             faltas: faltas ? parseInt(faltas) : 0,
             etnia: etnia ? parseInt(etnia) : null,
-            educacaoPais: educacaoPais ? parseInt(educacaoPais) : null,
-            tempoEstudoSemanal: tempoEstudoSemanal ? parseFloat(tempoEstudoSemanal) : null,
-            apoioPais: apoioPais ? 1 : 0,
-            aulasParticulares: aulasParticulares ? 1 : 0,
-            extraCurriculares: extraCurriculares ? 1 : 0,
+            educacao_pais: educacaoPais ? parseInt(educacaoPais) : null,
+            tempo_estudo_semanal: tempoEstudoSemanal ? parseFloat(tempoEstudoSemanal) : null,
+            apoio_pais: apoioPais ? 1 : 0,
+            aulas_particulares: aulasParticulares ? 1 : 0,
+            extra_curriculares: extraCurriculares ? 1 : 0,
             esportes: esportes ? 1 : 0,
-            aulaMusica: aulaMusica ? 1 : 0,
+            aula_musica: aulaMusica ? 1 : 0,
             voluntariado: voluntariado ? 1 : 0,
         };
 
@@ -156,7 +133,7 @@ export default function CadastrarAluno() {
             if (!response.ok) throw new Error(result.mensagem || "Falha ao cadastrar o aluno.");
             
             setMessage(result.mensagem || "Aluno cadastrado com sucesso!");
-            resetForm(); // Limpa o formulário após o sucesso
+            resetForm();
 
         } catch (err: any) {
             setError(err.message);
@@ -165,7 +142,6 @@ export default function CadastrarAluno() {
         }
     };
 
-    // --- Componente de Checkbox Reutilizável ---
     const BooleanCheckbox = ({ label, checked, onChange }: { label: string, checked: boolean, onChange: (e: React.ChangeEvent<HTMLInputElement>) => void }) => (
         <label className="flex items-center bg-[#A7C1A8] px-3 py-2 rounded-lg shadow-sm cursor-pointer hover:bg-[#8FAE91] transition-colors">
             <input type="checkbox" checked={checked} onChange={onChange} className="mr-2 accent-[#EEA03D] w-5 h-5"/>
@@ -187,7 +163,6 @@ export default function CadastrarAluno() {
                     {message && <p className="text-green-700 bg-green-100 p-3 rounded-md text-center font-semibold -my-2">{message}</p>}
 
                     <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
-                        {/* Seção de Dados Pessoais e Responsável */}
                         <fieldset className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
                             <div>
                                 <h5>Nome Completo</h5>
@@ -231,19 +206,9 @@ export default function CadastrarAluno() {
                             </div>
                         </fieldset>
 
-                         {/* Seção de Dados Acadêmicos */}
-                         <fieldset className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-4">
-                            <div>
-                                <h5>Turma</h5>
-                                <select value={idTurma} onChange={e => setIdTurma(e.target.value)} className="w-full h-10 bg-[#A7C1A8] rounded px-3">
-                                    <option value="">Alocar depois</option>
-                                    {turmas.map(t => <option key={t.id} value={t.id}>{t.nome}</option>)}
-                                </select>
-                            </div>
-                            <div>
-                                <h5>Total de Faltas</h5>
-                                <input className="w-full h-10 bg-[#A7C1A8] rounded px-3" type="number" min="0" value={faltas} onChange={e => setFaltas(e.target.value)} />
-                            </div>
+                         {/* Seção de Dados Acadêmicos - Campo Turma removido */}
+                         <fieldset className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-4">
+                          
                             <div>
                                 <h5>Escolaridade dos Pais</h5>
                                  <select value={educacaoPais} onChange={e => setEducacaoPais(e.target.value)} className="w-full h-10 bg-[#A7C1A8] rounded px-3">
@@ -257,7 +222,6 @@ export default function CadastrarAluno() {
                             </div>
                         </fieldset>
 
-                        {/* Seção de Atividades e Apoio */}
                         <div className="flex flex-col gap-4 pt-4">
                             <h3 className="text-xl font-semibold text-[#727D73] border-b-2 border-[#A7C1A8] pb-2 mb-2">
                                 Atividades e Apoio
@@ -272,7 +236,6 @@ export default function CadastrarAluno() {
                             </div>
                         </div>
                         
-                        {/* Botões de Ação */}
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-4">
                             <Link className="w-full sm:w-44 h-13 border-5 rounded-lg border-[#727D73] flex justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-2xl order-2 sm:order-1" href={"/ListaAlunos"}>
                                 Voltar

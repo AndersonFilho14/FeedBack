@@ -15,26 +15,26 @@ from datetime import datetime
 
 
 class ConsultarTurma:
-    """Lida com a consulta da turma de um aluno no banco de dados."""
+    """Lida com a consulta de um único registro de professor no banco de dados."""
 
     def __init__(self, id_aluno: int) -> None:
-        """Inicializa a classe ConsultarTurma com o ID do aluno."""
+        """Inicializa a classe ConsultarProfessor com o ID do professor."""
         self.__id_aluno = id_aluno
 
     def __consultar_no_banco(self) -> Optional[int]:
-        """Consulta o banco de dados por um aluno com o ID fornecido, retornando o ID da sua turma ou None."""
+        """Consulta o banco de dados por um professor com o ID fornecido, retornando o objeto ProfessorData ou None."""
         with DBConnectionHandler() as session:
-            aluno = (
+            retorno = (
                 session.query(AlunoData)
                 .filter(AlunoData.id == self.__id_aluno)
                 .first()
             )
-        if aluno:
-            return aluno.id_turma
+        if retorno:
+            return retorno.id
         return None
 
-    def get_id_turma(self) -> Optional[int]:
-        """Recupera o ID da turma do aluno."""
+    def get_id_turma(self):
+        """Recupera os dados do professor, retornando o objeto ProfessorData ou None."""
         return self.__consultar_no_banco()
     
 
@@ -47,13 +47,22 @@ class AlunoRepository:
             nome = aluno.nome,
             cpf = aluno.cpf,
             faltas = aluno.faltas,
-            nota_score_preditivo = aluno.nota_score_preditivo,
+            #nota_score_preditivo = aluno.nota_score_preditivo,
             id_escola = aluno.id_escola,
             data_nascimento = aluno.data_nascimento,
             sexo = aluno.sexo,
             nacionalidade = aluno.nacionalidade,
             id_turma = aluno.id_turma, # Inicializado como 0, será atualizado na função de criação/edição de turmas
             id_responsavel = aluno.id_responsavel,  # Inicializado como 0, será atualizado após a inserção do responsável no banco
+            etnia = aluno.etnia,
+            educacaoPais = aluno.educacao_pais,
+            tempoEstudoSemanal = aluno.tempo_estudo_semanal,
+            apoioPais = aluno.apoio_pais,
+            aulasParticulares = aluno.aulas_particulares,
+            extraCurriculares = aluno.extra_curriculares,
+            esportes = aluno.esportes,
+            aulaMusica = aluno.aula_musica,
+            voluntariado = aluno.voluntariado,
         )
 
         responsavel_orm = ResponsavelData(
@@ -83,10 +92,10 @@ class AlunoRepository:
                     avaliacao = AvaliacaoData(
                         tipo_avaliacao=tipo,
                         data_avaliacao=datetime.now(),
-                        nota=0.0,
+                        nota=-1.0,
                         id_aluno=aluno_orm.id,
-                        id_materia = materia.id,
-                        id_professor = materia.id_professor,
+                        id_materia=materia.id,
+                        id_professor=materia.id_professor,
                     )
                     avaliacoes.append(avaliacao)
 
@@ -116,6 +125,15 @@ class AlunoRepository:
         nova_nacionalidade: str,
         novo_nome_responsavel: str,
         novo_numero_responsavel: str,
+        nova_etnia: int,
+        nova_educacao_pais: int,
+        novo_tempo_estudo_semanal: float,
+        novo_apoio_pais: int,
+        novas_aulas_particulares: int,
+        novas_extra_curriculares: int,
+        novos_esportes: int,
+        nova_aula_musica: int,
+        novo_voluntariado: int
     ) -> bool:
         """Atualiza os dados do aluno com base no ID. Retorna True se atualizado, False se não encontrado."""
         with DBConnectionHandler() as session:
@@ -132,6 +150,15 @@ class AlunoRepository:
             aluno.data_nascimento = nova_data_nascimento
             aluno.sexo = novo_sexo
             aluno.nacionalidade = nova_nacionalidade
+            aluno.etnia = nova_etnia
+            aluno.educacaoPais = nova_educacao_pais
+            aluno.tempoEstudoSemanal = novo_tempo_estudo_semanal
+            aluno.apoioPais = novo_apoio_pais
+            aluno.aulasParticulares = novas_aulas_particulares
+            aluno.extraCurriculares = novas_extra_curriculares
+            aluno.esportes = novos_esportes
+            aluno.aulaMusica = nova_aula_musica
+            aluno.voluntariado = novo_voluntariado
 
             # Atualiza o responsável
             responsavel = (

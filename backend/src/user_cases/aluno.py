@@ -4,6 +4,7 @@ from infra.repositories import AlunoRepository, ConsultaEscolaBanco, ConsultaTur
 from config import log
 
 from utils.validarCampos import ValidadorCampos
+from utils.processIA import Aluno as AlunoIA, processIA
 from infra.db.models_data import Aluno as AlunoData
 from typing import Optional, List
 import json
@@ -26,6 +27,15 @@ class ControllerAluno:
         id_escola: Optional[int] = None,
         id_turma: Optional[int] = None,
         id_aluno: Optional[int] = None,
+        etnia: Optional[int] = None,
+        educacao_pais: Optional[int] = None,
+        tempo_estudo_semanal: Optional[float] = None,
+        apoio_pais: Optional[int] = None,
+        aulas_particulares: Optional[int] = None,
+        extra_curriculares: Optional[int] = None,
+        esportes: Optional[int] = None,
+        aula_musica: Optional[int] = None,
+        voluntariado: Optional[int] = None,
     ) -> None:
         self.__nome = nome
         self.__data_nascimento = data_nascimento
@@ -39,6 +49,15 @@ class ControllerAluno:
         self.__id_escola = id_escola
         self.__id_turma = id_turma
         self.__id_aluno = id_aluno
+        self.__etnia = etnia
+        self.__educacao_pais = educacao_pais
+        self.__tempo_estudo_semanal = tempo_estudo_semanal
+        self.__apoio_pais = apoio_pais
+        self.__aulas_particulares = aulas_particulares
+        self.__extra_curriculares = extra_curriculares
+        self.__esportes = esportes
+        self.__aula_musica = aula_musica
+        self.__voluntariado = voluntariado
 
     def criar_aluno(self) -> str:
         resultado = CriarAlunoNoBanco(
@@ -52,6 +71,16 @@ class ControllerAluno:
             faltas=self.__faltas,
             nota_score_preditivo=self.__nota_score,
             id_escola=self.__id_escola,
+            id_turma=self.__id_turma,
+            etnia=self.__etnia,
+            educacao_pais=self.__educacao_pais,
+            tempo_estudo_semanal=self.__tempo_estudo_semanal,
+            apoio_pais=self.__apoio_pais,
+            aulas_particulares=self.__aulas_particulares,
+            extra_curriculares=self.__extra_curriculares,
+            esportes=self.__esportes,
+            aula_musica=self.__aula_musica,
+            voluntariado=self.__voluntariado,
         ).executar()
         return resultado
 
@@ -77,6 +106,15 @@ class ControllerAluno:
             nova_nacionalidade=self.__nacionalidade, 
             novo_nome_responsavel=self.__nome_responsavel,
             novo_numero_responsavel=self.__numero_responsavel,  
+            nova_etnia=self.__etnia,
+            nova_educacao_pais=self.__educacao_pais,
+            novo_tempo_estudo_semanal=self.__tempo_estudo_semanal,
+            novo_apoio_pais=self.__apoio_pais,
+            novas_aulas_particulares=self.__aulas_particulares,
+            novas_extra_curriculares=self.__extra_curriculares,
+            novos_esportes=self.__esportes,
+            nova_aula_musica=self.__aula_musica,
+            novo_voluntariado=self.__voluntariado,
         ).executar()
 
     def deletar_aluno(self) -> str:
@@ -86,43 +124,54 @@ class ControllerAluno:
 class CriarAlunoNoBanco:
     def __init__(
         self,
-        nome: Optional[str] = None,
-        data_nascimento: Optional[str] = None,
-        sexo: Optional[str] = None,
-        cpf: Optional[str] = None,
-        nacionalidade: Optional[str] = None,
-        nome_responsavel: Optional[str] = None,
-        numero_responsavel: Optional[str] = None,
-        faltas: Optional[int] = 0,
-        nota_score_preditivo: Optional[float] = None,
-        id_escola: Optional[int] = None,
+        nome: str,
+        data_nascimento: str,
+        sexo: str,
+        cpf: str,
+        nacionalidade: str,
+        nome_responsavel: str,
+        numero_responsavel: str,
+        nota_score_preditivo: float,
+        id_escola: int,
+        etnia: int,
+        educacao_pais: int = None,
+        tempo_estudo_semanal: float = None,
+        apoio_pais: int = None,
+        aulas_particulares: int = None,
+        extra_curriculares: int = None,
+        esportes: int = None,
+        aula_musica: int = None,
+        voluntariado: int = None,
+        id_turma: Optional[int] = None,
+        faltas: int = 0,
+
     ) -> None:
-
-        # Conversão segura da data de nascimento
-        if isinstance(data_nascimento, str):
-            try:
-                self.__data_nascimento = datetime.strptime(data_nascimento, "%Y-%m-%d").date()
-            except ValueError:
-                raise ValueError("Formato inválido para data_nascimento. Use 'YYYY-MM-DD'.")
-        else:
-            self.__data_nascimento = data_nascimento  # já convertido ou None
-
-
+        self.__data_nascimento = datetime.strptime(data_nascimento, "%Y-%m-%d").date()
         self.__aluno = Aluno(
             id=0,  # Inicializado como 0, será atualizado no banco
             nome=nome,
-            data_nascimento= self.__data_nascimento,
+            data_nascimento=self.__data_nascimento,
             sexo=sexo,
             cpf=cpf,
             nacionalidade=nacionalidade,
             faltas=faltas,
             nota_score_preditivo=nota_score_preditivo,
             id_escola=id_escola,
+            etnia=etnia,
+            educacao_pais=educacao_pais,
+            tempo_estudo_semanal=tempo_estudo_semanal,
+            apoio_pais=apoio_pais,
+            aulas_particulares=aulas_particulares,
+            extra_curriculares=extra_curriculares,
+            esportes=esportes,
+            aula_musica=aula_musica,
+            voluntariado=voluntariado,
             id_turma=0,  # Inicializado como 0, será atualizado na função de criação/edicao de turmas
             id_responsavel=0,  # Inicializado como 0, será atualizado após a inserção do responsavel no banco
         )
-        self.__responsavel = Responsavel(id =0, nome=nome_responsavel, telefone=numero_responsavel)
-
+        self.__nota_score_preditivo = ObterNotaScorePreditivo.get_score_preditivo(self.__aluno)
+        self.__aluno.nota_score_preditivo = self.__nota_score_preditivo
+        self.__responsavel = Responsavel(id=0, nome=nome_responsavel, telefone=numero_responsavel)
 
 
     def executar(self) -> str:
@@ -134,7 +183,18 @@ class CriarAlunoNoBanco:
             self.__aluno.nacionalidade,
             self.__responsavel.nome, 
             self.__responsavel.telefone,
-            self.__aluno.data_nascimento,   
+            self.__aluno.data_nascimento,  
+            self.__aluno.sexo,
+            self.__aluno.etnia,
+            self.__aluno.educacao_pais,
+            self.__aluno.tempo_estudo_semanal,
+            self.__aluno.apoio_pais,
+            self.__aluno.aulas_particulares,
+            self.__aluno.extra_curriculares,
+            self.__aluno.esportes,
+            self.__aluno.aula_musica,
+            self.__aluno.voluntariado,
+            self.__aluno.id_turma,
         ])
         
         if resultado is not None:
@@ -206,6 +266,15 @@ class AtualizarAlunoNoBanco:
         nova_nacionalidade: str,
         novo_nome_responsavel: str,
         novo_numero_responsavel: str,
+        nova_etnia: int,
+        nova_educacao_pais: int,
+        novo_tempo_estudo_semanal: float,
+        novo_apoio_pais: int,
+        novas_aulas_particulares: int,
+        novas_extra_curriculares: int,
+        novos_esportes: int,
+        nova_aula_musica: int,
+        novo_voluntariado: int,
     ):
         self.__id = id_aluno
         self.__novo_nome = novo_nome
@@ -215,6 +284,15 @@ class AtualizarAlunoNoBanco:
         self.__nova_nacionalidade = nova_nacionalidade
         self.__novo_nome_responsavel = novo_nome_responsavel
         self.__novo_numero_responsavel = novo_numero_responsavel
+        self.__nova_etnia = nova_etnia
+        self.__nova_educacao_pais = nova_educacao_pais
+        self.__novo_tempo_estudo_semanal = novo_tempo_estudo_semanal
+        self.__novo_apoio_pais = novo_apoio_pais
+        self.__novas_aulas_particulares = novas_aulas_particulares
+        self.__novas_extra_curriculares = novas_extra_curriculares
+        self.__novos_esportes = novos_esportes
+        self.__nova_aula_musica = nova_aula_musica
+        self.__novo_voluntariado = novo_voluntariado
 
     def executar(self) -> str:
         
@@ -228,6 +306,15 @@ class AtualizarAlunoNoBanco:
             self.__nova_nacionalidade,
             self.__novo_nome_responsavel,
             self.__novo_numero_responsavel,
+            self.__nova_etnia,
+            self.__nova_educacao_pais,
+            self.__novo_tempo_estudo_semanal,
+            self.__novo_apoio_pais,
+            self.__novas_aulas_particulares,
+            self.__novas_extra_curriculares,
+            self.__novos_esportes,
+            self.__nova_aula_musica,
+            self.__novo_voluntariado
         ])
         if resultado is not None:
             return resultado
@@ -266,6 +353,15 @@ class AtualizarAlunoNoBanco:
                 nova_data_nascimento=data_nascimento,
                 novo_sexo=self.__novo_sexo,
                 nova_nacionalidade=self.__nova_nacionalidade,
+                nova_etnia=self.__nova_etnia,
+                nova_educacao_pais=self.__nova_educacao_pais,
+                novo_tempo_estudo_semanal=self.__novo_tempo_estudo_semanal,
+                novo_apoio_pais=self.__novo_apoio_pais,
+                novas_aulas_particulares=self.__novas_aulas_particulares,
+                novas_extra_curriculares=self.__novas_extra_curriculares,
+                novos_esportes=self.__novos_esportes,
+                nova_aula_musica=self.__nova_aula_musica,
+                novo_voluntariado=self.__novo_voluntariado
             )
             if atualizado:
                 log.info(f"Aluno {self.__id} atualizado com sucesso.")
@@ -293,6 +389,50 @@ class DeletarAlunoDoBanco:
             log.error(f"Erro ao deletar aluno: {e}")
             return "Erro ao deletar aluno"
         
+
+class ObterNotaScorePreditivo:
+    """Classe responsável por obter a nota de um aluno a partir de seu ID."""
+    
+    def get_score_preditivo(aluno: Aluno) -> str:
+        """Obtém o score preditivo de um aluno."""
+        try:
+            aluno_ia = ObterNotaScorePreditivo._criar_aluno_ia(aluno)
+            nota_predita = processIA(aluno_ia)
+            log.info(f"Score preditivo para o aluno {aluno.id} ({aluno.nome}): {nota_predita}")
+            return nota_predita
+        except Exception as e:
+            log.error(f"Erro ao obter score preditivo: {e}")
+            return "Erro ao obter score preditivo"
+
+    def _criar_aluno_ia(aluno: Aluno) -> AlunoIA:
+        """Cria um objeto AlunoIA a partir de um objeto Aluno."""
+        idade = ObterNotaScorePreditivo._calcular_idade(aluno.data_nascimento)
+        return AlunoIA(
+            id=aluno.id,
+            nome=aluno.nome,
+            idade=idade,
+            sexo=1 if aluno.sexo.lower() == 'masculino' else 0,
+            etnia=aluno.etnia,
+            educacaoPais=aluno.educacao_pais,
+            tempoEstudoSemanal=aluno.tempo_estudo_semanal,
+            faltas=aluno.faltas,
+            apoioPais=aluno.apoio_pais,
+            aulasParticulares=aluno.aulas_particulares,
+            extraCurriculares=aluno.extra_curriculares,
+            esportes=aluno.esportes,
+            aulaMusica=aluno.aula_musica,
+            voluntariado=aluno.voluntariado,
+            notaFinal=""
+        )
+    
+    def _calcular_idade(data_nascimento: date) -> int:
+        """Calcula a idade do aluno com base na data de nascimento."""
+        hoje = date.today()
+        return hoje.year - data_nascimento.year - (
+            (hoje.month, hoje.day) < (data_nascimento.month, data_nascimento.day)
+    )
+    
+        
 class FormatarAluno:
     """Classe responsável por formatar AlunoData → Aluno (domínio) → JSON."""
 
@@ -313,7 +453,16 @@ class FormatarAluno:
                     nacionalidade=aluno.nacionalidade,
                     id_escola=aluno.id_escola,
                     id_turma=aluno.id_turma,
-                    id_responsavel=aluno.id_responsavel
+                    id_responsavel=aluno.id_responsavel,
+                    etnia=aluno.etnia,
+                    educacao_pais=aluno.educacaoPais,
+                    tempo_estudo_semanal=aluno.tempoEstudoSemanal,
+                    apoio_pais=aluno.apoioPais,
+                    aulas_particulares=aluno.aulasParticulares,
+                    extra_curriculares=aluno.extraCurriculares,
+                    esportes=aluno.esportes,
+                    aula_musica=aluno.aulaMusica,
+                    voluntariado=aluno.voluntariado,
                 )
             )
         return lista_alunos
@@ -323,6 +472,7 @@ class FormatarAluno:
         for aluno in alunos_dominio:
             dados_aluno = ConsultaDadosAluno(aluno.id)
             nome_responsavel = dados_aluno.nome_responsavel()
+            numero_responsavel = dados_aluno.numero_responsavel()
             nome_turma = dados_aluno.nome_turma()
             nome_escola = dados_aluno.nome_escola()
             alunos_json.append(    
@@ -335,12 +485,22 @@ class FormatarAluno:
                     "data_nascimento": aluno.data_nascimento.strftime("%Y-%m-%d") if aluno.data_nascimento else None,
                     "sexo": aluno.sexo,
                     "nome_responsavel": nome_responsavel,
+                    "numero_responsavel": numero_responsavel,
                     "nome_turma": nome_turma,
                     "nome_escola": nome_escola,
                     "nacionalidade": aluno.nacionalidade,
                     "id_escola": aluno.id_escola,
-                    "id_turma": aluno.id_turma,     
-                    "id_responsavel": aluno.id_responsavel
+                    "id_turma": aluno.id_turma,
+                    "id_responsavel": aluno.id_responsavel,
+                    "etnia": aluno.etnia,
+                    "educacao_pais": aluno.educacao_pais,
+                    "tempo_estudo_semanal": aluno.tempo_estudo_semanal,
+                    "apoio_pais": aluno.apoio_pais,
+                    "aulas_particulares": aluno.aulas_particulares,
+                    "extra_curriculares": aluno.extra_curriculares,
+                    "esportes": aluno.esportes,
+                    "aula_musica": aluno.aula_musica,
+                    "voluntariado": aluno.voluntariado,
                 }
             )
 

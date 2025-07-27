@@ -2997,3 +2997,311 @@ DEBUG    | 24/07/2025 22:26:59 | 0:30:42.641249 |         professor.py:505   |  
 DEBUG    | 24/07/2025 22:26:59 | 0:30:42.646947 |         professor.py:505   |            professor._executar            | 3 professores encontrados na escola 1.
 DEBUG    | 24/07/2025 22:27:03 | 0:30:46.705069 |             turma.py:91    |                turma.executar             | 3 turmas encontradas na escola 1.
 DEBUG    | 24/07/2025 22:27:03 | 0:30:46.705903 |             turma.py:91    |                turma.executar             | 3 turmas encontradas na escola 1.
+INFO     | 25/07/2025 23:48:34 | 1 day, 1:52:17.258449 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 25/07/2025 23:50:33 | 0:00:00.346469 |              main.py:8     |                 main.<module>             | Iniciando projeto
+ERROR    | 25/07/2025 23:53:55 | 0:03:22.393229 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 25/07/2025 23:53:55 | 0:03:22.398316 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+DEBUG    | 25/07/2025 23:53:56 | 0:03:23.643821 |             turma.py:91    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 25/07/2025 23:53:56 | 0:03:23.645911 |             turma.py:91    |                turma.executar             | 3 turmas encontradas na escola 1.
+ERROR    | 25/07/2025 23:55:39 | 0:05:06.595188 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 25/07/2025 23:55:57 | 0:05:24.328845 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 25/07/2025 23:55:57 | 0:05:24.333933 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 25/07/2025 23:56:10 | 0:05:37.320258 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+DEBUG    | 25/07/2025 23:58:06 | 0:07:33.148990 |             turma.py:91    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 25/07/2025 23:58:06 | 0:07:33.149379 |             turma.py:91    |                turma.executar             | 3 turmas encontradas na escola 1.
+ERROR    | 25/07/2025 23:58:11 | 0:07:37.827577 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 25/07/2025 23:58:11 | 0:07:37.834859 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+DEBUG    | 25/07/2025 23:58:13 | 0:07:40.274217 |             turma.py:91    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 25/07/2025 23:58:13 | 0:07:40.276855 |             turma.py:91    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 25/07/2025 23:59:57 | 0:09:23.839772 |             turma.py:91    |                turma.executar             | 3 turmas encontradas na escola 1.
+ERROR    | 26/07/2025 00:01:18 | 0:10:45.368152 |             aluno.py:404   |                aluno.get_score_preditivo  | Erro ao obter score preditivo: Aluno() takes no arguments
+ERROR    | 26/07/2025 00:01:18 | 0:10:45.376937 |             aluno.py:231   |                aluno.executar             | Erro ao criar aluno: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.cpf = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('12312312313', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+DEBUG    | 26/07/2025 00:02:46 | 0:12:13.202731 |             turma.py:91    |                turma.executar             | 3 turmas encontradas na escola 1.
+ERROR    | 26/07/2025 00:03:16 | 0:12:43.072379 |             aluno.py:404   |                aluno.get_score_preditivo  | Erro ao obter score preditivo: Aluno() takes no arguments
+ERROR    | 26/07/2025 00:03:16 | 0:12:43.079629 |             aluno.py:231   |                aluno.executar             | Erro ao criar aluno: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.cpf = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('12312313333', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+DEBUG    | 26/07/2025 00:03:59 | 0:13:26.551804 |             turma.py:91    |                turma.executar             | 3 turmas encontradas na escola 1.
+ERROR    | 26/07/2025 00:04:29 | 0:13:56.748607 |             aluno.py:404   |                aluno.get_score_preditivo  | Erro ao obter score preditivo: Aluno() takes no arguments
+ERROR    | 26/07/2025 00:04:29 | 0:13:56.755493 |             aluno.py:231   |                aluno.executar             | Erro ao criar aluno: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.cpf = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('44555667778', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+DEBUG    | 26/07/2025 00:05:41 | 0:15:08.722685 |             turma.py:91    |                turma.executar             | 3 turmas encontradas na escola 1.
+ERROR    | 26/07/2025 00:06:42 | 0:16:09.060935 |             aluno.py:404   |                aluno.get_score_preditivo  | Erro ao obter score preditivo: Aluno() takes no arguments
+ERROR    | 26/07/2025 00:06:42 | 0:16:09.067618 |             aluno.py:231   |                aluno.executar             | Erro ao criar aluno: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.cpf = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('12312312333', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 26/07/2025 00:07:55 | 0:17:22.745662 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 26/07/2025 00:07:57 | 0:17:24.342379 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 26/07/2025 00:07:57 | 0:17:24.509129 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 26/07/2025 00:07:57 | 0:17:24.669096 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 26/07/2025 00:07:58 | 0:17:24.818164 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 26/07/2025 00:07:58 | 0:17:24.976034 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 26/07/2025 00:07:58 | 0:17:25.133370 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 26/07/2025 00:07:58 | 0:17:25.286014 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 26/07/2025 00:21:40 | 0:31:07.169058 |             aluno.py:404   |                aluno.get_score_preditivo  | Erro ao obter score preditivo: Aluno() takes no arguments
+ERROR    | 26/07/2025 00:21:40 | 0:31:07.175791 |             aluno.py:231   |                aluno.executar             | Erro ao criar aluno: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.cpf = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('33333333333', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 26/07/2025 00:21:42 | 0:31:09.778617 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 26/07/2025 00:21:43 | 0:31:10.388161 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 26/07/2025 00:21:43 | 0:31:10.545147 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 26/07/2025 00:21:43 | 0:31:10.703830 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 26/07/2025 00:29:32 | 0:38:58.831212 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 26/07/2025 00:33:39 | 0:43:06.152512 |             aluno.py:404   |                aluno.get_score_preditivo  | Erro ao obter score preditivo: Aluno() takes no arguments
+ERROR    | 26/07/2025 00:33:39 | 0:43:06.159063 |             aluno.py:231   |                aluno.executar             | Erro ao criar aluno: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.cpf = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('12312312312', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO     | 27/07/2025 16:19:10 | 1 day, 16:28:36.897478 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 27/07/2025 16:41:24 | 0:00:00.321647 |              main.py:8     |                 main.<module>             | Iniciando projeto
+ERROR    | 27/07/2025 17:11:45 | 0:30:21.632132 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 27/07/2025 17:11:46 | 0:30:22.178387 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 27/07/2025 17:11:46 | 0:30:22.328916 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO     | 27/07/2025 17:20:50 | 0:39:26.449072 |             aluno.py:401   |                aluno.get_score_preditivo  | Score preditivo para o aluno 0 (dddddddd): Erro: No module named 'sklearn'
+ERROR    | 27/07/2025 17:20:50 | 0:39:26.458507 |             aluno.py:231   |                aluno.executar             | Erro ao criar aluno: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.cpf = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('12312312312', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 27/07/2025 17:20:59 | 0:39:35.313445 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO     | 27/07/2025 17:21:56 | 0:40:32.413432 |             aluno.py:401   |                aluno.get_score_preditivo  | Score preditivo para o aluno 0 (asdasdasdasd): Erro: No module named 'sklearn'
+ERROR    | 27/07/2025 17:21:56 | 0:40:32.420074 |             aluno.py:231   |                aluno.executar             | Erro ao criar aluno: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.cpf = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('12312312312', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+ERROR    | 27/07/2025 17:21:59 | 0:40:35.272127 |             aluno.py:246   |                aluno.listar_alunos_escola | Erro ao listar alunos: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.id_escola = ?]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO     | 27/07/2025 17:30:40 | 0:00:00.394348 |             aluno.py:401   |                aluno.get_score_preditivo  | Score preditivo para o aluno 0 (fulano de tal): Erro: No module named 'sklearn'
+ERROR    | 27/07/2025 17:30:40 | 0:00:00.427022 |             aluno.py:231   |                aluno.executar             | Erro ao criar aluno: (sqlite3.OperationalError) no such column: aluno.etnia
+[SQL: SELECT aluno.id AS aluno_id, aluno.nome AS aluno_nome, aluno.cpf AS aluno_cpf, aluno.faltas AS aluno_faltas, aluno.nota_score_preditivo AS aluno_nota_score_preditivo, aluno.id_escola AS aluno_id_escola, aluno.id_turma AS aluno_id_turma, aluno.id_responsavel AS aluno_id_responsavel, aluno.data_nascimento AS aluno_data_nascimento, aluno.sexo AS aluno_sexo, aluno.nacionalidade AS aluno_nacionalidade, aluno.etnia AS aluno_etnia, aluno."educacaoPais" AS "aluno_educacaoPais", aluno."tempoEstudoSemanal" AS "aluno_tempoEstudoSemanal", aluno."apoioPais" AS "aluno_apoioPais", aluno."aulasParticulares" AS "aluno_aulasParticulares", aluno."extraCurriculares" AS "aluno_extraCurriculares", aluno.esportes AS aluno_esportes, aluno."aulaMusica" AS "aluno_aulaMusica", aluno.voluntariado AS aluno_voluntariado 
+FROM aluno 
+WHERE aluno.cpf = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('91765442714', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO     | 27/07/2025 17:35:08 | 0:53:44.659503 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 27/07/2025 17:35:10 | 0:00:00.384705 |              main.py:8     |                 main.<module>             | Iniciando projeto
+INFO     | 27/07/2025 17:35:52 | 0:00:42.762765 |             aluno.py:401   |                aluno.get_score_preditivo  | Score preditivo para o aluno 0 (asdasdasdasd): Erro: No module named 'sklearn'
+INFO     | 27/07/2025 17:36:12 | 0:00:00.291533 |             aluno.py:401   |                aluno.get_score_preditivo  | Score preditivo para o aluno 0 (fulano de tal): Erro: No module named 'sklearn'
+DEBUG    | 27/07/2025 17:37:39 | 0:02:30.126934 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:37:41 | 0:02:31.375094 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:37:41 | 0:02:32.138441 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:37:41 | 0:02:32.299533 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:37:42 | 0:02:32.444048 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:37:42 | 0:02:32.575572 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:37:42 | 0:02:32.721398 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:37:44 | 0:02:34.472783 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+INFO     | 27/07/2025 17:38:13 | 0:03:03.863168 |             aluno.py:401   |                aluno.get_score_preditivo  | Score preditivo para o aluno 0 (asdasdasda): Erro: No module named 'sklearn'
+INFO     | 27/07/2025 17:38:13 | 0:03:03.895255 |             aluno.py:228   |                aluno.executar             | Aluno 'asdasdasda' criado com sucesso.
+DEBUG    | 27/07/2025 17:38:32 | 0:03:22.900872 |             aluno.py:243   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:39:42 | 0:04:32.718540 |             aluno.py:243   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:39:51 | 0:04:41.842170 |             aluno.py:243   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:42:46 | 0:07:36.431400 |             aluno.py:243   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:43:52 | 0:08:42.798994 |             aluno.py:243   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:43:53 | 0:08:44.178401 |             aluno.py:243   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:43:54 | 0:08:44.336182 |             aluno.py:243   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:43:54 | 0:08:44.491484 |             aluno.py:243   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:43:54 | 0:08:44.631058 |             aluno.py:243   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 17:43:54 | 0:08:44.756316 |             aluno.py:243   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+INFO     | 27/07/2025 17:50:35 | 0:00:00.325646 |             aluno.py:401   |                aluno.get_score_preditivo  | Score preditivo para o aluno 0 (fulano de tal): Erro: No module named 'sklearn'
+ERROR    | 27/07/2025 17:50:35 | 0:00:00.367693 |             aluno.py:231   |                aluno.executar             | Erro ao criar aluno: (builtins.ValueError) could not convert string to float: "Erro: No module named 'sklearn'"
+[SQL: INSERT INTO aluno (nome, cpf, faltas, nota_score_preditivo, id_escola, id_turma, id_responsavel, data_nascimento, sexo, nacionalidade, etnia, "educacaoPais", "tempoEstudoSemanal", "apoioPais", "aulasParticulares", "extraCurriculares", esportes, "aulaMusica", voluntariado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: [{'etnia': 1, 'apoioPais': 1, 'sexo': 'Feminino', 'tempoEstudoSemanal': 10.0, 'aulaMusica': 1, 'aulasParticulares': 1, 'id_responsavel': 26, 'data_nasc ... (144 characters truncated) ... d_turma': 0, 'nota_score_preditivo': "Erro: No module named 'sklearn'", 'id_escola': 1, 'educacaoPais': 1, 'nome': 'fulano de tal', 'voluntariado': 1}]]
+INFO     | 27/07/2025 17:50:56 | 0:00:00.318859 |             aluno.py:401   |                aluno.get_score_preditivo  | Score preditivo para o aluno 0 (fulano de tal): Erro: No module named 'sklearn'
+INFO     | 27/07/2025 17:50:56 | 0:00:00.375378 |             aluno.py:228   |                aluno.executar             | Aluno 'fulano de tal' criado com sucesso.
+INFO     | 27/07/2025 17:53:01 | 0:17:51.425745 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 27/07/2025 17:58:01 | 0:00:01.051625 |             aluno.py:401   |                aluno.get_score_preditivo  | Score preditivo para o aluno 0 (fulano de tal): A
+WARNING  | 27/07/2025 17:58:01 | 0:00:01.074979 |             aluno.py:210   |                aluno.executar             | Tentativa de cadastro com CPF já existente: 91765442714
+INFO     | 27/07/2025 17:59:25 | 0:00:00.881621 |             aluno.py:401   |                aluno.get_score_preditivo  | Score preditivo para o aluno 0 (fulano de tala): A
+INFO     | 27/07/2025 17:59:25 | 0:00:00.945500 |             aluno.py:228   |                aluno.executar             | Aluno 'fulano de tala' criado com sucesso.
+INFO     | 27/07/2025 18:01:06 | 0:00:00.911253 |             aluno.py:401   |                aluno.get_score_preditivo  | Score preditivo para o aluno 0 (fulano de talal): C
+INFO     | 27/07/2025 18:01:06 | 0:00:00.969882 |             aluno.py:228   |                aluno.executar             | Aluno 'fulano de talal' criado com sucesso.
+INFO     | 27/07/2025 18:04:54 | 0:00:00.330832 |              main.py:8     |                 main.<module>             | Iniciando projeto
+INFO     | 27/07/2025 18:05:21 | 0:00:27.927679 |             aluno.py:401   |                aluno.get_score_preditivo  | Score preditivo para o aluno 0 (asdasdasd): A
+INFO     | 27/07/2025 18:05:21 | 0:00:27.973227 |             aluno.py:228   |                aluno.executar             | Aluno 'asdasdasd' criado com sucesso.
+DEBUG    | 27/07/2025 18:05:28 | 0:00:34.934832 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:05:29 | 0:00:35.124127 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:05:29 | 0:00:35.282385 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:05:29 | 0:00:35.441947 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:05:29 | 0:00:35.599813 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:05:29 | 0:00:35.743126 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:05:29 | 0:00:35.908410 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:05:30 | 0:00:36.074478 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:05:30 | 0:00:36.226704 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:05:30 | 0:00:36.378595 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:05:30 | 0:00:36.518537 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:05:30 | 0:00:36.673485 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:05:30 | 0:00:36.815466 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:05:30 | 0:00:36.965467 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:05:31 | 0:00:37.116616 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:05:31 | 0:00:37.261992 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:07:02 | 0:00:00.338158 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:08:05 | 0:03:11.063062 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:08:10 | 0:03:16.665698 |             aluno.py:252   |                aluno.listar_alunos_turma  | 3 alunos encontrados na turma 1.
+DEBUG    | 27/07/2025 18:08:12 | 0:03:18.351932 |             aluno.py:252   |                aluno.listar_alunos_turma  | 3 alunos encontrados na turma 1.
+DEBUG    | 27/07/2025 18:08:14 | 0:03:20.070824 |             aluno.py:252   |                aluno.listar_alunos_turma  | 3 alunos encontrados na turma 1.
+DEBUG    | 27/07/2025 18:09:37 | 0:04:43.539808 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:09:37 | 0:04:43.553111 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:09:39 | 0:04:45.530504 |             aluno.py:243   |                aluno.listar_alunos_escola | 11 alunos encontrados na escola 1.
+DEBUG    | 27/07/2025 18:12:26 | 0:07:32.670151 |             aluno.py:252   |                aluno.listar_alunos_turma  | 3 alunos encontrados na turma 1.
+DEBUG    | 27/07/2025 18:12:28 | 0:07:35.015492 |             aluno.py:252   |                aluno.listar_alunos_turma  | 3 alunos encontrados na turma 2.

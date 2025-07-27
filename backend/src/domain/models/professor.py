@@ -12,11 +12,11 @@ class Professor:
         nacionalidade: str,
         estado_civil: str,
         telefone: str,
-        email: str,
+        nome_usuario: str,
         senha: str
     ) -> None:
         for item in [nome, cpf, cargo, sexo, nacionalidade, 
-                     estado_civil, telefone, email, senha]:
+                     estado_civil, telefone, nome_usuario, senha]:
             if not isinstance(item, str):
                 raise ValueError("O valor não é str")
 
@@ -37,8 +37,8 @@ class Professor:
         self.nacionalidade = nacionalidade
         self.estado_civil = estado_civil
         self.telefone = telefone
-        self.email = email
+        self.nome_usuario = nome_usuario
         self.senha = senha
 
     def __repr__(self) -> str:
-        return f"<Professor id={self.id}, nome='{self.nome}', cpf='{self.cpf}', cargo='{self.cargo}', id_escola={self.id_escola}, data_nascimento={self.data_nascimento}, sexo='{self.sexo}', nacionalidade='{self.nacionalidade}', estado_civil='{self.estado_civil}', telefone='{self.telefone}', email='{self.email}', senha='{self.senha}'>"
+        return f"<Professor id={self.id}, nome='{self.nome}', cpf='{self.cpf}', cargo='{self.cargo}', id_escola={self.id_escola}, data_nascimento={self.data_nascimento}, sexo='{self.sexo}', nacionalidade='{self.nacionalidade}', estado_civil='{self.estado_civil}', telefone='{self.telefone}', nome_usuario='{self.nome_usuario}', senha='{self.senha}'>"
