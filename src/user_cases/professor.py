@@ -546,7 +546,7 @@ class AtualizarProfessorNoBanco:
         
         try:               
             # Verifica existencia de algum aluno com cpf fornecido
-            if ConsultaAlunoBanco(id_aluno =  self.__id, cpf = self.__novo_cpf).buscar_por_cpf_e_id():
+            if ConsultaAlunoBanco().buscar_por_cpf_e_id(id = self.__id, cpf = self.__novo_cpf):
                 log.warning(f"Tentativa de atualização com CPF já existente: {self.__novo_cpf}")
                 return "CPF já vinculado. Aluno"
             

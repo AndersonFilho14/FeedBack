@@ -1,6 +1,6 @@
 from typing import Optional
 from domain.models import Aluno, Responsavel
-from infra.repositories import AlunoRepository, ConsultaEscolaBanco, ConsultaTurmaBanco, ConsultaAlunoBanco, ConsultarProfessor, ConsultaDadosAluno
+from infra.repositories import AlunoRepository, ConsultaEscolaBanco, ConsultarProfessor, ConsultaDadosAluno, AlunoIARepository, ConsultaAlunoBanco
 from config import log
 
 from utils.validarCampos import ValidadorCampos
@@ -166,7 +166,7 @@ class CriarAlunoNoBanco:
             esportes=esportes,
             aula_musica=aula_musica,
             voluntariado=voluntariado,
-            id_turma=0,  # Inicializado como 0, será atualizado na função de criação/edicao de turmas
+            id_turma=id_turma,  # Inicializado como 0, será atualizado na função de criação/edicao de turmas
             id_responsavel=0,  # Inicializado como 0, será atualizado após a inserção do responsavel no banco
         )
         self.__nota_score_preditivo = ObterNotaScorePreditivo.get_score_preditivo(self.__aluno)
@@ -322,7 +322,7 @@ class AtualizarAlunoNoBanco:
         try:
             
             # Verifica existencia de algum aluno com cpf existente
-            if ConsultaAlunoBanco(id_aluno=self.__id, cpf=self.__novo_cpf).buscar_por_cpf_e_id():
+            if ConsultaAlunoBanco().buscar_por_cpf_e_id(id=self.__id, cpf=self.__novo_cpf):
                 log.warning(f"Tentativa de cadastro com CPF já existente: {self.__novo_cpf}")
                 return "CPF já vinculado."
             
@@ -432,7 +432,32 @@ class ObterNotaScorePreditivo:
             (hoje.month, hoje.day) < (data_nascimento.month, data_nascimento.day)
     )
     
-        
+
+class ControllerAlunoIA:
+    """Controlador responsável por coletar dados de alunos relacionados à IA."""
+
+    def obter_distribuicao_notas_ia_geral(id_escola: Optional[int] = None) -> str:
+        """
+        Retorna um JSON com a contagem de notas preditivas dos alunos (geral).
+        """
+        distribuicao = AlunoIARepository.contar_notas_ia_geral()
+        return json.dumps({"distribuicao_geral": distribuicao}, ensure_ascii=False, indent=4)
+
+    def obter_distribuicao_notas_ia_escola(id_escola: Optional[int] = None) -> str:
+        """
+        Retorna um JSON com a contagem de notas preditivas dos alunos de uma escola.
+        """
+        distribuicao = AlunoIARepository.contar_notas_ia_por_escola(id_escola)
+        return json.dumps({"distribuicao_por_escola": distribuicao}, ensure_ascii=False, indent=4)
+
+    def obter_distribuicao_notas_por_sexo(id_escola: Optional[int] = None) -> str:
+        """
+        Retorna um JSON com a contagem de notas preditivas dos alunos por sexo.
+        """
+        distribuicao = AlunoIARepository.contar_notas_ia_por_sexo(id_escola)
+        return json.dumps({"distribuicao_por_sexo": distribuicao}, ensure_ascii=False, indent=4)
+
+ 
 class FormatarAluno:
     """Classe responsável por formatar AlunoData → Aluno (domínio) → JSON."""
 
