@@ -1,5 +1,6 @@
 from typing import Optional, List
-
+from typing import Dict
+from collections import Counter, defaultdict
 from infra import DBConnectionHandler
 
 from infra.db.models_data import (
@@ -190,29 +191,58 @@ class AlunoRepository:
             session.commit()
             return True
         
-class ConsultaAlunoBanco:
-    """Classe resonsável por fazer consultas para validar alguns atributos no banco"""
+class AlunoIARepository:
+    """Classe responsável por acessar dados de score preditivo dos alunos."""
 
-    def __init__(self, id_aluno: Optional[int] = None, cpf: Optional[int] = None) -> None:
-        self.__id_aluno = id_aluno
-        self.__cpf = cpf
-    
-    def buscar_por_cpf(self) -> Optional[AlunoData]:
-        """Busca um aluno pelo CPF. Retorna o objeto AlunoData se encontrado, senão None."""
+    def contar_notas_ia_por_escola(id_escola: int) -> Dict[str, int]:
+        """
+        Conta quantos alunos possuem cada nota preditiva (A, B, C, D, F) para a escola informada.
+        """
         with DBConnectionHandler() as session:
-            return session.query(AlunoData).filter_by(cpf=self.__cpf).first()
-        
-    def buscar_aluno_por_id(self) -> Optional[AlunoData]:
-        """Busca um aluno pelo ID e Retorna o objeto AlunoData  se encontrado, senão None."""
+            alunos = (
+                session.query(Aluno)
+                .filter(Aluno.id_escola == id_escola, Aluno.nota_score_preditivo != None)
+                .all()
+            )
+            notas = [aluno.nota_score_preditivo for aluno in alunos]
+            return dict(Counter(notas))
+
+    def contar_notas_ia_geral() -> Dict[str, int]:
+        """
+        Conta a distribuição geral das notas preditivas no banco (sem filtro de escola).
+        """
         with DBConnectionHandler() as session:
-            return session.query(AlunoData).filter_by(id = self.__id_aluno).first()
+            alunos = (
+                session.query(Aluno)
+                .filter(Aluno.nota_score_preditivo != None)
+                .all()
+            )
+            notas = [aluno.nota_score_preditivo for aluno in alunos]
+            return dict(Counter(notas))
         
-    def buscar_por_cpf_e_id(self) -> bool:
-        """Verifica se o CPF já está cadastrado em outro professor com ID diferente, e retorna um booleano com base nisso.."""
+    def contar_notas_ia_por_sexo(id_escola: Optional[int] = None) -> Dict[str, Dict[str, int]]:
+        """
+        Retorna a contagem de notas IA por sexo.
+        Exemplo:
+        {
+            "Masculino": {"A": 5, "B": 3},
+            "Feminino": {"A": 4, "C": 2}
+        }
+        """
         with DBConnectionHandler() as session:
-            aluno = session.query(AlunoData).filter_by(cpf=self.__cpf).first()
-            return aluno is not None and aluno.id != self.__id_aluno
-        
+            query = session.query(Aluno).filter(Aluno.nota_score_preditivo != None)
+            if id_escola is not None:
+                query = query.filter(Aluno.id_escola == id_escola)
+
+            alunos = query.all()
+
+            distribuicao = defaultdict(Counter)
+            for aluno in alunos:
+                sexo = aluno.sexo or "Não informado"
+                distribuicao[sexo][aluno.nota_score_preditivo] += 1
+
+            # Converte para dicionário normal
+            return {sexo: dict(notas) for sexo, notas in distribuicao.items()}
 
 class ConsultaDadosAluno:
     """Consulta dados relacionados ao aluno: responsável, turma e escola."""
@@ -246,3 +276,26 @@ class ConsultaDadosAluno:
                 if escola:
                     return escola.nome
             return None
+        
+    def numero_responsavel(self) -> Optional[str]:
+        with DBConnectionHandler() as session:
+            aluno = session.query(AlunoData).filter(AlunoData.id == self.id_aluno).first()
+            if aluno and aluno.id_responsavel:
+                responsavel = session.query(ResponsavelData).filter(ResponsavelData.id == aluno.id_responsavel).first()
+                if responsavel:
+                    return responsavel.telefone
+            return None
+
+class ConsultaAlunoBanco:
+    """Classe resonsável por fazer consultas para validar alguns atributos no banco"""
+    
+    def buscar_por_cpf(self, cpf: str) -> Optional[AlunoData]:
+        """Busca um aluno pelo CPF. Retorna o objeto AlunoData se encontrado, senão None."""
+        with DBConnectionHandler() as session:
+            return session.query(AlunoData).filter_by(cpf=cpf).first()
+        
+    def buscar_por_cpf_e_id(self, cpf: str, id: int) -> bool:
+        """Verifica se o CPF já está cadastrado em outro professor com ID diferente, e retorna um booleano com base nisso.."""
+        with DBConnectionHandler() as session:
+            aluno = session.query(AlunoData).filter_by(cpf=cpf).first()
+            return aluno is not None and aluno.id != id
