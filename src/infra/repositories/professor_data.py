@@ -349,6 +349,11 @@ class ProfessorRepository:
                 return False
             session.delete(professor)
             session.commit()
+
+            # Deletando o acesso do professor
+            acesso = session.query(AcessoData).filter_by(id_user=id_professor).first()
+            session.delete(acesso)
+            session.commit()    
             return True
 
 
