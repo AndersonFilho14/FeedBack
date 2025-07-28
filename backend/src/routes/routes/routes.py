@@ -356,17 +356,24 @@ def criar_escola():
 
 
 # --------------------- LISTAR ESCOLAS ---------------------
-@user_rout_bp.route("/escola", methods=["GET"])
+@user_rout_bp.route("/escola/<int:id_municipio>", methods=["GET"])
 def listar_escolas():
     """
-    Lista todas as escolas cadastradas no sistema.
+    Lista todas as escolas cadastradas em um município específico.
+    
+    Query param:
+        id_municipio (int): ID do município para filtrar as escolas.
 
-    :return: JSON contendo a lista de escolas em formato estruturado.
+    :return: JSON contendo a lista de escolas.
     """
-    controller = ControllerEscola()
-    resultado_json = controller.listar_escolas()
-    return make_response(resultado_json)
+    id_municipio = request.args.get("id_municipio", type=int)
 
+    if id_municipio is None:
+        return make_response({"erro": "Parâmetro 'id_municipio' é obrigatório."}, 400)
+
+    controller = ControllerEscola(id_municipio=id_municipio)
+    resultado_json = controller.listar_escolas()
+    return make_response(resultado_json, 200)
 
 # --------------------- ATUALIZAR ESCOLA ---------------------
 @user_rout_bp.route("/escola/<int:id_escola>", methods=["PUT"])
@@ -408,6 +415,22 @@ def deletar_escola(id_escola):
     resultado = controller.deletar_escola()
     return make_response(jsonify({"mensagem": resultado}))
 
+# --------------------- BUSCAR ESCOLA ---------------------
+@user_rout_bp.route("/escola/<int:id_escola>", methods=["GET"])
+def obter_escola(id_escola: int):
+    """
+    Rota para buscar uma escola pelo ID.
+
+    Retorno:
+        200 OK com JSON da escola encontrada
+        404 Not Found se a escola não existir
+    """
+    try:
+        controller = ControllerEscola(id_escola=id_escola)
+        escola = controller.buscar_escola()
+        return jsonify(escola.__dict__), 200  # ou use um método to_dict() se houver
+    except ValueError as e:
+        return jsonify({"erro": str(e)}), 404
 
 # --------------------- CRIAR MATÉRIA ---------------------
 @user_rout_bp.route("/materia", methods=["POST"])
