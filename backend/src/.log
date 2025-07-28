@@ -5358,3 +5358,41 @@ INFO     | 28/07/2025 18:19:34 | 0:00:02.118425 |              main.py:8     |  
 INFO     | 28/07/2025 18:24:14 | 0:04:42.364945 |            escola.py:71    |               escola.executar             | Escola 'testeEscola' criada com sucesso.
 DEBUG    | 28/07/2025 18:38:28 | 0:18:56.389008 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
 INFO     | 28/07/2025 18:40:20 | 0:20:47.808369 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 28/07/2025 18:40:23 | 0:00:00.856508 |              main.py:8     |                 main.<module>             | Iniciando projeto
+INFO     | 28/07/2025 18:42:06 | 0:01:43.506807 |            escola.py:71    |               escola.executar             | Escola 'teste3' criada com sucesso.
+DEBUG    | 28/07/2025 18:42:12 | 0:01:50.178311 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+ERROR    | 28/07/2025 18:42:55 | 0:02:33.102710 |            escola.py:74    |               escola.executar             | Erro ao criar escola: (sqlite3.IntegrityError) UNIQUE constraint failed: acesso.usuario
+[SQL: INSERT INTO acesso (usuario, senha, id_user, id_cargo) VALUES (?, ?, ?, ?)]
+[parameters: ('teste', '123', 7, 2)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+ERROR    | 28/07/2025 18:43:01 | 0:02:38.849419 |            escola.py:74    |               escola.executar             | Erro ao criar escola: (sqlite3.IntegrityError) UNIQUE constraint failed: acesso.usuario
+[SQL: INSERT INTO acesso (usuario, senha, id_user, id_cargo) VALUES (?, ?, ?, ?)]
+[parameters: ('teste', '123', 8, 2)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+INFO     | 28/07/2025 18:43:07 | 0:02:45.291160 |            escola.py:71    |               escola.executar             | Escola 'teste33' criada com sucesso.
+DEBUG    | 28/07/2025 18:43:18 | 0:02:55.914526 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:45:45 | 0:05:22.494602 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:11 | 0:05:48.735491 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:12 | 0:05:49.576246 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:13 | 0:05:50.384115 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:13 | 0:05:51.073471 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:14 | 0:05:51.749634 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:15 | 0:05:52.412336 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:15 | 0:05:52.869711 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:15 | 0:05:53.335936 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:16 | 0:05:53.756681 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:16 | 0:05:54.138707 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:17 | 0:05:54.508934 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:17 | 0:05:54.861804 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:17 | 0:05:55.279168 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:18 | 0:05:55.670513 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:18 | 0:05:56.037155 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:19 | 0:05:56.481429 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:19 | 0:05:56.830137 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:19 | 0:05:57.181610 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:20 | 0:05:57.543426 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:20 | 0:05:57.881684 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:20 | 0:05:58.272494 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:21 | 0:05:58.678893 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:21 | 0:05:58.993785 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 18:46:21 | 0:05:59.325745 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.

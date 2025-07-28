@@ -19,13 +19,14 @@ function Page() {
   useEffect(() => {
     if (id) {
       setMode("edit");
+      console.log(id, "aqui id")
       getEscola({ id })
         .then((data) => {
           setEscola(data);
           form.setFieldsValue(data);
         })
         .catch(() => {
-          route.back();
+        //   route.back();
         });
     } else {
       setMode("create");
