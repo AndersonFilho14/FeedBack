@@ -356,17 +356,24 @@ def criar_escola():
 
 
 # --------------------- LISTAR ESCOLAS ---------------------
-@user_rout_bp.route("/escola", methods=["GET"])
+@user_rout_bp.route("/escola/<int:id_municipio>", methods=["GET"])
 def listar_escolas():
     """
-    Lista todas as escolas cadastradas no sistema.
+    Lista todas as escolas cadastradas em um município específico.
+    
+    Query param:
+        id_municipio (int): ID do município para filtrar as escolas.
 
-    :return: JSON contendo a lista de escolas em formato estruturado.
+    :return: JSON contendo a lista de escolas.
     """
-    controller = ControllerEscola()
-    resultado_json = controller.listar_escolas()
-    return make_response(resultado_json)
+    id_municipio = request.args.get("id_municipio", type=int)
 
+    if id_municipio is None:
+        return make_response({"erro": "Parâmetro 'id_municipio' é obrigatório."}, 400)
+
+    controller = ControllerEscola(id_municipio=id_municipio)
+    resultado_json = controller.listar_escolas()
+    return make_response(resultado_json, 200)
 
 # --------------------- ATUALIZAR ESCOLA ---------------------
 @user_rout_bp.route("/escola/<int:id_escola>", methods=["PUT"])
