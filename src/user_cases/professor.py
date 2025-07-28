@@ -114,7 +114,16 @@ class ControllerProfessorAlunosVinculados:
                     "nacionalidade": aluno.nacionalidade,
                     "id_escola": aluno.id_escola,
                     "id_turma": aluno.id_turma,
-                    "id_responsavel": aluno.id_responsavel
+                    "id_responsavel": aluno.id_responsavel,
+                    "etnia": aluno.etnia,
+                    "esportes": aluno.esportes,
+                    "apoio_pais": aluno.apoio_pais,
+                    "aula_musica": aluno.aula_musica,
+                    "aulas_particulares": aluno.aulas_particulares,
+                    "educacao_pais": aluno.educacao_pais,
+                    "extra_curriculares": aluno.extra_curriculares,
+                    "tempo_estudo_semanal": aluno.tempo_estudo_semanal,
+                    "voluntariado": aluno.voluntariado
                 }
             )
 
@@ -282,7 +291,16 @@ class ConsultarAlunosVinculadosAoProfessor:
             nacionalidade=aluno.nacionalidade,
             id_escola=aluno.id_escola,
             id_turma=aluno.id_turma,
-            id_responsavel=aluno.id_responsavel
+            id_responsavel=aluno.id_responsavel,
+            etnia=aluno.etnia,
+            esportes=aluno.esportes,
+            apoio_pais=aluno.apoioPais,
+            aula_musica=aluno.aulaMusica,
+            aulas_particulares=aluno.aulasParticulares,
+            educacao_pais=aluno.educacaoPais,
+            extra_curriculares=aluno.extraCurriculares,
+            tempo_estudo_semanal=aluno.tempoEstudoSemanal,
+            voluntariado=aluno.voluntariado
         )
         return aluno_model
 
