@@ -1,6 +1,9 @@
+import traceback
 import random
-from datetime import date, timedelta
-from sqlalchemy.exc import IntegrityError # Import IntegrityError
+from datetime import date
+from sqlalchemy.exc import IntegrityError
+from user_cases.aluno import ObterNotaScorePreditivo
+from utils.processIA import processIA, Aluno as AlunoIA
 
 # Importa o handler de conexão e as classes do seu modelo
 from infra.db.settings.connection import DBConnectionHandler
@@ -145,6 +148,47 @@ def popular_dados():
         escolas_list.append(escola_b2)
         print("Escolas criadas (ou já existiam).")
 
+        # adicionando classes de acesso das escolas
+        acesso_escola_a1 = Acesso(
+            usuario = escola_a1.nome + "_user",
+                senha="senha123",
+                id_user=escola_a1.id,
+                id_cargo=2
+        )
+
+        session.add(acesso_escola_a1)
+        session.commit()
+
+        acesso_escola_a2 = Acesso(
+            usuario = escola_a2.nome + "_user",
+                senha="senha123",
+                id_user=escola_a2.id,
+                id_cargo=2
+        )
+
+        session.add(acesso_escola_a2)
+        session.commit()
+
+        acesso_escola_b1 = Acesso(
+            usuario = escola_b1.nome + "_user",
+                senha="senha123",
+                id_user=escola_b1.id,
+                id_cargo=2
+        )
+
+        session.add(acesso_escola_b1)
+        session.commit()
+
+        acesso_escola_b2 = Acesso(
+            usuario = escola_b2.nome + "_user",
+                senha="senha123",
+                id_user=escola_b2.id,
+                id_cargo=2
+        )
+
+        session.add(acesso_escola_b2)
+        session.commit()
+
         # 5. Criar Turmas (duas por escola)
         print("Criando turmas...")
         turmas = []
@@ -192,6 +236,7 @@ def popular_dados():
         print("Criando professores (4 por escola, 2 por matéria por turma)...")
         professores = []
         cpf_counter = 1000
+        acess_prof_counter = 0
 
         turmas_por_escola = {escola.id: [] for escola in escolas_list}
         for turma in turmas:
@@ -224,6 +269,17 @@ def popular_dados():
             professores.append(prof_port_1)
             cpf_counter += 1
 
+            # Adicionando o acesso do professor
+            acesso_prof_port_1 = Acesso(
+                usuario=prof_port_1.nome + "_user" + str(acess_prof_counter),
+                senha="senha123",
+                id_user=prof_port_1.id,
+                id_cargo=1
+            )
+            session.add(acesso_prof_port_1)
+            session.commit()
+            acess_prof_counter+=1
+
             prof_port_2_name = f"Prof. Português 2 - {escola.nome[-2:]}"
             prof_port_2 = session.query(Professor).filter_by(nome=prof_port_2_name, id_escola=escola.id).first()
             if not prof_port_2:
@@ -243,6 +299,17 @@ def popular_dados():
                 session.refresh(prof_port_2)
             professores.append(prof_port_2)
             cpf_counter += 1
+
+                        # Adicionando o acesso do professor
+            acesso_prof_port_2 = Acesso(
+                usuario=prof_port_2.nome + "_user" + str(acess_prof_counter),
+                senha="senha123",
+                id_user=prof_port_2.id,
+                id_cargo=1
+            )
+            session.add(acesso_prof_port_2)
+            session.commit()
+            acess_prof_counter+=1
 
             # Professores de Matemática para esta escola
             prof_mat_1_name = f"Prof. Matemática 1 - {escola.nome[-2:]}"
@@ -265,6 +332,17 @@ def popular_dados():
             professores.append(prof_mat_1)
             cpf_counter += 1
 
+            # Adicionando o acesso do professor
+            acesso_prof_mat_1 = Acesso(
+                usuario=prof_mat_1.nome + "_user" + str(acess_prof_counter),
+                senha="senha123",
+                id_user=prof_mat_1.id,
+                id_cargo=1
+            )
+            session.add(acesso_prof_mat_1)
+            session.commit()
+            acess_prof_counter+=1
+
             prof_mat_2_name = f"Prof. Matemática 2 - {escola.nome[-2:]}"
             prof_mat_2 = session.query(Professor).filter_by(nome=prof_mat_2_name, id_escola=escola.id).first()
             if not prof_mat_2:
@@ -284,7 +362,20 @@ def popular_dados():
                 session.refresh(prof_mat_2)
             professores.append(prof_mat_2)
             cpf_counter += 1
+
+            # Adicionando o acesso do professor
+            acesso_prof_mat_2 = Acesso(
+                usuario=prof_mat_2.nome + "_user" + str(acess_prof_counter),
+                senha="senha123",
+                id_user=prof_mat_1.id,
+                id_cargo=1
+            )
+            session.add(acesso_prof_mat_2)
+            session.commit()
+            acess_prof_counter+=1
+
         print("Professores criados (ou já existiam).")
+        print("Acesso professores criados")
 
         # Recarrega o dicionário professores_por_escola_e_disciplina com os objetos atualizados
         professores_por_escola_e_disciplina = {escola.id: {'Português': [], 'Matemática': []} for escola in escolas_list}
@@ -360,10 +451,11 @@ def popular_dados():
         for i in range(len(turmas) * 3):
             responsavel_name = f"Responsavel {i + 1}"
             responsavel = session.query(Responsavel).filter_by(nome=responsavel_name).first()
+            telefone = '9' + ''.join(str(random.randint(0, 9)) for _ in range(8))
             if not responsavel:
                 responsavel = Responsavel(
                     nome=responsavel_name,
-                    telefone="telefone responsavel",
+                    telefone=telefone,
                 )
                 session.add(responsavel)
                 session.commit()
@@ -397,11 +489,43 @@ def popular_dados():
                         sexo=random.choice(["Masculino", "Feminino"]),
                         nacionalidade="Brasileira",
                         faltas=random.randint(0, 2),
-                        nota_score_preditivo=random.uniform(5.0, 9.5),
                         id_escola=turma.id_escola,
                         id_turma=turma.id,
                         id_responsavel=responsaveis_disponiveis.pop().id if responsaveis_disponiveis else None,
+                        etnia=random.randint(1, 5),                              # Simula 5 categorias étnicas
+                        educacaoPais=random.randint(0, 5),                       # 0: sem escolaridade até 5: superior completo
+                        tempoEstudoSemanal=round(random.uniform(1.0, 15.0), 1),  # horas semanais
+                        apoioPais=random.choice([0, 1]),
+                        aulasParticulares=random.choice([0, 1]),
+                        extraCurriculares=random.choice([0, 1]),
+                        esportes=random.choice([0, 1]),
+                        aulaMusica=random.choice([0, 1]),
+                        voluntariado=random.choice([0, 1])
                     )
+
+                    idade = ObterNotaScorePreditivo._calcular_idade(aluno.data_nascimento)
+                    # criando o alunoIA com os dados do aluno para obter a nota preditiva
+                    alunoIA = AlunoIA(
+                        id=aluno.id,
+                        nome=aluno.nome,
+                        sexo= 1 if aluno.sexo == "Masculino" else 0,
+                        idade=idade,
+                        faltas=aluno.faltas,
+                        etnia=aluno.etnia,
+                        educacaoPais=aluno.educacaoPais,
+                        tempoEstudoSemanal=aluno.tempoEstudoSemanal,
+                        apoioPais=aluno.apoioPais,
+                        aulasParticulares=aluno.aulasParticulares,
+                        esportes=aluno.esportes,
+                        aulaMusica=aluno.aulaMusica,
+                        voluntariado=aluno.voluntariado,
+                        extraCurriculares=aluno.extraCurriculares,
+                        notaFinal=""
+                    )
+
+                    nota_scorre_IA = processIA(alunoIA)
+                    aluno.nota_score_preditivo = nota_scorre_IA
+
                     session.add(aluno)
                     session.commit()
                     session.refresh(aluno)
@@ -550,3 +674,4 @@ if __name__ == "__main__":
         popular_dados()
     except Exception as exception:
         print(f"Erro ao popular os dados. Tipo de erro: {str(exception)}")
+        print(traceback.format_exc())

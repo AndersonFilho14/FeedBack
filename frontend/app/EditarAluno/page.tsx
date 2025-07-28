@@ -3,39 +3,30 @@ import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-// --- Interfaces de Dados ---
-// Define a estrutura completa dos dados do aluno, alinhada com o modelo do backend
+// --- Interfaces e Mapeamentos ---
+
 interface AlunoData {
     id: number;
     nome: string;
     cpf: string;
+    id_escola: number;
     data_nascimento: string;
     sexo: string;
     nacionalidade: string;
-    faltas: number;
-    id_turma?: number | null;
     id_responsavel: number;
-    etnia?: number | null;
-    educacaoPais?: number | null;
-    tempoEstudoSemanal?: number | null;
-    apoioPais: number;
-    aulasParticulares: number;
-    extraCurriculares: number;
-    esportes: number;
-    aulaMusica: number;
-    voluntariado: number;
-    // Dados do responsável, que podem ser enviados juntos
     nome_responsavel: string;
     numero_responsavel: string;
+    etnia?: number | null;
+    educacao_pais?: number | null;
+    tempo_estudo_semanal?: number | null;
+    apoio_pais?: number | null;
+    aulas_particulares?: number | null;
+    extra_curriculares?: number | null;
+    esportes?: number | null;
+    aula_musica?: number | null;
+    voluntariado?: number | null;
 }
 
-interface TurmaData {
-    id: number;
-    nome: string;
-}
-
-// --- Mapeamentos para Selects (Dropdowns) ---
-// Melhora a clareza do código ao invés de usar "números mágicos"
 const etniaOptions = [
     { value: 1, label: "Branca" },
     { value: 2, label: "Preta" },
@@ -53,31 +44,44 @@ const educacaoPaisOptions = [
     { value: 4, label: "Pós-graduação" },
 ];
 
+// --- Funções de formatação ---
+const formatCpf = (cpf: string) => {
+    if (!cpf) return "";
+    let value = cpf.replace(/\D/g, '');
+    if (value.length > 11) value = value.slice(0, 11);
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    return value;
+};
+
+const formatTelefone = (telefone: string) => {
+    if (!telefone) return "";
+    return telefone
+        .replace(/\D/g, '')
+        .replace(/^(\d{2})(\d)/, '($1) $2')
+        .replace(/(\d{5})(\d)/, '$1-$2')
+        .slice(0, 15);
+};
 
 export default function EditarAluno() {
     const searchParams = useSearchParams();
     const alunoId = searchParams.get("id");
     
     // --- Estados do Formulário ---
-    // Dados Pessoais
     const [nome, setNome] = useState("");
     const [data, setData] = useState("");
     const [sexo, setSexo] = useState("");
     const [cpf, setCpf] = useState("");
     const [nacionalidade, setNacionalidade] = useState("");
     const [etnia, setEtnia] = useState<string>("");
-
-    // Dados do Responsável
     const [nomeResponsavel, setNomeResponsavel] = useState("");
     const [telefoneResponsavel, setTelefoneResponsavel] = useState("");
-
-    // Dados Acadêmicos e Comportamentais
-    const [idTurma, setIdTurma] = useState<string>("");
-    const [faltas, setFaltas] = useState<string>("0");
     const [educacaoPais, setEducacaoPais] = useState<string>("");
     const [tempoEstudoSemanal, setTempoEstudoSemanal] = useState<string>("");
+    const [idEscola, setIdEscola] = useState<number | null>(null);
     
-    // Checkboxes (true/false)
+    // Checkboxes (boolean)
     const [apoioPais, setApoioPais] = useState(false);
     const [aulasParticulares, setAulasParticulares] = useState(false);
     const [extraCurriculares, setExtraCurriculares] = useState(false);
@@ -85,18 +89,16 @@ export default function EditarAluno() {
     const [aulaMusica, setAulaMusica] = useState(false);
     const [voluntariado, setVoluntariado] = useState(false);
 
-    const [turmas, setTurmas] = useState<TurmaData[]>([]);
-
     // --- Estados de Controle da UI ---
     const [loading, setLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [message, setMessage] = useState<string | null>(null);
 
-    // --- Busca de Dados ---
+    // --- Busca de Dados (LÓGICA ATUALIZADA) ---
     const fetchAlunoData = useCallback(async () => {
         if (!alunoId) {
-            setError("ID do aluno não foi fornecido na URL.");
+            setError("ID do aluno não fornecido na URL.");
             setLoading(false);
             return;
         }
@@ -104,43 +106,42 @@ export default function EditarAluno() {
         setError(null);
         
         try {
-            // Busca dados do aluno e turmas da escola em paralelo para otimizar
-            const [alunoResponse, turmasResponse] = await Promise.all([
-                fetch(`http://localhost:5000/aluno/${alunoId}`),
-                fetch(`http://localhost:5000/turmas/escola/1`) // Hardcoded para escola 1
-            ]);
-
-            if (!alunoResponse.ok) throw new Error("Falha ao buscar dados do aluno.");
-            if (!turmasResponse.ok) throw new Error("Falha ao buscar lista de turmas.");
+            // 1. Busca a LISTA de alunos da escola (rota que já funciona)
+            // Assumindo escola com ID 1, como em outros componentes seus.
+            const response = await fetch(`http://localhost:5000/alunos/escola/1`);
+            if (!response.ok) {
+                throw new Error("Falha ao buscar a lista de alunos.");
+            }
             
-            const aluno: AlunoData = await alunoResponse.json();
-            const turmasData: { turmas: TurmaData[] } = await turmasResponse.json();
-            
-            setTurmas(turmasData.turmas || []);
+            const data = await response.json();
+            const todosAlunos = data.alunos;
 
-            // Preenche o formulário com os dados do aluno
+            // 2. Encontra o aluno específico DENTRO da lista
+            const aluno = todosAlunos.find((a: AlunoData) => a.id.toString() === alunoId);
+
+            if (!aluno) {
+                throw new Error(`Aluno com ID ${alunoId} não foi encontrado.`);
+            }
+            
+            // 3. Preenche o formulário com os dados do aluno encontrado
             setNome(aluno.nome || "");
-            setCpf(aluno.cpf || "");
+            setCpf(formatCpf(aluno.cpf || ""));
             setData(aluno.data_nascimento ? aluno.data_nascimento.split('T')[0] : "");
             setSexo(aluno.sexo || "");
             setNacionalidade(aluno.nacionalidade || "");
             setEtnia(aluno.etnia?.toString() || "");
-            setIdTurma(aluno.id_turma?.toString() || "");
-            setFaltas(aluno.faltas?.toString() || "0");
             
-            // Dados do responsável
-            // TODO: Ajustar para buscar o responsável pelo `id_responsavel` se a API permitir
             setNomeResponsavel(aluno.nome_responsavel || "");
-            setTelefoneResponsavel(aluno.numero_responsavel || "");
+            setTelefoneResponsavel(formatTelefone(aluno.numero_responsavel || ""));
+            setIdEscola(aluno.id_escola);
 
-            // Dados adicionais
-            setEducacaoPais(aluno.educacaoPais?.toString() || "");
-            setTempoEstudoSemanal(aluno.tempoEstudoSemanal?.toString() || "");
-            setApoioPais(aluno.apoioPais === 1);
-            setAulasParticulares(aluno.aulasParticulares === 1);
-            setExtraCurriculares(aluno.extraCurriculares === 1);
+            setEducacaoPais(aluno.educacao_pais?.toString() || "");
+            setTempoEstudoSemanal(aluno.tempo_estudo_semanal?.toString() || "");
+            setApoioPais(aluno.apoio_pais === 1);
+            setAulasParticulares(aluno.aulas_particulares === 1);
+            setExtraCurriculares(aluno.extra_curriculares === 1);
             setEsportes(aluno.esportes === 1);
-            setAulaMusica(aluno.aulaMusica === 1);
+            setAulaMusica(aluno.aula_musica === 1);
             setVoluntariado(aluno.voluntariado === 1);
 
         } catch (err: any) {
@@ -154,25 +155,13 @@ export default function EditarAluno() {
         fetchAlunoData();
     }, [fetchAlunoData]);
 
-
     // --- Handlers de Input com Máscara ---
     const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value
-          .replace(/\D/g, '')
-          .replace(/(\d{3})(\d)/, '$1.$2')
-          .replace(/(\d{3})(\d)/, '$1.$2')
-          .replace(/(\d{3})(\d{1,2})$/, '$1-$2')
-          .slice(0, 14);
-        setCpf(value);
+        setCpf(formatCpf(e.target.value));
     };
 
     const handleTelefoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value
-          .replace(/\D/g, '')
-          .replace(/^(\d{2})(\d)/, '($1) $2')
-          .replace(/(\d{5})(\d)/, '$1-$2')
-          .slice(0, 15);
-        setTelefoneResponsavel(value);
+        setTelefoneResponsavel(formatTelefone(e.target.value));
     };
 
     // --- Ação de Salvar ---
@@ -182,13 +171,13 @@ export default function EditarAluno() {
             setError("Não é possível salvar sem um ID de aluno.");
             return;
         }
-
+        
         setIsSaving(true);
         setError(null);
         setMessage(null);
 
-        // Monta o payload para a API, convertendo os tipos de dados
         const payload = {
+            id_escola: idEscola, // Importante para o backend saber a escola
             nome,
             cpf: cpf.replace(/\D/g, ''),
             data_nascimento: data,
@@ -196,16 +185,14 @@ export default function EditarAluno() {
             nacionalidade,
             nome_responsavel: nomeResponsavel,
             numero_responsavel: telefoneResponsavel.replace(/\D/g, ''),
-            id_turma: idTurma ? parseInt(idTurma) : null,
-            faltas: faltas ? parseInt(faltas) : 0,
             etnia: etnia ? parseInt(etnia) : null,
-            educacaoPais: educacaoPais ? parseInt(educacaoPais) : null,
-            tempoEstudoSemanal: tempoEstudoSemanal ? parseFloat(tempoEstudoSemanal) : null,
-            apoioPais: apoioPais ? 1 : 0,
-            aulasParticulares: aulasParticulares ? 1 : 0,
-            extraCurriculares: extraCurriculares ? 1 : 0,
+            educacao_pais: educacaoPais ? parseInt(educacaoPais) : null,
+            tempo_estudo_semanal: tempoEstudoSemanal ? parseFloat(tempoEstudoSemanal) : null,
+            apoio_pais: apoioPais ? 1 : 0,
+            aulas_particulares: aulasParticulares ? 1 : 0,
+            extra_curriculares: extraCurriculares ? 1 : 0,
             esportes: esportes ? 1 : 0,
-            aulaMusica: aulaMusica ? 1 : 0,
+            aula_musica: aulaMusica ? 1 : 0,
             voluntariado: voluntariado ? 1 : 0,
         };
 
@@ -248,7 +235,7 @@ export default function EditarAluno() {
                     {error && <p className="text-red-600 bg-red-100 p-3 rounded-md text-center font-semibold -my-2">{error}</p>}
                     {message && <p className="text-green-700 bg-green-100 p-3 rounded-md text-center font-semibold -my-2">{message}</p>}
 
-                    {!loading && (
+                    {!loading && !error && (
                         <form className="flex flex-col gap-8" onSubmit={handleSave}>
                             {/* Seção de Dados Pessoais e Responsável */}
                             <fieldset className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
@@ -295,18 +282,7 @@ export default function EditarAluno() {
                             </fieldset>
 
                              {/* Seção de Dados Acadêmicos */}
-                             <fieldset className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-4">
-                                <div>
-                                    <h5>Turma</h5>
-                                    <select value={idTurma} onChange={e => setIdTurma(e.target.value)} className="w-full h-10 bg-[#A7C1A8] rounded px-3">
-                                        <option value="">Nenhuma turma</option>
-                                        {turmas.map(t => <option key={t.id} value={t.id}>{t.nome}</option>)}
-                                    </select>
-                                </div>
-                                <div>
-                                    <h5>Total de Faltas</h5>
-                                    <input className="w-full h-10 bg-[#A7C1A8] rounded px-3" type="number" min="0" value={faltas} onChange={e => setFaltas(e.target.value)} />
-                                </div>
+                             <fieldset className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
                                 <div>
                                     <h5>Escolaridade dos Pais</h5>
                                      <select value={educacaoPais} onChange={e => setEducacaoPais(e.target.value)} className="w-full h-10 bg-[#A7C1A8] rounded px-3">
@@ -321,8 +297,10 @@ export default function EditarAluno() {
                             </fieldset>
 
                             {/* Seção de Atividades e Apoio */}
-                            <fieldset className="border-t-2 border-[#A7C1A8] pt-6">
-                                <legend className="text-xl text-[#727D73] px-2 -translate-y-9 bg-[#F5ECD5]">Atividades e Apoio</legend>
+                            <div className="flex flex-col gap-4 pt-4">
+                                <h3 className="text-xl font-semibold text-[#727D73] border-b-2 border-[#A7C1A8] pb-2 mb-2">
+                                    Atividades e Apoio
+                                </h3>
                                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                                    <BooleanCheckbox label="Apoio dos Pais" checked={apoioPais} onChange={e => setApoioPais(e.target.checked)} />
                                    <BooleanCheckbox label="Aulas Particulares" checked={aulasParticulares} onChange={e => setAulasParticulares(e.target.checked)} />
@@ -331,7 +309,7 @@ export default function EditarAluno() {
                                    <BooleanCheckbox label="Aulas de Música" checked={aulaMusica} onChange={e => setAulaMusica(e.target.checked)} />
                                    <BooleanCheckbox label="Faz Voluntariado" checked={voluntariado} onChange={e => setVoluntariado(e.target.checked)} />
                                 </div>
-                            </fieldset>
+                            </div>
                             
                             {/* Botões de Ação */}
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-4">

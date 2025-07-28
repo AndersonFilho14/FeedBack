@@ -114,7 +114,16 @@ class ControllerProfessorAlunosVinculados:
                     "nacionalidade": aluno.nacionalidade,
                     "id_escola": aluno.id_escola,
                     "id_turma": aluno.id_turma,
-                    "id_responsavel": aluno.id_responsavel
+                    "id_responsavel": aluno.id_responsavel,
+                    "etnia": aluno.etnia,
+                    "esportes": aluno.esportes,
+                    "apoio_pais": aluno.apoio_pais,
+                    "aula_musica": aluno.aula_musica,
+                    "aulas_particulares": aluno.aulas_particulares,
+                    "educacao_pais": aluno.educacao_pais,
+                    "extra_curriculares": aluno.extra_curriculares,
+                    "tempo_estudo_semanal": aluno.tempo_estudo_semanal,
+                    "voluntariado": aluno.voluntariado
                 }
             )
 
@@ -282,7 +291,16 @@ class ConsultarAlunosVinculadosAoProfessor:
             nacionalidade=aluno.nacionalidade,
             id_escola=aluno.id_escola,
             id_turma=aluno.id_turma,
-            id_responsavel=aluno.id_responsavel
+            id_responsavel=aluno.id_responsavel,
+            etnia=aluno.etnia,
+            esportes=aluno.esportes,
+            apoio_pais=aluno.apoioPais,
+            aula_musica=aluno.aulaMusica,
+            aulas_particulares=aluno.aulasParticulares,
+            educacao_pais=aluno.educacaoPais,
+            extra_curriculares=aluno.extraCurriculares,
+            tempo_estudo_semanal=aluno.tempoEstudoSemanal,
+            voluntariado=aluno.voluntariado
         )
         return aluno_model
 
@@ -468,7 +486,7 @@ class CriarProfessorNoBanco:
                 return f"Escola com ID {self.__professor.id_escola} não encontrada."
             
             # Verifica existencia de algum aluno com cpf existente
-            if ConsultaAlunoBanco(cpf=self.__professor.cpf).buscar_por_cpf() is not None:
+            if ConsultaAlunoBanco().buscar_por_cpf(cpf=self.__professor.cpf) is not None:
                 log.warning(f"Tentativa de cadastro com CPF já existente: {self.__professor.cpf}")
                 return "CPF já vinculado, aluno."
             
@@ -546,7 +564,7 @@ class AtualizarProfessorNoBanco:
         
         try:               
             # Verifica existencia de algum aluno com cpf fornecido
-            if ConsultaAlunoBanco(id_aluno =  self.__id, cpf = self.__novo_cpf).buscar_por_cpf_e_id():
+            if ConsultaAlunoBanco().buscar_por_cpf_e_id(id = self.__id, cpf = self.__novo_cpf):
                 log.warning(f"Tentativa de atualização com CPF já existente: {self.__novo_cpf}")
                 return "CPF já vinculado. Aluno"
             

@@ -27,15 +27,26 @@ export default function InicialProfessor() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try{
-        const response = await fetch("http://127.0.0.1:5000/professor/visualizar_alunos/1");
+      // 1. Obter o ID do professor do localStorage
+      const professorId = localStorage.getItem('userId');
+
+      if (!professorId) {
+        setError("Não foi possível identificar o professor. Por favor, faça login novamente.");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        // 2. Usar o ID do professor logado na chamada da API
+        const response = await fetch(`http://127.0.0.1:5000/professor/visualizar_alunos/${professorId}`);
         if (!response.ok) {
-          throw new Error("Failed to fetch data");
+          const errorData = await response.json().catch(() => null);
+          throw new Error(errorData?.mensagem || `Falha ao buscar dados: ${response.status}`);
         }
         const data: ProfessorData = await response.json();
         setProfessorData(data);
-      } catch (err) {
-        setError("Error fetching data");
+      } catch (err: any) {
+        setError(err.message || "Ocorreu um erro desconhecido.");
         console.error(err);
       } finally {
         setLoading(false);
@@ -55,7 +66,10 @@ export default function InicialProfessor() {
   const { professor, alunos_vinculados } = professorData;
 
   // Assuming each unique id_turma represents a class
-  const turmas = [...new Set(alunos_vinculados.map((aluno) => aluno.id_turma))];
+  // FIX: Safely handle cases where alunos_vinculados might not be an array.
+  const turmas = alunos_vinculados && Array.isArray(alunos_vinculados)
+    ? [...new Set(alunos_vinculados.map((aluno) => aluno.id_turma))]
+    : [];
 
   return (
     <>
@@ -70,9 +84,9 @@ export default function InicialProfessor() {
           <main className="w-310 h-137 flex flex-col justify-center items-center gap-4 overflow-y-auto">
             <div className="flex justify-center items-center w-full h-full">
               <div className="grid grid-cols-3 gap-33">
-                {turmas.map((turmaId, idx) => (
+                {turmas.map((turmaId) => (
                 <div 
-                  key={idx} 
+                  key={turmaId} 
                   className="w-63 h-64 border-t-0 border-7 rounded-lg border-[#A4B465] text-2xl flex flex-col items-center place-content-between  bg-white shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)]">
                     <span className="mb-2 border-7 rounded-lg border-[#727D73]  w-63 flex items-center justify-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] ">Turma {turmaId}</span>
                     Ter : 8:30 - 9:40<br />
@@ -80,7 +94,8 @@ export default function InicialProfessor() {
                     <div className="flex gap-10" >
                       <Link 
                         className="w-35 h-11 border-4 rounded-lg border-[#727D73] flex items-center justify-center text-xl bg-[#A7C1A8] mb-4" 
-                        href={{ pathname: '/EdicaoTurma', query: { turmaId } }} >
+                        // FIX: Corrected path from /EdicaoTurma to /EditarTurma
+                        href={{ pathname: '/EditarTurma', query: { turmaId } }} >
                         Visualizar
                       </Link>
                     </div>

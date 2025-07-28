@@ -14,7 +14,10 @@ from typing import Optional, List
 class ControllerTurma:
     """Controlador responsável por coordenar operações relacionadas a turmas."""
 
-    def __init__(self, nome: Optional[str] = None, ano_letivo: Optional[int] = None, id_escola: Optional[int] = None, id_turma: Optional[int] = None, id_professor: Optional[int] = None, ids_alunos: Optional[List[int]] = None, id_professor_anterior: Optional[List[int]] = None, ids_alunos_anteriores: Optional[List[int]] = None) -> None:
+    def __init__(self, nome: Optional[str] = None, ano_letivo: Optional[int] = None, id_escola: Optional[int] = None, 
+                 id_turma: Optional[int] = None, id_professor: Optional[int] = None, ids_alunos: Optional[List[int]] = None, 
+                 id_professor_anterior: Optional[int] = None, ids_alunos_anteriores: Optional[List[int]] = None) -> None:
+        
         self.__nome = nome
         self.__id_escola = id_escola
         self.__id_turma = id_turma

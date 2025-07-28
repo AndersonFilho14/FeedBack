@@ -1,38 +1,55 @@
 "use client";
-import React,{useState} from "react";
-
+import React, { useState } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
-    const [mensagem, setMensagem] = useState("");
+    const [error, setError] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const router = useRouter();
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+        e.preventDefault();
+        setIsSubmitting(true);
+        setError(null);
 
-    try {
-        const response = await fetch(`http://127.0.0.1:5000/acesso/${user}/${password}`);
-        if (!response.ok) {
-            setMensagem("Usuário ou senha inválidos.");
-            return;
-        }
-        const data = await response.json();
-        if (data.nome && data.cargo) {
-            const cargo = data.cargo.toLowerCase();
-            if (cargo === "professor") {
-                window.location.href = "/InicialProfessor";
-            } else if (cargo === "escola") {
-                window.location.href = "/EdicaoEscola";
-            } else if (cargo === "municipio") {
-                window.location.href = "/EdicaoMunicipio";
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/acesso/${user}/${password}`);
+            
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => null);
+                throw new Error(errorData?.mensagem || "Usuário ou senha inválidos.");
             }
-        } else {
-            setMensagem("Usuário ou senha inválidos.");
+
+            const data = await response.json();
+            // 1. Validar se os dados essenciais (id_user, cargo) foram recebidos
+            if (data.id_user && data.cargo) {
+                // 2. Armazenar os dados do usuário no localStorage para uso em outras páginas
+                localStorage.setItem('userId', data.id_user);
+                localStorage.setItem('userName', data.nome);
+                localStorage.setItem('userCargo', data.cargo);
+                if (data.token) localStorage.setItem('authToken', data.token);
+
+                const cargo = data.cargo.toLowerCase();
+                if (cargo === "professor") {
+                    router.push("/InicialProfessor");
+                } else if (cargo === "escola") {
+                    router.push("/EdicaoEscola"); 
+                } else if (cargo === "municipio") {
+                    router.push("/EdicaoMunicipio");
+                } else {
+                    throw new Error("Cargo de usuário não reconhecido.");
+                }
+            } else {
+                throw new Error("Resposta do servidor não contém os dados necessários para o login.");
+            }
+        } catch (err: any) {
+            setError(err.message || "Erro ao conectar com o servidor.");
+        } finally {
+            setIsSubmitting(false);
         }
-    } catch {
-        setMensagem("Erro ao processar resposta do servidor.");
-    }
-};
+    };
 
     return (
         <>
@@ -61,12 +78,18 @@ export default function Login() {
                             onChange={e => setPassword(e.target.value)}
                             required
                         />
-                        <span className=" cursor-pointer mt-4 flex flex-col items-center p-[7] bg-[#727D73] rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.25)]">
-                            <button type="submit" className=" cursor-pointer pt-2 pb-2 pl-14 pr-14 bg-[#D0DDD0] border-[#727D73] rounded-sm">Entrar</button>
+                        <span className="mt-4 flex flex-col items-center p-[7px] bg-[#727D73] rounded-xl shadow-[0_4px_20px_0_rgba(0,0,0,0.25)]">
+                            <button 
+                                type="submit" 
+                                className="cursor-pointer pt-2 pb-2 pl-14 pr-14 bg-[#D0DDD0] border-[#727D73] rounded-sm disabled:bg-gray-400 disabled:cursor-not-allowed"
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? "Entrando..." : "Entrar"}
+                            </button>
                         </span>
                     </form>
-                    {mensagem && (
-                        <div className="mt-4 text-red-600">{mensagem}</div>
+                    {error && (
+                        <div className="mt-4 text-red-600 font-semibold">{error}</div>
                     )}
                 </main>
             </div>

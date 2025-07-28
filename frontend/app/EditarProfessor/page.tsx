@@ -206,8 +206,8 @@ export default function EditarProfessor() {
                             <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="text" name="Nome pai" id="" value={cargo} onChange={e => setCargo(e.target.value)} />
                             <h5>Telefone </h5>
                             <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="text" name="Telefone responsavel" id="" value={telefone} onChange={handleTelefoneChange} placeholder="(00) 00000-0000" />
-                            <h5>Email</h5>
-                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="Email" name="Email" id="" value={email} onChange={e => setEmail(e.target.value)} />
+                            <h5>Usuario</h5>
+                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="usuario" name="usuario" id="" value={email} onChange={e => setEmail(e.target.value)} />
                             <h5>Nova Senha (deixe em branco para não alterar)</h5>
                             <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="password" name="senha para login" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" />
                         </div>

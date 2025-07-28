@@ -13,7 +13,8 @@ from user_cases import (
     ControllerProfessor,
     ControllerTurma,
     ControllerRankingAvaliacao, 
-    ControllerHistoricoAvaliacoes
+    ControllerHistoricoAvaliacoes,
+    ControllerDashboard
 )
 
 user_rout_bp = Blueprint("user_routes", __name__)
@@ -857,3 +858,22 @@ def ranking_materias_por_escola(id_escola):
     controller = ControllerRankingAvaliacao(id_escola=id_escola)
     resultado = controller.ranquear_materias()
     return make_response(resultado)
+
+@user_rout_bp.route("/dashboard/escola/<int:id_escola>", methods=["GET"])
+def dashboard_escola(id_escola):
+    """
+    Rota para retornar o dashboard de uma escola específica.
+    """
+    controller = ControllerDashboard(id_escola=id_escola)
+    dashboard = controller.gerar_dashboard_escola()
+    return dashboard, 200, {"Content-Type": "application/json"}
+
+
+@user_rout_bp.route("/dashboard/municipio/<int:id_municipio>", methods=["GET"])
+def dashboard_municipio(id_municipio):
+    """
+    Rota para retornar o dashboard de um município específico.
+    """
+    controller = ControllerDashboard(id_municipio=id_municipio)
+    dashboard = controller.gerar_dashboard_municipio()
+    return dashboard, 200, {"Content-Type": "application/json"}

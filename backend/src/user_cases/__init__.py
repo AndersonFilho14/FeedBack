@@ -10,7 +10,8 @@ from user_cases.professor import (
     )
 from user_cases.escola import ControllerEscola # noqa : F401
 from user_cases.materia import ControllerMateria # noqa : F401
-from user_cases.aluno import ControllerAluno # noqa : F401
+from user_cases.aluno import ControllerAluno, ControllerAlunoIA # noqa : F401
 from user_cases.municipio import ControllerMunicipio # noqa : F401
 from user_cases.turma import ControllerTurma # noqa : F401
 from user_cases.avaliacao import ControllerRankingAvaliacao, ControllerHistoricoAvaliacoes
+from user_cases.dashboard import ControllerDashboard  # noqa : F401

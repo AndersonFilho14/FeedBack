@@ -64,66 +64,90 @@ class ControllerRankingAvaliacao:
         ranking = RanquearAvaliacao.raquear_avaliacoes(avaliacoes_dom, criterio="id_materia")
         return FormatarAvaliacao().gerar_json_ranqueado(ranking=ranking, criterio="ranking_materias")
     
-    def ranquear_por_tipo_avaliacao_geral(self) -> Dict[str, List[Dict]]:
-        """
-        Retorna um dicionário onde as chaves são os tipos de avaliação (ex: '1VA', '2VA'),
-        e os valores são listas de escolas com suas médias, ordenadas.
-        """
-        avaliacoes_data = AvaliacaoRepository().buscar_todas()
-        avaliacoes_dom = FormatarAvaliacao().formatar_avaliacao_data_para_dominio(avaliacoes_data)
-
-        agrupado_por_tipo: Dict[str, List[Avaliacao]] = defaultdict(list)
-        for avaliacao in avaliacoes_dom:
-            agrupado_por_tipo[avaliacao.tipo_avaliacao].append(avaliacao)
-
-        resultado: Dict[str, List[Dict]] = {}
-        for tipo, avaliacoes in agrupado_por_tipo.items():
-            escolas_ranqueadas = RanquearAvaliacao.raquear_por_escola(avaliacoes)
-
-            escolas_formatadas = []
-            for esc in escolas_ranqueadas:
-                nome = ConsultaEscolaBanco().buscar_por_id(esc["id"]).nome
-                escolas_formatadas.append({
-                    "nome_escola": nome,
-                    "media": esc["media"],
-                    "quantidade_avaliacoes": esc["quantidade_avaliacoes"]
-                })
-
-            resultado[tipo] = escolas_formatadas
-       
-        return json.dumps(resultado, ensure_ascii=False, indent=4)
-
-    def ranquear_por_tipo_avaliacao_por_escola(self) -> str:
-        """
-        Retorna um JSON onde as chaves são os tipos de avaliação (ex: '1VA', '2VA'),
-        e os valores são listas de turmas com suas médias, ordenadas, apenas da escola informada,
-        filtrando avaliações com id_turma diferente de None.
-        """
+    def ranquear_professores_por_escola(self) -> str:
+        """Ranqueia professores de uma escola específica com base na média das avaliações dos alunos."""
         avaliacoes_data = AvaliacaoRepository().buscar_por_escola(self.__id_escola)
         avaliacoes_dom = FormatarAvaliacao().formatar_avaliacao_data_para_dominio(avaliacoes_data)
 
-        agrupado_por_tipo: Dict[str, List[Avaliacao]] = defaultdict(list)
-        for avaliacao in avaliacoes_dom:
-            if avaliacao.id_turma is not None:  # filtro para id_turma != None
+        # Filtrar avaliações que possuem professor vinculado
+        avaliacoes_dom = [a for a in avaliacoes_dom if a.id_professor is not None]
+
+        # Ranqueamento por professor
+        ranking = RanquearAvaliacao.raquear_avaliacoes(avaliacoes_dom, criterio="id_professor")
+
+        # Formatar resultado com nomes dos professores
+        professores_formatados = []
+        for prof in ranking:
+            professor = ConsultarProfessor(id_professor=prof["id"]).get_professor_retorno()
+            nome = professor.nome
+            professores_formatados.append({
+                "nome_professor": nome,
+                "media": prof["media"],
+                "quantidade_avaliacoes": prof["quantidade_avaliacoes"]
+            })
+
+        return json.dumps({"ranking_professores": professores_formatados}, ensure_ascii=False, indent=4)
+
+    def ranquear_por_tipo_avaliacao_geral(self) -> Dict[str, List[Dict]]:
+            """
+            Retorna um dicionário onde as chaves são os tipos de avaliação (ex: '1VA', '2VA'),
+            e os valores são listas de escolas com suas médias, ordenadas.
+            """
+            avaliacoes_data = AvaliacaoRepository().buscar_todas()
+            avaliacoes_dom = FormatarAvaliacao().formatar_avaliacao_data_para_dominio(avaliacoes_data)
+
+            agrupado_por_tipo: Dict[str, List[Avaliacao]] = defaultdict(list)
+            for avaliacao in avaliacoes_dom:
                 agrupado_por_tipo[avaliacao.tipo_avaliacao].append(avaliacao)
 
-        resultado: Dict[str, List[Dict]] = {}
-        for tipo, avaliacoes in agrupado_por_tipo.items():
-            turmas_ranqueadas = RanquearAvaliacao.raquear_avaliacoes(avaliacoes, criterio="id_turma")
+            resultado: Dict[str, List[Dict]] = {}
+            for tipo, avaliacoes in agrupado_por_tipo.items():
+                escolas_ranqueadas = RanquearAvaliacao.raquear_por_escola(avaliacoes)
 
-            turmas_formatadas = []
-            for turma in turmas_ranqueadas:
-                nome = ConsultaTurmaBanco().buscar_por_id(turma["id"]).nome
-                turmas_formatadas.append({
-                    "nome_turma": nome,
-                    "media": turma["media"],
-                    "quantidade_avaliacoes": turma["quantidade_avaliacoes"]
-                })
+                escolas_formatadas = []
+                for esc in escolas_ranqueadas:
+                    nome = ConsultaEscolaBanco().buscar_por_id(esc["id"]).nome
+                    escolas_formatadas.append({
+                        "nome_escola": nome,
+                        "media": esc["media"],
+                        "quantidade_avaliacoes": esc["quantidade_avaliacoes"]
+                    })
 
-            resultado[tipo] = turmas_formatadas
+                resultado[tipo] = escolas_formatadas
+        
+            return json.dumps(resultado, ensure_ascii=False, indent=4)
 
-        return json.dumps(resultado, ensure_ascii=False, indent=4)
-    
+    def ranquear_por_tipo_avaliacao_por_escola(self) -> str:
+            """
+            Retorna um JSON onde as chaves são os tipos de avaliação (ex: '1VA', '2VA'),
+            e os valores são listas de turmas com suas médias, ordenadas, apenas da escola informada,
+            filtrando avaliações com id_turma diferente de None.
+            """
+            avaliacoes_data = AvaliacaoRepository().buscar_por_escola(self.__id_escola)
+            avaliacoes_dom = FormatarAvaliacao().formatar_avaliacao_data_para_dominio(avaliacoes_data)
+
+            agrupado_por_tipo: Dict[str, List[Avaliacao]] = defaultdict(list)
+            for avaliacao in avaliacoes_dom:
+                if avaliacao.id_turma is not None:  # filtro para id_turma != None
+                    agrupado_por_tipo[avaliacao.tipo_avaliacao].append(avaliacao)
+
+            resultado: Dict[str, List[Dict]] = {}
+            for tipo, avaliacoes in agrupado_por_tipo.items():
+                turmas_ranqueadas = RanquearAvaliacao.raquear_avaliacoes(avaliacoes, criterio="id_turma")
+
+                turmas_formatadas = []
+                for turma in turmas_ranqueadas:
+                    nome = ConsultaTurmaBanco().buscar_por_id(turma["id"]).nome
+                    turmas_formatadas.append({
+                        "nome_turma": nome,
+                        "media": turma["media"],
+                        "quantidade_avaliacoes": turma["quantidade_avaliacoes"]
+                    })
+
+                resultado[tipo] = turmas_formatadas
+
+            return json.dumps(resultado, ensure_ascii=False, indent=4)
+        
     
 class RanquearAvaliacao:
     """Classe para calcular médias e ranquear por aluno, turma ou escola."""
@@ -144,7 +168,7 @@ class RanquearAvaliacao:
         agrupado = defaultdict(list)
 
         for avaliacao in avaliacoes:
-            aluno = ConsultaAlunoBanco(id_aluno = avaliacao.id_aluno).buscar_aluno_por_id()
+            aluno = ConsultaAlunoBanco().buscar_aluno_por_id(id_aluno = avaliacao.id_aluno)
             if aluno:
                 id_escola = aluno.id_escola
                 agrupado[id_escola].append(avaliacao)
@@ -266,7 +290,7 @@ class FormatarAvaliacao:
 
         if criterio == "ranking_alunos":
             for item in ranking:
-                aluno = ConsultaAlunoBanco(id_aluno=item["id"]).buscar_aluno_por_id()
+                aluno = ConsultaAlunoBanco().buscar_aluno_por_id(id_aluno=item["id"])
                 
                 if aluno is not None:
                     turma = ConsultaTurmaBanco().buscar_por_id(aluno.id_turma)

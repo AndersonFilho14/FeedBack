@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function CadastrarProfessor() {
    
     const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
+    const [Usuario, setUsuario] = useState("");
     const [nome, setNome] = useState("");
     const [data, setData] = useState("");
     const [sexo, setSexo] = useState("");
@@ -48,7 +48,7 @@ export default function CadastrarProfessor() {
             nacionalidade,
             estado_civil: estadoCivil,
             telefone: telefone.replace(/\D/g, ''), // Remove a máscara do telefone
-            email,
+            email: Usuario,
             senha: password,
             data_nascimento: data,
             sexo,
@@ -133,8 +133,8 @@ export default function CadastrarProfessor() {
                             <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="text" name="Nome pai" id="" value={cargo} onChange={e => setCargo(e.target.value)} />
                             <h5>Telefone </h5>
                             <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="text" name="Telefone responsavel" id="" value={telefone} onChange={handleTelefoneChange} placeholder="(00) 00000-0000" />
-                            <h5>Email</h5>
-                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="Email" name="Email" id="" value={email} onChange={e => setEmail(e.target.value)} />
+                            <h5>Usuario</h5>
+                            <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="Usuario" name="Usuario" id="" value={Usuario} onChange={e => setUsuario(e.target.value)} />
                             <h5>Senha para login</h5>
                             <input className="w-80 h-10 bg-[#A7C1A8] rounded inset-shadow-[0_2px_1.8px_1px_rgba(0,0,0,0.25)]" type="password" name="senha para login" value={password} onChange={e => setPassword(e.target.value)} />
                         </div>
