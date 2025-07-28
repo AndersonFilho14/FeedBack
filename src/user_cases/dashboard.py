@@ -53,9 +53,49 @@ def gerar_dashboard_escola(self) -> str:
 
     return json.dumps(dashboard, ensure_ascii=False, indent=4)
 
-    def gerar_dashboard_municipio(self) -> str:
-        """
-        Gera o dashboard para o município contendo informações agregadas de várias escolas associadas a ele.
-        """
-        return "Dashboard do Município"
+ def gerar_dashboard_municipio(self) -> str:
+    """
+    Gera o dashboard para o município contendo informações agregadas de várias escolas associadas a ele.
+    """
+
+    # --- Rankings gerais ---
+    controller = ControllerRankingAvaliacao()
+    ranking_alunos = json.loads(controller.ranquear_alunos_geral())
+    ranking_turmas = json.loads(controller.ranquear_turmas_geral())
+    ranking_escolas = json.loads(controller.ranquear_escolas_geral())
+    ranking_materias = json.loads(controller.ranquear_materias_geral())
+    ranking_tipo_avaliacao = json.loads(controller.ranquear_por_tipo_avaliacao_geral())
+
+    # --- Dados preditivos IA (gerais) ---
+    notas_ia_geral = json.loads(ControllerAlunoIA.obter_distribuicao_notas_ia_geral())
+    notas_ia_por_sexo = json.loads(ControllerAlunoIA.obter_distribuicao_notas_por_sexo_geral())
+
+    # --- Participações em atividades (gerais) ---
+    esporte_geral = json.loads(ControllerAlunoIA.obter_qtd_alunos_por_esporte_geral())
+    extra_geral = json.loads(ControllerAlunoIA.obter_qtd_alunos_por_extra_curricular_geral())
+    musica_geral = json.loads(ControllerAlunoIA.obter_qtd_alunos_por_aula_musica_geral())
+    particulares_geral = json.loads(ControllerAlunoIA.obter_qtd_alunos_por_aulas_particulares_geral())
+
+    # --- JSON Final organizado ---
+    dashboard = {
+        "ranking": {
+            "alunos": ranking_alunos,
+            "turmas": ranking_turmas,
+            "escolas": ranking_escolas,
+            "materias": ranking_materias,
+            "tipos_avaliacao": ranking_tipo_avaliacao
+        },
+        "ia": {
+            "distribuicao_notas": notas_ia_geral,
+            "por_sexo": notas_ia_por_sexo
+        },
+        "atividades": {
+            "esportes": esporte_geral,
+            "extra_curriculares": extra_geral,
+            "aulas_musica": musica_geral,
+            "aulas_particulares": particulares_geral
+        }
+    }
+
+    return json.dumps(dashboard, ensure_ascii=False, indent=4)
     
