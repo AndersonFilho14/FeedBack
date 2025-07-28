@@ -18,6 +18,7 @@ export default function EdicaoEscola() {
                         <Link className="w-80 h-24 border-5 rounded-lg border-[#A4B465] flex  justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] text-2xl" href={"/ListaTurmas"}>Manutencao de Turmas</Link>
                     </main>
                     <Link className=" w-44 h-13 border-5 rounded-lg border-[#727D73] flex  justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-2xl mt-16" href={"/Login"}>Voltar</Link>
+                    <Link href="/DesempenhaAgregado" className="py-2 px-6 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition-colors text-lg mt-3.5">Ver Dashboard </Link>
                 </div>
                 
             </div>

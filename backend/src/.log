@@ -5176,3 +5176,181 @@ DEBUG    | 28/07/2025 14:07:00 | 0:49:06.557458 |           materia.py:86    |  
 DEBUG    | 28/07/2025 14:07:12 | 0:49:18.872407 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
 DEBUG    | 28/07/2025 14:07:12 | 0:49:18.897514 |           materia.py:86    |              materia.executar             | 1 matérias encontradas.
 DEBUG    | 28/07/2025 14:07:15 | 0:49:21.130919 |           materia.py:86    |              materia.executar             | 0 matérias encontradas.
+DEBUG    | 28/07/2025 14:28:42 | 1:10:49.033340 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 14:28:42 | 1:10:49.059767 |           materia.py:86    |              materia.executar             | 1 matérias encontradas.
+INFO     | 28/07/2025 17:06:02 | 0:00:00.465247 |              main.py:8     |                 main.<module>             | Iniciando projeto
+DEBUG    | 28/07/2025 17:06:07 | 0:00:05.824681 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 17:06:07 | 0:00:05.852568 |           materia.py:86    |              materia.executar             | 1 matérias encontradas.
+DEBUG    | 28/07/2025 17:06:17 | 0:00:15.445815 |           materia.py:86    |              materia.executar             | 0 matérias encontradas.
+DEBUG    | 28/07/2025 17:06:19 | 0:00:17.302395 |           materia.py:86    |              materia.executar             | 0 matérias encontradas.
+DEBUG    | 28/07/2025 17:06:20 | 0:00:18.373256 |           materia.py:86    |              materia.executar             | 0 matérias encontradas.
+DEBUG    | 28/07/2025 17:06:20 | 0:00:18.517129 |           materia.py:86    |              materia.executar             | 0 matérias encontradas.
+DEBUG    | 28/07/2025 17:06:22 | 0:00:20.551441 |           materia.py:86    |              materia.executar             | 0 matérias encontradas.
+DEBUG    | 28/07/2025 17:06:25 | 0:00:23.456409 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:06:25 | 0:00:23.457168 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:06:26 | 0:00:24.355838 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:06:26 | 0:00:24.370505 |         professor.py:256   |            professor.__init__             | 1
+TRACE    | 28/07/2025 17:06:41 | 0:00:39.923489 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 28/07/2025 17:07:21 | 0:01:19.942994 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 28/07/2025 17:07:21 | 0:01:20.042269 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 17:07:21 | 0:01:20.044312 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 17:07:21 | 0:01:20.054033 |           materia.py:86    |              materia.executar             | 1 matérias encontradas.
+DEBUG    | 28/07/2025 17:07:21 | 0:01:20.059556 |           materia.py:86    |              materia.executar             | 1 matérias encontradas.
+DEBUG    | 28/07/2025 17:15:22 | 0:09:20.820591 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 17:15:22 | 0:09:20.826611 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 17:15:22 | 0:09:20.834630 |           materia.py:86    |              materia.executar             | 1 matérias encontradas.
+DEBUG    | 28/07/2025 17:15:22 | 0:09:20.842970 |           materia.py:86    |              materia.executar             | 1 matérias encontradas.
+TRACE    | 28/07/2025 17:15:39 | 0:09:37.542497 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 28/07/2025 17:15:39 | 0:09:37.635024 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:15:39 | 0:09:37.637315 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:15:45 | 0:09:43.880346 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:15:45 | 0:09:43.905299 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:18:02 | 0:12:00.684258 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:18:02 | 0:12:00.704024 |         professor.py:256   |            professor.__init__             | 1
+INFO     | 28/07/2025 17:19:20 | 0:13:18.693203 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 28/07/2025 17:19:21 | 0:00:00.322093 |              main.py:8     |                 main.<module>             | Iniciando projeto
+TRACE    | 28/07/2025 17:20:56 | 0:01:34.626699 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 28/07/2025 17:20:56 | 0:01:34.753668 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:20:56 | 0:01:34.769138 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:20:58 | 0:01:37.181496 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:20:58 | 0:01:37.210635 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:21:01 | 0:01:40.339797 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:21:01 | 0:01:40.355019 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:21:03 | 0:01:42.339460 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:21:03 | 0:01:42.356167 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:21:05 | 0:01:44.365836 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:21:05 | 0:01:44.384702 |         professor.py:256   |            professor.__init__             | 1
+TRACE    | 28/07/2025 17:21:14 | 0:01:53.165547 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 28/07/2025 17:21:17 | 0:01:56.038392 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:21:17 | 0:01:56.068043 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+TRACE    | 28/07/2025 17:21:53 | 0:02:31.836111 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 28/07/2025 17:21:53 | 0:02:31.938727 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:21:53 | 0:02:31.952323 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:21:55 | 0:02:34.227320 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:21:55 | 0:02:34.245741 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:22:02 | 0:02:40.807602 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:22:02 | 0:02:40.820429 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:22:17 | 0:02:56.401395 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:22:17 | 0:02:56.436457 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:22:23 | 0:03:02.446628 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:22:23 | 0:03:02.468267 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:22:37 | 0:03:16.015782 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:22:37 | 0:03:16.030940 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:22:39 | 0:03:18.001533 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:22:39 | 0:03:18.022256 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:24:03 | 0:04:41.848589 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:24:03 | 0:04:41.888103 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:24:13 | 0:04:51.895285 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:24:13 | 0:04:51.910104 |         professor.py:256   |            professor.__init__             | 1
+TRACE    | 28/07/2025 17:24:18 | 0:04:57.083042 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 28/07/2025 17:24:30 | 0:05:08.677235 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 28/07/2025 17:24:30 | 0:05:08.772555 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:24:30 | 0:05:08.791074 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:24:31 | 0:05:10.374869 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:24:31 | 0:05:10.377607 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:24:48 | 0:05:26.649566 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:24:48 | 0:05:26.665307 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:25:24 | 0:06:02.924680 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 28/07/2025 17:25:24 | 0:06:02.940567 |         professor.py:256   |            professor.__init__             | 1
+TRACE    | 28/07/2025 17:25:33 | 0:06:12.316918 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 28/07/2025 17:25:34 | 0:06:13.373925 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:25:34 | 0:06:13.403524 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:25:38 | 0:06:17.246507 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:25:38 | 0:06:17.272403 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:25:58 | 0:06:36.725930 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:25:58 | 0:06:36.755484 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:26:02 | 0:06:41.112603 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:26:02 | 0:06:41.139691 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:26:25 | 0:07:03.903355 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:26:25 | 0:07:03.930010 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+INFO     | 28/07/2025 17:26:45 | 0:07:23.748067 |             aluno.py:401   |                aluno.get_score_preditivo  | Score preditivo para o aluno 0 (easdfasdsada): C
+INFO     | 28/07/2025 17:26:45 | 0:07:23.785668 |             aluno.py:228   |                aluno.executar             | Aluno 'easdfasdsada' criado com sucesso.
+DEBUG    | 28/07/2025 17:26:46 | 0:07:24.834600 |             aluno.py:243   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:26:46 | 0:07:24.863041 |             aluno.py:243   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+INFO     | 28/07/2025 17:27:00 | 0:07:39.156111 |             aluno.py:384   |                aluno.executar             | Aluno 25 deletado.
+DEBUG    | 28/07/2025 17:27:19 | 0:07:58.268250 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:27:19 | 0:07:58.294536 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:27:41 | 0:08:20.200189 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:27:41 | 0:08:20.222051 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:27:44 | 0:08:22.881060 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:27:44 | 0:08:22.881924 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:27:44 | 0:08:22.911373 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:27:44 | 0:08:22.918474 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:27:53 | 0:08:32.351177 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:27:53 | 0:08:32.375001 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:28:19 | 0:08:58.019517 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:28:19 | 0:08:58.024269 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:28:19 | 0:08:58.044279 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:28:19 | 0:08:58.060281 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:28:19 | 0:08:58.068993 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:28:19 | 0:08:58.077336 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:28:29 | 0:09:08.085191 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:28:29 | 0:09:08.107474 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:28:31 | 0:09:09.947826 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:28:31 | 0:09:09.948545 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:28:31 | 0:09:09.987327 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:28:31 | 0:09:09.988744 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+INFO     | 28/07/2025 17:28:48 | 0:09:26.840215 |             turma.py:76    |                turma.executar             | Turma 'sala de computacao' criada com sucesso.
+DEBUG    | 28/07/2025 17:28:52 | 0:09:31.287373 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:28:52 | 0:09:31.324513 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:28:54 | 0:09:32.903170 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:28:54 | 0:09:32.905129 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:28:54 | 0:09:32.906190 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:28:54 | 0:09:32.951717 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:28:54 | 0:09:32.956355 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:28:54 | 0:09:32.962954 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:28:55 | 0:09:34.099376 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:28:55 | 0:09:34.128324 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:28:56 | 0:09:34.753736 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:28:56 | 0:09:34.755404 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:28:56 | 0:09:34.783868 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:28:56 | 0:09:34.787896 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:29:13 | 0:09:51.800272 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:29:13 | 0:09:51.802568 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:29:14 | 0:09:52.684026 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:29:14 | 0:09:52.685546 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:29:14 | 0:09:52.688452 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:29:14 | 0:09:52.688769 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:29:14 | 0:09:52.689611 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:29:14 | 0:09:52.695003 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:29:15 | 0:09:54.009616 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 28/07/2025 17:29:15 | 0:09:54.038830 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+TRACE    | 28/07/2025 17:29:51 | 0:10:30.082506 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 28/07/2025 17:29:52 | 0:10:30.966980 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 17:29:52 | 0:10:30.979172 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 17:29:52 | 0:10:30.987188 |           materia.py:86    |              materia.executar             | 1 matérias encontradas.
+DEBUG    | 28/07/2025 17:29:52 | 0:10:31.003874 |           materia.py:86    |              materia.executar             | 1 matérias encontradas.
+DEBUG    | 28/07/2025 17:31:23 | 0:12:02.025490 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 17:31:23 | 0:12:02.032240 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 17:31:23 | 0:12:02.041035 |           materia.py:86    |              materia.executar             | 1 matérias encontradas.
+DEBUG    | 28/07/2025 17:31:23 | 0:12:02.047871 |           materia.py:86    |              materia.executar             | 1 matérias encontradas.
+TRACE    | 28/07/2025 17:33:16 | 0:13:55.082696 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 28/07/2025 17:33:19 | 0:13:58.381741 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:33:19 | 0:13:58.403251 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:33:24 | 0:14:02.632926 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:33:24 | 0:14:02.652524 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:33:27 | 0:14:05.910480 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:33:27 | 0:14:05.913581 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+TRACE    | 28/07/2025 17:37:19 | 0:17:57.669332 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 28/07/2025 17:37:19 | 0:17:57.775435 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 17:37:19 | 0:17:57.775817 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 17:37:19 | 0:17:57.784855 |           materia.py:86    |              materia.executar             | 1 matérias encontradas.
+DEBUG    | 28/07/2025 17:37:19 | 0:17:57.795289 |           materia.py:86    |              materia.executar             | 1 matérias encontradas.
+DEBUG    | 28/07/2025 17:38:37 | 0:19:16.492915 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 17:38:37 | 0:19:16.499986 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+DEBUG    | 28/07/2025 17:38:37 | 0:19:16.512393 |           materia.py:86    |              materia.executar             | 1 matérias encontradas.
+DEBUG    | 28/07/2025 17:38:37 | 0:19:16.520551 |           materia.py:86    |              materia.executar             | 1 matérias encontradas.
+TRACE    | 28/07/2025 17:38:45 | 0:19:23.919595 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 28/07/2025 17:40:19 | 0:20:58.360117 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:40:19 | 0:20:58.393768 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:42:57 | 0:23:36.547527 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:42:57 | 0:23:36.572639 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 28/07/2025 17:43:03 | 0:23:41.829955 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:43:03 | 0:23:41.849952 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:43:46 | 0:24:25.475231 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:43:46 | 0:24:25.498126 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:44:00 | 0:24:38.981649 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:44:00 | 0:24:39.007427 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+INFO     | 28/07/2025 17:44:56 | 0:25:35.231368 |         professor.py:507   |            professor._executar            | Professor 'abigobaldo junior' criado com sucesso.
+DEBUG    | 28/07/2025 17:45:11 | 0:25:49.887902 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+DEBUG    | 28/07/2025 17:45:11 | 0:25:49.913530 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
