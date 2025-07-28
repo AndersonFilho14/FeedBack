@@ -5354,3 +5354,5 @@ DEBUG    | 28/07/2025 17:44:00 | 0:24:39.007427 |         professor.py:521   |  
 INFO     | 28/07/2025 17:44:56 | 0:25:35.231368 |         professor.py:507   |            professor._executar            | Professor 'abigobaldo junior' criado com sucesso.
 DEBUG    | 28/07/2025 17:45:11 | 0:25:49.887902 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
 DEBUG    | 28/07/2025 17:45:11 | 0:25:49.913530 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+INFO     | 28/07/2025 18:19:34 | 0:00:02.118425 |              main.py:8     |                 main.<module>             | Iniciando projeto
+INFO     | 28/07/2025 18:24:14 | 0:04:42.364945 |            escola.py:71    |               escola.executar             | Escola 'testeEscola' criada com sucesso.
