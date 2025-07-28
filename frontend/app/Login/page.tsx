@@ -37,7 +37,7 @@ export default function Login() {
                 } else if (cargo === "escola") {
                     router.push("/EdicaoEscola"); 
                 } else if (cargo === "municipio") {
-                    router.push("/dashboard");
+                    router.push("/MunicipioMain");
                 } else {
                     throw new Error("Cargo de usuário não reconhecido.");
                 }

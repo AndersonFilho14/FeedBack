@@ -9,6 +9,7 @@ interface Avaliacao {
   nome_aluno: string;
   nota: number | null;
   tipo_avaliacao: string;
+  nome_turma: string; // Adicionado para permitir a filtragem correta
 }
 
 export default function EditarNotas() {
@@ -24,38 +25,53 @@ export default function EditarNotas() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Obter o ID do professor do localStorage para garantir que os dados corretos sejam buscados.
-    let professorId: string | null = null;
-    try {
-      professorId = localStorage.getItem('userId');
-    } catch (e) {
-      setError("Erro ao acessar os dados do usuário.");
-      setLoading(false);
-      return;
-    }
+    async function fetchData() {
+      // Obter o ID do professor do localStorage
+      let professorId: string | null;
+      try {
+        professorId = localStorage.getItem('userId');
+      } catch (e) {
+        setError("Erro ao acessar os dados do usuário.");
+        setLoading(false);
+        return;
+      }
 
-    if (!professorId) {
-      setError("Professor não identificado. Por favor, faça o login novamente.");
-      setLoading(false);
-      return;
-    }
+      if (!professorId) {
+        setError("Professor não identificado. Por favor, faça o login novamente.");
+        setLoading(false);
+        return;
+      }
 
-    async function fetchAvaliacoes(pId: string) {
       try {
         setError(null);
         setLoading(true);
-        // Usar o ID do professor logado na chamada da API
-        const response = await fetch(`http://localhost:5000/historico/avaliacoes/turma/${turmaId}/${pId}`);
+        
+        // A API de avaliações não filtra por turma, então buscamos as turmas para filtrar pelo nome.
+        const [avaliacoesRes, turmasRes] = await Promise.all([
+          fetch(`http://localhost:5000/historico/avaliacoes/turma/${turmaId}/${professorId}`),
+          fetch(`http://localhost:5000/turmas/escola/1`) // Assumindo escola 1, como em outras telas
+        ]);
 
-        if (!response.ok) {
+        if (!avaliacoesRes.ok) {
           throw new Error("Falha ao buscar as avaliações da turma.");
         }
+        if (!turmasRes.ok) {
+          throw new Error("Falha ao buscar a lista de turmas para filtragem.");
+        }
 
-        const data = await response.json();
+        const dataAvaliacoes = await avaliacoesRes.json();
+        const todasAsTurmas = await turmasRes.json();
 
-        if (data && data.avaliacoes) {
-          const filtradas = data.avaliacoes.filter(
-            (a: Avaliacao) => a.tipo_avaliacao === tipo
+        // Encontrar o nome da turma atual para poder filtrar as avaliações
+        const turmaAtual = todasAsTurmas.find((t: { turma_id: number, nome: string }) => t.turma_id.toString() === turmaId);
+        if (!turmaAtual) {
+          throw new Error(`Turma com ID ${turmaId} não foi encontrada.`);
+        }
+
+        if (dataAvaliacoes && dataAvaliacoes.avaliacoes) {
+          // Filtra as avaliações pelo nome da turma e pelo tipo (1Va, 2Va, etc.)
+          const filtradas = dataAvaliacoes.avaliacoes.filter(
+            (a: Avaliacao) => a.nome_turma === turmaAtual.nome && a.tipo_avaliacao === tipo
           );
           setAvaliacoes(filtradas);
         } else {
@@ -70,7 +86,7 @@ export default function EditarNotas() {
     }
 
     if (turmaId && tipo) {
-      fetchAvaliacoes(professorId);
+      fetchData();
     } else {
       setError("ID da turma ou tipo de avaliação não especificado.");
       setLoading(false);

@@ -397,7 +397,7 @@ if __name__ == "__main__":
     #test_criar_materia()
     #test_criar_municipio() 
    
-    #test_listar_escolas()
+    test_listar_escolas()
     #test_listar_professores()
     #test_listar_turmas()
     #test_listar_alunos_escola()
