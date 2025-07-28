@@ -42,7 +42,20 @@ class ControllerEscola:
     def deletar_escola(self) -> str:
         """Remove uma escola do banco pelo ID."""
         return DeletarEscolaDoBanco(id_escola = self.__id_escola).executar()
+    
+    
+    def buscar_escola(self) -> Escola:
+        """busca uma escola por meio do id"""
+        escola_data = ConsultaEscolaBanco().buscar_por_id(id_escola=self.__id_escola)
+        
+        if not escola_data:
+            raise ValueError(f"Escola com ID {self.__id_escola} não encontrada.")
 
+        lista_escola = [escola_data]  # cria uma lista com um único item
+        escola_dominio = FormatarEscola().formatar_escola_data_para_dominio(lista_escola)[0]  # pega o primeiro da lista formatada
+        
+        return escola_dominio
+        
 
 class CriarEscolaNoBanco:
     def __init__(self,  nome: str, id_municipio: int, nome_usuario: str = None, senha: str = None):
@@ -171,3 +184,4 @@ class FormatarEscola:
             })
 
         return json.dumps({"escolas": lista}, ensure_ascii=False, indent=4)
+    

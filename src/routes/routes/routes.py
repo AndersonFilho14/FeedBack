@@ -408,6 +408,24 @@ def deletar_escola(id_escola):
     return make_response(jsonify({"mensagem": resultado}))
 
 
+# --------------------- BUSCAR ESCOLA ---------------------
+@user_rout_bp.route("/escola/<int:id_escola>", methods=["GET"])
+def obter_escola(id_escola: int):
+    """
+    Rota para buscar uma escola pelo ID.
+
+    Retorno:
+        200 OK com JSON da escola encontrada
+        404 Not Found se a escola não existir
+    """
+    try:
+        controller = ControllerEscola(id_escola=id_escola)
+        escola = controller.buscar_escola()
+        return jsonify(escola.__dict__), 200  # ou use um método to_dict() se houver
+    except ValueError as e:
+        return jsonify({"erro": str(e)}), 404
+
+
 # --------------------- CRIAR MATÉRIA ---------------------
 @user_rout_bp.route("/materia", methods=["POST"])
 def criar_materia():
