@@ -7,7 +7,6 @@ from user_cases.municipio import ControllerMunicipio
 from user_cases.escola import ControllerEscola
 from user_cases.avaliacao import ControllerRankingAvaliacao, ControllerHistoricoAvaliacoes
 
-
 ID_ESCOLA_TESTE = 1
 
 # Funções de criação:
@@ -100,7 +99,6 @@ def test_criar_municipio():
 
 def test_listar_escolas():
     controller = ControllerEscola(id_municipio=1)
-
     resposta = controller.listar_escolas()
     print(resposta)
 
@@ -199,7 +197,7 @@ def test_atualizar_turma():
     controller = ControllerTurma(
         id_turma=2,  # ajuste para um ID válido
         nome="3º Ano b atualizado",
-        id_professor_anterior=1,
+        id_professor_anterior=2,
         ids_alunos_anteriores=ids_alunos_anteriores,
         id_professor=2,
         ids_alunos=ids_alunos_atual,
@@ -397,7 +395,7 @@ if __name__ == "__main__":
     #test_criar_materia()
     #test_criar_municipio() 
    
-    #test_listar_escolas()
+    test_listar_escolas()
     #test_listar_professores()
     #test_listar_turmas()
     #test_listar_alunos_escola()
@@ -450,4 +448,3 @@ if __name__ == "__main__":
     #teste_distribuicao_extra_curricular_escola()
     #teste_distribuicao_aula_musica_escola()
     #teste_distribuicao_aulas_Particulares_escola()
-    

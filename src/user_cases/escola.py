@@ -161,7 +161,7 @@ class FormatarEscola:
         """Gera um JSON formatado com os dados das escolas."""
         lista = []
         for escola in escolas_dominio:
-            acesso = ConsultaEscolaBanco().buscar_acesso(escola.id)
+            acesso = ConsultaEscolaBanco().buscar_acesso(escola.id, id_cargo=2)
             lista.append({
                 "id": escola.id,
                 "nome": escola.nome,
