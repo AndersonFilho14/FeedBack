@@ -252,7 +252,7 @@ class FormatarAvaliacao:
         lista = []
 
         for avaliacao in avaliacoes_dominio:
-            aluno = ConsultaAlunoBanco(id_aluno=avaliacao.id_aluno).buscar_aluno_por_id()
+            aluno = ConsultaAlunoBanco().buscar_aluno_por_id(id_aluno=avaliacao.id_aluno)
             professor = ConsultarProfessor(id_professor=avaliacao.id_professor).get_professor_retorno()
             disciplina = ConsultaMateriaBanco().buscar_disciplina_por_id(id_disciplina=avaliacao.id_disciplina)
             materia = ConsultaMateriaBanco().buscar_materia_por_id(avaliacao.id_materia)
