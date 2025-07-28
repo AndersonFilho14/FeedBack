@@ -1,10 +1,12 @@
 from user_cases.professor import ControllerProfessor
 from user_cases.aluno import ControllerAluno
+from user_cases.aluno import ControllerAluno, ControllerAlunoIA
 from user_cases.turma import ControllerTurma
 from user_cases.materia import ControllerMateria
 from user_cases.municipio import ControllerMunicipio
 from user_cases.escola import ControllerEscola
 from user_cases.avaliacao import ControllerRankingAvaliacao, ControllerHistoricoAvaliacoes
+
 
 ID_ESCOLA_TESTE = 1
 
@@ -191,11 +193,11 @@ def test_atualizar_aluno():
     print(resposta)
 
 def test_atualizar_turma():
-    ids_alunos_anteriores = [25, 26, 27, 28]
-    ids_alunos_atual = [25, 26, 2]  # IDs de alunos atuais
+    ids_alunos_anteriores = [4, 5]
+    ids_alunos_atual = [1, 2]  # IDs de alunos atuais
     
     controller = ControllerTurma(
-        id_turma=10,  # ajuste para um ID válido
+        id_turma=2,  # ajuste para um ID válido
         nome="3º Ano b atualizado",
         id_professor_anterior=1,
         ids_alunos_anteriores=ids_alunos_anteriores,
@@ -331,6 +333,61 @@ def teste_ranking_tipo_avaliacao_escola():
     resposta = controller.ranquear_por_tipo_avaliacao_por_escola()
     print(resposta)
 
+def teste_ranking_professor_escola():
+    controller = ControllerRankingAvaliacao(id_escola=ID_ESCOLA_TESTE)
+    resposta = controller.ranquear_professores_por_escola()
+    print(resposta)
+
+# Testes relacionados aos dados da IA:
+
+def teste_distrubuicao_notas_IA_geral():
+    resultado = ControllerAlunoIA.obter_distribuicao_notas_ia_geral()
+    print (resultado)
+
+def teste_distribuicao_notas_IA_Escola():
+    resultado = ControllerAlunoIA.obter_distribuicao_notas_ia_escola(id_escola = ID_ESCOLA_TESTE)
+    print (resultado)
+
+def teste_distribuicao_notas_IA_por_sexo_geral():
+    resultado = ControllerAlunoIA.obter_distribuicao_notas_por_sexo_geral()
+    print (resultado)
+
+def teste_distribuicao_notas_IA_por_sexo_escola():
+    resultado = ControllerAlunoIA.obter_distribuicao_notas_por_sexo_escola(ID_ESCOLA_TESTE)
+    print (resultado)
+
+def teste_distribuicao_participantes_esporte_geral():
+    resultado = ControllerAlunoIA.obter_qtd_alunos_por_esporte_geral()
+    print(resultado)
+
+def teste_distribuicao_participantes_esporte_escola():
+    resultado = ControllerAlunoIA.obter_qtd_alunos_por_esporte_escola(ID_ESCOLA_TESTE)
+    print(resultado)
+
+def teste_distribuicao_extra_curricular_geral():
+    resultado = ControllerAlunoIA.obter_qtd_alunos_por_extra_curricular_geral()
+    print(resultado)
+
+def teste_distribuicao_extra_curricular_escola():
+    resultado = ControllerAlunoIA.obter_qtd_alunos_por_extra_curricular_escola(ID_ESCOLA_TESTE)
+    print(resultado)
+    
+def teste_distribuicao_aula_musica_escola():
+    resultado = ControllerAlunoIA.obter_qtd_alunos_por_aula_musica_escola(ID_ESCOLA_TESTE)
+    print(resultado)
+    
+def teste_distribuicao_aula_musica_geral():
+    resultado = ControllerAlunoIA.obter_qtd_alunos_por_aula_musica_geral()
+    print(resultado)
+
+def teste_distribuicao_aulas_Particulares_escola():
+    resultado = ControllerAlunoIA.obter_qtd_alunos_por_aulas_particulares_escola(ID_ESCOLA_TESTE)
+    print(resultado)
+
+def teste_distribuicao_aulas_Particulares_geral():
+    resultado = ControllerAlunoIA.obter_qtd_alunos_por_aulas_particulares_geral()
+    print(resultado)
+
 if __name__ == "__main__":
     print("descomente a função que deseja testar")
     #test_criar_escola()
@@ -355,7 +412,8 @@ if __name__ == "__main__":
     #test_atualizar_materia()
     #test_atualizar_municipio() 
     
-    test_deletar_escola()
+    #test_deletar_escola()
+    #test_deletar_escola()
     #test_deletar_professor()
     #test_deletar_turma()
     #test_deletar_aluno()
@@ -370,8 +428,26 @@ if __name__ == "__main__":
     #test_ranking_por_turma_geral()
     #test_ranking_por_escola_geral()
     #test_ranking_por_materia_geral()
+    #teste_ranking_tipo_avaliacao_geral()
+
     #teste_ranking_por_aluno_escola()
     #teste_ranking_por_turma_escola()
     #teste_ranking_por_materia_escola()
-    #teste_ranking_tipo_avaliacao_geral()
     #teste_ranking_tipo_avaliacao_escola()
+    #teste_ranking_tipo_avaliacao_escola()
+    #teste_ranking_professor_escola()
+
+    #teste_distrubuicao_notas_IA_geral()
+    #teste_distribuicao_notas_IA_por_sexo_geral()
+    #teste_distribuicao_participantes_esporte_geral()
+    #teste_distribuicao_extra_curricular_geral()
+    #teste_distribuicao_aula_musica_geral()
+    #teste_distribuicao_aulas_Particulares_geral()
+
+    #teste_distribuicao_notas_IA_Escola()
+    #teste_distribuicao_notas_IA_por_sexo_escola()
+    #teste_distribuicao_participantes_esporte_escola()
+    #teste_distribuicao_extra_curricular_escola()
+    #teste_distribuicao_aula_musica_escola()
+    #teste_distribuicao_aulas_Particulares_escola()
+    

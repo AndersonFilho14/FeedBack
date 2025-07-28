@@ -436,6 +436,14 @@ class ObterNotaScorePreditivo:
 class ControllerAlunoIA:
     """Controlador responsável por coletar dados de alunos relacionados à IA."""
 
+    def obter_distribuicao_notas_ia_escola(id_escola: int) -> str:
+        """
+        Retorna um JSON com a contagem de notas preditivas dos alunos de uma escola.
+        """
+        distribuicao = AlunoIARepository.contar_notas_ia_por_escola(id_escola)
+        return json.dumps({"distribuicao_por_escola": distribuicao}, ensure_ascii=False, indent=4)
+
+
     def obter_distribuicao_notas_ia_geral(id_escola: Optional[int] = None) -> str:
         """
         Retorna um JSON com a contagem de notas preditivas dos alunos (geral).
@@ -443,21 +451,151 @@ class ControllerAlunoIA:
         distribuicao = AlunoIARepository.contar_notas_ia_geral()
         return json.dumps({"distribuicao_geral": distribuicao}, ensure_ascii=False, indent=4)
 
-    def obter_distribuicao_notas_ia_escola(id_escola: Optional[int] = None) -> str:
-        """
-        Retorna um JSON com a contagem de notas preditivas dos alunos de uma escola.
-        """
-        distribuicao = AlunoIARepository.contar_notas_ia_por_escola(id_escola)
-        return json.dumps({"distribuicao_por_escola": distribuicao}, ensure_ascii=False, indent=4)
 
-    def obter_distribuicao_notas_por_sexo(id_escola: Optional[int] = None) -> str:
+    def obter_distribuicao_notas_por_sexo_escola(id_escola: int) -> str:
         """
         Retorna um JSON com a contagem de notas preditivas dos alunos por sexo.
         """
-        distribuicao = AlunoIARepository.contar_notas_ia_por_sexo(id_escola)
+        distribuicao = AlunoIARepository.contar_notas_ia_por_sexo_escola(id_escola)
         return json.dumps({"distribuicao_por_sexo": distribuicao}, ensure_ascii=False, indent=4)
 
- 
+
+    def obter_distribuicao_notas_por_sexo_geral() -> str:
+        """
+        Retorna um JSON com a contagem de notas preditivas dos alunos por sexo (geral, sem filtro de escola).
+        """
+        distribuicao = AlunoIARepository.contar_notas_ia_por_sexo_geral()
+        return json.dumps({"distribuicao_por_sexo": distribuicao}, ensure_ascii=False, indent=4)
+
+
+    def obter_qtd_alunos_por_esporte_escola(id_escola: int) -> str:
+        """
+        Retorna a contagem de alunos que participam ou não de esportes na escola.
+
+        Exemplo:
+        {
+            "esportes": {
+                "Participa": 7,
+                "Não participa": 5
+            }
+        }
+        """
+        dados = AlunoIARepository.contar_alunos_por_esporte_escola(id_escola)
+        return json.dumps({"esportes": dados}, ensure_ascii=False, indent=4)
+
+
+    def obter_qtd_alunos_por_esporte_geral() -> str:
+        """
+        Retorna a contagem de alunos que participam ou não de esportes em todas as escolas.
+
+        Exemplo:
+        {
+            "esportes": {
+                "Participa": 15,
+                "Não participa": 9
+            }
+        }
+        """
+        dados = AlunoIARepository.contar_alunos_por_esporte_geral()
+        return json.dumps({"esportes": dados}, ensure_ascii=False, indent=4)
+
+
+    def obter_qtd_alunos_por_extra_curricular_escola(id_escola: int) -> str:
+        """
+        Retorna a contagem de alunos que fazem ou não fazem aulas extracurriculares na escola.
+
+        Exemplo:
+        {
+            "extraCurriculares": {
+                "Faz": 6,
+                "Não faz": 8
+            }
+        }
+        """
+        dados = AlunoIARepository.contar_alunos_por_extracurriculares_escola(id_escola)
+        return json.dumps({"extraCurriculares": dados}, ensure_ascii=False, indent=4)
+
+
+    def obter_qtd_alunos_por_extra_curricular_geral() -> str:
+        """
+        Retorna a contagem de alunos que fazem ou não fazem aulas extracurriculares em geral.
+
+        Exemplo:
+        {
+            "extraCurriculares": {
+                "Faz": 12,
+                "Não faz": 18
+            }
+        }
+        """
+        dados = AlunoIARepository.contar_alunos_por_extracurriculares_geral()
+        return json.dumps({"extraCurriculares": dados}, ensure_ascii=False, indent=4)
+
+
+    def obter_qtd_alunos_por_aula_musica_escola(id_escola: int) -> str:
+        """
+        Retorna a contagem de alunos que fazem ou não fazem aula de música na escola.
+
+        Exemplo:
+        {
+            "aulaMusica": {
+                "Faz": 5,
+                "Não faz": 9
+            }
+        }
+        """
+        dados = AlunoIARepository.contar_alunos_por_aula_musica_escola(id_escola)
+        return json.dumps({"aulaMusica": dados}, ensure_ascii=False, indent=4)
+
+
+    def obter_qtd_alunos_por_aula_musica_geral() -> str:
+        """
+        Retorna a contagem de alunos que fazem ou não fazem aula de música em geral.
+
+        Exemplo:
+        {
+            "aulaMusica": {
+                "Faz": 14,
+                "Não faz": 16
+            }
+        }
+        """
+        dados = AlunoIARepository.contar_alunos_por_aula_musica_geral()
+        return json.dumps({"aulaMusica": dados}, ensure_ascii=False, indent=4)
+
+
+    def obter_qtd_alunos_por_aulas_particulares_escola(id_escola: int) -> str:
+        """
+        Retorna a contagem de alunos que fazem ou não fazem aulas particulares na escola.
+
+        Exemplo:
+        {
+            "aulasParticulares": {
+                "Faz": 4,
+                "Não faz": 10
+            }
+        }
+        """
+        dados = AlunoIARepository.contar_alunos_por_aulas_particulares_escola(id_escola)
+        return json.dumps({"aulasParticulares": dados}, ensure_ascii=False, indent=4)
+
+
+    def obter_qtd_alunos_por_aulas_particulares_geral() -> str:
+        """
+        Retorna a contagem de alunos que fazem ou não fazem aulas particulares em geral.
+
+        Exemplo:
+        {
+            "aulasParticulares": {
+                "Faz": 12,
+                "Não faz": 18
+            }
+        }
+        """
+        dados = AlunoIARepository.contar_alunos_por_aulas_particulares_geral()
+        return json.dumps({"aulasParticulares": dados}, ensure_ascii=False, indent=4)
+    
+
 class FormatarAluno:
     """Classe responsável por formatar AlunoData → Aluno (domínio) → JSON."""
 

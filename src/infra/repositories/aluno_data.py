@@ -200,8 +200,8 @@ class AlunoIARepository:
         """
         with DBConnectionHandler() as session:
             alunos = (
-                session.query(Aluno)
-                .filter(Aluno.id_escola == id_escola, Aluno.nota_score_preditivo != None)
+                session.query(AlunoData)
+                .filter(AlunoData.id_escola == id_escola, AlunoData.nota_score_preditivo != None)
                 .all()
             )
             notas = [aluno.nota_score_preditivo for aluno in alunos]
@@ -213,36 +213,262 @@ class AlunoIARepository:
         """
         with DBConnectionHandler() as session:
             alunos = (
-                session.query(Aluno)
-                .filter(Aluno.nota_score_preditivo != None)
+                session.query(AlunoData)
+                .filter(AlunoData.nota_score_preditivo != None)
                 .all()
             )
             notas = [aluno.nota_score_preditivo for aluno in alunos]
             return dict(Counter(notas))
         
-    def contar_notas_ia_por_sexo(id_escola: Optional[int] = None) -> Dict[str, Dict[str, int]]:
+    def contar_notas_ia_por_sexo_escola(id_escola: Optional[int] = None) -> Dict[str, Dict[str, int]]:
         """
-        Retorna a contagem de notas IA por sexo.
-        Exemplo:
+        Retorna a contagem de notas IA por sexo, filtrando por escola (se fornecida).
+
+        Exemplo de retorno:
         {
             "Masculino": {"A": 5, "B": 3},
             "Feminino": {"A": 4, "C": 2}
         }
         """
         with DBConnectionHandler() as session:
-            query = session.query(Aluno).filter(Aluno.nota_score_preditivo != None)
+            query = session.query(AlunoData).filter(AlunoData.nota_score_preditivo != None)
+
             if id_escola is not None:
-                query = query.filter(Aluno.id_escola == id_escola)
+                query = query.filter(AlunoData.id_escola == id_escola)
 
             alunos = query.all()
 
-            distribuicao = defaultdict(Counter)
+            distribuicao = defaultdict(list)
             for aluno in alunos:
-                sexo = aluno.sexo or "Não informado"
-                distribuicao[sexo][aluno.nota_score_preditivo] += 1
+                if aluno.sexo:
+                    distribuicao[aluno.sexo].append(aluno.nota_score_preditivo)
 
-            # Converte para dicionário normal
-            return {sexo: dict(notas) for sexo, notas in distribuicao.items()}
+            resultado: Dict[str, Dict[str, int]] = {}
+            for sexo, notas in distribuicao.items():
+                resultado[sexo] = dict(Counter(notas))
+
+            return resultado
+        
+    def contar_notas_ia_por_sexo_geral() -> Dict[str, Dict[str, int]]:
+        """
+        Retorna a contagem de notas IA por sexo em todas as escolas (sem filtro).
+
+        Exemplo de retorno:
+        {
+            "Masculino": {"A": 10, "B": 6},
+            "Feminino": {"A": 8, "C": 3}
+        }
+        """
+        with DBConnectionHandler() as session:
+            alunos = (
+                session.query(AlunoData)
+                .filter(AlunoData.nota_score_preditivo != None)
+                .all()
+            )
+
+            distribuicao = defaultdict(list)
+            for aluno in alunos:
+                if aluno.sexo:
+                    distribuicao[aluno.sexo].append(aluno.nota_score_preditivo)
+
+            resultado: Dict[str, Dict[str, int]] = {}
+            for sexo, notas in distribuicao.items():
+                resultado[sexo] = dict(Counter(notas))
+
+            return resultado
+        
+    def contar_alunos_por_esporte_geral() -> Dict[str, int]:
+        """
+        Conta quantos alunos participam ou não de esportes (sem filtro de escola).
+
+        Exemplo de retorno:
+        {
+            "Participa": 15,
+            "Não participa": 9
+        }
+        """
+        with DBConnectionHandler() as session:
+            alunos = session.query(AlunoData).all()
+
+            contagem = {"Participa": 0, "Não participa": 0}
+            for aluno in alunos:
+                if aluno.esportes == 1:
+                    contagem["Participa"] += 1
+                else:
+                    contagem["Não participa"] += 1
+
+            return contagem
+
+    def contar_alunos_por_esporte_escola(id_escola: Optional[int] = None) -> Dict[str, int]:
+        """
+        Conta quantos alunos de uma escola participam ou não de esportes.
+
+        Exemplo de retorno:
+        {
+            "Participa": 7,
+            "Não participa": 3
+        }
+        """
+        with DBConnectionHandler() as session:
+            query = session.query(AlunoData)
+            if id_escola is not None:
+                query = query.filter(AlunoData.id_escola == id_escola)
+
+            alunos = query.all()
+
+            contagem = {"Participa": 0, "Não participa": 0}
+            for aluno in alunos:
+                if aluno.esportes == 1:
+                    contagem["Participa"] += 1
+                else:
+                    contagem["Não participa"] += 1
+
+            return contagem
+        
+    def contar_alunos_por_extracurriculares_geral() -> Dict[str, int]:
+        """
+        Conta quantos alunos fazem ou não fazem aulas extracurriculares (sem filtro de escola).
+
+        Exemplo de retorno:
+        {
+            "Faz": 12,
+            "Não faz": 18
+        }
+        """
+        with DBConnectionHandler() as session:
+            alunos = session.query(AlunoData).all()
+
+            contagem = {"Faz": 0, "Não faz": 0}
+            for aluno in alunos:
+                if aluno.extraCurriculares == 1:
+                    contagem["Faz"] += 1
+                else:
+                    contagem["Não faz"] += 1
+
+            return contagem
+
+    def contar_alunos_por_extracurriculares_escola(id_escola: Optional[int] = None) -> Dict[str, int]:
+        """
+        Conta quantos alunos de uma escola fazem ou não fazem aulas extracurriculares.
+
+        Exemplo de retorno:
+        {
+            "Faz": 5,
+            "Não faz": 7
+        }
+        """
+        with DBConnectionHandler() as session:
+            query = session.query(AlunoData)
+            if id_escola is not None:
+                query = query.filter(AlunoData.id_escola == id_escola)
+
+            alunos = query.all()
+
+            contagem = {"Faz": 0, "Não faz": 0}
+            for aluno in alunos:
+                if aluno.extraCurriculares == 1:
+                    contagem["Faz"] += 1
+                else:
+                    contagem["Não faz"] += 1
+
+            return contagem
+    
+    def contar_alunos_por_aula_musica_geral() -> Dict[str, int]:
+        """
+        Conta quantos alunos fazem ou não fazem aula de música (sem filtro de escola).
+
+        Exemplo de retorno:
+        {
+            "Faz": 14,
+            "Não faz": 16
+        }
+        """
+        with DBConnectionHandler() as session:
+            alunos = session.query(AlunoData).all()
+
+            contagem = {"Faz": 0, "Não faz": 0}
+            for aluno in alunos:
+                if aluno.aulaMusica == 1:
+                    contagem["Faz"] += 1
+                else:
+                    contagem["Não faz"] += 1
+
+            return contagem
+
+    def contar_alunos_por_aula_musica_escola(id_escola: Optional[int] = None) -> Dict[str, int]:
+        """
+        Conta quantos alunos de uma escola fazem ou não fazem aula de música.
+
+        Exemplo de retorno:
+        {
+            "Faz": 7,
+            "Não faz": 9
+        }
+        """
+        with DBConnectionHandler() as session:
+            query = session.query(AlunoData)
+            if id_escola is not None:
+                query = query.filter(AlunoData.id_escola == id_escola)
+
+            alunos = query.all()
+
+            contagem = {"Faz": 0, "Não faz": 0}
+            for aluno in alunos:
+                if aluno.aulaMusica == 1:
+                    contagem["Faz"] += 1
+                else:
+                    contagem["Não faz"] += 1
+
+            return contagem
+
+    def contar_alunos_por_aulas_particulares_geral() -> Dict[str, int]:
+        """
+        Conta quantos alunos fazem ou não fazem aulas particulares (sem filtro de escola).
+
+        Exemplo de retorno:
+        {
+            "Faz": 12,
+            "Não faz": 18
+        }
+        """
+        with DBConnectionHandler() as session:
+            alunos = session.query(AlunoData).all()
+
+            contagem = {"Faz": 0, "Não faz": 0}
+            for aluno in alunos:
+                if aluno.aulasParticulares == 1:
+                    contagem["Faz"] += 1
+                else:
+                    contagem["Não faz"] += 1
+
+            return contagem
+
+    def contar_alunos_por_aulas_particulares_escola(id_escola: Optional[int] = None) -> Dict[str, int]:
+        """
+        Conta quantos alunos de uma escola fazem ou não fazem aulas particulares.
+
+        Exemplo de retorno:
+        {
+            "Faz": 5,
+            "Não faz": 11
+        }
+        """
+        with DBConnectionHandler() as session:
+            query = session.query(AlunoData)
+            if id_escola is not None:
+                query = query.filter(AlunoData.id_escola == id_escola)
+
+            alunos = query.all()
+
+            contagem = {"Faz": 0, "Não faz": 0}
+            for aluno in alunos:
+                if aluno.aulasParticulares == 1:
+                    contagem["Faz"] += 1
+                else:
+                    contagem["Não faz"] += 1
+
+            return contagem
+
 
 class ConsultaDadosAluno:
     """Consulta dados relacionados ao aluno: responsável, turma e escola."""
@@ -289,6 +515,12 @@ class ConsultaDadosAluno:
 class ConsultaAlunoBanco:
     """Classe resonsável por fazer consultas para validar alguns atributos no banco"""
     
+    def buscar_aluno_por_id(self, id_aluno: int) -> Optional[AlunoData]:
+        """Busca um aluno pelo ID. Retorna o objeto AlunoData se encontrado, senão None."""
+        with DBConnectionHandler() as session:
+            return session.query(AlunoData).filter_by(id=id_aluno).first()
+
+
     def buscar_por_cpf(self, cpf: str) -> Optional[AlunoData]:
         """Busca um aluno pelo CPF. Retorna o objeto AlunoData se encontrado, senão None."""
         with DBConnectionHandler() as session:
