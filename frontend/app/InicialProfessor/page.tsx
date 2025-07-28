@@ -89,13 +89,13 @@ export default function InicialProfessor() {
                   key={turmaId} 
                   className="w-63 h-64 border-t-0 border-7 rounded-lg border-[#A4B465] text-2xl flex flex-col items-center place-content-between  bg-white shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)]">
                     <span className="mb-2 border-7 rounded-lg border-[#727D73]  w-63 flex items-center justify-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] ">Turma {turmaId}</span>
-                    Ter : 8:30 - 9:40<br />
-                    Qua : 8:30 - 9:40
+                  
+                    
                     <div className="flex gap-10" >
                       <Link 
                         className="w-35 h-11 border-4 rounded-lg border-[#727D73] flex items-center justify-center text-xl bg-[#A7C1A8] mb-4" 
                         // FIX: Corrected path from /EdicaoTurma to /EditarTurma
-                        href={{ pathname: '/EditarTurma', query: { turmaId } }} >
+                        href={{ pathname: '/EdicaoTurma', query: { turmaId } }} >
                         Visualizar
                       </Link>
                     </div>

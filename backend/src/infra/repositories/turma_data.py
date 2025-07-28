@@ -51,8 +51,9 @@ class TurmaRepository:
             session.commit()
 
             # ---------------- PROFESSORES ----------------
-            turma = session.query(ProfessorTurma).filter_by(id_turma=id_turma, id_professor=id_professor_anterior).first()
-            turma.id_professor = id_professor_atual
+            professor_turma = session.query(ProfessorTurma).filter_by(id_turma=id_turma, id_professor=id_professor_anterior).first()
+            if professor_turma is not None:
+                professor_turma.id_professor = id_professor_atual
             
             # ---------------- ALUNOS ----------------
             set_atuais_alunos = set(ids_alunos_atuais)
