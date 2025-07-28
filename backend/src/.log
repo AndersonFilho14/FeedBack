@@ -5356,3 +5356,5 @@ DEBUG    | 28/07/2025 17:45:11 | 0:25:49.887902 |         professor.py:521   |  
 DEBUG    | 28/07/2025 17:45:11 | 0:25:49.913530 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
 INFO     | 28/07/2025 18:19:34 | 0:00:02.118425 |              main.py:8     |                 main.<module>             | Iniciando projeto
 INFO     | 28/07/2025 18:24:14 | 0:04:42.364945 |            escola.py:71    |               escola.executar             | Escola 'testeEscola' criada com sucesso.
+DEBUG    | 28/07/2025 18:38:28 | 0:18:56.389008 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+INFO     | 28/07/2025 18:40:20 | 0:20:47.808369 |              main.py:10    |                 main.<module>             | Fim do projeto
