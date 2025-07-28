@@ -29,42 +29,52 @@ export default function CadastrarTurma() {
     const [filtroAluno, setFiltroAluno] = useState("");
     const [professorSelecionado, setProfessorSelecionado] = useState<Professor | null>(null);
     const [alunosSelecionados, setAlunosSelecionados] = useState<Aluno[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     // --- EFEITO PARA BUSCAR DADOS DA API ---
     useEffect(() => {
-        const id_escola = 1; // ❗ SUBSTITUA PELO ID REAL DA ESCOLA
+        const id_escola = 1; // ❗ ATENÇÃO: O ID da escola está fixo. O ideal é obtê-lo de um contexto de autenticação ou estado global.
 
         const fetchData = async () => {
+            setIsLoading(true);
+            setError(null);
             try {
-                // Aponta para o seu backend Flask para buscar professores
-                const resProfessores = await fetch(`${API_BASE_URL}/professores/escola/${id_escola}`);
-                if (!resProfessores.ok) throw new Error("Falha ao buscar professores");
-                const dataProfessores = await resProfessores.json();
-                setTodosProfessores(dataProfessores.professores || []);
+                // Busca professores e alunos em paralelo para otimizar o carregamento
+                const [professoresRes, alunosRes] = await Promise.all([
+                    fetch(`${API_BASE_URL}/professores/escola/${id_escola}`),
+                    fetch(`${API_BASE_URL}/alunos/escola/${id_escola}`)
+                ]);
 
-                // Aponta para o seu backend Flask para buscar alunos
-                const resAlunos = await fetch(`${API_BASE_URL}/alunos/escola/${id_escola}`);
-                if (!resAlunos.ok) throw new Error("Falha ao buscar alunos");
-                const dataAlunos = await resAlunos.json();
+                if (!professoresRes.ok) throw new Error("Falha ao buscar a lista de professores.");
+                if (!alunosRes.ok) throw new Error("Falha ao buscar a lista de alunos.");
+
+                const dataProfessores = await professoresRes.json();
+                const dataAlunos = await alunosRes.json();
+
+                setTodosProfessores(dataProfessores.professores || []);
                 setTodosAlunos(dataAlunos.alunos || []);
 
-            } catch (error) {
-                console.error("Erro ao buscar dados:", error);
-                alert("Não foi possível carregar os dados dos professores ou alunos.");
+            } catch (err: any) {
+                console.error("Erro ao buscar dados:", err);
+                setError("Não foi possível carregar os dados. Tente recarregar a página.");
+            } finally {
+                setIsLoading(false);
             }
         };
 
         fetchData();
     }, []);
 
-    // --- FUNÇÕES DE MANIPULAÇÃO (sem alterações) ---
+    // --- FUNÇÕES DE MANIPULAÇÃO ---
     const handleSelectProfessor = (professor: Professor) => {
         setProfessorSelecionado(professor);
     };
 
     const handleSelectAluno = (aluno: Aluno) => {
         if (!alunosSelecionados.some(a => a.id === aluno.id)) {
-            setAlunosSelecionados([...alunosSelecionados, aluno]);
+            setAlunosSelecionados(prevAlunos => [...prevAlunos, aluno]);
         }
     };
 
@@ -73,29 +83,29 @@ export default function CadastrarTurma() {
     };
 
     const handleRemoveAluno = (alunoId: number) => {
-        setAlunosSelecionados(alunosSelecionados.filter(a => a.id !== alunoId));
+        setAlunosSelecionados(prevAlunos => prevAlunos.filter(a => a.id !== alunoId));
     };
 
     // --- FUNÇÃO DE SUBMISSÃO DO FORMULÁRIO (VERSÃO CORRIGIDA) ---
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setError(null); // Limpa erros anteriores
 
         if (!nomeTurma || !professorSelecionado || alunosSelecionados.length === 0) {
-            alert("Por favor, preencha o nome da turma, selecione um professor e adicione pelo menos um aluno.");
+            setError("Por favor, preencha o nome da turma, selecione um professor e adicione pelo menos um aluno.");
             return;
         }
 
         // Objeto de dados CORRIGIDO para corresponder ao backend
         const dadosNovaTurma = {
             nome: nomeTurma,
-            escola_id: 1, // Chave 'escola_id' correta
-            ids_professores: [professorSelecionado.id], // Enviado como uma lista
-            ids_alunos: alunosSelecionados.map(aluno => aluno.id), // Já estava correto
+            escola_id: 1, // CORRIGIDO: Chave 'escola_id' para corresponder à API Flask.
+            id_professor: professorSelecionado.id, // Chave 'id_professor' está correta.
+            ids_alunos: alunosSelecionados.map(aluno => aluno.id), // Chave 'ids_alunos' está correta.
             ano_letivo: new Date().getFullYear() // Adicionado o ano letivo atual
         };
 
-        console.log("Enviando para o backend (formato corrigido):", dadosNovaTurma);
-
+        setIsSubmitting(true);
         try {
             // Rota CORRIGIDA para /turma (singular)
             const response = await fetch(`${API_BASE_URL}/turma`, {
@@ -106,20 +116,20 @@ export default function CadastrarTurma() {
                 body: JSON.stringify(dadosNovaTurma),
             });
 
+            const resultado = await response.json();
+
             if (!response.ok) {
-                // Tenta ler a mensagem de erro do backend para dar um alerta mais útil
-                const errorData = await response.json();
-                throw new Error(errorData.mensagem || 'Falha ao criar a turma');
+                throw new Error(resultado.mensagem || 'Falha ao criar a turma. O servidor não retornou uma mensagem de erro específica.');
             }
 
-            const resultado = await response.json();
-            console.log("Turma criada com sucesso:", resultado);
             alert(resultado.mensagem || "Turma criada com sucesso!");
             router.push('/ListaTurmas');
 
-        } catch (error) {
-            console.error("Erro ao criar turma:", error);
-            
+        } catch (err: any) {
+            console.error("Erro ao criar turma:", err);
+            setError(err.message);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -133,7 +143,14 @@ export default function CadastrarTurma() {
         a.nome.toLowerCase().includes(filtroAluno.toLowerCase()) && !alunosSelecionados.some(sel => sel.id === a.id)
     );
 
-    // --- JSX (sem alterações na estrutura) ---
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center min-h-screen bg-[#F5ECD5]">
+                <p className="text-2xl font-[Jomolhari]">Carregando dados...</p>
+            </div>
+        );
+    }
+
     return (
         <>
             <header className="font-[InknutAntiqua] bg-[#727D73] border-[#A4B465] text-[#EEA03D] border-7 h-21 text-center text-7xl fixed top-0 left-0 w-full z-50">
@@ -141,7 +158,6 @@ export default function CadastrarTurma() {
             </header>
             <div className="bg-[#F5ECD5] bg-[url('/imagem/backgroundloginimage.png')] bg-cover bg-center bg-no-repeat flex justify-center items-center min-h-screen py-28">
                 <form onSubmit={handleSubmit} className="font-[Jomolhari] bg-[#F5ECD5] border-[#A7C1A8] w-auto h-auto p-8 rounded-3xl shadow-[0_19px_4px_4px_rgba(0,0,0,0.25)] flex flex-col justify-center items-center gap-6 border-11">
-                    {/* ... todo o seu JSX continua aqui, sem alterações ... */}
                     <h1 className="text-[#EEA03D] text-6xl">Criar Turma</h1>
                     <h5 className="text-2xl">Nome da Turma</h5>
                     <input
@@ -227,8 +243,13 @@ export default function CadastrarTurma() {
 
                     {/* Botões de Ação */}
                     <div className="flex flex-col items-center gap-4 mt-4">
-                        <button type="submit" className="w-100 h-16 border-5 rounded-lg border-[#A4B465] flex justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-4xl hover:bg-amber-100 transition-colors">
-                            Criar Turma
+                        {error && <p className="text-red-500 text-center -my-2">{error}</p>}
+                        <button
+                            type="submit"
+                            className="w-100 h-16 border-5 rounded-lg border-[#A4B465] flex justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-4xl hover:bg-amber-100 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? 'Criando...' : 'Criar Turma'}
                         </button>
                         <Link className="w-34 h-10 border-5 rounded-lg border-[#727D73] flex justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-lg hover:bg-gray-100 transition-colors" href={"/ListaTurmas"}>
                             Voltar

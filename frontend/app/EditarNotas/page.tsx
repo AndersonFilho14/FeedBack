@@ -24,14 +24,28 @@ export default function EditarNotas() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchAvaliacoes() {
-      // 3. Assumir ID do professor como 1, conforme outros arquivos
-      const professorId = 1;
+    // Obter o ID do professor do localStorage para garantir que os dados corretos sejam buscados.
+    let professorId: string | null = null;
+    try {
+      professorId = localStorage.getItem('userId');
+    } catch (e) {
+      setError("Erro ao acessar os dados do usuário.");
+      setLoading(false);
+      return;
+    }
+
+    if (!professorId) {
+      setError("Professor não identificado. Por favor, faça o login novamente.");
+      setLoading(false);
+      return;
+    }
+
+    async function fetchAvaliacoes(pId: string) {
       try {
         setError(null);
         setLoading(true);
-        // 4. Corrigir a URL do fetch para incluir o ID do professor
-        const response = await fetch(`http://localhost:5000/historico/avaliacoes/turma/${turmaId}/${professorId}`);
+        // Usar o ID do professor logado na chamada da API
+        const response = await fetch(`http://localhost:5000/historico/avaliacoes/turma/${turmaId}/${pId}`);
 
         if (!response.ok) {
           throw new Error("Falha ao buscar as avaliações da turma.");
@@ -56,7 +70,7 @@ export default function EditarNotas() {
     }
 
     if (turmaId && tipo) {
-      fetchAvaliacoes();
+      fetchAvaliacoes(professorId);
     } else {
       setError("ID da turma ou tipo de avaliação não especificado.");
       setLoading(false);
