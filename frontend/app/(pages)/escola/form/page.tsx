@@ -3,7 +3,6 @@ import { FormItem } from "@/components/FormItem";
 import { createEscola, editEscola, getEscola } from "@/services/escola";
 import { Escola } from "@/types/Escola";
 import { Button, Form, Input, Typography } from "antd";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -20,14 +19,13 @@ function Page() {
   useEffect(() => {
     if (id) {
       setMode("edit");
-      console.log(id, "aqui id")
       getEscola({ id })
         .then((data) => {
           setEscola(data);
           form.setFieldsValue(data);
         })
         .catch(() => {
-        //   route.back();
+          route.back();
         });
     } else {
       setMode("create");
@@ -35,7 +33,7 @@ function Page() {
   }, []);
 
   const onSubmit = () => {
-    const currentEscola = form.getFieldsValue();
+    const currentEscola = form.getFieldsValue() as Escola;
 
     if (mode === "create") {
       createEscola(currentEscola)
@@ -63,79 +61,63 @@ function Page() {
       </header>
 
       <div className="bg-[#F5ECD5] bg-[url('/imagem/backgroundloginimage.png')] bg-cover bg-center bg-no-repeat flex justify-center items-center min-h-screen py-28">
-        <form
-          
-          className="font-[Jomolhari] bg-[#F5ECD5] border-[#A7C1A8] w-full max-w-4xl h-auto p-8 rounded-3xl shadow-[0_19px_4px_4px_rgba(0,0,0,0.25)] flex flex-col justify-center items-center gap-8 border-11"
+        <Form
+          form={form}
+          onFinish={onSubmit}
+          className="font-[Jomolhari] bg-[#F5ECD5] border-[#A7C1A8] w-auto h-auto p-8 rounded-3xl shadow-[0_19px_4px_4px_rgba(0,0,0,0.25)] flex flex-col justify-center items-center gap-6 border-11"
         >
-          <h1 className="text-[#EEA03D] text-6xl mb-4">
+          <Title className="text-[#EEA03D] text-6xl">
             {mode === "edit" ? "Editar Escola" : "Criar Escola"}
-          </h1>
+          </Title>
 
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-            <div className="flex flex-col gap-2">
-              <h5 className="text-2xl">Nome da Escola</h5>
-              <input
-                className="bg-[#A7C1A8] px-3 w-full h-10 rounded"
-                placeholder="Nome da escola"
-               
-                
-                required
-              />
-            </div>
+          <FormItem name="nome" label="Nome da Escola">
+            <Input
+              className="bg-[#A7C1A8] pl-2 w-80 h-10 rounded"
+              placeholder="Nome da escola"
+            />
+          </FormItem>
 
-            <div className="flex flex-col gap-2">
-              <h5 className="text-2xl">ID do Município</h5>
-              <input
-                type="number"
-                className="bg-[#A7C1A8] px-3 w-full h-10 rounded"
-                placeholder="Digite o código do município"
-                
-                
-                required
-              />
-            </div>
+          <FormItem name="idMunicipio" label="ID do Município">
+            <Input
+              type="number"
+              className="bg-[#A7C1A8] pl-2 w-80 h-10 rounded"
+              placeholder="Digite o código do município"
+            />
+          </FormItem>
 
-            <div className="flex flex-col gap-2">
-              <h5 className="text-2xl">Nome do Usuário</h5>
-              <input
-                className="bg-[#A7C1A8] px-3 w-full h-10 rounded"
-                placeholder="Digite o nome do usuário"
-                
-                required
-              />
-            </div>
+          <FormItem name="nomeUsuario" label="Nome do Usuário">
+            <Input
+              className="bg-[#A7C1A8] pl-2 w-80 h-10 rounded"
+              placeholder="Digite o nome do usuário"
+            />
+          </FormItem>
 
-            <div className="flex flex-col gap-2">
-              <h5 className="text-2xl">Senha</h5>
-              <input
-                type="password"
-                className="bg-[#A7C1A8] px-3 w-full h-10 rounded"
-                placeholder={
-                  mode === "edit"
-                    ? "Deixe em branco para não alterar"
-                    : "Digite a senha do usuário"
-                }
-                
-                required={mode === "create"}
-              />
-            </div>
-          </div>
+          <FormItem name="senha" label="Senha">
+            <Input.Password
+              className="bg-[#A7C1A8] pl-2 w-80 h-10 rounded"
+              placeholder={
+                mode === "edit"
+                  ? "Deixe em branco para não alterar"
+                  : "Digite a senha do usuário"
+              }
+            />
+          </FormItem>
 
-          <div className="w-full flex justify-center items-center gap-10 mt-8">
-            <Link
-              href="/escola"
+          <div className="w-full flex justify-center items-center gap-10 mt-4">
+            <Button
+              onClick={() => route.back()}
               className="w-44 h-13 border-5 rounded-lg border-[#727D73] flex justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-2xl hover:bg-gray-100 transition-colors"
             >
               Voltar
-            </Link>
-            <button
-              type="submit"
+            </Button>
+            <Button
+              htmlType="submit"
               className="w-44 h-13 border-5 rounded-lg border-[#A4B465] flex justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-2xl hover:bg-amber-100 transition-colors"
             >
               Salvar
-            </button>
+            </Button>
           </div>
-        </form>
+        </Form>
       </div>
     </>
   );
