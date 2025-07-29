@@ -356,15 +356,15 @@ def criar_escola():
 
 
 # --------------------- LISTAR ESCOLAS ---------------------
-@user_rout_bp.route("/municipio/<int:id_municipio>/escola", methods=["GET"])
-def listar_escolas(id_municipio: int):
+@user_rout_bp.route("/escola", methods=["GET"])
+def listar_escolas():
     """
     Lista todas as escolas de um município específico.
 
     :param id_municipio: ID do município passado na URL.
     :return: JSON contendo a lista de escolas formatadas.
     """
-    controller = ControllerEscola(id_municipio=id_municipio)
+    controller = ControllerEscola(id_municipio=1)
     resultado_json = controller.listar_escolas()
     return make_response(resultado_json)
 

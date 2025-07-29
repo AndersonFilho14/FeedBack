@@ -5442,3 +5442,9 @@ DEBUG    | 29/07/2025 03:18:22 | 0:23:27.045470 |         professor.py:256   |  
 DEBUG    | 29/07/2025 03:18:22 | 0:23:27.062980 |         professor.py:256   |            professor.__init__             | 1
 INFO     | 29/07/2025 03:26:47 | 0:31:52.001117 |              main.py:10    |                 main.<module>             | Fim do projeto
 INFO     | 29/07/2025 03:26:48 | 0:00:00.331292 |              main.py:8     |                 main.<module>             | Iniciando projeto
+INFO     | 29/07/2025 16:56:17 | 0:00:02.041580 |              main.py:8     |                 main.<module>             | Iniciando projeto
+TRACE    | 29/07/2025 17:21:18 | 0:25:03.206572 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 29/07/2025 17:21:18 | 0:25:03.215617 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+INFO     | 29/07/2025 17:35:01 | 0:00:00.726345 |              main.py:8     |                 main.<module>             | Iniciando projeto
+INFO     | 29/07/2025 17:35:40 | 0:00:00.698789 |              main.py:8     |                 main.<module>             | Iniciando projeto
+DEBUG    | 29/07/2025 17:35:47 | 0:00:06.968423 |            escola.py:99    |               escola.executar             | 7 escolas encontradas no município 1.
