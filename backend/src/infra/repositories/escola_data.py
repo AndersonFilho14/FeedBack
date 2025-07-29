@@ -48,7 +48,10 @@ class EscolaRepository:
                 # Atualizando o acesso do usuário
                 acesso = session.query(AcessoData).filter(AcessoData.id_user == id_escola).first()
                 acesso.usuario = novo_nome_usuario
-                acesso.senha = nova_senha
+
+                if acesso.senha is not None:
+                    acesso.senha = nova_senha
+                    
                 return True
 
     def deletar(self, id_escola: int) -> bool:

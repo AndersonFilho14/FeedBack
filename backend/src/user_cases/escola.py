@@ -104,7 +104,7 @@ class ListarEscolasDoBanco:
 
 
 class AtualizarEscolaNoBanco:
-    def __init__(self, id_escola: int, novo_nome: str, novo_id_municipio: int, novo_nome_usuario: str, nova_senha: str):
+    def __init__(self, id_escola: int, novo_nome: str, novo_id_municipio: int, novo_nome_usuario: str, nova_senha: {str}):
         self.__id = id_escola
         self.__novo_nome = novo_nome
         self.__novo_id_municipio = novo_id_municipio
@@ -115,11 +115,9 @@ class AtualizarEscolaNoBanco:
         
         # Valida se todos os campos estão preenchidos
         resultado = ValidadorCampos.validar_campos_preenchidos([
-            self.__id,
             self.__novo_nome,
             self.__novo_id_municipio, 
-            self.__novo_nome_usuario,
-            self.__nova_senha
+            self.__novo_nome_usuario
         ])
         
         if resultado is not None:
@@ -130,7 +128,7 @@ class AtualizarEscolaNoBanco:
             if ConsultaMunicipioBanco().buscar_por_id(self.__novo_id_municipio) is None:
                 return f"Município com ID {self.__novo_id_municipio} não encontrado."
             
-            atualizado = EscolaRepository().atualizar(self.__id, self.__novo_nome, self.__novo_id_municipio)
+            atualizado = EscolaRepository().atualizar(self.__id, self.__novo_nome, self.__novo_id_municipio,self.__nova_senha)
             if atualizado:
                 log.info(f"Escola {self.__id} atualizada para '{self.__novo_nome}', município {self.__novo_id_municipio}.")
                 return "Escola atualizada com sucesso"
