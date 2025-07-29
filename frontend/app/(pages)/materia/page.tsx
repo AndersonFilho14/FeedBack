@@ -1,8 +1,9 @@
+import { Table } from 'antd'
 import React from 'react'
 
 function page() {
   return (
-    <div>page</div>
+    <Table/>
   )
 }
 

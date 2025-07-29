@@ -3,7 +3,7 @@ import FooterForm from "@/components/FooterForm";
 import { FormItem } from "@/components/FormItem";
 import { createEscola, editEscola, getEscola } from "@/services/escola";
 import { Escola } from "@/types/Escola";
-import {Form, Input, Typography } from "antd";
+import { Form, Input, Typography } from "antd";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -41,15 +41,18 @@ function Page() {
         .then(() => {
           console.log("tudo certo");
         })
-        .catch(() => {
+        .finally(() => {
           console.log("error");
+          route.back();
         });
     } else {
       if (currentEscola.senha?.trim() == "") {
         currentEscola.senha = undefined;
       }
-      if (id) currentEscola.id = id
-      editEscola({ id, ...currentEscola});
+      if (id) currentEscola.id = id;
+      editEscola({ id, ...currentEscola }).finally(() => {
+        route.back();
+      });
     }
   };
 
@@ -102,7 +105,7 @@ function Page() {
             />
           </FormItem>
 
-         <FooterForm/>
+          <FooterForm />
         </Form>
       </div>
     </>
