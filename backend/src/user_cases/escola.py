@@ -36,7 +36,6 @@ class ControllerEscola:
     def atualizar_escola(self) -> str:
         """Atualiza o nome e o município da escola com o ID informado."""
         return AtualizarEscolaNoBanco(id_escola = self.__id_escola, novo_nome = self.__nome,
-                                       novo_id_municipio = self.__id_municipio,
                                        novo_nome_usuario = self.__nome_usuario, nova_senha = self.__senha).executar()
 
     def deletar_escola(self) -> str:
@@ -104,10 +103,9 @@ class ListarEscolasDoBanco:
 
 
 class AtualizarEscolaNoBanco:
-    def __init__(self, id_escola: int, novo_nome: str, novo_id_municipio: int, novo_nome_usuario: str, nova_senha: {str}):
+    def __init__(self, id_escola: int, novo_nome: str, novo_nome_usuario: str, nova_senha: {str}):
         self.__id = id_escola
         self.__novo_nome = novo_nome
-        self.__novo_id_municipio = novo_id_municipio
         self.__novo_nome_usuario = novo_nome_usuario
         self.__nova_senha = nova_senha
 
@@ -116,7 +114,6 @@ class AtualizarEscolaNoBanco:
         # Valida se todos os campos estão preenchidos
         resultado = ValidadorCampos.validar_campos_preenchidos([
             self.__novo_nome,
-            self.__novo_id_municipio, 
             self.__novo_nome_usuario
         ])
         
@@ -124,13 +121,9 @@ class AtualizarEscolaNoBanco:
             return resultado
         
         try:
-            # Verifica existência do município antes de atualizar a escola
-            if ConsultaMunicipioBanco().buscar_por_id(self.__novo_id_municipio) is None:
-                return f"Município com ID {self.__novo_id_municipio} não encontrado."
-            
-            atualizado = EscolaRepository().atualizar(self.__id, self.__novo_nome, self.__novo_id_municipio,self.__nova_senha)
+            atualizado = EscolaRepository().atualizar(id_escola=self.__id, novo_nome=self.__novo_nome, novo_nome_usuario=self.__novo_nome_usuario ,nova_senha=self.__nova_senha)
             if atualizado:
-                log.info(f"Escola {self.__id} atualizada para '{self.__novo_nome}', município {self.__novo_id_municipio}.")
+                log.info(f"Escola {self.__id} atualizada para '{self.__novo_nome}'")
                 return "Escola atualizada com sucesso"
             else:
                 return "Escola não encontrada"

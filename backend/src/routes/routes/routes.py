@@ -435,7 +435,6 @@ def criar_materia():
     ```json
     {
         "nome": "Gramática",
-        "id_disciplina": 1,
         "id_professor": 3
     }
     ```
@@ -445,7 +444,6 @@ def criar_materia():
     dados = request.json
     controller = ControllerMateria(
         nome=dados.get("nome"),
-        id_disciplina=dados.get("id_disciplina"),
         id_professor=dados.get("id_professor")
     )
     resultado = controller.criar_materia()
@@ -456,9 +454,7 @@ def criar_materia():
 @user_rout_bp.route("/materia", methods=["GET"])
 def listar_materias():
     """
-    Lista todas as matérias.
-
-    
+    Lista todas as matérias.    
     :return: JSON estruturado com a lista de matérias.
     """
     controller = ControllerMateria()
@@ -490,7 +486,6 @@ def atualizar_materia(id_materia):
     ```json
     {
         "nome": "Gramática Avançada",
-        "id_disciplina": 1,
         "id_professor": 3
     }
     ```
@@ -502,7 +497,6 @@ def atualizar_materia(id_materia):
     controller = ControllerMateria(
         id_materia=id_materia,
         nome=dados.get("nome"),
-        id_disciplina=dados.get("id_disciplina"),
         id_professor=dados.get("id_professor")
     )
     resultado = controller.atualizar_materia()
@@ -876,7 +870,7 @@ def ranking_escolas():
     Retorna o ranking geral das escolas por média de nota.
     """
     controller = ControllerRankingAvaliacao()
-    resultado = controller.ranquear_escolas()
+    resultado = controller.ranquear_escolas_geral()
     return make_response(resultado)
 
 
@@ -886,7 +880,7 @@ def ranking_materias_por_escola(id_escola):
     Retorna o ranking das matérias de uma escola por média de nota.
     """
     controller = ControllerRankingAvaliacao(id_escola=id_escola)
-    resultado = controller.ranquear_materias()
+    resultado = controller.ranquear_materias_geral()
     return make_response(resultado)
 
 @user_rout_bp.route("/dashboard/escola/<int:id_escola>", methods=["GET"])

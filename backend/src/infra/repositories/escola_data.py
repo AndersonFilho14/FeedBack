@@ -32,7 +32,7 @@ class EscolaRepository:
             escolas = session.query(EscolaData).filter(EscolaData.id_municipio == id_municipio).all()
             return escolas
 
-    def atualizar(self, id_escola: int, novo_nome: str, novo_id_municipio: int,
+    def atualizar(self, id_escola: int, novo_nome: str, 
                    novo_nome_usuario: str, nova_senha: str ) -> bool:
         """Atualiza os dados da escola com base no ID. Retorna True se for atualizada, False se não encontrada."""
         
@@ -42,7 +42,6 @@ class EscolaRepository:
                 return False
             else:
                 escola.nome = novo_nome
-                escola.id_municipio = novo_id_municipio
                 session.commit()
 
                 # Atualizando o acesso do usuário
