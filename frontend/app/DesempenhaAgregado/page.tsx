@@ -22,7 +22,6 @@ function DashboardPage() {
           {/* Grid para os componentes do dashboard com espaçamento */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             <AveragePerClass />
-            
             <AverageTeacher />
           </div>
         </main>
