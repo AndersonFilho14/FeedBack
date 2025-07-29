@@ -356,7 +356,7 @@ def criar_escola():
 
 
 # --------------------- LISTAR ESCOLAS ---------------------
-@user_rout_bp.route("/escola/<int:id_municipio>", methods=["GET"])
+@user_rout_bp.route("/municipio/<int:id_municipio>/escola", methods=["GET"])
 def listar_escolas(id_municipio: int):
     """
     Lista todas as escolas de um município específico.
@@ -369,7 +369,7 @@ def listar_escolas(id_municipio: int):
     return make_response(resultado_json)
 
 # --------------------- ATUALIZAR ESCOLA ---------------------
-@user_rout_bp.route("/municipio/<int:id_escola>/escola", methods=["PUT"])
+@user_rout_bp.route("/escola/<int:id_escola>", methods=["PUT"])
 def atualizar_escola(id_escola):
     """
     Atualiza os dados de uma escola existente.
