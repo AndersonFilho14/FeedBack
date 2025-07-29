@@ -5396,3 +5396,12 @@ DEBUG    | 28/07/2025 18:46:20 | 0:05:58.272494 |            escola.py:85    |  
 DEBUG    | 28/07/2025 18:46:21 | 0:05:58.678893 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
 DEBUG    | 28/07/2025 18:46:21 | 0:05:58.993785 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
 DEBUG    | 28/07/2025 18:46:21 | 0:05:59.325745 |            escola.py:85    |               escola.executar             | 0 escolas encontradas no município None.
+INFO     | 29/07/2025 01:11:21 | 0:00:02.372032 |              main.py:8     |                 main.<module>             | Iniciando projeto
+DEBUG    | 29/07/2025 01:13:48 | 0:02:29.265918 |            escola.py:98    |               escola.executar             | 7 escolas encontradas no município 1.
+DEBUG    | 29/07/2025 01:13:58 | 0:02:39.058066 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 2.
+DEBUG    | 29/07/2025 01:14:05 | 0:02:46.090768 |            escola.py:98    |               escola.executar             | 7 escolas encontradas no município 1.
+DEBUG    | 29/07/2025 01:14:11 | 0:02:52.336983 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 2.
+DEBUG    | 29/07/2025 01:14:19 | 0:03:00.295293 |            escola.py:98    |               escola.executar             | 0 escolas encontradas no município 3.
+DEBUG    | 29/07/2025 01:14:23 | 0:03:03.864372 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 2.
+DEBUG    | 29/07/2025 01:16:07 | 0:04:47.497367 |            escola.py:98    |               escola.executar             | 7 escolas encontradas no município 1.
+DEBUG    | 29/07/2025 01:16:59 | 0:05:39.818676 |            escola.py:98    |               escola.executar             | 7 escolas encontradas no município 1.

@@ -3,5 +3,5 @@ export interface Escola {
   nome: string;
   idMunicipio: string;
   nomeUsuario: string;
-  senha: string;
+  senha?: string;
 }
