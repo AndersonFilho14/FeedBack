@@ -452,19 +452,33 @@ def criar_materia():
     return make_response(jsonify({"mensagem": resultado}))
 
 
-# --------------------- LISTAR MATÉRIAS DE UM PROFESSOR ---------------------
-@user_rout_bp.route("/materia/professor/<int:id_professor>", methods=["GET"])
-def listar_materias_por_professor(id_professor):
+# --------------------- LISTAR MATÉRIAS  ---------------------###
+@user_rout_bp.route("/materia", methods=["GET"])
+def listar_materias():
     """
-    Lista todas as matérias vinculadas a um professor.
+    Lista todas as matérias.
 
-    :param id_professor: ID do professor.
+    
     :return: JSON estruturado com a lista de matérias.
     """
-    controller = ControllerMateria(id_professor=id_professor)
+    controller = ControllerMateria()
     resultado_json = controller.listar_materias()  
     return make_response(resultado_json)
 
+# --------------------- BUSCA MATÉRIAS POR ID ---------------------###
+@user_rout_bp.route("/materia/<int:id_materia>", methods=["GET"])
+def buscar_materias_por_id(id_materia: int):
+    """
+    buscar as matérias vinculadas por id.
+
+    :param id_materia: ID da matéria a ser buscada.
+    :return: JSON estruturado com a lista de matérias.
+    """
+
+    controller = ControllerMateria(id_materia=id_materia)
+    materia = controller.buscar_materia()
+    return jsonify(materia.__dict__), 200 
+  
 
 # --------------------- ATUALIZAR MATÉRIA ---------------------
 @user_rout_bp.route("/materia/<int:id_materia>", methods=["PUT"])

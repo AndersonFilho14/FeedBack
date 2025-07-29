@@ -17,10 +17,10 @@ class MateriaRepository:
             session.add(materia_orm)
             session.commit()
             
-    def listar_por_professor(self, id_professor: int) -> List[MateriaData]:
+    def listar(self) -> List[MateriaData]:
         """Retorna lista de matérias atribuídas a um professor específico."""
         with DBConnectionHandler() as session:
-            materias = session.query(MateriaData).filter(MateriaData.id_professor == id_professor).all()
+            materias = session.query(MateriaData).all()
             return materias
 
     def atualizar(self, id_materia: int, novo_nome: str, novo_id_disciplina: int, novo_id_professor: int) -> bool:

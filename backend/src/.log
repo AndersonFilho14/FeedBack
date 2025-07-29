@@ -5406,3 +5406,39 @@ DEBUG    | 29/07/2025 01:14:23 | 0:03:03.864372 |            escola.py:98    |  
 DEBUG    | 29/07/2025 01:16:07 | 0:04:47.497367 |            escola.py:98    |               escola.executar             | 7 escolas encontradas no município 1.
 DEBUG    | 29/07/2025 01:16:59 | 0:05:39.818676 |            escola.py:98    |               escola.executar             | 7 escolas encontradas no município 1.
 INFO     | 29/07/2025 02:13:18 | 0:00:01.168811 |              main.py:8     |                 main.<module>             | Iniciando projeto
+INFO     | 29/07/2025 02:33:14 | 0:00:00.496760 |              main.py:8     |                 main.<module>             | Iniciando projeto
+INFO     | 29/07/2025 02:39:28 | 0:06:14.331812 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 29/07/2025 02:39:29 | 0:00:00.330491 |              main.py:8     |                 main.<module>             | Iniciando projeto
+INFO     | 29/07/2025 02:41:21 | 0:01:51.623425 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 29/07/2025 02:41:22 | 0:00:00.337814 |              main.py:8     |                 main.<module>             | Iniciando projeto
+DEBUG    | 29/07/2025 02:41:25 | 0:00:02.671340 |           materia.py:85    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 29/07/2025 02:41:32 | 0:00:09.994293 |           materia.py:85    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 29/07/2025 02:41:32 | 0:00:10.456765 |           materia.py:85    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 29/07/2025 02:41:33 | 0:00:10.625031 |           materia.py:85    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 29/07/2025 02:41:33 | 0:00:10.790727 |           materia.py:85    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 29/07/2025 02:41:33 | 0:00:10.946129 |           materia.py:85    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 29/07/2025 02:41:33 | 0:00:11.084124 |           materia.py:85    |              materia.executar             | 2 matérias encontradas.
+INFO     | 29/07/2025 02:50:54 | 0:09:32.056177 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 29/07/2025 02:54:55 | 0:00:00.334703 |              main.py:8     |                 main.<module>             | Iniciando projeto
+DEBUG    | 29/07/2025 03:12:38 | 0:17:43.539215 |           materia.py:97    |              materia.executar             | 2 matérias encontradas.
+TRACE    | 29/07/2025 03:17:46 | 0:22:50.684752 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 29/07/2025 03:17:46 | 0:22:50.860803 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 29/07/2025 03:17:46 | 0:22:50.862003 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 29/07/2025 03:18:09 | 0:23:13.741568 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 29/07/2025 03:18:09 | 0:23:13.744007 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 29/07/2025 03:18:11 | 0:23:16.376798 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 29/07/2025 03:18:11 | 0:23:16.392618 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 29/07/2025 03:18:15 | 0:23:19.630637 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 29/07/2025 03:18:15 | 0:23:19.679420 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 29/07/2025 03:18:16 | 0:23:21.180146 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 29/07/2025 03:18:16 | 0:23:21.230973 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 29/07/2025 03:18:18 | 0:23:22.847579 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 29/07/2025 03:18:18 | 0:23:22.894691 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 29/07/2025 03:18:19 | 0:23:24.243270 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 29/07/2025 03:18:19 | 0:23:24.257827 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 29/07/2025 03:18:20 | 0:23:25.499399 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 29/07/2025 03:18:20 | 0:23:25.514929 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 29/07/2025 03:18:22 | 0:23:27.045470 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 29/07/2025 03:18:22 | 0:23:27.062980 |         professor.py:256   |            professor.__init__             | 1
+INFO     | 29/07/2025 03:26:47 | 0:31:52.001117 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 29/07/2025 03:26:48 | 0:00:00.331292 |              main.py:8     |                 main.<module>             | Iniciando projeto

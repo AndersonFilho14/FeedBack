@@ -1,6 +1,8 @@
 import json
 
 from domain.models import Materia
+from infra.repositories.materia_data import ConsultaMateriaBanco
+
 from utils.validarCampos import ValidadorCampos
 from infra.repositories import MateriaRepository, ConsultarProfessor
 from infra.db.models_data import Materia as Materia_data
@@ -30,7 +32,7 @@ class ControllerMateria:
 
     def listar_materias(self) -> str:
         """Lista todas as matérias de um professor especificado."""
-        materias_data = ListarMateriasNoBanco(id_professor = self.__id_professor).executar()
+        materias_data = ListarMateriasNoBanco().executar()
         materias_dominio = FormatarMateria().formatar_materia_data_para_dominio(materias_data = materias_data)
         return FormatarMateria().gerar_json(materias_dominio = materias_dominio)
         
@@ -46,6 +48,16 @@ class ControllerMateria:
         """Remove uma matéria do banco pelo ID."""
         return DeletarMateriaDoBanco(id_materia = self.__id_materia).executar()
 
+    def buscar_materia(self) -> Materia:
+        """Busca uma matéria por meio do ID."""
+        materia_data = ConsultaMateriaBanco().buscar_materia_por_id(id_materia=self.__id_materia)
+        
+        if not materia_data:
+            raise ValueError(f"Matéria com ID {self.__id_materia} não encontrada.")
+
+        lista_materia = [materia_data]
+
+        return FormatarMateria().formatar_materia_data_para_dominio(lista_materia)[0]
 
 class CriarMateriaNoBanco:
     def __init__(self, nome: str, id_disciplina: int, id_professor: int):
@@ -77,12 +89,11 @@ class CriarMateriaNoBanco:
 
 
 class ListarMateriasNoBanco:
-    def __init__(self, id_professor: int):
-        self.__id_professor = id_professor
-    
+ 
+ 
     def executar(self) -> list[Materia_data]:
         try:
-            materias = MateriaRepository().listar_por_professor(self.__id_professor)
+            materias = MateriaRepository().listar()
             log.debug(f"{len(materias)} matérias encontradas.")
             return materias
         except Exception as e:
