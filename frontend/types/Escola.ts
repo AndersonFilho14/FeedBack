@@ -1,5 +1,5 @@
 export interface Escola {
-  id: string;
+  id?: string;
   nome: string;
   idMunicipio: string;
   nomeUsuario: string;

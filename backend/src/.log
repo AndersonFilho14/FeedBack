@@ -5405,3 +5405,4 @@ DEBUG    | 29/07/2025 01:14:19 | 0:03:00.295293 |            escola.py:98    |  
 DEBUG    | 29/07/2025 01:14:23 | 0:03:03.864372 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 2.
 DEBUG    | 29/07/2025 01:16:07 | 0:04:47.497367 |            escola.py:98    |               escola.executar             | 7 escolas encontradas no município 1.
 DEBUG    | 29/07/2025 01:16:59 | 0:05:39.818676 |            escola.py:98    |               escola.executar             | 7 escolas encontradas no município 1.
+INFO     | 29/07/2025 02:13:18 | 0:00:01.168811 |              main.py:8     |                 main.<module>             | Iniciando projeto

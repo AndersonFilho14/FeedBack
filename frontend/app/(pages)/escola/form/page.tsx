@@ -25,7 +25,7 @@ function Page() {
           form.setFieldsValue(data);
         })
         .catch(() => {
-          route.back();
+          // route.back();
         });
     } else {
       setMode("create");
@@ -44,13 +44,11 @@ function Page() {
           console.log("error");
         });
     } else {
-      if (escola && escola.senha === currentEscola.senha) {
+      if (currentEscola.senha?.trim() == "") {
         currentEscola.senha = undefined;
       }
-
-      if (escola) {
-        editEscola({ id: escola.id, ...currentEscola });
-      }
+      if (id) currentEscola.id = id
+      editEscola({ id, ...currentEscola});
     }
   };
 
