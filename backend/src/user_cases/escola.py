@@ -53,7 +53,8 @@ class ControllerEscola:
 
         lista_escola = [escola_data]  # cria uma lista com um único item
         escola_dominio = FormatarEscola().formatar_escola_data_para_dominio(lista_escola)[0]  # pega o primeiro da lista formatada
-        
+        acesso = ConsultaEscolaBanco().buscar_acesso(id_escola=escola_dominio.id)
+        escola_dominio.nome_usuario = acesso.usuario
         return escola_dominio
         
 
