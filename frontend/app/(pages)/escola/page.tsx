@@ -97,7 +97,7 @@ function Page() {
           {/* Você pode ajustar o link do botão "Voltar" conforme necessário */}
           <Link
             className="w-34 h-10 border-5 rounded-lg border-[#727D73] flex justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-lg"
-            href={"/"}
+            href={"/MunicipioMain"}
           >
             Voltar
           </Link>

@@ -6152,3 +6152,26 @@ DEBUG    | 30/07/2025 03:34:54 | 0:11:03.775228 |           materia.py:84    |  
 DEBUG    | 30/07/2025 03:34:54 | 0:11:03.781205 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
 DEBUG    | 30/07/2025 03:34:57 | 0:11:06.392900 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
 DEBUG    | 30/07/2025 03:34:57 | 0:11:06.398363 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+TRACE    | 30/07/2025 03:38:02 | 0:14:11.622666 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 30/07/2025 03:38:02 | 0:14:11.625928 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+TRACE    | 30/07/2025 03:38:05 | 0:14:14.593868 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 30/07/2025 03:38:51 | 0:15:00.370570 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:38:51 | 0:15:00.384010 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:39:27 | 0:15:36.273121 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:39:27 | 0:15:36.279720 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:39:45 | 0:15:53.903985 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:39:45 | 0:15:53.906269 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:39:47 | 0:15:55.931486 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:39:47 | 0:15:55.934235 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:40:08 | 0:16:17.320466 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:40:08 | 0:16:17.324628 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:40:12 | 0:16:21.172399 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:40:12 | 0:16:21.174705 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:40:14 | 0:16:22.953428 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:40:14 | 0:16:22.955327 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:40:44 | 0:16:53.398651 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:40:44 | 0:16:53.428970 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:41:20 | 0:17:29.608935 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:41:20 | 0:17:29.609293 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:41:22 | 0:17:30.983357 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:41:22 | 0:17:30.986444 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
