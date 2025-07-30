@@ -23,7 +23,7 @@ class MateriaRepository:
             materias = session.query(MateriaData).all()
             return materias
 
-    def atualizar(self, id_materia: int, novo_nome: str, novo_id_professor: int) -> bool:
+    def atualizar(self, id_materia: int, novo_nome: str) -> bool:
         """Atualiza os dados da matéria com base no ID. Retorna True se atualizado, False se não encontrado."""
         
         with DBConnectionHandler() as session:
@@ -31,7 +31,6 @@ class MateriaRepository:
             if not materia:
                 return False
             materia.nome_materia = novo_nome
-            materia.id_professor = novo_id_professor
             session.commit()
             return True
 

@@ -14,16 +14,14 @@ class ControllerMateria:
     """Controlador responsável por coordenar operações relacionadas a matérias."""
 
     def __init__(self, nome: Optional[str] = None,
-                 id_professor: Optional[int] = None,
                  id_materia: Optional[int] = None,
         ) -> None:
         self.__nome = nome
-        self.__id_professor = id_professor
         self.__id_materia = id_materia
 
     def criar_materia(self) -> str:
         """Cria uma nova matéria no banco de dados."""
-        resultado = CriarMateriaNoBanco(nome = self.__nome,id_professor = self.__id_professor).executar()
+        resultado = CriarMateriaNoBanco(nome = self.__nome).executar()
         return resultado
 
     def listar_materias(self) -> str:
@@ -35,8 +33,7 @@ class ControllerMateria:
     def atualizar_materia(self) -> str:
         """Atualiza os dados da matéria com base no ID."""
         resultado = AtualizarMateriaNoBanco(id_materia = self.__id_materia, 
-                                            novo_nome = self.__nome,
-                                            novo_id_professor = self.__id_professor).executar()
+                                            novo_nome = self.__nome).executar()
         return resultado
 
     def deletar_materia(self) -> str:
@@ -55,14 +52,13 @@ class ControllerMateria:
         return FormatarMateria().formatar_materia_data_para_dominio(lista_materia)[0]
 
 class CriarMateriaNoBanco:
-    def __init__(self, nome: str, id_professor: int):
-        self.__materia = Materia(nome = nome, id_professor = id_professor, id_materia = 0, id_disciplina=0)
+    def __init__(self, nome: str):
+        self.__materia = Materia(nome = nome, id_professor = 0, id_materia = 0, id_disciplina=0)
     def executar(self) -> str:
         
         # Validação de campos obrigatórios
         resultado = ValidadorCampos.validar_campos_preenchidos([
             self.__materia.nome,
-            self.__materia.id_professor
         ])
         if resultado is not None:
             return resultado
@@ -82,8 +78,6 @@ class CriarMateriaNoBanco:
 
 
 class ListarMateriasNoBanco:
- 
- 
     def executar(self) -> list[Materia_data]:
         try:
             materias = MateriaRepository().listar()
@@ -95,10 +89,9 @@ class ListarMateriasNoBanco:
 
 
 class AtualizarMateriaNoBanco:
-    def __init__(self, id_materia: int, novo_nome: str, novo_id_professor: int):
+    def __init__(self, id_materia: int, novo_nome: str):
         self.__id = id_materia
         self.__novo_nome = novo_nome
-        self.__id_professor = novo_id_professor
 
     def executar(self) -> str:
         
@@ -106,24 +99,18 @@ class AtualizarMateriaNoBanco:
         resultado = ValidadorCampos.validar_campos_preenchidos([
             self.__id,
             self.__novo_nome,
-            self.__id_professor
         ])
         
         if resultado is not None:
             return resultado
             
         try:
-            # Verifica existência do professor antes de atualizar a matéria
-            if ConsultarProfessor(self.__id_professor) is None:
-                return f"Professor com ID {self.__id_professor} não encontrado."
-            
+            atualizado = MateriaRepository().atualizar(id_materia = self.__id, novo_nome = self.__novo_nome)
+            if atualizado:
+                log.info(f"Matéria {self.__id} atualizada com sucesso.")
+                return "Matéria atualizada com sucesso"
             else:
-                atualizado = MateriaRepository().atualizar(id_materia = self.__id, novo_nome = self.__novo_nome, novo_id_professor = self.__id_professor)
-                if atualizado:
-                    log.info(f"Matéria {self.__id} atualizada com sucesso.")
-                    return "Matéria atualizada com sucesso"
-                else:
-                    return "Matéria não encontrada"
+                return "Matéria não encontrada"
         except Exception as e:
             log.error(f"Erro ao atualizar matéria: {e}")
             return "Erro ao atualizar matéria"

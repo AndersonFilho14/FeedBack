@@ -435,7 +435,6 @@ def criar_materia():
     ```json
     {
         "nome": "Gramática",
-        "id_professor": 3
     }
     ```
 
@@ -444,7 +443,6 @@ def criar_materia():
     dados = request.json
     controller = ControllerMateria(
         nome=dados.get("nome"),
-        id_professor=dados.get("id_professor")
     )
     resultado = controller.criar_materia()
     return make_response(jsonify({"mensagem": resultado}))
@@ -486,7 +484,6 @@ def atualizar_materia(id_materia):
     ```json
     {
         "nome": "Gramática Avançada",
-        "id_professor": 3
     }
     ```
 
@@ -497,7 +494,6 @@ def atualizar_materia(id_materia):
     controller = ControllerMateria(
         id_materia=id_materia,
         nome=dados.get("nome"),
-        id_professor=dados.get("id_professor")
     )
     resultado = controller.atualizar_materia()
     return make_response(jsonify({"mensagem": resultado}))
