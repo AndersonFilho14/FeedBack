@@ -254,13 +254,11 @@ class FormatarAvaliacao:
         for avaliacao in avaliacoes_dominio:
             aluno = ConsultaAlunoBanco().buscar_aluno_por_id(id_aluno=avaliacao.id_aluno)
             professor = ConsultarProfessor(id_professor=avaliacao.id_professor).get_professor_retorno()
-            disciplina = ConsultaMateriaBanco().buscar_disciplina_por_id(id_disciplina=avaliacao.id_disciplina)
             materia = ConsultaMateriaBanco().buscar_materia_por_id(avaliacao.id_materia)
             turma = ConsultaTurmaBanco().buscar_por_id(avaliacao.id_turma)
 
             nome_aluno = aluno.nome if aluno else "Desconhecido"
             nome_professor = professor.nome if professor else "Desconhecido"
-            nome_disciplina = disciplina.nome_disciplina if disciplina else "Desconhecida"
             nome_materia = materia.nome_materia if materia else "Desconhecida"
             nome_turma = turma.nome if turma else "Desconhecida"
             escola = ConsultaEscolaBanco().buscar_por_id(aluno.id_escola)
@@ -275,7 +273,6 @@ class FormatarAvaliacao:
                 "id_aluno": avaliacao.id_aluno,
                 "nome_aluno": nome_aluno,
                 "nome_professor": nome_professor,
-                "nome_disciplina": nome_disciplina,
                 "nome_materia": nome_materia,
                 "nome_turma": nome_turma,
                 "nome_escola": nome_escola

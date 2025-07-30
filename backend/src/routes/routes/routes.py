@@ -435,7 +435,6 @@ def criar_materia():
     ```json
     {
         "nome": "Gramática",
-        "id_disciplina": 1,
         "id_professor": 3
     }
     ```
@@ -445,7 +444,6 @@ def criar_materia():
     dados = request.json
     controller = ControllerMateria(
         nome=dados.get("nome"),
-        id_disciplina=dados.get("id_disciplina"),
         id_professor=dados.get("id_professor")
     )
     resultado = controller.criar_materia()
@@ -456,9 +454,7 @@ def criar_materia():
 @user_rout_bp.route("/materia", methods=["GET"])
 def listar_materias():
     """
-    Lista todas as matérias.
-
-    
+    Lista todas as matérias.    
     :return: JSON estruturado com a lista de matérias.
     """
     controller = ControllerMateria()
@@ -490,7 +486,6 @@ def atualizar_materia(id_materia):
     ```json
     {
         "nome": "Gramática Avançada",
-        "id_disciplina": 1,
         "id_professor": 3
     }
     ```
@@ -502,7 +497,6 @@ def atualizar_materia(id_materia):
     controller = ControllerMateria(
         id_materia=id_materia,
         nome=dados.get("nome"),
-        id_disciplina=dados.get("id_disciplina"),
         id_professor=dados.get("id_professor")
     )
     resultado = controller.atualizar_materia()
