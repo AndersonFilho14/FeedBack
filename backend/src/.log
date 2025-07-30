@@ -5885,3 +5885,270 @@ INFO     | 30/07/2025 02:32:06 | 0:09:15.342763 |            escola.py:143   |  
 DEBUG    | 30/07/2025 02:32:06 | 0:09:15.351908 |            escola.py:98    |               escola.executar             | 3 escolas encontradas no município 1.
 INFO     | 30/07/2025 02:32:07 | 0:09:16.276964 |            escola.py:143   |               escola.executar             | Escola 20 deletada.
 DEBUG    | 30/07/2025 02:32:07 | 0:09:16.287955 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 02:33:54 | 0:11:03.326407 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 02:33:54 | 0:11:03.329948 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+TRACE    | 30/07/2025 02:34:01 | 0:11:09.861432 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 30/07/2025 02:37:24 | 0:14:33.706358 |           materia.py:90    |              materia.executar             | 2 matérias encontradas.
+INFO     | 30/07/2025 02:38:37 | 0:15:46.059559 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 30/07/2025 02:38:38 | 0:00:00.335553 |              main.py:8     |                 main.<module>             | Iniciando projeto
+INFO     | 30/07/2025 02:38:41 | 0:00:02.547258 |           materia.py:73    |              materia.executar             | Matéria 'aaaaaa' criada com sucesso.
+DEBUG    | 30/07/2025 02:38:47 | 0:00:09.285077 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+INFO     | 30/07/2025 02:40:02 | 0:01:24.386184 |           materia.py:110   |              materia.executar             | Matéria 3 atualizada com sucesso.
+DEBUG    | 30/07/2025 02:40:06 | 0:01:27.873362 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+INFO     | 30/07/2025 02:40:31 | 0:01:52.803571 |           materia.py:127   |              materia.executar             | Matéria 3 deletada.
+DEBUG    | 30/07/2025 02:40:34 | 0:01:56.390862 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+INFO     | 30/07/2025 02:45:01 | 0:06:22.545187 |           materia.py:73    |              materia.executar             | Matéria 'dddffffa' criada com sucesso.
+DEBUG    | 30/07/2025 02:45:07 | 0:06:28.800963 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+DEBUG    | 30/07/2025 02:52:32 | 0:13:53.710506 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+DEBUG    | 30/07/2025 02:52:36 | 0:13:57.676167 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+DEBUG    | 30/07/2025 02:53:50 | 0:15:11.959351 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+DEBUG    | 30/07/2025 02:53:54 | 0:15:16.203608 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+DEBUG    | 30/07/2025 02:54:18 | 0:15:39.768022 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+DEBUG    | 30/07/2025 02:54:20 | 0:15:42.348022 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+INFO     | 30/07/2025 02:54:24 | 0:15:46.069318 |           materia.py:127   |              materia.executar             | Matéria 3 deletada.
+DEBUG    | 30/07/2025 02:54:27 | 0:15:49.017172 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:54:55 | 0:16:16.934972 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:55:07 | 0:16:29.179891 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:55:07 | 0:16:29.186191 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:55:10 | 0:16:31.710453 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:55:10 | 0:16:31.712524 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:55:16 | 0:16:38.073485 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:55:16 | 0:16:38.076178 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+TRACE    | 30/07/2025 02:55:32 | 0:16:54.028131 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 30/07/2025 02:55:32 | 0:16:54.031748 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+TRACE    | 30/07/2025 02:55:36 | 0:16:57.434142 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 30/07/2025 02:55:51 | 0:17:13.010207 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:55:51 | 0:17:13.016975 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:55:55 | 0:17:16.747599 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:55:55 | 0:17:16.755234 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+TRACE    | 30/07/2025 02:56:56 | 0:18:17.798923 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 30/07/2025 02:57:46 | 0:19:08.405049 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:57:46 | 0:19:08.417068 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:57:48 | 0:19:09.626276 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 02:57:48 | 0:19:09.646971 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 02:57:51 | 0:19:13.048221 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 02:57:51 | 0:19:13.068268 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+TRACE    | 30/07/2025 02:58:17 | 0:19:39.160046 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 30/07/2025 02:58:19 | 0:19:40.642233 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:58:19 | 0:19:40.648536 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:58:22 | 0:19:44.379864 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:58:22 | 0:19:44.385910 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:58:37 | 0:19:58.561231 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:58:37 | 0:19:58.567325 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:58:47 | 0:20:09.363260 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:58:47 | 0:20:09.370145 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:58:51 | 0:20:12.618662 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:58:51 | 0:20:12.624115 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:58:57 | 0:20:19.068775 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:58:57 | 0:20:19.074609 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:59:00 | 0:20:21.434483 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:59:00 | 0:20:21.442860 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:59:05 | 0:20:26.532708 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:59:05 | 0:20:26.540548 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:59:52 | 0:21:14.213222 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 02:59:52 | 0:21:14.219161 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:00:02 | 0:21:24.428357 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:00:46 | 0:22:07.915127 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:00:46 | 0:22:07.922774 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:00:49 | 0:22:10.845806 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:00:49 | 0:22:10.849395 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:00:58 | 0:22:20.143809 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:00:58 | 0:22:20.146247 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:01:04 | 0:22:25.630171 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:01:54 | 0:23:15.483116 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:01:54 | 0:23:15.494075 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:02:01 | 0:23:23.287537 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:02:05 | 0:23:27.012585 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:02:05 | 0:23:27.049187 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:02:10 | 0:23:31.609007 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:02:11 | 0:23:32.915543 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:02:11 | 0:23:32.919044 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:08:06 | 0:29:28.255813 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:08:10 | 0:29:31.913370 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:08:10 | 0:29:31.919174 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+INFO     | 30/07/2025 03:08:23 | 0:29:45.067566 |           materia.py:110   |              materia.executar             | Matéria 1 atualizada com sucesso.
+DEBUG    | 30/07/2025 03:08:24 | 0:29:46.046563 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:08:24 | 0:29:46.046892 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:09:08 | 0:30:30.048705 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:09:08 | 0:30:30.057396 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:09:12 | 0:30:33.783621 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:09:12 | 0:30:33.794420 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:09:22 | 0:30:43.435366 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:09:22 | 0:30:43.437510 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:10:01 | 0:31:22.830102 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:10:10 | 0:31:32.319350 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:10:10 | 0:31:32.321834 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:10:12 | 0:31:34.138179 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:10:12 | 0:31:34.147283 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:11:31 | 0:32:53.174553 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:11:31 | 0:32:53.181327 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:11:54 | 0:33:15.658666 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:11:54 | 0:33:15.666708 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+INFO     | 30/07/2025 03:11:56 | 0:33:17.701934 |           materia.py:110   |              materia.executar             | Matéria 2 atualizada com sucesso.
+DEBUG    | 30/07/2025 03:11:57 | 0:33:18.837701 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:11:57 | 0:33:18.844193 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+INFO     | 30/07/2025 03:11:58 | 0:33:20.316410 |           materia.py:110   |              materia.executar             | Matéria 1 atualizada com sucesso.
+DEBUG    | 30/07/2025 03:11:59 | 0:33:20.786370 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:11:59 | 0:33:20.796730 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+INFO     | 30/07/2025 03:12:03 | 0:33:24.790407 |           materia.py:110   |              materia.executar             | Matéria 1 atualizada com sucesso.
+DEBUG    | 30/07/2025 03:12:04 | 0:33:25.630648 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:12:04 | 0:33:25.632528 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:12:08 | 0:33:29.528872 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:12:08 | 0:33:29.534626 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:12:10 | 0:33:31.443202 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:12:10 | 0:33:31.452836 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:12:11 | 0:33:33.334230 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:12:11 | 0:33:33.336712 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+INFO     | 30/07/2025 03:12:14 | 0:33:36.389007 |           materia.py:73    |              materia.executar             | Matéria 'aaaa' criada com sucesso.
+INFO     | 30/07/2025 03:12:18 | 0:33:39.725852 |           materia.py:73    |              materia.executar             | Matéria 'aaaa' criada com sucesso.
+DEBUG    | 30/07/2025 03:12:19 | 0:33:40.786296 |           materia.py:84    |              materia.executar             | 4 matérias encontradas.
+DEBUG    | 30/07/2025 03:12:19 | 0:33:40.792769 |           materia.py:84    |              materia.executar             | 4 matérias encontradas.
+INFO     | 30/07/2025 03:12:22 | 0:33:43.788174 |           materia.py:127   |              materia.executar             | Matéria 4 deletada.
+INFO     | 30/07/2025 03:12:24 | 0:33:45.866743 |           materia.py:127   |              materia.executar             | Matéria 3 deletada.
+DEBUG    | 30/07/2025 03:12:26 | 0:33:47.798992 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:12:52 | 0:34:14.356892 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:12:52 | 0:34:14.365134 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:15:50 | 0:37:12.389667 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:15:50 | 0:37:12.395868 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+INFO     | 30/07/2025 03:15:58 | 0:37:19.613006 |           materia.py:73    |              materia.executar             | Matéria 'nova materia' criada com sucesso.
+DEBUG    | 30/07/2025 03:15:59 | 0:37:20.456889 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+DEBUG    | 30/07/2025 03:15:59 | 0:37:20.462888 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+INFO     | 30/07/2025 03:16:03 | 0:37:24.627280 |           materia.py:110   |              materia.executar             | Matéria 3 atualizada com sucesso.
+DEBUG    | 30/07/2025 03:16:03 | 0:37:25.108949 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+DEBUG    | 30/07/2025 03:16:03 | 0:37:25.115956 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+INFO     | 30/07/2025 03:16:05 | 0:37:26.947509 |           materia.py:127   |              materia.executar             | Matéria 3 deletada.
+DEBUG    | 30/07/2025 03:16:08 | 0:37:29.755944 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:16:08 | 0:37:29.762896 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:16:11 | 0:37:32.726238 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:16:11 | 0:37:32.728478 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:16:15 | 0:37:36.662153 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:16:15 | 0:37:36.663701 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+TRACE    | 30/07/2025 03:16:24 | 0:37:45.762891 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 30/07/2025 03:16:25 | 0:37:47.129754 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:16:25 | 0:37:47.136263 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:21:07 | 0:42:29.192639 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:21:07 | 0:42:29.192878 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
+DEBUG    | 30/07/2025 03:21:09 | 0:42:31.027428 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:21:09 | 0:42:31.033318 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:21:34 | 0:42:56.182348 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:21:34 | 0:42:56.194143 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+TRACE    | 30/07/2025 03:23:21 | 0:44:43.314855 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 30/07/2025 03:23:23 | 0:44:44.514285 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:23:23 | 0:44:44.514703 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:23:25 | 0:44:46.988218 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:23:25 | 0:44:46.988482 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:23:27 | 0:44:48.811760 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:23:27 | 0:44:48.824128 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+INFO     | 30/07/2025 03:23:49 | 0:45:11.064295 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 30/07/2025 03:23:51 | 0:00:00.352723 |              main.py:8     |                 main.<module>             | Iniciando projeto
+DEBUG    | 30/07/2025 03:23:56 | 0:00:04.830291 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:11 | 0:00:20.324915 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:11 | 0:00:20.326743 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:13 | 0:00:22.266023 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:13 | 0:00:22.266283 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:14 | 0:00:23.709974 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:14 | 0:00:23.713335 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:19 | 0:00:27.981599 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:19 | 0:00:28.004058 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:21 | 0:00:30.290958 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:21 | 0:00:30.296313 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:21 | 0:00:30.297198 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:21 | 0:00:30.361054 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:21 | 0:00:30.373113 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:21 | 0:00:30.419046 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:24 | 0:00:32.790809 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:24 | 0:00:32.811999 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:24 | 0:00:33.468290 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:24 | 0:00:33.473448 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:24 | 0:00:33.477203 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:24 | 0:00:33.517248 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:24 | 0:00:33.517951 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:24 | 0:00:33.522200 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:26 | 0:00:35.494578 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:26 | 0:00:35.515632 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:28 | 0:00:37.289446 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:28 | 0:00:37.292334 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:28 | 0:00:37.323053 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:28 | 0:00:37.329346 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+INFO     | 30/07/2025 03:24:34 | 0:00:42.978738 |             turma.py:76    |                turma.executar             | Turma 'aaa' criada com sucesso.
+DEBUG    | 30/07/2025 03:24:35 | 0:00:43.853536 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:35 | 0:00:43.882412 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:36 | 0:00:45.374602 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:36 | 0:00:45.379078 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:36 | 0:00:45.380308 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:36 | 0:00:45.422897 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:36 | 0:00:45.425370 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:36 | 0:00:45.427623 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:39 | 0:00:48.176111 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:39 | 0:00:48.203480 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:40 | 0:00:49.079427 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:40 | 0:00:49.082502 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:40 | 0:00:49.087765 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:40 | 0:00:49.122729 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:40 | 0:00:49.132842 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:40 | 0:00:49.133874 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:41 | 0:00:50.209220 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:24:41 | 0:00:50.236215 |             turma.py:90    |                turma.executar             | 3 turmas encontradas na escola 1.
+INFO     | 30/07/2025 03:24:42 | 0:00:51.511104 |             turma.py:142   |                turma.executar             | Turma 9 deletada.
+DEBUG    | 30/07/2025 03:24:47 | 0:00:56.079481 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:24:47 | 0:00:56.079733 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:25:57 | 0:02:06.511857 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:25:57 | 0:02:06.518144 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:25:59 | 0:02:08.694981 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:25:59 | 0:02:08.715015 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:26:08 | 0:02:17.658007 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:26:08 | 0:02:17.658735 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:26:10 | 0:02:19.401116 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:26:10 | 0:02:19.402145 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:26:11 | 0:02:20.717770 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:26:11 | 0:02:20.737072 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:26:13 | 0:02:21.968039 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:26:13 | 0:02:21.987821 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:26:30 | 0:02:39.092718 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:26:30 | 0:02:39.113681 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:27:26 | 0:03:34.861895 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:27:26 | 0:03:34.865326 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+INFO     | 30/07/2025 03:28:02 | 0:04:11.546710 |         professor.py:507   |            professor._executar            | Professor 'asdasdasd' criado com sucesso.
+DEBUG    | 30/07/2025 03:28:08 | 0:04:17.301121 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:28:08 | 0:04:17.323400 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:30:05 | 0:06:14.493793 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:30:05 | 0:06:14.517851 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:30:07 | 0:06:16.412900 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:30:07 | 0:06:16.435682 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:30:09 | 0:06:18.395940 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:30:09 | 0:06:18.421741 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:30:10 | 0:06:19.128996 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:30:10 | 0:06:19.151462 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+INFO     | 30/07/2025 03:31:35 | 0:07:43.802274 |         professor.py:587   |            professor._executar            | Professor 17 atualizado com sucesso.
+INFO     | 30/07/2025 03:31:39 | 0:07:48.344151 |         professor.py:587   |            professor._executar            | Professor 17 atualizado com sucesso.
+INFO     | 30/07/2025 03:31:42 | 0:07:50.980818 |         professor.py:587   |            professor._executar            | Professor 17 atualizado com sucesso.
+INFO     | 30/07/2025 03:31:45 | 0:07:54.469833 |         professor.py:587   |            professor._executar            | Professor 17 atualizado com sucesso.
+DEBUG    | 30/07/2025 03:31:46 | 0:07:55.154772 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:31:46 | 0:07:55.157858 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:31:47 | 0:07:56.439979 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:31:47 | 0:07:56.461450 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+INFO     | 30/07/2025 03:31:54 | 0:08:03.164289 |         professor.py:587   |            professor._executar            | Professor 17 atualizado com sucesso.
+INFO     | 30/07/2025 03:33:29 | 0:09:38.620285 |         professor.py:587   |            professor._executar            | Professor 17 atualizado com sucesso.
+DEBUG    | 30/07/2025 03:33:30 | 0:09:39.502309 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:33:30 | 0:09:39.523327 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+INFO     | 30/07/2025 03:33:32 | 0:09:41.509520 |         professor.py:604   |            professor._executar            | Professor 17 deletado.
+INFO     | 30/07/2025 03:33:57 | 0:10:06.283785 |         professor.py:507   |            professor._executar            | Professor 'ggggggggggg' criado com sucesso.
+DEBUG    | 30/07/2025 03:34:01 | 0:10:10.586346 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+DEBUG    | 30/07/2025 03:34:01 | 0:10:10.613211 |         professor.py:521   |            professor._executar            | 5 professores encontrados na escola 1.
+INFO     | 30/07/2025 03:34:03 | 0:10:12.409441 |         professor.py:604   |            professor._executar            | Professor 17 deletado.
+DEBUG    | 30/07/2025 03:34:07 | 0:10:16.232796 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:34:07 | 0:10:16.266659 |             aluno.py:243   |                aluno.listar_alunos_escola | 6 alunos encontrados na escola 1.
+INFO     | 30/07/2025 03:34:26 | 0:10:35.764140 |             aluno.py:401   |                aluno.get_score_preditivo  | Score preditivo para o aluno 0 (asdasdasdsadas): C
+INFO     | 30/07/2025 03:34:27 | 0:10:35.797823 |             aluno.py:228   |                aluno.executar             | Aluno 'asdasdasdsadas' criado com sucesso.
+DEBUG    | 30/07/2025 03:34:29 | 0:10:37.856699 |             aluno.py:243   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+DEBUG    | 30/07/2025 03:34:29 | 0:10:37.886529 |             aluno.py:243   |                aluno.listar_alunos_escola | 7 alunos encontrados na escola 1.
+INFO     | 30/07/2025 03:34:32 | 0:10:41.281380 |             aluno.py:384   |                aluno.executar             | Aluno 25 deletado.
+DEBUG    | 30/07/2025 03:34:37 | 0:10:46.032564 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+DEBUG    | 30/07/2025 03:34:37 | 0:10:46.051922 |             turma.py:90    |                turma.executar             | 2 turmas encontradas na escola 1.
+TRACE    | 30/07/2025 03:34:48 | 0:10:57.342011 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 30/07/2025 03:34:51 | 0:11:00.493637 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:34:51 | 0:11:00.499503 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:34:54 | 0:11:03.775228 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:34:54 | 0:11:03.781205 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:34:57 | 0:11:06.392900 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 30/07/2025 03:34:57 | 0:11:06.398363 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
