@@ -4,7 +4,11 @@ import React, { useEffect, useState } from "react";
 import { columns } from "./data";
 import { getDSMunicipio } from "@/services/dashboard";
 
-function BestStudentTable() {
+function BestStudentTable({
+  hidePageButtons = false,
+}: {
+  hidePageButtons?: boolean;
+}) {
   const [alunos, setAlunos] = useState([]);
   useEffect(() => {
     getDSMunicipio({ id: "1" }).then(({ data }) => {
@@ -17,13 +21,14 @@ function BestStudentTable() {
     <>
       <div>
         <Card className="flex flex-col max-w-3xl">
-          <Title level={4} >
-            Ranking Top 5 Média de Alunos
-          </Title>
+          <Title level={4}>Ranking Top 5 Média de Alunos</Title>
           <Table
             columns={columns}
-            dataSource={alunos}
-            pagination={{ pageSize: 5 }}
+            dataSource={hidePageButtons ? alunos.slice(0, 5) : alunos}
+            pagination={{
+              pageSize: 5,
+              hideOnSinglePage: true,
+            }}
           />
         </Card>
       </div>

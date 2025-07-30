@@ -6178,3 +6178,5 @@ DEBUG    | 30/07/2025 03:41:22 | 0:17:30.986444 |            escola.py:98    |  
 INFO     | 30/07/2025 08:41:21 | 0:00:02.021150 |              main.py:8     |                 main.<module>             | Iniciando projeto
 DEBUG    | 30/07/2025 09:47:51 | 1:06:31.612194 |            escola.py:98    |               escola.executar             | 2 escolas encontradas no município 1.
 INFO     | 30/07/2025 10:05:18 | 1:23:58.835012 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 30/07/2025 11:28:35 | 0:00:01.374340 |              main.py:8     |                 main.<module>             | Iniciando projeto
+INFO     | 30/07/2025 12:31:57 | 1:03:23.011734 |              main.py:10    |                 main.<module>             | Fim do projeto
