@@ -52,14 +52,14 @@ class ControllerEscola:
 
         lista_escola = [escola_data]  # cria uma lista com um único item
         escola_dominio = FormatarEscola().formatar_escola_data_para_dominio(lista_escola)[0]  # pega o primeiro da lista formatada
-        acesso = ConsultaEscolaBanco().buscar_acesso(id_escola=escola_dominio.id)
+        acesso = ConsultaEscolaBanco().buscar_acesso(id_escola=escola_dominio.id,id_cargo=2)
         escola_dominio.nome_usuario = acesso.usuario
         return escola_dominio
         
 
 class CriarEscolaNoBanco:
     def __init__(self,  nome: str, id_municipio: int, nome_usuario: str = None, senha: str = None):
-        self.__escola = Escola(nome = nome, id_municipio = id_municipio, id = 0, nome_usuario = nome_usuario, senha = senha)
+        self.__escola = Escola(nome = nome, id_municipio = 1, id = 0, nome_usuario = nome_usuario, senha = senha)
 
     def executar(self) -> str:
         

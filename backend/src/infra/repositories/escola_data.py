@@ -75,8 +75,14 @@ class ConsultaEscolaBanco:
     def buscar_por_id(self, id_escola: int) -> Optional[EscolaData]:
         with DBConnectionHandler() as session:
             return session.query(EscolaData).filter_by(id = id_escola).first()
-    
-    def buscar_acesso(self, id_escola: int) -> Optional[AcessoData]:
+
+    def buscar_acesso(self, id_escola: int, id_cargo: Optional[int] = None) -> Optional[AcessoData]:
         with DBConnectionHandler() as session:
-            return session.query(AcessoData).filter_by(id_user = id_escola).first()
+            query = session.query(AcessoData).filter_by(id_user=id_escola)
+            
+            if id_cargo is not None:
+                query = query.filter_by(id_cargo=id_cargo)
+            
+            return query.first()
+
     
