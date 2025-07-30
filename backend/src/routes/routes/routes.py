@@ -876,7 +876,7 @@ def ranking_escolas():
     Retorna o ranking geral das escolas por média de nota.
     """
     controller = ControllerRankingAvaliacao()
-    resultado = controller.ranquear_escolas()
+    resultado = controller.ranquear_escolas_geral()
     return make_response(resultado)
 
 
@@ -886,7 +886,7 @@ def ranking_materias_por_escola(id_escola):
     Retorna o ranking das matérias de uma escola por média de nota.
     """
     controller = ControllerRankingAvaliacao(id_escola=id_escola)
-    resultado = controller.ranquear_materias()
+    resultado = controller.ranquear_materias_geral()
     return make_response(resultado)
 
 @user_rout_bp.route("/dashboard/escola/<int:id_escola>", methods=["GET"])
