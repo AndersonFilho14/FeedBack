@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client'
+"use client";
 import { getDSEscola } from "@/services/dashboard";
 import { Card, Typography } from "antd";
 import React, { useEffect, useState } from "react";
@@ -22,8 +22,9 @@ export const AverageTeacher: React.FC = () => {
     getDSEscola({ id: "1" }).then(({ data }) => {
       setProfessor(data.ranking.professores.ranking_professores);
     });
-  },[]);
-const { Title } = Typography;
+  }, []);
+
+  const { Title } = Typography;
 
   return (
     <Card style={{ width: "100%", height: 450 }}>
@@ -48,8 +49,12 @@ const { Title } = Typography;
             }
             labelFormatter={(label: string) => `Professor: ${label}`}
           />
-          <Bar dataKey="media" name="media" >
-              <LabelList dataKey="media" position="top" formatter={(v:any) => v!.toFixed(2)} />
+          <Bar dataKey="media" name="media">
+            <LabelList
+              dataKey="media"
+              position="top"
+              formatter={(v: any) => v!.toFixed(2)}
+            />
             {professor.map((_, index) => (
               <Cell key={index} fill={cores[index % cores.length]} />
             ))}

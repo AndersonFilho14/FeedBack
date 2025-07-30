@@ -1,10 +1,17 @@
+"use client";
 import AveragePerClass from "@/components/AvaragePerClass";
 import AveragePerSchool from "@/components/AveragePerSchool";
 import BestStudentTable from "@/components/BestStudentTable";
 import AverageTeacher from "@/components/AverageTeacher";
 import React from "react";
+import DistributionSchoolIA from "@/components/DistributionSchoolIA";
+import DistSchoolAIMale from "@/components/DistSchoolAIMale";
+import DistSchoolAIFemale from "@/components/DistSchoolAIFemale";
+import { Card, Typography } from "antd";
 
 function DashboardPage() {
+  const { Title } = Typography;
+
   return (
     <>
       {/* Header consistente com o resto da aplicação */}
@@ -26,6 +33,14 @@ function DashboardPage() {
             <AveragePerSchool />
             <AverageTeacher />
           </div>
+          <Card style={{ marginTop: 16 }}>
+            <Title level={3}>IA</Title>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              <DistributionSchoolIA />
+              <DistSchoolAIMale />
+              <DistSchoolAIFemale />
+            </div>
+          </Card>
         </main>
       </div>
     </>
