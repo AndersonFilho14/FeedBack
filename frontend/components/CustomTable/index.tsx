@@ -1,5 +1,5 @@
 import { Button, Table, TableProps } from "antd";
-import { Edit2Icon,  TrashIcon } from "lucide-react";
+import { Edit2Icon, TrashIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
@@ -10,31 +10,33 @@ function CustomTable({
 }: {
   columns: TableProps["columns"];
   dataSource: TableProps["dataSource"];
-  handleDelete: (id: string) => void;
+  handleDelete?: (id: string) => void;
 }) {
   const route = useRouter();
   const href = usePathname();
   const dataCol: TableProps["columns"] = [
-    {
-      key: "Ações",
-      title: "Ações",
-      render: (_, rol) => (
-        <>
-          <div>
-            <Button
-              onClick={() => {
-                route.push(`${href}/form?id=${rol.id}`);
-              }}
-            >
-              <Edit2Icon />
-            </Button>
-            <Button onClick={() => handleDelete(rol.id)}>
-              <TrashIcon />
-            </Button>
-          </div>
-        </>
-      ),
-    },
+    handleDelete
+      ? {
+          key: "Ações",
+          title: "Ações",
+          render: (_, rol) => (
+            <>
+              <div>
+                <Button
+                  onClick={() => {
+                    route.push(`${href}/form?id=${rol.id}`);
+                  }}
+                >
+                  <Edit2Icon />
+                </Button>
+                <Button onClick={() => handleDelete(rol.id)}>
+                  <TrashIcon />
+                </Button>
+              </div>
+            </>
+          ),
+        }
+      : {},
   ];
 
   return (
