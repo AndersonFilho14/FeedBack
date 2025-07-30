@@ -6,7 +6,7 @@ from user_cases.materia import ControllerMateria
 from user_cases.municipio import ControllerMunicipio
 from user_cases.escola import ControllerEscola
 from user_cases.avaliacao import ControllerRankingAvaliacao, ControllerHistoricoAvaliacoes
-
+from user_cases.dashboard import ControllerDashboard
 
 ID_ESCOLA_TESTE = 1
 
@@ -309,7 +309,7 @@ def test_ranking_por_materia_geral():
     print(resposta)
 
 def teste_ranking_por_aluno_escola():
-    controller = ControllerRankingAvaliacao(id_escola=ID_ESCOLA_TESTE)
+    controller = ControllerRankingAvaliacao(id_escola=3)
     resposta = controller.ranquear_alunos_por_escola()
     print(resposta)
 
@@ -388,6 +388,10 @@ def teste_distribuicao_aulas_Particulares_geral():
     resultado = ControllerAlunoIA.obter_qtd_alunos_por_aulas_particulares_geral()
     print(resultado)
 
+def teste_Dashboard():
+    resultado = ControllerDashboard(id_escola=3).gerar_dashboard_escola()
+    print(resultado)
+
 if __name__ == "__main__":
     print("descomente a função que deseja testar")
     #test_criar_escola()
@@ -397,7 +401,7 @@ if __name__ == "__main__":
     #test_criar_materia()
     #test_criar_municipio() 
    
-    test_listar_escolas()
+    #test_listar_escolas()
     #test_listar_professores()
     #test_listar_turmas()
     #test_listar_alunos_escola()
@@ -450,4 +454,5 @@ if __name__ == "__main__":
     #teste_distribuicao_extra_curricular_escola()
     #teste_distribuicao_aula_musica_escola()
     #teste_distribuicao_aulas_Particulares_escola()
+    teste_Dashboard()
     
