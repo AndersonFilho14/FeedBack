@@ -36,7 +36,6 @@ function DashboardPage() {
               Baixar PDF
             </Button>
           </div>
-          {/* Grid para os componentes do dashboard com espaçamento */}
           <div id="relatorio-completo">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
               <BestStudentTable hidePageButtons />
