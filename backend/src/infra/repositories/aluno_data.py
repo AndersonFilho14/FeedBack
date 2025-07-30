@@ -196,8 +196,11 @@ class AlunoIARepository:
 
     def contar_notas_ia_por_escola(id_escola: int) -> Dict[str, int]:
         """
-        Conta quantos alunos possuem cada nota preditiva (A, B, C, D, F) para a escola informada.
+        Conta quantos alunos possuem cada nota preditiva (A, B, C, D, E, F) para a escola informada.
+        Mesmo que uma nota não esteja presente, ela será incluída com valor 0.
         """
+        categorias = ["A", "B", "C", "D", "E", "F"]
+
         with DBConnectionHandler() as session:
             alunos = (
                 session.query(AlunoData)
@@ -205,12 +208,17 @@ class AlunoIARepository:
                 .all()
             )
             notas = [aluno.nota_score_preditivo for aluno in alunos]
-            return dict(Counter(notas))
+            contagem = dict(Counter(notas))
+            return {categoria: contagem.get(categoria, 0) for categoria in categorias}
+
 
     def contar_notas_ia_geral() -> Dict[str, int]:
         """
         Conta a distribuição geral das notas preditivas no banco (sem filtro de escola).
+        Mesmo que uma nota não esteja presente, ela será incluída com valor 0.
         """
+        categorias = ["A", "B", "C", "D", "E", "F"]
+
         with DBConnectionHandler() as session:
             alunos = (
                 session.query(AlunoData)
@@ -218,18 +226,17 @@ class AlunoIARepository:
                 .all()
             )
             notas = [aluno.nota_score_preditivo for aluno in alunos]
-            return dict(Counter(notas))
+            contagem = dict(Counter(notas))
+            return {categoria: contagem.get(categoria, 0) for categoria in categorias}
+
         
     def contar_notas_ia_por_sexo_escola(id_escola: Optional[int] = None) -> Dict[str, Dict[str, int]]:
         """
         Retorna a contagem de notas IA por sexo, filtrando por escola (se fornecida).
-
-        Exemplo de retorno:
-        {
-            "Masculino": {"A": 5, "B": 3},
-            "Feminino": {"A": 4, "C": 2}
-        }
+        Mesmo que uma nota não esteja presente, ela será incluída com valor 0.
         """
+        categorias = ["A", "B", "C", "D", "E", "F"]
+
         with DBConnectionHandler() as session:
             query = session.query(AlunoData).filter(AlunoData.nota_score_preditivo != None)
 
@@ -245,20 +252,19 @@ class AlunoIARepository:
 
             resultado: Dict[str, Dict[str, int]] = {}
             for sexo, notas in distribuicao.items():
-                resultado[sexo] = dict(Counter(notas))
+                contagem = dict(Counter(notas))
+                resultado[sexo] = {categoria: contagem.get(categoria, 0) for categoria in categorias}
 
             return resultado
-        
+
+            
     def contar_notas_ia_por_sexo_geral() -> Dict[str, Dict[str, int]]:
         """
         Retorna a contagem de notas IA por sexo em todas as escolas (sem filtro).
-
-        Exemplo de retorno:
-        {
-            "Masculino": {"A": 10, "B": 6},
-            "Feminino": {"A": 8, "C": 3}
-        }
+        Mesmo que uma nota não esteja presente, ela será incluída com valor 0.
         """
+        categorias = ["A", "B", "C", "D", "E", "F"]
+
         with DBConnectionHandler() as session:
             alunos = (
                 session.query(AlunoData)
@@ -273,7 +279,8 @@ class AlunoIARepository:
 
             resultado: Dict[str, Dict[str, int]] = {}
             for sexo, notas in distribuicao.items():
-                resultado[sexo] = dict(Counter(notas))
+                contagem = dict(Counter(notas))
+                resultado[sexo] = {categoria: contagem.get(categoria, 0) for categoria in categorias}
 
             return resultado
         
