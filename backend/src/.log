@@ -6570,3 +6570,24 @@ INFO     | 31/07/2025 15:26:47 | 0:00:00.530840 |              main.py:8     |  
 TRACE    | 31/07/2025 15:27:10 | 0:00:23.432514 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
 DEBUG    | 31/07/2025 15:27:10 | 0:00:23.443029 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
 TRACE    | 31/07/2025 15:27:20 | 0:00:33.019613 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 31/07/2025 15:32:32 | 0:05:45.677488 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 31/07/2025 15:37:27 | 0:10:40.280042 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 31/07/2025 15:37:30 | 0:10:43.270704 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 31/07/2025 15:37:30 | 0:10:43.282945 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+TRACE    | 31/07/2025 15:37:36 | 0:10:49.819830 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+INFO     | 31/07/2025 15:49:07 | 0:22:20.839402 |           materia.py:73    |              materia.executar             | Matéria 'Materia Teste Cypress' criada com sucesso.
+DEBUG    | 31/07/2025 15:49:08 | 0:22:21.237078 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+DEBUG    | 31/07/2025 15:49:08 | 0:22:21.289218 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+DEBUG    | 31/07/2025 15:49:41 | 0:22:54.311303 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 31/07/2025 15:49:41 | 0:22:54.334235 |         professor.py:256   |            professor.__init__             | 1
+TRACE    | 31/07/2025 15:49:44 | 0:22:57.450371 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+TRACE    | 31/07/2025 15:51:10 | 0:24:23.072329 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+INFO     | 31/07/2025 15:58:31 | 0:31:44.224070 |           materia.py:73    |              materia.executar             | Matéria 'Materia Teste Cypress' criada com sucesso.
+DEBUG    | 31/07/2025 15:58:31 | 0:31:44.620238 |           materia.py:84    |              materia.executar             | 4 matérias encontradas.
+DEBUG    | 31/07/2025 15:58:31 | 0:31:44.659585 |           materia.py:84    |              materia.executar             | 4 matérias encontradas.
+INFO     | 31/07/2025 16:00:36 | 0:33:49.037276 |           materia.py:73    |              materia.executar             | Matéria 'Materia Teste Cypress' criada com sucesso.
+DEBUG    | 31/07/2025 16:00:36 | 0:33:49.447172 |           materia.py:84    |              materia.executar             | 5 matérias encontradas.
+DEBUG    | 31/07/2025 16:00:36 | 0:33:49.460412 |           materia.py:84    |              materia.executar             | 5 matérias encontradas.
+TRACE    | 31/07/2025 16:02:33 | 0:35:46.301841 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 31/07/2025 16:02:54 | 0:36:07.767615 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 31/07/2025 16:02:54 | 0:36:07.793487 |         professor.py:256   |            professor.__init__             | 1
