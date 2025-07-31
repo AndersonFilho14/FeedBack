@@ -4,10 +4,10 @@ describe('Teste de Login de escola', () => {
     cy.intercept('GET', '**/acesso/municipio_alfa/senha123', {
       statusCode: 200,
       body: {
-                id_user: 1,
-                nome: "Cidade Alpha",
-                cargo: "Municipio",
-                token: "Q2lkYWRlIEFscGhh"
+            id_user: 1,
+            nome: "Cidade Alpha",
+            cargo: "Municipio",
+            token: "Q2lkYWRlIEFscGhh"
         },
     });
     cy.visit('http://localhost:3000/Login');
