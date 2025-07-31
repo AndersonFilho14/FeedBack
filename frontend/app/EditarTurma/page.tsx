@@ -196,20 +196,7 @@ export default function EditarTurma() {
                     />
                     <div className="flex flex-wrap gap-10 justify-center items-start">
                         <div className="flex flex-col gap-4">
-                            <div>
-                                <h5 className="text-2xl mb-2">Procurar Professor</h5>
-                                <input
-                                    className="w-80 h-10 border-5 rounded-lg border-[#A4B465] bg-amber-50 shadow-md p-2"
-                                    placeholder="Buscar professor disponível..."
-                                    value={filtroProfessor}
-                                    onChange={e => setFiltroProfessor(e.target.value)}
-                                />
-                                <div className="overflow-y-auto h-32 mt-2 border border-gray-300 rounded-lg bg-white/50">
-                                    {professoresFiltrados.map(prof => (
-                                        <div key={prof.id} onClick={() => handleSelectProfessor(prof)} className="p-2 border-b cursor-pointer hover:bg-amber-100">{prof.nome}</div>
-                                    ))}
-                                </div>
-                            </div>
+                           
                             <div>
                                 <h5 className="text-2xl mb-2">Procurar Aluno</h5>
                                 <input 

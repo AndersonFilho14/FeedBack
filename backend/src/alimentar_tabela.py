@@ -465,15 +465,45 @@ def popular_dados():
 
 
         # 11. Criar Alunos (três por turma)
-        print("Criando alunos...")
+        print("Criando alunos com perfis variados...")
         alunos = []
         responsaveis_disponiveis = list(responsaveis)
         random.shuffle(responsaveis_disponiveis)
         global_aluno_count = 0
         for turma_idx, turma in enumerate(turmas):
+            # O laço continua criando 3 alunos por turma
             for j in range(3):
                 global_aluno_count += 1
-                aluno_name = f"Aluno {global_aluno_count} - {turma.nome}"
+                
+                # --- LÓGICA ADICIONADA AQUI ---
+                # O terceiro aluno (índice j=2) será o de péssimo desempenho.
+                if j == 2: 
+                    # Perfil de péssimo desempenho
+                    perfil_nome = "Péssimo Desempenho"
+                    faltas = random.randint(15, 50)
+                    tempo_estudo = round(random.uniform(0.0, 2.5), 1)
+                    apoio_pais = 0
+                    aulas_particulares = 0
+                    educacao_pais = random.randint(0, 2)
+                    extra_curriculares = 0
+                    esportes = random.choice([0, 1])
+                    aula_musica = 0
+                    voluntariado = 0
+                else:
+                    # Perfil padrão/bom desempenho (lógica original)
+                    perfil_nome = "Desempenho Padrão"
+                    faltas = random.randint(0, 2)
+                    tempo_estudo = round(random.uniform(1.0, 15.0), 1)
+                    apoio_pais = random.choice([0, 1])
+                    aulas_particulares = random.choice([0, 1])
+                    educacao_pais = random.randint(0, 5)
+                    extra_curriculares = random.choice([0, 1])
+                    esportes = random.choice([0, 1])
+                    aula_musica = random.choice([0, 1])
+                    voluntariado = random.choice([0, 1])
+                # --- FIM DA LÓGICA ADICIONADA ---
+
+                aluno_name = f"Aluno {global_aluno_count} ({perfil_nome}) - {turma.nome}"
                 aluno = session.query(Aluno).filter_by(nome=aluno_name, id_turma=turma.id).first()
 
                 if not aluno:
@@ -482,25 +512,26 @@ def popular_dados():
                     mes_nascimento = random.randint(1, 12)
                     dia_nascimento = random.randint(1, 28)
 
+                    # Note que o construtor agora usa as variáveis definidas no if/else acima
                     aluno = Aluno(
                         nome=aluno_name,
                         cpf=f"{600 + global_aluno_count:09d}01",
                         data_nascimento=date(ano_nascimento, mes_nascimento, dia_nascimento),
                         sexo=random.choice(["Masculino", "Feminino"]),
                         nacionalidade="Brasileira",
-                        faltas=random.randint(0, 2),
+                        faltas=faltas,  # Usa a variável
                         id_escola=turma.id_escola,
                         id_turma=turma.id,
                         id_responsavel=responsaveis_disponiveis.pop().id if responsaveis_disponiveis else None,
-                        etnia=random.randint(1, 5),                              # Simula 5 categorias étnicas
-                        educacaoPais=random.randint(0, 5),                       # 0: sem escolaridade até 5: superior completo
-                        tempoEstudoSemanal=round(random.uniform(1.0, 15.0), 1),  # horas semanais
-                        apoioPais=random.choice([0, 1]),
-                        aulasParticulares=random.choice([0, 1]),
-                        extraCurriculares=random.choice([0, 1]),
-                        esportes=random.choice([0, 1]),
-                        aulaMusica=random.choice([0, 1]),
-                        voluntariado=random.choice([0, 1])
+                        etnia=random.randint(1, 5),
+                        educacaoPais=educacao_pais, # Usa a variável
+                        tempoEstudoSemanal=tempo_estudo, # Usa a variável
+                        apoioPais=apoio_pais, # Usa a variável
+                        aulasParticulares=aulas_particulares, # Usa a variável
+                        extraCurriculares=extra_curriculares, # Usa a variável
+                        esportes=esportes, # Usa a variável
+                        aulaMusica=aula_musica, # Usa a variável
+                        voluntariado=voluntariado # Usa a variável
                     )
 
                     idade = ObterNotaScorePreditivo._calcular_idade(aluno.data_nascimento)
@@ -531,6 +562,7 @@ def popular_dados():
                     session.refresh(aluno)
                 alunos.append(aluno)
         print("Alunos criados (ou já existiam).")
+
 
         # 12. Criar Avaliações (com lógica de notas)
         print("Gerando avaliações...")
