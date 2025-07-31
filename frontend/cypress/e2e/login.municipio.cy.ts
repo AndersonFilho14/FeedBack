@@ -1,20 +1,20 @@
-
-describe('Teste de Login', () => {
-  it('login válido redireciona para /InicialProfessor', () => {
-    cy.intercept('GET', '**/acesso/prof_alfa/senha123', {
+//O sistema deve permitir login com autenticação por perfil (professor, gestor, …).
+describe('Teste de Login de municipio', () => {
+  it('login válido redireciona para /EdicaoEscola', () => {
+    cy.intercept('GET', '**/acesso/municipio_alfa/senha123', {
       statusCode: 200,
       body: {
-        id_user: 1,
-        nome: "Prof. Ana Silva",
-        cargo: "Professor",
-        token: "UHJvZi4gQW5hIFNpbHZh"
-      },
+            id_user: 1,
+            nome: "Escola Primaria Alpha I",
+            cargo: "Escola",
+            token: "RXNjb2xhIFByaW1hcmlhIEFscGhhIEk="
+        },
     });
     cy.visit('http://localhost:3000/Login');
-    cy.get('input[name="User"]').type('prof_alfa');
+    cy.get('input[name="User"]').type('escola_alfa');
     cy.get('input[name="password"]').type('senha123');
     cy.get('button[type="submit"]').click();
-    cy.url().should('include', '/InicialProfessor');
+    cy.url().should('include', '/EdicaoEscola');
   });
 
   it('login inválido exibe mensagem de erro', () => {
