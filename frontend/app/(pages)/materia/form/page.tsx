@@ -66,6 +66,7 @@ function CadastrarMateriaPage() {
                                 <input 
                                     className="w-full h-12 bg-[#A7C1A8] rounded px-3 text-lg" 
                                     type="text" 
+                                    name="nome"
                                     value={nome} 
                                     onChange={e => setNome(e.target.value)} 
                                     required 
@@ -77,7 +78,7 @@ function CadastrarMateriaPage() {
                             <Link className="w-full sm:w-44 h-13 border-5 rounded-lg border-[#727D73] flex justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-2xl text-black order-2 sm:order-1" href={"/materia"}>
                                 Voltar
                             </Link>
-                            <button type="submit" disabled={isSubmitting} className="w-full sm:w-100 h-19 border-5 rounded-lg border-[#727D73] flex justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-4xl disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-gray-600 order-1 sm:order-2">
+                            <button type="submit" name="Cadastrar" disabled={isSubmitting} className="w-full sm:w-100 h-19 border-5 rounded-lg border-[#727D73] flex justify-center items-center shadow-[0px_4px_22.5px_3px_rgba(0,0,0,0.18)] bg-amber-50 text-4xl disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-gray-600 order-1 sm:order-2">
                                 {isSubmitting ? "Cadastrando..." : "Cadastrar"}
                             </button>
                         </div>

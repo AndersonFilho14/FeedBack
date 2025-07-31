@@ -6506,3 +6506,67 @@ TRACE    | 31/07/2025 00:56:14 | 10:21:39.465020 |            acesso.py:49    | 
 TRACE    | 31/07/2025 00:57:54 | 10:23:19.446645 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
 DEBUG    | 31/07/2025 00:58:00 | 10:23:25.268056 |         professor.py:256   |            professor.__init__             | 1
 DEBUG    | 31/07/2025 00:58:00 | 10:23:25.296236 |         professor.py:256   |            professor.__init__             | 1
+TRACE    | 31/07/2025 01:06:01 | 10:31:26.900496 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 31/07/2025 01:06:05 | 10:31:30.371470 |         professor.py:256   |            professor.__init__             | 1
+DEBUG    | 31/07/2025 01:06:05 | 10:31:30.394112 |         professor.py:256   |            professor.__init__             | 1
+INFO     | 31/07/2025 13:27:57 | 0:00:00.419264 |              main.py:8     |                 main.<module>             | Iniciando projeto
+DEBUG    | 31/07/2025 13:56:34 | 0:28:36.948049 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 31/07/2025 13:56:34 | 0:28:36.975481 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 31/07/2025 13:56:51 | 0:28:53.892690 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 31/07/2025 13:56:51 | 0:28:53.918974 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 31/07/2025 13:56:55 | 0:28:57.882689 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+DEBUG    | 31/07/2025 13:56:55 | 0:28:57.883064 |           materia.py:84    |              materia.executar             | 2 matérias encontradas.
+INFO     | 31/07/2025 13:56:57 | 0:29:00.524630 |           materia.py:73    |              materia.executar             | Matéria 'aaaaa' criada com sucesso.
+INFO     | 31/07/2025 13:59:49 | 0:31:52.391410 |           materia.py:73    |              materia.executar             | Matéria 'Materia Teste Cypress' criada com sucesso.
+DEBUG    | 31/07/2025 13:59:49 | 0:31:52.727002 |           materia.py:84    |              materia.executar             | 4 matérias encontradas.
+DEBUG    | 31/07/2025 13:59:49 | 0:31:52.767140 |           materia.py:84    |              materia.executar             | 4 matérias encontradas.
+INFO     | 31/07/2025 13:59:52 | 0:31:55.734910 |           materia.py:73    |              materia.executar             | Matéria 'Materia Teste Cypress' criada com sucesso.
+DEBUG    | 31/07/2025 13:59:53 | 0:31:56.106129 |           materia.py:84    |              materia.executar             | 5 matérias encontradas.
+DEBUG    | 31/07/2025 13:59:53 | 0:31:56.146019 |           materia.py:84    |              materia.executar             | 5 matérias encontradas.
+INFO     | 31/07/2025 13:59:59 | 0:32:01.873870 |           materia.py:73    |              materia.executar             | Matéria 'Materia Teste Cypress' criada com sucesso.
+DEBUG    | 31/07/2025 13:59:59 | 0:32:02.196265 |           materia.py:84    |              materia.executar             | 6 matérias encontradas.
+DEBUG    | 31/07/2025 13:59:59 | 0:32:02.229092 |           materia.py:84    |              materia.executar             | 6 matérias encontradas.
+INFO     | 31/07/2025 14:03:28 | 0:35:31.419275 |           materia.py:127   |              materia.executar             | Matéria 4 deletada.
+INFO     | 31/07/2025 14:03:30 | 0:35:33.208284 |           materia.py:127   |              materia.executar             | Matéria 5 deletada.
+INFO     | 31/07/2025 14:03:31 | 0:35:34.478235 |           materia.py:127   |              materia.executar             | Matéria 6 deletada.
+INFO     | 31/07/2025 14:03:41 | 0:35:44.622410 |           materia.py:73    |              materia.executar             | Matéria 'Materia Teste Cypress' criada com sucesso.
+DEBUG    | 31/07/2025 14:03:42 | 0:35:44.946484 |           materia.py:84    |              materia.executar             | 4 matérias encontradas.
+DEBUG    | 31/07/2025 14:03:42 | 0:35:44.978978 |           materia.py:84    |              materia.executar             | 4 matérias encontradas.
+DEBUG    | 31/07/2025 14:04:39 | 0:36:42.621173 |           materia.py:84    |              materia.executar             | 4 matérias encontradas.
+DEBUG    | 31/07/2025 14:04:39 | 0:36:42.624986 |           materia.py:84    |              materia.executar             | 4 matérias encontradas.
+DEBUG    | 31/07/2025 14:04:46 | 0:36:49.508842 |           materia.py:84    |              materia.executar             | 4 matérias encontradas.
+DEBUG    | 31/07/2025 14:04:46 | 0:36:49.510970 |           materia.py:84    |              materia.executar             | 4 matérias encontradas.
+INFO     | 31/07/2025 14:04:48 | 0:36:51.471077 |           materia.py:127   |              materia.executar             | Matéria 4 deletada.
+INFO     | 31/07/2025 14:04:52 | 0:36:55.186669 |           materia.py:127   |              materia.executar             | Matéria 3 deletada.
+INFO     | 31/07/2025 14:12:15 | 0:44:18.521734 |           materia.py:73    |              materia.executar             | Matéria 'Materia Teste Cypress' criada com sucesso.
+DEBUG    | 31/07/2025 14:12:16 | 0:44:18.928932 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+DEBUG    | 31/07/2025 14:12:16 | 0:44:18.955755 |           materia.py:84    |              materia.executar             | 3 matérias encontradas.
+INFO     | 31/07/2025 14:20:54 | 0:52:56.833478 |           materia.py:73    |              materia.executar             | Matéria 'Materia Teste Cypress' criada com sucesso.
+DEBUG    | 31/07/2025 14:20:54 | 0:52:57.197657 |           materia.py:84    |              materia.executar             | 4 matérias encontradas.
+DEBUG    | 31/07/2025 14:20:54 | 0:52:57.229101 |           materia.py:84    |              materia.executar             | 4 matérias encontradas.
+TRACE    | 31/07/2025 14:21:13 | 0:53:16.614478 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 31/07/2025 14:21:20 | 0:53:23.590872 |         professor.py:256   |            professor.__init__             | 1
+INFO     | 31/07/2025 14:23:38 | 0:55:41.560872 |           materia.py:73    |              materia.executar             | Matéria 'Materia Teste Cypress' criada com sucesso.
+DEBUG    | 31/07/2025 14:23:39 | 0:55:42.016306 |           materia.py:84    |              materia.executar             | 5 matérias encontradas.
+DEBUG    | 31/07/2025 14:23:39 | 0:55:42.044902 |           materia.py:84    |              materia.executar             | 5 matérias encontradas.
+INFO     | 31/07/2025 14:23:49 | 0:55:52.048435 |           materia.py:127   |              materia.executar             | Matéria 5 deletada.
+INFO     | 31/07/2025 14:23:50 | 0:55:53.280231 |           materia.py:127   |              materia.executar             | Matéria 4 deletada.
+INFO     | 31/07/2025 14:23:51 | 0:55:54.204767 |           materia.py:127   |              materia.executar             | Matéria 3 deletada.
+TRACE    | 31/07/2025 14:24:09 | 0:56:12.077499 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 31/07/2025 14:24:17 | 0:56:20.156981 |         professor.py:256   |            professor.__init__             | 1
+TRACE    | 31/07/2025 15:15:20 | 1:47:23.309191 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 31/07/2025 15:15:22 | 1:47:25.091298 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 31/07/2025 15:15:22 | 1:47:25.095595 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 31/07/2025 15:25:52 | 1:57:55.260814 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+DEBUG    | 31/07/2025 15:25:52 | 1:57:55.299285 |         professor.py:521   |            professor._executar            | 4 professores encontrados na escola 1.
+TRACE    | 31/07/2025 15:26:19 | 1:58:21.921843 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 31/07/2025 15:26:19 | 1:58:21.925888 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+TRACE    | 31/07/2025 15:26:23 | 1:58:26.465642 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 31/07/2025 15:26:23 | 1:58:26.468838 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+TRACE    | 31/07/2025 15:26:32 | 1:58:35.717686 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 31/07/2025 15:26:32 | 1:58:35.721407 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+INFO     | 31/07/2025 15:26:44 | 1:58:46.896915 |              main.py:10    |                 main.<module>             | Fim do projeto
+INFO     | 31/07/2025 15:26:47 | 0:00:00.530840 |              main.py:8     |                 main.<module>             | Iniciando projeto
+TRACE    | 31/07/2025 15:27:10 | 0:00:23.432514 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
+DEBUG    | 31/07/2025 15:27:10 | 0:00:23.443029 |            acesso.py:32    |               acesso.return_user_ou_texto | Não encontrou no banco
+TRACE    | 31/07/2025 15:27:20 | 0:00:33.019613 |            acesso.py:49    |               acesso.__init__             | Iniciando a validação do acesso
